@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "优惠买单",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  }
+}

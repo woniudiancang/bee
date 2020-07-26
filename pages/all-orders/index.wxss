@@ -1,0 +1,228 @@
+
+.content-1{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 100rpx;
+  color: #9e9e9e;
+}
+.content-2{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  color: #9e9e9e;
+}
+.button{
+  width: 300rpx;
+  height:50rpx !important;
+  margin-top: 50rpx;
+  margin-left: 225rpx;
+}  
+
+/* .orders-bar{
+  background-color: #ffffff;
+  margin-top: 10rpx;
+}
+.orders-bar .title-box{
+  display: flex;
+  justify-content: space-between;
+  padding: 32rpx;
+}
+.orders-bar .title-box .wait-pay{
+  font-size: 28rpx;
+  color: #949494;
+}
+.orders-bar .photos-bar{
+  padding: 16rpx 32rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+.orders-bar .photos-bar .photos{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+
+}
+.orders-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+}
+.orders-time .box-1{
+  font-size: 28rpx;
+  color: #949494;
+}
+.orders-bar .pay-button{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding:16rpx 32rpx ;
+}
+.orders-bar .pay-button .button-1{
+  font-size:26rpx ;
+  margin-right: 32rpx;
+  padding: 10rpx 16rpx;
+  border-style: solid;
+  border-width: thin;
+  border-color: #efeaea;
+}
+.orders-bar .pay-button .button-2{
+  font-size:26rpx ;
+  padding: 10rpx 16rpx;
+  border-style: solid;
+  border-width: thin;
+  border-color: #d4ad7e;
+  color: #d4ad7e;
+} */
+
+/*  */
+.container{
+  width: 100%;
+  background-color: #F2f2f2;
+}
+.status-box{
+  width:100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+.status-box .status-label{
+  width: 150rpx;
+  height: 100%;
+  text-align: center;
+  font-size:28rpx;
+  color:#353535;
+  box-sizing: border-box;
+  position: relative;
+}
+.status-box .status-label.active{
+  color:#e64340;
+  border-bottom: 6rpx solid #e64340;
+}
+.no-order{ 
+  margin-top: 200rpx;
+  background-color: #F2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no-order-img{
+  width: 81rpx;
+  height: 96rpx;
+  margin-bottom: 31rpx;
+}
+.no-order .text{
+  font-size:28rpx;
+  color:#999999;
+  text-align: center
+}
+.order-list{
+  width: 100%;
+}
+.order-list .a-order{
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.a-order  .goods-info,
+.goods-img-container{
+  width: 720rpx;
+  margin-left: 30rpx;
+  border-top: 1rpx solid #eee;
+  padding: 30rpx 0;
+  display: flex;
+  align-items: center;
+}
+.goods-price {
+font-size:26rpx;
+width:720rpx;
+text-align: right;
+margin-bottom:30rpx;
+}
+.goods-price .p {
+font-size:36rpx;
+color:#e64340;
+}
+.goods-info .img-box{
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  margin-right: 30rpx;
+  background-color: #f7f7f7;
+}
+.goods-info .img-box .goods-img,
+.goods-img-container .img-box .goods-img{
+  width: 120rpx;
+  height: 120rpx;
+}
+.goods-info  .goods-des{
+  font-size:26rpx;
+  color:#000000;
+}
+.goods-img-container{
+  height: 180rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.goods-img-container .img-box{
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  background-color: #f7f7f7;
+  display: inline-block;
+}
+.price-box{
+  width: 720rpx;
+  display: flex;
+  flex-direction:row-reverse;
+  padding-bottom: 30rpx;
+}
+.price-box .btn{
+  width: 166rpx;
+  height: 60rpx;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 60rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+  font-size:26rpx;
+}
+.price-box .active{
+  border:1px solid #e64340;
+  color: #e64340;
+}
+.remark {
+color:#e64340;
+margin-bottom: 20rpx;
+}
+/*  */
+.toOrder-btn{
+  margin-top: 30rpx;
+  width: 200rpx;
+  height: 80rpx;
+  background: #d3aa79;
+  font-size: 30rpx;
+  color: white;
+}
+
+.to-index-btn {
+  color: #fff;
+  /* background: #e64340; */
+  background: darkorange;
+  border-radius: 6px;
+  width: 290rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+}

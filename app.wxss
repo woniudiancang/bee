@@ -1,0 +1,33 @@
+/**app.wxss**/
+@import 'weui/weui.wxss';
+@import 'colorui/main.wxss';
+@import 'colorui/icon.wxss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 200rpx 0; */
+  box-sizing: border-box;
+} 
+
+
+.no-data {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
+}
+.no-data .line {
+  width:132rpx;
+  height:2rpx;
+  background: #999;
+}
+.no-data .txt {
+  font-size:26rpx;
+  color:rgba(153,153,153,1);
+  margin: 0 16rpx;
+}

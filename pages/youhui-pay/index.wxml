@@ -1,0 +1,39 @@
+<view class="youhui-pay-bar">
+	<view class="shop-bar">
+		<view class="shop-name-box">
+			<view class="shop-name">{{shopName}}</view>
+			<view class="ad">{{shopAddress}}</view>
+		</view>
+		<image mode='aspectFill' class='logo' src='{{headUrl}}'></image>
+	</view>
+
+  <form bindsubmit="bindSave" report-submit="true">
+	  <view class="amount-pay-bar">
+		  <view class="title">买单金额</view>
+		  <view class="amount">
+			  <view class="units">¥</view>
+			  <input class='describe' placeholder='请询问服务员后输入' name="amount" type="digit"></input>
+		  </view>
+		  <view class="blank"></view>
+		  <!-- <van-button type="primary" block color="#e7e7e7" custom-class="pay">确认付款</van-button> -->
+		  <button class="c-btn" formType="submit">确认付款</button>
+
+		  <view class="youhui-pay">买单优惠</view>
+      
+		  <view class="content">
+			  <block wx:if='{{rechargeSendRules}}'>
+				  <view class="charge-rule-wrap">
+					  <view wx:for='{{rechargeSendRules}}' wx:key="index" wx:for-item="item" class="charge-detail">
+						  <text>满 {{item.consume}} 元 </text>
+						  <text>减 {{item.discounts}} 元</text>
+					  </view>
+				  </view>
+			  </block>
+		  </view>
+	  </view>
+  </form>
+
+</view>
+
+
+<van-dialog id="van-dialog" />

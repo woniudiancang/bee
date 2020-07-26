@@ -1,0 +1,166 @@
+page{
+  background-color: #e7e7e7;
+} 
+/* page{
+  background-color: #ffffff;
+} */
+.content-1{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 200rpx;
+  color: #9e9e9e;
+}
+.content-2{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  color: #9e9e9e;
+} 
+.button{
+  width: 330rpx;
+  height:100rpx !important;
+  margin-top: 150rpx;
+  margin-left: 225rpx;
+  font-size: 50rpx;
+  font-weight: 600;
+} 
+.baocun{
+  width: 550rpx;
+  margin-left: 100rpx;
+  margin-right: 100rpx;
+  margin-top: 80rpx;
+  font-size: 50rpx;
+}
+.quxiao{
+  width:550rpx;
+  margin-left: 100rpx;
+  margin-top: 50rpx;
+  font-size: 45rpx ;
+  color: #000000 !important;
+
+}
+
+.container {
+  background-color: #f2f2f2;
+}
+
+.address-list {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.address-list .a-address {
+  width: 720rpx;
+  margin-left: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.a-address .left-text {
+  width: 610rpx;
+  box-sizing: border-box;
+}
+
+.a-address .left-text .name-tel {
+  margin-bottom: 20rpx;
+}
+
+.a-address .left-text .address-box {
+  font-size: 24rpx;
+  color: #888;
+  line-height: 36rpx;
+}
+
+.a-address .right-edit {
+  width: 72rpx;
+}
+.a-address .right-edit image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.bottom-box {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  font-size: 28rpx;
+  color: #333;
+  border-top: 1rpx solid #eee;
+  height: 100rpx;
+  background: #fff;
+  line-height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bottom-box .next {
+  margin-right: 32rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.bottom-box .add-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 32rpx;
+}
+.bottom-box .add-btn image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.bottom-box .add-btn view {
+  margin-left: 16rpx;
+}
+/*  */
+.label{
+  padding-right: 30rpx;
+}
+/*  */
+.addressEdit{
+  width: 100%;
+  height: 100vw;
+}
+.region-box{
+  background: white;
+  padding: 0 32rpx;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+}
+.save-btn{
+  margin-top: 60rpx;
+  height: 90rpx;
+  width: 550rpx;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  color: white;
+  background: #d3aa79;
+
+}
+.cancel-btn{
+  margin-top: 30rpx;
+  height: 90rpx;
+  width: 550rpx;
+  font-size: 30rpx;
+  line-height: 90rpx;
+}
+.row-wrap{
+  background: white;
+  padding: 0 32rpx;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: center;
+  font-size: 30rpx;
+}

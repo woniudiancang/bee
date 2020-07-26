@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "订单列表",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index"
+  }
+}

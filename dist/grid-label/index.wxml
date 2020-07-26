@@ -1,0 +1,1 @@
+<view class="i-class i-grid-label"><slot></slot></view>

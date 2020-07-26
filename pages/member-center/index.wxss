@@ -1,0 +1,99 @@
+.my-box{
+  background-color: #d3aa79;
+  margin-top: 30rpx;
+  margin-left: 25rpx;
+  padding-top: 30rpx;
+  padding-bottom: 60rpx;
+  width:700rpx;
+  border-radius: 8rpx;
+}
+.my-box .head-bar{
+  display: flex;
+  margin-left: 30rpx;
+  align-items: center;
+}
+.my-box .head-bar .head{
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+}
+.my-box .head-bar .name-box{
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  color: #ffffff;
+  
+}
+.my-box .head-bar .name-box .name{
+  color: #ffffff;
+  font-weight: 600;
+  
+}
+.my-box .head-bar .name-box .content{
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+.my-box .state{
+  font-size: 50rpx;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 50rpx;
+}
+.my-box .state-0{
+  font-size: 28rpx;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20rpx;
+}
+.system{
+  font-size:38rpx;
+  margin-top: 80rpx;
+  margin-bottom: 40rpx;
+  text-align: center;
+}
+.title-box{
+  display: flex;
+  justify-content: space-around;
+  margin-left: 25rpx;
+  width: 700rpx;
+  height: 80rpx;
+  background-color: #d3aa79;
+  text-align: center;
+  line-height: 80rpx;
+  color: #ffffff;
+}
+.title1, .title2, .title3{
+  width: 233rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-style: solid;
+  border-color: #f5f5f5;
+  border-width: thin;
+}
+.title-box-0{
+  display: flex;
+  justify-content: space-around;
+  margin-left: 25rpx;
+  width: 700rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.title-box-1{
+  display: flex;
+  justify-content: space-around;
+  margin-left: 25rpx;
+  width: 700rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background-color: #f7f7f7;
+}
+.remark{
+  text-align: center;
+  margin-top: 30rpx;
+  font-size: 25rpx;
+}
+
+

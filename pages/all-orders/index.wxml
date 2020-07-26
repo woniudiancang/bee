@@ -1,0 +1,88 @@
+<!-- <view class="orders-bar">
+  <view class="title-box">
+    <view class="title">蜗牛点餐</view>
+    <view class="wait-pay">待支付</view>
+  </view>
+  <view class="photos-bar">
+    <image mode='aspectFill' class='photos' src='http://img4.imgtn.bdimg.com/it/u=1249391358,3728112758&fm=26&gp=0.jpg'></image>
+    <image mode='aspectFill' class='photos' src='http://img4.imgtn.bdimg.com/it/u=1249391358,3728112758&fm=26&gp=0.jpg'></image>
+  </view>
+  <view class="orders-time">
+    <view class="box-1">
+      <view class="time">下单时间：2020-06-02 16:28:19</view>
+      <view class="num">订单编号：2006061228226760002</view>
+    </view>
+    <view class="price">￥35</view>
+  </view>
+  <view class="pay-button">
+    <view class="button-1">订单详情</view>
+    <view class="button-2">立即支付</view>
+  </view>
+</view>
+
+<view class="orders-bar">
+  <view class="title-box">
+    <view class="title">蜗牛点餐</view>
+    <view class="wait-pay">已关闭</view>
+  </view>
+  <view class="photos-bar">
+    <image mode='aspectFill' class='photos' src='http://img4.imgtn.bdimg.com/it/u=1249391358,3728112758&fm=26&gp=0.jpg'></image>
+    <image mode='aspectFill' class='photos' src='http://img4.imgtn.bdimg.com/it/u=1249391358,3728112758&fm=26&gp=0.jpg'></image>
+  </view>
+  <view class="orders-time">
+    <view class="box-1">
+      <view class="time">下单时间：2020-06-02 16:28:19</view>
+      <view class="num">订单编号：2006061228226760002</view>
+    </view>
+    <view class="price">￥35</view>
+  </view>
+  <view class="pay-button">
+    <view class="button-1">删除订单</view>
+    <view class="button-2">订单详情</view>
+  </view>
+</view> -->
+
+<view class="container">
+
+	<!-- 去掉顶部选项卡 -->
+
+	<view class="no-order" hidden="{{orderList ? true : false}}">
+		<view class="content-1">您还没有点餐</view>
+		<view class="content-2">快去犒劳一下自己吧！</view>
+		<view class="to-index-btn" bindtap="toIndexPage">去点餐</view>
+	</view>
+
+	<view class="order-list" hidden="{{orderList ? false : true}}">
+		<view class="a-order" wx:for="{{orderList}}" wx:key="index">
+			<navigator url="/pages/order-details/index?id={{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+				<view class="weui-cell__bd">订单编号：{{item.orderNumber}}</view>
+				<view class="weui-cell__ft weui-cell__ft_in-access">{{item.statusStr}}</view>
+			</navigator>
+			<scroll-view class="goods-img-container" scroll-x="true">
+				<view class="img-box" wx:for="{{goodsMap[item.id]}}" wx:key="index">
+					<navigator url="/pages/goods-details/index?id={{item.goodsId}}">
+						<image src="{{item.pic}}" class="goods-img"></image>
+					</navigator>
+				</view>
+			</scroll-view>
+			<view class="goods-price">
+				共 {{item.goodsNumber}} 件商品 合计：
+				<text class="p" wx:if="{{item.score <= 0}}">¥ {{item.amountReal}}</text>
+				<text class="p" wx:if="{{item.score > 0}}">¥ {{item.amountReal}} + {{item.score}} 积分</text>
+			</view>
+			<view class="goods-info">
+				<view class="goods-des">
+					<view class="remark" wx:if="{{item.remark && item.remark != ''}}">{{item.remark}}</view>
+					<view>下单时间：{{item.dateAdd}} </view>
+				</view>
+			</view>
+			<view class="price-box">
+				<view class="btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
+				<view class="btn active" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">马上付款</view>
+				<view class="btn active" hidden="{{(item.status==0 || item.status==-1) ? true : false}}" bindtap="refundApply" data-id="{{item.id}}" data-amount='{{item.amountReal}}'>退换货</view>
+				<view class="btn" hidden="{{item.status== -1  ? false : true}}" data-id="{{item.id}}" bindtap="deleteOrder">删除订单</view>
+			</view>
+		</view>
+	</view>
+	<view class="safeAreaOldMarginBttom safeAreaNewMarginBttom"></view>
+</view>

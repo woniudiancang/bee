@@ -1,0 +1,84 @@
+<import src="/template/login/index.wxml" />
+<view class="my-bar">
+	<image mode='aspectFill' class='background' src='https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1521128793,2909565959&fm=26&gp=0.jpg'></image>
+	<view class="my-box">
+		<view class="head-bar">
+			<button bindgetuserinfo="goLogin" class="userinfo-avatar" style="background-image: url({{apiUserInfoMap.base.avatarUrl}})" size="default"></button>
+
+			<view class="name-box">
+				<view class="name">{{apiUserInfoMap.base.nick}}</view>
+				<view class="state">非会员</view>
+			</view>
+		</view>
+		<view class="coupon-box">
+			<view class="coupon">
+				<view class="num">{{coupons}}</view>
+				<view class="title1">优惠券</view>
+			</view>
+			<view class="balance-box">
+				<view class="amount-box">
+					<view class="amount1">¥</view>
+					<view class="amount2">{{balance}}</view>
+				</view>
+				<view class="amount">余额</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="my-bar1">
+	<navigator url="/pages/member-center/index">
+		<view class="box">
+			<view class="box-0">
+				<image mode='aspectFill' class='icon' src='/images/huiyuan.png'></image>
+				<view class="title">会员中心</view>
+			</view>
+			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+		</view>
+	</navigator>
+	
+	<navigator url="/pages/youhui-pay/index">
+		<view class="box">
+			<view class="box-0">
+				<image mode='aspectFill' class='icon' src='/images/youhui.png'></image>
+				<view class="title">优惠买单</view>
+			</view>
+			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+		</view>
+	</navigator>
+	<view class="box" bindtap="goOrderList">
+		<view class="box-0">
+			<image mode='aspectFill' class='icon' src='/images/order.png'></image>
+			<view class="title">全部订单</view>
+		</view>
+		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+	</view>
+
+	<view class="box">
+		<view class="box-0">
+			<image mode='aspectFill' class='icon' src='/images/my.png'></image>
+			<view class="title">我的拼单</view>
+		</view>
+		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+	</view>
+
+	<navigator url="/pages/ad/index">
+		<view class="box">
+			<view class="box-0">
+				<image mode='aspectFill' class='icon' src='/images/ad.png'></image>
+				<view class="title">收货地址</view>
+			</view>
+			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+		</view>
+	</navigator>
+
+	<view class="box">
+		<view class="box-0">
+			<image mode='aspectFill' class='icon' src='/images/about.png'></image>
+			<view class="title">关于我们</view>
+		</view>
+		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
+	</view>
+
+</view>
+
+<template is="apifmLogin" data="{{wxlogin: wxlogin}}" />

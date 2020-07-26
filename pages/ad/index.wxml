@@ -1,0 +1,81 @@
+<view class="container" wx:if="{{addressList.length > 0 && addressEdit == false}}">
+  <view class="address-list">
+    <view class="a-address" wx:for="{{addressList}}" wx:key="id">
+      <view class="left-text" bindtap="selectTap" data-id="{{item.id}}">
+        <view class="name-tel">
+          {{item.linkMan}} {{item.mobile}}
+        </view>
+        <view class="address-box">
+          {{item.address}}
+        </view>
+      </view>
+      <view class="right-edit" bindtap="editAddress" data-id="{{item.id}}">
+        <image src="/images/icon/edit.svg"></image>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-box" bindtap="addAddress" wx:if="{{addressList.length > 0 && addressEdit == false}}">
+    <view class="add-btn">
+      <image src="/images/index/add-darkorange.png"></image>
+      <view>新增收货地址</view>
+    </view>
+    <image class="next" src="/images/icon/next.png"></image>
+  </view>
+</view>
+
+<view class="" wx:if="{{addressList == null && addressEdit == false}}">
+	<view class="content-1">暂无地址信息</view>
+	<view class="content-2">请点击按钮添加地址信息</view>
+	<van-button type="primary" color="#d3aa79" custom-class="button" bindtap="addAddress">添加新地址</van-button>
+</view>
+
+<view class="addressEdit" wx:if="{{addressEdit}}">
+	<form bindsubmit="bindSave">
+		<!-- <van-cell-group> -->
+		<!-- <van-field value="{{addressData.linkMan}}" clearable size="large" label="用户名" placeholder="请输入用户名" bind:click-icon="onClickIcon" /> -->
+		<!-- <van-field value="{{addressData.mobile}}" type="number" size="large" label="手机号码" placeholder="请输入手机号码" border="{{false}}" bindblur="setTelModal" /> -->
+		<!-- <van-field value="{{}}" type="" label="选择地区" size="large" border="{{ false }}" bind:click="areaListSwitch" /> -->
+		<!-- <van-field value="{{addressData.address}}" type="" size="large" label="详细地址" placeholder="街道、楼栋、门牌等" border="{{ false }}" /> -->
+		<!-- </van-cell-group> -->
+		<!-- <van-button type="primary" color="#d3aa79" custom-class="baocun" formType="submit">保存</van-button>
+		<van-button type="default" color="#f7f7f7" custom-class="quxiao" bindtap="editCancel">取消</van-button> -->
+
+		<view class="cu-form-group">
+			<view class="title">用户姓名</view>
+			<input name="linkMan" type="text" value="{{addressData.linkMan}}" placeholder="中英文字符"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">手机号码</view>
+			<input name="mobile" placeholder="11位手机号码" value="{{addressData.mobile}}" type="number" bindblur="setTelModal"></input>
+			<view class="cu-capsule radius">
+				<view class="cu-tag bg-blue">
+					+86
+				</view>
+				<view class="cu-tag line-blue">
+					中国大陆
+				</view>
+			</view>
+		</view>		
+
+		<view class="row-wrap" bindtap="selectCity">
+			<view class="label">选择地区</view>
+			<picker mode="multiSelector" range="{{pickerRegionRange}}" range-key="name" value="{{pickerSelect}}" bindchange="bindchange" bindcolumnchange="bindcolumnchange">
+				{{showRegionStr}}
+			</picker>
+		</view>
+
+		<view class="cu-form-group">
+			<view class="title">详细地址</view>
+			<input name="address" value="{{addressData.address}}" placeholder="街道、楼栋、门牌等"></input>
+		</view>
+
+		<button class="save-btn" formType="submit">保存</button>
+		<button class="cancel-btn" color="#f7f7f7" bindtap="editCancel" wx:if="{{cancelBtn}}">取消</button>
+		<button type="danger" class="save-btn" bindtap="deleteAddress" data-id="{{addressData.id}}" wx:if="{{id && cancelBtn == false}}">删除该地址</button>
+
+		<!-- <van-button type="primary" color="#d3aa79" custom-class="baocun" formType="submit">保存</van-button>
+		<van-button type="default" color="#f7f7f7" custom-class="quxiao" bindtap="editCancel">取消</van-button> -->
+
+	</form>
+
+</view>

@@ -1,0 +1,286 @@
+ page {
+   background-color: #f5f5f5;
+   position: relative;
+ }
+
+ .pay-bar {
+   background-color: #ffffff;
+   width: 100%;
+ }
+
+ .pay-bar .pay-box {
+   height: 80rpx;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ .pay-bar .pay-box .shop {
+   margin-left: 32rpx;
+ }
+
+ .pay-bar .pay-box .shop .name {
+   font-size: 32rpx;
+   font-weight: 600;
+ }
+
+ .pay-bar .pay-box .shop .ad {
+   font-size: 24rpx;
+   margin-top: 16rpx;
+ }
+
+ .pay-bar .pay-box .icon {
+   margin-right: 32rpx;
+ }
+
+ .way-bar {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 10rpx 32rpx 12rpx 32rpx;
+ }
+
+ .way-bar .ziqu {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100rpx;
+   width: 315rpx;
+   background-color: #d3aa79;
+   border-radius: 5rpx;
+ }
+
+ .way-bar .ziqu .ziqu-1 {
+   margin-left: 10rpx;
+   color: #ffffff;
+ }
+
+ .way-bar .peisong {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100rpx;
+   width: 315rpx;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+   border-radius: 5rpx;
+ }
+
+ .way-bar .peisong .icon {
+   height: 40rpx;
+   width: 40rpx;
+ }
+
+ .way-bar .peisong .peisong-1 {
+   margin-left: 10rpx;
+ }
+
+ .tel-bar {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 22rpx 32rpx;
+ }
+
+ .tel-bar .title {
+   font-size: 28rpx;
+   text-align: center;
+
+ }
+
+ .tel-bar .num-box {
+   display: flex;
+   align-items: center;
+ }
+
+ .tel-bar .num-box .num {
+   font-size: 25rpx;
+ }
+
+ .goods-title {
+   font-size: 28rpx;
+   font-weight: 600;
+   background-color: #ffffff;
+   padding-left: 32rpx;
+   margin-top: 10rpx;
+   padding-top: 25rpx;
+ }
+
+ .detail {
+   background-color: #ffffff;
+   padding: 8rpx 32rpx;
+ }
+
+ .detail .detail-1 {
+   font-size: 28rpx;
+ }
+
+ .detail .detail-2 {
+   font-size: 25rpx;
+ }
+
+ .detail .num {
+   font-size: 28rpx;
+   text-align: center;
+ }
+
+ .detail .price {
+   font-size: 28rpx;
+   /* text-align: center; */
+   text-align: right;
+ }
+
+ .amount {
+   text-align: right;
+   padding-right: 32rpx;
+   background-color: #ffffff;
+   font-size: 28rpx;
+   padding-bottom: 32rpx;
+ }
+
+ .coupon-bar {
+   background-color: #ffffff;
+   margin-top: 10rpx;
+   padding: 32rpx;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ .coupon-bar .coupon-title {
+   font-size: 28rpx;
+ }
+
+ .coupon-bar .coupon-box {
+   display: flex;
+   align-items: center;
+   font-size: 28rpx;
+ }
+
+ .coupon-bar .coupon-box .num {
+   margin-right: 10rpx;
+ }
+
+ .pay-btn {
+   background-color: #d3aa79 !important;
+   border-style: none !important;
+
+ }
+
+ /*  */
+ .shops {
+   width: 100%;
+
+ }
+
+ .shops-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   margin: 32rpx;
+   font-size: 26rpx;
+ }
+
+ .shops-container .l {
+   display: flex;
+   align-items: center;
+ }
+
+ .shops-container .l text {
+   color: gray;
+   margin-left: 16rpx;
+ }
+
+ .shops-container .l image {
+   width: 30rpx;
+   height: 30rpx;
+ }
+
+ .shops-container .r {
+   display: flex;
+   align-items: center;
+ }
+
+ .shops-container .r text {
+
+   color: gray;
+ }
+
+ .shops-container .r image {
+   width: 40rpx;
+   height: 40rpx;
+ }
+
+ .shop-name {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 32rpx;
+   /* margin-top: 32rpx; */
+ }
+
+ .shop-name .name {
+   font-size: 48rpx;
+   /* color: #cd0074; */
+   /* color: gray; */
+   /* color: orangered; */
+   /* margin-left: 30rpx; */
+ }
+
+ .shop-name-r text {
+   font-size: 30rpx;
+   /* color: orangered; */
+   color: #00cc00;
+   line-height: 76rpx;
+ }
+ /* 地址 */
+ .address-box {
+  width: 100vw;
+  margin: 20rpx 0;
+  border-top: 1rpx dashed #eee;
+}
+
+.add-address {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding-left: 32rpx;
+}
+.add-address image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.add-address view {
+  margin-left: 16rpx;
+  font-size: 28rpx;
+  color: #000;
+  padding: 40rpx 0;
+}
+
+.show-address {
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 0 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show-address .name-tel {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 20rpx 0;
+}
+
+.show-address .addr-text {
+  font-size: 24rpx;
+  color: #888;
+  padding-bottom: 34rpx;
+  line-height: 36rpx;
+}
+.show-address .next {
+  width: 40rpx;
+  height: 40rpx;
+}

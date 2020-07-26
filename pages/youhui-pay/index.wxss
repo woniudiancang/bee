@@ -1,0 +1,111 @@
+page{
+  background-color:#e7e7e7;
+}
+.youhui-pay-bar{
+  width: 700rpx;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  margin:50rpx 25rpx ;
+}
+.youhui-pay-bar .shop-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding:30rpx 40rpx 30rpx 20rpx ;
+}
+.youhui-pay-bar .shop-bar .shop-name-box .shop-name{
+  font-size:28rpx;
+  font-weight: 600;
+}
+.youhui-pay-bar .shop-bar .shop-name-box .ad{
+  font-size:24rpx;
+  margin-top: 15rpx;
+}
+.youhui-pay-bar .shop-bar .logo{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.youhui-pay-bar .amount-pay-bar{
+  padding: 35rpx 30rpx;
+}
+.youhui-pay-bar .amount-pay-bar .title{
+  font-size: 28rpx;
+  color:#acacac;
+}
+.youhui-pay-bar .amount-pay-bar .amount{
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.youhui-pay-bar .amount-pay-bar .amount .units{
+  font-size: 45rpx;
+  font-weight: 800;
+  margin-left: 20rpx;
+}
+.youhui-pay-bar .amount-pay-bar .amount .describe{
+  font-size: 35rpx;
+  margin-left: 30rpx; 
+}
+.youhui-pay-bar .amount-pay-bar .blank{
+  height: 2rpx;
+  width: 640rpx;
+  background-color: #f7f7f7;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+}
+.youhui-pay-bar .amount-pay-bar .pay{
+  font-size: 30rpx;
+  border-radius: 5rpx;
+}
+.youhui-pay-bar .amount-pay-bar .pay-1{
+  font-size: 30rpx;
+  border-radius: 5rpx;
+  
+}
+
+.youhui-pay-bar .amount-pay-bar .youhui-pay{
+  font-size: 28rpx;
+  color:#acacac;
+  margin-top:70rpx ;
+}
+.youhui-pay-bar .amount-pay-bar .content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+  /* width: 180rpx;
+  height: 110rpx; */
+  color: #dbb991;
+  font-size: 26rpx;
+  font-weight: 500;
+  /* border-style:solid ;
+  border-width: 0.5rpx; */
+}
+.charge-rule-wrap{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  justify-content: left;
+  align-items: center;
+  overflow: hidden;
+}
+.charge-detail{
+  width: 180rpx;
+  height: 110rpx;
+  border: 1rpx solid #dbb991;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0 10rpx;
+}
+/*  */
+.c-btn{
+  background: #dbb991;
+  font-size: 30rpx;
+  color: white;
+}
