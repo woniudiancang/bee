@@ -15,11 +15,11 @@ function showTabBarBadge(){
     if (res.code == 0) {
       if (res.data.number == 0) {
         wx.removeTabBarBadge({
-          index: 2
+          index: 1
         });
       } else {
         wx.setTabBarBadge({
-          index: 2,
+          index: 1,
           text: `${res.data.number}`
         });
       }
