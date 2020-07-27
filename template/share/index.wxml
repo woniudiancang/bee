@@ -1,1 +1,19 @@
-
+<template name="apifmShare">
+	<view class="apifmShare">
+		<!-- <view class='share'>
+			<image src='/images/mine/favorite.png'></image>
+			<button open-type='addFav'></button>
+			<text>收藏</text>
+		</view> -->
+		<view class='share'>
+			<image src='/images/mine/tof-red.png'></image>
+			<button open-type='share'></button>
+			<text>分享</text>
+		</view>
+		<view class='share' bindtap="drawSharePic">
+			<image src='/images/mine/poster-red.png'></image>
+			<button data-d="{{goodsDetail}}"></button>
+			<text>海报</text>
+		</view>
+	</view>
+</template>
