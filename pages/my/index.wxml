@@ -29,7 +29,8 @@
 	<navigator url="/pages/member-center/index">
 		<view class="box">
 			<view class="box-0">
-				<image mode='aspectFill' class='icon' src='/images/huiyuan.png'></image>
+				<!-- <image mode='aspectFill' class='icon' src='/images/huiyuan.png'></image> -->
+				<text class="cuIcon-crown text-orange" style="font-size:20px"></text>
 				<view class="title">会员中心</view>
 			</view>
 			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
@@ -39,7 +40,8 @@
 	<navigator url="/pages/youhui-pay/index">
 		<view class="box">
 			<view class="box-0">
-				<image mode='aspectFill' class='icon' src='/images/youhui.png'></image>
+				<!-- <image mode='aspectFill' class='icon' src='/images/youhui.png'></image> -->
+				<text class="cuIcon-redpacket_fill text-orange" style="font-size:20px"></text>
 				<view class="title">优惠买单</view>
 			</view>
 			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
@@ -47,7 +49,8 @@
 	</navigator>
 	<view class="box" bindtap="goOrderList">
 		<view class="box-0">
-			<image mode='aspectFill' class='icon' src='/images/order.png'></image>
+			<!-- <image mode='aspectFill' class='icon' src='/images/order.png'></image> -->
+			<text class="cuIcon-form text-orange" style="font-size:20px"></text>
 			<view class="title">全部订单</view>
 		</view>
 		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
@@ -55,7 +58,8 @@
 
 	<view class="box">
 		<view class="box-0">
-			<image mode='aspectFill' class='icon' src='/images/my.png'></image>
+			<!-- <image mode='aspectFill' class='icon' src='/images/my.png'></image> -->
+			<text class="cuIcon-formfill text-orange" style="font-size:20px"></text>
 			<view class="title">我的拼单</view>
 		</view>
 		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
@@ -64,7 +68,8 @@
 	<navigator url="/pages/ad/index">
 		<view class="box">
 			<view class="box-0">
-				<image mode='aspectFill' class='icon' src='/images/ad.png'></image>
+				<!-- <image mode='aspectFill' class='icon' src='/images/ad.png'></image> -->
+				<text class="cuIcon-activity text-orange" style="font-size:20px"></text>
 				<view class="title">收货地址</view>
 			</view>
 			<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>
@@ -73,7 +78,8 @@
 
 	<view class="box">
 		<view class="box-0">
-			<image mode='aspectFill' class='icon' src='/images/about.png'></image>
+			<!-- <image mode='aspectFill' class='icon' src='/images/about.png'></image> -->
+			<text class="cuIcon-questionfill text-orange" style="font-size:20px"></text>
 			<view class="title">关于我们</view>
 		</view>
 		<image mode='aspectFill' class='go' src='/images/icon-font-solid.png'></image>

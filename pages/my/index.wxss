@@ -126,7 +126,7 @@
   margin-right: 5rpx;
 }
 .my-bar1{
-  padding-top: 40rpx;
+  padding-top: 20rpx;
 }
 .my-bar1 .box{
   display: flex;
