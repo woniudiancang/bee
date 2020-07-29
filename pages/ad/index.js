@@ -92,6 +92,7 @@ Page({
   },
   // 删除地址按钮
   deleteAddress: function (e) {
+    const _this = this
     const id = e.currentTarget.dataset.id;
     console.log(id)
     wx.showModal({
@@ -100,7 +101,11 @@ Page({
       success: function (res) {
         if (res.confirm) {
           WXAPI.deleteAddress(wx.getStorageSync('token'), id).then(function () {
-            wx.navigateBack({})
+            _this.setData({
+              addressEdit: false,
+              cancelBtn: false,
+            })
+            _this.initShippingAddress()
           })
         } else {
           console.log('用户点击取消')
@@ -122,20 +127,27 @@ Page({
     })
   },  
   // 获取地址列表
-  initShippingAddress: function() {
-    var that = this;
-    WXAPI.queryAddress(wx.getStorageSync('token')).then(function(res) {
-      // console.log(res.data)
-      if (res.code == 0) {        
-        that.setData({
-          addressList: res.data
-        });
-      } else if (res.code == 700) {
-        that.setData({
-          addressList: null
-        });
-      }
+  async initShippingAddress() {
+    wx.showLoading({
+      title: '',
     })
+    const res = await WXAPI.queryAddress(wx.getStorageSync('token'))
+    wx.hideLoading({
+      success: (res) => {},
+    })
+    if (res.code == 0) {
+      this.setData({
+        addressList: res.data
+      });
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      this.setData({
+        addressList: null
+      });
+    }
   },   
   // 省市选择器 三栏
   initRegionPicker () {
@@ -298,7 +310,7 @@ Page({
 
     if (linkMan == ""){
       wx.showToast({
-        title: '请填写联系人姓名',
+        title: '请填写用户姓名',
         icon: 'none',        
       })
       return
@@ -368,7 +380,11 @@ Page({
       })
       return;
     } else {
-      wx.navigateBack()
+      this.setData({
+        addressEdit: false,
+        cancelBtn: false,
+      })
+      this.initShippingAddress()
     }    
     
   },

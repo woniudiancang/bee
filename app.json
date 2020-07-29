@@ -1,10 +1,9 @@
 {
   "pages": [
-    
     "pages/index/index", 
     "pages/all-orders/index",    
     "pages/my/index",
-    "pages/ad/index",        
+    "pages/ad/index",
     "pages/pay/index", 
     "pages/shop/select",
     "pages/shop-cart/index",      
@@ -13,9 +12,7 @@
     "pages/order/refundApply",
     "pages/order-details/index",
     "pages/order-details/scan-result",
-    "pages/order-list/index",    
-    
-    "pages/logs/logs"   
+    "pages/order-list/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

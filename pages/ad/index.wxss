@@ -139,7 +139,7 @@ page{
 .save-btn{
   margin-top: 60rpx;
   height: 90rpx;
-  width: 550rpx;
+  width: 650rpx;
   font-size: 30rpx;
   line-height: 90rpx;
   color: white;
@@ -149,7 +149,7 @@ page{
 .cancel-btn{
   margin-top: 30rpx;
   height: 90rpx;
-  width: 550rpx;
+  width: 650rpx;
   font-size: 30rpx;
   line-height: 90rpx;
 }
