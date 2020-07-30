@@ -133,7 +133,7 @@ Page({
         _this.onShow();
       })
     } else {
-      wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
+      wxpay.wxpay('order', money, orderId, "/pages/all-orders/index");
     }
   },
   onLoad: function(options) {

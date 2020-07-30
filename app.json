@@ -11,8 +11,7 @@
     "pages/member-center/index",
     "pages/order/refundApply",
     "pages/order-details/index",
-    "pages/order-details/scan-result",
-    "pages/order-list/index"
+    "pages/order-details/scan-result"
   ],
   "window": {
     "backgroundTextStyle": "light",

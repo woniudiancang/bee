@@ -55,23 +55,21 @@
     <view class="list-title">商品信息</view>
     <form bindsubmit="submitReputation" report-submit="true">
       <block wx:for="{{orderDetail.goods}}" wx:key="{{index}}">
-        <navigator url="/pages/goods-details/index?id={{item.goodsId}}">
-          <view class="a-goods">
-            <view class="img-box">
-              <image src="{{item.pic}}" class="img" />
+        <view class="a-goods">
+          <view class="img-box">
+            <image src="{{item.pic}}" class="img" />
+          </view>
+          <view class="text-box">
+            <view class="arow arow01">
+              <view class="goods-name">{{item.goodsName}}</view>
+              <view class="goods-price">¥ {{item.amount}}</view>
             </view>
-            <view class="text-box">
-              <view class="arow arow01">
-                <view class="goods-name">{{item.goodsName}}</view>
-                <view class="goods-price">¥ {{item.amount}}</view>
-              </view>
-              <view class="arow">
-                <view class="goods-label">{{item.property}}</view>
-                <view class="goods-num">x {{item.number}}</view>
-              </view>
+            <view class="arow">
+              <view class="goods-label">{{item.property}}</view>
+              <view class="goods-num">x {{item.number}}</view>
             </view>
           </view>
-        </navigator>
+        </view>
       </block>
     </form>
   </view>
