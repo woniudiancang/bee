@@ -149,10 +149,6 @@ Page({
       }      
     }
   },
-  onReady: function() {
-    // 生命周期函数--监听页面初次渲染完成
-
-  },
   getOrderStatistics() {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then(res => {
       if (res.code == 0) {
@@ -268,9 +264,18 @@ Page({
     })
       
   },
-
-
-
-
-
+  async callShop(e) {
+    const shopId = e.currentTarget.dataset.shopid
+    const res = await WXAPI.shopSubdetail(shopId)
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    wx.makePhoneCall({
+      phoneNumber: res.data.info.linkPhone,
+    })
+  },
 })

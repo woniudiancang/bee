@@ -69,8 +69,7 @@ Page({
   },
 
   onLoad(e) {
-    // 获取位置传美版
-    var shopInfo = wx.getStorageSync('shopInfo')
+    const shopInfo = wx.getStorageSync('shopInfo')
     this.setData({
       shopInfo,
     })
@@ -172,12 +171,16 @@ Page({
     var that = this;
     var loginToken = wx.getStorageSync('token') // 用户登录 token
     var remark = "联系电话：" +this.data.mobile + "  " + this.data.remark; // 备注信息 
-    let postData = {
+    const postData = {
       token: loginToken,
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark,
       peisongType: that.data.peisongType
-    };
+    }
+    if (this.data.shopInfo) {
+      postData.shopIdZt = this.data.shopInfo.id
+      postData.shopNameZt = this.data.shopInfo.name
+    }
     if (that.data.kjId) {
       postData.kjid = that.data.kjId
     }

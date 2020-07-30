@@ -146,33 +146,11 @@
 			</view>
 		</view>
 	</view>
-	<view wx:if="{{hasMoreSelect && goodsDetailSkuShowType==0}}" class="row-arrow" bindtap="bindGuiGeTap">
+	<view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
 		<view>{{selectSize}}</view>
 		<image src="/images/icon/next.png"></image>
 	</view>
-	<view class="size-label-box2" wx:if="{{goodsDetailSkuShowType==1}}">
-		<view class="label-title">选择商品规格</view>
-		<view class="size-label-box">
-			<block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-				<view class="label">{{property.name}}</view>
-				<view class="label-item-box">
-					<view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
-						{{item.name}}
-					</view>
-				</view>
-			</block>
-		</view>
-		<view class="buy-num-box">
-			<view class="num-label">购买数量</view>
-			<view class="num-box">
-				<view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
-				<view class="num-input">
-					<input type="number" value="{{buyNumber}}" disabled />
-				</view>
-				<view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
-			</view>
-		</view>
-	</view>
+	
 	<view wx:if="{{shopSubdetail}}" class="shop-container">
 		<image mode="aspectFill" src="{{shopSubdetail.info.pic}}"></image>
 		<view class="info">

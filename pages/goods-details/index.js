@@ -41,7 +41,6 @@ Page({
     const that = this
     this.data.kjJoinUid = e.kjJoinUid    
     this.setData({
-      goodsDetailSkuShowType: CONFIG.goodsDetailSkuShowType,
       curuid: wx.getStorageSync('uid')
     })
     this.reputation(e.id)

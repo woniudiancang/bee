@@ -18,67 +18,6 @@
   margin-left: 225rpx;
 }  
 
-/* .orders-bar{
-  background-color: #ffffff;
-  margin-top: 10rpx;
-}
-.orders-bar .title-box{
-  display: flex;
-  justify-content: space-between;
-  padding: 32rpx;
-}
-.orders-bar .title-box .wait-pay{
-  font-size: 28rpx;
-  color: #949494;
-}
-.orders-bar .photos-bar{
-  padding: 16rpx 32rpx;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-}
-.orders-bar .photos-bar .photos{
-  height: 80rpx;
-  width: 80rpx;
-  border-radius: 50%;
-  margin-right: 30rpx;
-
-}
-.orders-time{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32rpx;
-}
-.orders-time .box-1{
-  font-size: 28rpx;
-  color: #949494;
-}
-.orders-bar .pay-button{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding:16rpx 32rpx ;
-}
-.orders-bar .pay-button .button-1{
-  font-size:26rpx ;
-  margin-right: 32rpx;
-  padding: 10rpx 16rpx;
-  border-style: solid;
-  border-width: thin;
-  border-color: #efeaea;
-}
-.orders-bar .pay-button .button-2{
-  font-size:26rpx ;
-  padding: 10rpx 16rpx;
-  border-style: solid;
-  border-width: thin;
-  border-color: #d4ad7e;
-  color: #d4ad7e;
-} */
-
-/*  */
 .container{
   width: 100%;
   background-color: #F2f2f2;
@@ -186,19 +125,7 @@ color:#e64340;
   padding-bottom: 30rpx;
 }
 .price-box .btn{
-  width: 166rpx;
-  height: 60rpx;
-  box-sizing: border-box;
-  text-align: center;
-  line-height: 60rpx;
-  border: 1rpx solid #ccc;
-  border-radius: 6rpx;
   margin-left: 20rpx;
-  font-size:26rpx;
-}
-.price-box .active{
-  border:1px solid #e64340;
-  color: #e64340;
 }
 .remark {
 color:#e64340;
@@ -225,4 +152,22 @@ margin-bottom: 20rpx;
   text-align: center;
   font-size: 28rpx;
   margin-top: 30rpx;
+}
+.order-info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-info-box .l {
+  margin-left: 24rpx;
+  color: #666;
+  font-size: 24rpx;
+}
+.order-info-box .r {
+  margin-right: 24rpx;
+  color: #e64340;
+  font-size: 58rpx;
+}
+.order-info-box .r text {
+  font-size: 26rpx;
 }
