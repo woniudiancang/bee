@@ -29,9 +29,17 @@
 
 # 本项目使用了下面的组件，在此鸣谢
 
-- [接口 SDK](https://github.com/gooking/apifm-wxapi)
+- [vant-UI库](https://youzan.github.io/vant-weapp/)
+
+- [小程序在线接口-SDK](https://github.com/gooking/apifm-wxapi)
 
 - [api工厂](https://admin.it120.cc)
+
+- [FMUI-轻松活泼-icon](https://www.iconfont.cn/collections/detail?spm=a313x.7781069.0.da5a778a4&cid=17041)
+
+- [小程序HTML解析组件](https://github.com/jin-yufeng/Parser)
+
+- [生成条码和二维码](https://github.com/alsey/wxbarcode)
 
 # 使用教程
 ## 注册开通小程序账号

@@ -1,33 +1,24 @@
-/**app.wxss**/
-@import 'weui/weui.wxss';
-@import 'colorui/main.wxss';
-@import 'colorui/icon.wxss';
-
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  /* padding: 200rpx 0; */
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+page,view,image,input {
+  display: block;
   box-sizing: border-box;
-} 
-
-
-.no-data {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50%;
 }
-.no-data .line {
-  width:132rpx;
-  height:2rpx;
-  background: #999;
-}
-.no-data .txt {
-  font-size:26rpx;
-  color:rgba(153,153,153,1);
-  margin: 0 16rpx;
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  width: 38rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #e64340;
+  border: 1rpx solid #fff;
+  border-radius: 50%;
 }

@@ -1,4 +1,3 @@
-<import src="/template/login/index.wxml" />
 <view class="my-bar">
 	<image mode='aspectFill' class='background' src='https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1521128793,2909565959&fm=26&gp=0.jpg'></image>
 	<view class="my-box">

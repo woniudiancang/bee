@@ -92,6 +92,8 @@ module.exports =
 "use strict";
 
 
+var _module$exports;
+
 /* eslint-disable */
 // 小程序开发api接口工具包，https://github.com/gooking/wxapi
 var API_BASE_URL = 'https://api.it120.cc';
@@ -136,13 +138,26 @@ Promise.prototype.finally = function (callback) {
   });
 };
 
-module.exports = {
+module.exports = (_module$exports = {
   init2: function init2(a, b) {
     API_BASE_URL = a;
     subDomain = b;
   },
   init: function init(b) {
     subDomain = b;
+  },
+  init3: function init3(_ref) {
+    var _ref$apiBaseUrl = _ref.apiBaseUrl,
+        apiBaseUrl = _ref$apiBaseUrl === undefined ? API_BASE_URL : _ref$apiBaseUrl,
+        subD = _ref.subDomain,
+        req = _ref.request;
+
+    // 某些需求需要定制化 request，需要保证传入自定义 reuqest 与默认 request 参数一致
+    if (req) {
+      request = req;
+    }
+    API_BASE_URL = apiBaseUrl;
+    subDomain = subD;
   },
   request: request,
   queryMobileLocation: function queryMobileLocation() {
@@ -384,6 +399,17 @@ module.exports = {
   goodsFavList: function goodsFavList(data) {
     return request('/shop/goods/fav/list', true, 'post', data);
   },
+  myBuyGoodsHis: function myBuyGoodsHis(data) {
+    return request('/shop/goods/his/list', true, 'post', data);
+  },
+  myBuyGoodsHisDelete: function myBuyGoodsHisDelete(token) {
+    var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    var goodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    return request('/shop/goods/his/delete', true, 'post', {
+      token: token, id: id, goodsId: goodsId
+    });
+  },
   goodsFavPut: function goodsFavPut(token, goodsId) {
     return request('/shop/goods/fav/add', true, 'post', {
       token: token, goodsId: goodsId
@@ -409,6 +435,9 @@ module.exports = {
     return request('/discounts/detail', true, 'get', {
       id: id
     });
+  },
+  couponStatistics: function couponStatistics(token) {
+    return request('/discounts/statistics', true, 'get', { token: token });
   },
   myCoupons: function myCoupons(data) {
     return request('/discounts/my', true, 'get', data);
@@ -473,19 +502,24 @@ module.exports = {
       token: token
     });
   },
-  // pingtuanSet: function pingtuanSet(goodsId) {
-  //   return request('/shop/goods/pingtuan/set', true, 'get', {
-  //     goodsId: goodsId
-  //   });
-  // },
   pingtuanSet: function pingtuanSet(goodsId) {
     return request('/shop/goods/pingtuan/set', true, 'get', {
-      goodsId: goodsId,      
+      goodsId: goodsId
     });
   },
   pingtuanSets: function pingtuanSets(goodsIdArray) {
     return request('/shop/goods/pingtuan/sets', true, 'get', {
       goodsId: goodsIdArray.join()
+    });
+  },
+  goodsDefaultPingtuan: function goodsDefaultPingtuan(goodsId) {
+    return request('/shop/goods/pingtuan/default', true, 'get', {
+      goodsId: goodsId
+    });
+  },
+  pingtuanMultilevel: function pingtuanMultilevel(goodsId) {
+    return request('/shop/goods/pingtuanMultilevel', true, 'get', {
+      goodsId: goodsId
     });
   },
   pingtuanOpen: function pingtuanOpen(token, goodsId) {
@@ -531,6 +565,20 @@ module.exports = {
       token: token, encryptedData: encryptedData, iv: iv, pwd: pwd
     });
   },
+  bindMobileWxapp: function bindMobileWxapp(token, code, encryptedData, iv) {
+    var pwd = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+
+    return request('/user/wxapp/bindMobile', true, 'post', {
+      token: token, code: code, encryptedData: encryptedData, iv: iv, pwd: pwd
+    });
+  },
+  bindMobileTta: function bindMobileTta(token, encryptedData, iv) {
+    var pwd = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+    return request('/user/tt/microapp/bindMobile', true, 'post', {
+      token: token, encryptedData: encryptedData, iv: iv, pwd: pwd
+    });
+  },
   bindMobileSms: function bindMobileSms(token, mobile, code) {
     var pwd = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
@@ -561,11 +609,13 @@ module.exports = {
   },
   orderDetail: function orderDetail(token, id) {
     var hxNumber = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+    var peisongOrderId = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
     return request('/order/detail', true, 'get', {
       id: id,
       token: token,
-      hxNumber: hxNumber
+      hxNumber: hxNumber,
+      peisongOrderId: peisongOrderId
     });
   },
   orderDelivery: function orderDelivery(token, orderId) {
@@ -595,15 +645,22 @@ module.exports = {
       token: token
     });
   },
+  jdjlOrderPay: function jdjlOrderPay(token, _token) {
+    var couponId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    return request('/jdjl/payOrder', true, 'post', {
+      _token: _token,
+      token: token,
+      couponId: couponId
+    });
+  },
   orderHX: function orderHX(hxNumber) {
     return request('/order/hx', true, 'post', {
       hxNumber: hxNumber
     });
   },
-  orderStatistics: function orderStatistics(token) {
-    return request('/order/statistics', true, 'get', {
-      token: token
-    });
+  orderSet: function orderSet() {
+    return request('/order/set', true, 'get');
   },
   orderRefunds: function orderRefunds(token, orderId) {
     return request('/order/refund', true, 'get', {
@@ -661,11 +718,34 @@ module.exports = {
   fxApplyProgress: function fxApplyProgress(token) {
     return request('/saleDistribution/apply/progress', true, 'get', { token: token });
   },
+  fxApplyProgressV2: function fxApplyProgressV2(token) {
+    return request('/saleDistribution/apply/progress/v2', true, 'get', { token: token });
+  },
   fxMembers: function fxMembers(data) {
     return request('/saleDistribution/members', true, 'post', data);
   },
   fxCommisionLog: function fxCommisionLog(data) {
     return request('/saleDistribution/commision/log', true, 'post', data);
+  },
+  fxCommisionFreezeAmount: function fxCommisionFreezeAmount(token) {
+    return request('/saleDistribution/commission/freeze', true, 'get', { token: token });
+  },
+  fxSaleroomRankTotal: function fxSaleroomRankTotal(page, pageSize) {
+    return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+      page: page, pageSize: pageSize
+    });
+  },
+  goodsSellNumberStatistics: function goodsSellNumberStatistics(page, pageSize) {
+    var goodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    return request('/site/goods/statistics', true, 'get', {
+      page: page, pageSize: pageSize, goodsId: goodsId
+    });
+  },
+  fxSaleroomRankDaily: function fxSaleroomRankDaily(page, pageSize, day) {
+    return request('/saleDistribution/sale-room-rank/daily', true, 'get', {
+      page: page, pageSize: pageSize, day: day
+    });
   },
   wxaQrcode: function wxaQrcode(data) {
     return request('/qrcode/wxa/unlimit', true, 'post', data);
@@ -710,15 +790,21 @@ module.exports = {
     return request('/order/refundApply/apply', true, 'post', data);
   },
   refundApplyDetail: function refundApplyDetail(token, orderId) {
+    var orderGoodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
     return request('/order/refundApply/info', true, 'get', {
       token: token,
-      orderId: orderId
+      orderId: orderId,
+      orderGoodsId: orderGoodsId
     });
   },
   refundApplyCancel: function refundApplyCancel(token, orderId) {
+    var orderGoodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
     return request('/order/refundApply/cancel', true, 'post', {
       token: token,
-      orderId: orderId
+      orderId: orderId,
+      orderGoodsId: orderGoodsId
     });
   },
   cmsCategories: function cmsCategories() {
@@ -1032,9 +1118,6 @@ module.exports = {
       token: token, email: email, code: code, pwd: pwd
     });
   },
-  siteStatistics: function siteStatistics() {
-    return request('/site/statistics', true, 'get');
-  },
   goodsDynamic: function goodsDynamic(type) {
     return request('/site/goods/dynamic', true, 'get', { type: type });
   },
@@ -1096,8 +1179,89 @@ module.exports = {
     return request('/wx/live/his', true, 'get', {
       roomId: roomId
     });
+  },
+  peisongMembers: function peisongMembers(data) {
+    return request('/peisong/member/list', true, 'post', data);
+  },
+  peisongMemberInfo: function peisongMemberInfo(token) {
+    return request('/peisong/member/info', true, 'get', {
+      token: token
+    });
+  },
+  peisongMemberChangeWorkStatus: function peisongMemberChangeWorkStatus(token) {
+    return request('/peisong/member/change-work-status', true, 'post', {
+      token: token
+    });
+  },
+  peisongOrdersGrabbing: function peisongOrdersGrabbing(token) {
+    return request('/peisong/order/grabbing', true, 'get', { token: token });
+  },
+  peisongOrders: function peisongOrders(data) {
+    return request('/peisong/order/list', true, 'post', data);
+  },
+  peisongOrderGrab: function peisongOrderGrab(data) {
+    return request('/peisong/order/grab', true, 'post', data);
+  },
+  peisongOrderDetail: function peisongOrderDetail(token, id) {
+    return request('/peisong/order/detail', true, 'get', { token: token, id: id });
+  },
+  peisongOrderEstimatedCompletionTime: function peisongOrderEstimatedCompletionTime(data) {
+    return request('/peisong/order/estimatedCompletionTime', true, 'post', data);
+  },
+  peisongStartService: function peisongStartService(data) {
+    return request('/peisong/order/start-service', true, 'post', data);
+  },
+  peisongEndService: function peisongEndService(data) {
+    return request('/peisong/order/end-service', true, 'post', data);
+  },
+  peisongOrderAllocation: function peisongOrderAllocation(token, id, uid) {
+    return request('/peisong/order/allocation', true, 'post', {
+      token: token, id: id, uid: uid
+    });
+  },
+  siteStatistics: function siteStatistics() {
+    return request('/site/statistics', true, 'get');
+  },
+  orderStatistics: function orderStatistics(token) {
+    return request('/order/statistics', true, 'get', {
+      token: token
+    });
+  },
+  siteStatisticsSaleroom: function siteStatisticsSaleroom(data) {
+    return request('/site/statistics/saleroom', true, 'get', data);
+  },
+  siteStatisticsSaleroomYear: function siteStatisticsSaleroomYear() {
+    var year = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+    return request('/site/statistics/saleroom/year', true, 'get', { year: year });
+  },
+  bonusLog: function bonusLog(data) {
+    return request('/bonusLog/list', true, 'post', data);
+  },
+  mtjAsset: function mtjAsset(token) {
+    return request('/mtj/asset', true, 'get', { token: token });
+  },
+  mtjLogs: function mtjLogs(data) {
+    return request('/mtj/logs', true, 'post', data);
+  },
+  mtjStatistics: function mtjStatistics() {
+    return request('/site/statistics/mjt', true, 'get');
+  },
+  register_tt: function register_tt(data) {
+    return request('/user/tt/microapp/register', true, 'post', data);
+  },
+  login_tt: function login_tt(code) {
+    return request('/user/tt/microapp/login', true, 'post', {
+      code: code
+    });
   }
-};
+}, _module$exports['login_tt'] = function login_tt(code) {
+  return request('/user/tt/microapp/login', true, 'post', {
+    code: code
+  });
+}, _module$exports.wxOpenAuthorization = function wxOpenAuthorization(data) {
+  return request('/user/wxsns/authorization', true, 'post', data);
+}, _module$exports);
 
 /***/ })
 /******/ ]);

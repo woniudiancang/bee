@@ -6,6 +6,7 @@
     "pages/ad/index",
     "pages/pay/index", 
     "pages/shop/select",
+    "pages/shop/detail",
     "pages/shop-cart/index",      
     "pages/youhui-pay/index", 
     "pages/member-center/index",
@@ -20,33 +21,26 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#bfbfbf",
-    "selectedColor": "#ff8c00",
-    "borderStyle": "black",
+    "color": "#6e6d6b",
+    "selectedColor": "#e64340",
     "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/order1.png",
-        "selectedIconPath": "images/tabbar/order2.png",
-        "text": "首页"
+        "iconPath": "images/nav/index-off.png",
+        "selectedIconPath": "images/nav/index-on.png",
+        "text": "点餐"
       },
-      {
-        "pagePath": "pages/shop-cart/index",
-        "iconPath": "images/tabbar/car1.png",
-        "selectedIconPath": "images/tabbar/car2.png",
-        "text": "购物车"
-      },
-      {
-        "pagePath": "pages/all-orders/index",
-        "iconPath": "images/tabbar/list1.png",
-        "selectedIconPath": "images/tabbar/list2.png",
-        "text": "订单"
-      },      
       {
         "pagePath": "pages/my/index",
-        "iconPath": "images/tabbar/user1.png",
-        "selectedIconPath": "images/tabbar/user2.png",
+        "iconPath": "images/nav/qc-off.png",
+        "selectedIconPath": "images/nav/qc-on.png",
+        "text": "取餐"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "images/nav/my-off.png",
+        "selectedIconPath": "images/nav/my-on.png",
         "text": "我的"
       }
     ]
@@ -57,9 +51,20 @@
     }
   },
   "usingComponents": {
+    "parser":"/components/parser.20200731.min/parser",
     "van-button": "@vant/weapp/button/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
-    "van-sidebar-item": "@vant/weapp/sidebar-item/index"
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-empty": "@vant/weapp/empty/index"
   },
   "sitemapLocation": "sitemap.json"
 }

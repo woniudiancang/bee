@@ -1,137 +1,162 @@
-<!--  -->
-<view class="container">
-	<view class="box">
-		<view class="shop-name">
-			<view class="name">{{shopInfo.name}}</view>
-			<i-switch value="{{switch1}}" size="large" bind:change="onChange" slot="footer">
-				<view slot="open">自取</view>
-				<view slot="close">外卖</view>
-			</i-switch>
-		</view>
-		<!-- 门店切换 -->
-		<view class="shops">
-			<navigator url="/pages/shop/select">
-				<view class="shops-container">
-					<view class="l">
-						<!-- <image src="/images/index/location.png"></image> -->
-						<text>距离您 {{shopInfo.distance}} km</text>
-					</view>
-					<view class="r">
-						<text>更多门店信息</text>
-						<image mode='aspectFill' class='go' src='/images/icon-font-solid@2x.png'></image>
-					</view>
-				</view>
-			</navigator>
-		</view>
-	</view>
-	<!-- <view class="search">
-		<input type="text" placeholder="输入搜索关键词" value="{{name}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
-		<image src="/images/icon/search.svg" bindtap="goSearch"></image>
-	</view> -->
-
-	<view class="content-container">
-		<!-- 左侧分类 -->
-		<scroll-view class="category-container" scroll-y="true" scroll-with-animation="true">
-			<view wx:if="{{category.level == 1}}" class="category {{categorySelected.id==category.id?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="id" data-id="{{category.id}}" bindtap="onCategoryClick">
-				<view class="name {{categorySelected.id==category.id?'active':''}}">{{category.name}}</view>
-			</view>
-		</scroll-view>
-		<!-- 右侧 -->
-		<scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
-			<view wx:if="{{!currentGoods}}" class="no-data">
-				<view class="txt">暂无商品</view>
-			</view>
-
-			<!-- 商品列表 -->
-			<view class="goods" wx:for="{{currentGoods}}" wx:key="id">
-				<image mode="aspectFill" class="pic" src="{{item.pic}}" data-id='{{item.id}}'></image>
-				<view class="goods-r">
-					<view class="goods-name" data-id='{{item.id}}'>{{item.name}}</view>
-					<view class="des">{{item.characteristic}}</view>
-					<view class='soldInfo'>
-						<text class="price">¥{{item.minPrice}}</text>
-						<van-button wx:if="{{item.pingtuan}}" size="small" color="#d3aa79" round data-id="{{item.id}}" bindtap="addShopCar">一起拼</van-button>
-						<van-button wx:else size="small" color="#d3aa79" round data-id="{{item.id}}" bindtap="addShopCar">选规格</van-button>
-					</view>
-				</view>
-			</view>
-		</scroll-view>
-	</view>
+<view class="box">
+  <view class="shop-name">
+    <view class="name">{{shopInfo.name}}</view>
+    <view class="select">
+      <view class="{{peisongType == 'zq' ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">自取</view>
+      <view class="{{peisongType == 'kd' ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">外卖</view>
+    </view>
+  </view>
+  <view class="distance-bar">
+    <view class="distance">距离您{{shopInfo.distance}}千米</view>
+    <navigator url="/pages/shop/detail?id={{shopInfo.id}}" hover-class="none">
+      <view class="shop-message">
+        <view class="message">查看门店信息</view>
+        <van-icon name="arrow" />
+      </view>
+    </navigator>
+  </view>
+</view>
+<view class="box1">
+  <view class="box-1">
+    <van-sidebar>
+      <van-sidebar-item wx:for="{{categories}}" wx:key="id" title="{{item.name}}" data-idx="{{index}}" bind:click="categoryClick" />
+    </van-sidebar>
+  </view>
+  <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}">
+    <van-empty wx:if="{{!goods || goods.length == 0}}" description="暂无商品" />
+    <van-card
+      wx:for="{{goods}}" wx:key="id"
+      centered="true"
+      lazy-load="true"
+      origin-price="{{item.originalPrice > 0 ? item.originalPrice : ''}}"
+      price="{{item.minPrice}}"
+      thumb-mode="aspectFill"
+      desc="{{item.characteristic}}"
+      title="{{item.name}}"
+      thumb="{{item.pic}}">
+      <view class="goods-btn" slot="footer">
+        <van-button wx:if="{{item.propertyIds}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
+      </view>
+    </van-card>
+  </scroll-view>
 </view>
 
-<block wx:if="{{skuCurGoods}}">
-	<view class="sku-mask"></view>
-	<view class="sku-container">
-		<image class="close" src="/images/icon/close.svg" bindtap="closeSku"></image>
-		<view class="sku" wx:for="{{skuCurGoods.properties}}" wx:key="id">
-			<view class="t">{{item.name}}</view>
-			<view class="items">
-				<text class="{{small.active? 'active' : ''}}" wx:for="{{item.childsCurGoods}}" wx:for-item="small" wx:key="id" data-pid="{{small.propertyId}}" data-id="{{small.id}}" bindtap="skuSelect">{{small.name}}</text>
-				
-			</view>
-		</view>
-		<view class="num">
-			<view class="t">购买数量</view>
-			<view class="num-box">
-				<text class="a" bindtap="storesJian">-</text>
-				<text class="b">{{skuCurGoods.basicInfo.storesBuy}}</text>
-				<text class="a" bindtap="storesJia">+</text>
-			</view>
-		</view>
-	</view>
-	<view class="sku-btn">
-		<view wx:if="{{pingtuan}}" class="join-shop-cart" bindtap="addCarSku">去拼单</view>
-		<view wx:else class="join-shop-cart" bindtap="addCarSku">加入购物车</view>
-		<!-- <view class="now-buy" bindtap="buyNow" data-shopType="{{shopType}}">立即购买</view> -->
-	</view>
-</block>
+<view class="cart-bar" wx:if="{{shippingCarInfo && shippingCarInfo.number}}">
+  <view class="l" bindtap="showCartPop">
+    <van-button type="default" round icon="shopping-cart-o">购物车</van-button>
+    <view class="badge">{{shippingCarInfo.number}}</view>
+  </view>  
+  <view class="r">
+    <view class="amount"><text>¥</text>{{shippingCarInfo.price}}</view>
+    <view class="topay" bindtap="goPay">结算</view>
+  </view>
+</view>
 
-<!-- 拼团 -->
-<van-popup show="{{pingtuanSet}}" position="bottom" closeable custom-style="height: 750rpx;" bind:close="ptClose">
-	<view class="pingtuan-bar">
-		<image mode='aspectFill' class='photos' src='{{goodsPic}}'></image>
-		<view class="pingtuan-box">
-			<view class="title">{{goodsName}}</view>
-			<view class="price">
 
-				<view class="xianjia">¥{{selectSizePrice}}</view>
-				<view class="yuanjia">/原价¥{{selectSizeOPrice}}</view>
-			</view>
-			<view class="jilu">{{pingtuanSetInfo.numberPersion}}人成单 / 已拼{{goodsNumber}}件</view>
-		</view>
-	</view>
-	<view class="pingdan-title">差{{pingtuanSetInfo.numberPersion - orderNumber}}人，即可拼单成功</view>
-	<view class="pingtuan-photos">
-		<image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
-		<image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
-		<image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
-	</view>
-	<view class="botton-box">
-		<van-button wx:if="{{pingtuanList}}" round type="default" block size="small" color="#d3aa79" bindtap="buyNow" 
-		data-pingtuanopenid="{{pingtuanopenid}}" data-shopType="toPingtuan">立即拼单</van-button>
-		<view class="btn-box" wx:else>
-			<van-button round type="default" block size="small" color="#d3aa79" bindtap="toBuy">单独购买</van-button>
-			<van-button round type="default" block size="small" color="#d3aa79" bindtap="toPintuan" data-id="{{goodsId}}" 
-			data-pingtuanopenid="{{pingtuanopenid}}">发起拼团</van-button>
-		</view>
-	</view>
-	<van-divider contentPosition="center" dashed>拼单流程</van-divider>
-	<view class="liucheng">
-		<view class="liucheng-1">
-			<image mode='aspectFill' class='icon' src='/images/pay-pingtuan.png'></image>
-			<view class="content">支付开拼</view>
-		</view>
-		<view class="liucheng-1">
-			<image mode='aspectFill' class='icon' src='/images/friend.png'></image>
-			<view class="content">好友参与</view>
-		</view>
-		<view class="liucheng-1">
-			<image mode='aspectFill' class='icon' src='/images/quhuo.png'></image>
-			<view class="content">成功取货</view>
-		</view>
-		<view class="liucheng-1">
-			<image mode='aspectFill' class='icon' src='/images/tuikuan.png'></image>
-			<view class="content">失败退款</view>
-		</view>
-	</view>
+
+<van-popup
+  show="{{ showGoodsDetailPOP }}"
+  custom-style="max-height: 80%;z-index:99999;"
+  closeable
+  close-icon="close"
+  position="bottom"
+  bind:close="hideGoodsDetailPOP">
+  <image mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}'></image>
+  <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
+  <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
+    <view class="title">{{item.name}}</view>
+    <view class="box-1">
+      <view wx:for="{{item.childsCurGoods}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.selected?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick">{{small.name}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{curGoodsMap.content}}" class="introduce">
+    <view class="title">产品介绍</view>
+    <view class="content">
+      <parser html="{{curGoodsMap.content}}" />
+    </view>
+  </view>
+
+  <view class="blank"></view>
+  <view class="add-bar">
+    <view class="add-box">
+      <view class="price"><text>¥</text>{{curGoodsMap.price}}</view>
+      <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" bind:change="goodsStepChange"/>
+    </view>
+    <view class="add-cart">
+      <van-button block color="#e64340" bind:click="addCart2">加入购物车</van-button>
+    </view>
+  </view>
+</van-popup> 
+
+<van-popup
+  show="{{ showCartPop }}"
+  position="bottom"
+  custom-style="bottom: 100rpx;max-height: 80%;"
+  bind:close="hideCartPop">
+  <view class="empty-box" bindtap="clearCart">
+    <van-icon name="delete" />
+    <view class="empty-1">清空购物车</view>
+  </view>
+  <view wx:for="{{shippingCarInfo.items}}" wx:key="key" class="cart-goods-list">
+    <view class="l">
+      <view class="title">{{item.name}}</view>
+      <view wx:if="{{item.sku}}" class="content">
+        <block wx:for="{{item.sku}}" wx:key="optionValueId" wx:for-item="_sku">{{_sku.optionValueName}} </block>
+      </view>
+    </view>
+    <view class="r">
+      <view class="price">¥{{ item.price }}</view>
+      <van-stepper value="{{ item.number }}" min="0" async-change disable-input data-idx="{{index}}" bind:change="cartStepChange"/>
+    </view>
+  </view>
 </van-popup>
+
+<!-- <van-popup
+  show="{{ true }}"
+  position="bottom"
+  closeable
+  custom-style="height: 60%;"
+  bind:close="onClose"
+>
+<view class="pingtuan-bar">
+  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+  <view class="pingtuan-box">
+    <view class="title">昭华</view>
+    <view class="price">
+      <view class="xianjia">¥18</view>
+      <view class="yuanjia">原价¥26</view>
+    </view>
+    <view class="jilu">3人成单 / 已拼19件</view>
+  </view>
+</view>
+<view class="pingdan-title">差2人，即可拼单成功</view>
+<view class="pingtuan-photos">
+  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+</view>
+<view class="botton-box">
+  <van-button round type="default" block size="small" color="#d3aa79" >立即拼单</van-button>
+</view>
+<van-divider contentPosition="center" dashed>拼单流程</van-divider>
+<view class="liucheng">
+  <view class="liucheng-1">
+    <image mode='aspectFill' class='icon' src='/images/pay-pingtuan.png'></image>
+    <view class="content">支付开拼</view>
+  </view>
+  <view class="liucheng-1">
+    <image mode='aspectFill' class='icon' src='/images/friend.png'></image>
+    <view class="content">好友参与</view>
+  </view>
+  <view class="liucheng-1">
+    <image mode='aspectFill' class='icon' src='/images/quhuo.png'></image>
+    <view class="content">成功取货</view>
+  </view>
+  <view class="liucheng-1">
+    <image mode='aspectFill' class='icon' src='/images/tuikuan.png'></image>
+    <view class="content">失败退款</view>
+  </view>
+</view>
+</van-popup>  -->

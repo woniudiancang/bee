@@ -1,18 +1,3 @@
 {
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "小蜜蜂点餐",
-  "usingComponents": {
-    "i-switch": "../../dist/switch/index",
-    "van-sidebar": "@vant/weapp/sidebar/index",
-    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
-    "van-card": "@vant/weapp/card/index",
-    "van-submit-bar": "@vant/weapp/submit-bar/index",
-    "van-popup": "@vant/weapp/popup/index",
-    "van-stepper": "@vant/weapp/stepper/index",
-    "van-button": "@vant/weapp/button/index",
-    "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index",
-    "van-divider": "@vant/weapp/divider/index"
-  }
-  
+  "navigationBarTitleText": ""
 }

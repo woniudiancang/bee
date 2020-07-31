@@ -144,7 +144,7 @@ Page({
     })
   },
   goOrderList: function (e) {
-    wx.switchTab({
+    wx.navigateTo({
       url: "/pages/all-orders/index?type=" + e.currentTarget.dataset.type
     })
   },

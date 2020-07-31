@@ -1,0 +1,1 @@
+<slot wx:if="{{!nodes.length}}"/><trees class="top"style="{{selectable?'user-select:text;-webkit-user-select:text;':''}}{{showAm}}"lazy-load="{{lazyLoad}}"loading="{{loadingImg}}"nodes="{{nodes}}"/>

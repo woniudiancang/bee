@@ -1,3 +1,0 @@
-<view class="van-grid custom-class {{ border && !gutter ? 'van-hairline--top' : '' }}" style="{{ viewStyle }}">
-  <slot />
-</view>
