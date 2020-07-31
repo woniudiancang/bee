@@ -75,15 +75,6 @@ page{
   color: #888;
   line-height: 36rpx;
 }
-
-.a-address .right-edit {
-  width: 72rpx;
-}
-.a-address .right-edit image {
-  width: 40rpx;
-  height: 40rpx;
-}
-
 .bottom-box {
   position: fixed;
   width: 100vw;
@@ -97,6 +88,7 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 16rpx;
 }
 .bottom-box .next {
   margin-right: 32rpx;
@@ -107,7 +99,6 @@ page{
 .bottom-box .add-btn {
   display: flex;
   align-items: center;
-  margin-left: 32rpx;
 }
 .bottom-box .add-btn image {
   width: 40rpx;
@@ -143,7 +134,7 @@ page{
   font-size: 30rpx;
   line-height: 90rpx;
   color: white;
-  background: #d3aa79;
+  background: #e64340;
 
 }
 .cancel-btn{
@@ -163,4 +154,7 @@ page{
   /* justify-content: space-between; */
   align-items: center;
   font-size: 30rpx;
+}
+.right-edit {
+  margin-right: 32rpx;
 }

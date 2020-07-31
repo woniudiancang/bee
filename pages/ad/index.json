@@ -1,8 +1,3 @@
 {
-  "navigationBarTitleText": "地址管理",
-  "usingComponents": {
-    "van-field": "@vant/weapp/field/index",
-    "van-area": "@vant/weapp/area/index",
-    "van-button": "@vant/weapp/button/index"
-  }
+  "navigationBarTitleText": "地址管理"
 }

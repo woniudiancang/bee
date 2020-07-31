@@ -1,6 +1,9 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
-const app = getApp()
+const APP = getApp()
+APP.configLoadOK = () => {
+  
+}
 
 Page({
   data: {
@@ -12,14 +15,16 @@ Page({
     pickerSelect:[0, 0, 0],
     showRegionStr: '选择行政地址（省、市、区县）',
 
+    addressData: {}
   },
   // 添加地址
   addAddress: function() {
     this.setData({
       addressEdit: true,
       cancelBtn: true,
+      id: null,
+      addressData: {}
     })
-    
   },
   // 取消编辑
   editCancel: function(){
@@ -140,10 +145,6 @@ Page({
         addressList: res.data
       });
     } else {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none'
-      })
       this.setData({
         addressList: null
       });
@@ -296,26 +297,45 @@ Page({
       aIndex: aIndex,
     })  
     
-  },  
+  },
+  linkManChange(e) {
+    const addressData = this.data.addressData
+    addressData.linkMan = e.detail
+    this.setData({
+      addressData
+    })
+  },
+  mobileChange(e) {
+    const addressData = this.data.addressData
+    addressData.mobile = e.detail
+    this.setData({
+      addressData
+    })
+  },
+  addressChange(e) {
+    const addressData = this.data.addressData
+    addressData.address = e.detail
+    this.setData({
+      addressData
+    })
+  },
   // 保存按钮
-  async bindSave(e) {    
-    var that = this;
-    var pObject = that.data.pObject
-    var cObject = that.data.cObject
-    var dObject = that.data.dObject
-    var linkMan = e.detail.value.linkMan;
-    var address = e.detail.value.address;
-    var mobile = e.detail.value.mobile;
-    const code = '322000';
+  async bindSave() {    
+    const pObject = this.data.pObject
+    const cObject = this.data.cObject
+    const dObject = this.data.dObject
+    const linkMan = this.data.addressData.linkMan
+    const address = this.data.addressData.address
+    const mobile = this.data.addressData.mobile
 
-    if (linkMan == ""){
+    if (!linkMan){
       wx.showToast({
         title: '请填写用户姓名',
         icon: 'none',        
       })
       return
     }
-    if (mobile == ""){
+    if (!mobile){
       wx.showToast({
         title: '请填写手机号码',
         icon: 'none',        
@@ -329,7 +349,7 @@ Page({
       })
       return
     }
-    if (address == ""){
+    if (!address){
       wx.showToast({
         title: '请填写详细地址',
         icon: 'none',       
@@ -342,7 +362,6 @@ Page({
       linkMan: linkMan,
       address: address,
       mobile: mobile,
-      code: code,
       isDefault: 'true',
     }     
 
