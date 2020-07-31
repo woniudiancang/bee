@@ -5,38 +5,8 @@ const AUTH = require('../../utils/auth')
 
 Page({
   data: {
-    statusType: [//没用
-      {
-        status: 9999,
-        label: '全部'
-      },
-      {
-        status: 0,
-        label: '待付款'
-      },
-      {
-        status: 1,
-        label: '待发货'
-      },
-      {
-        status: 2,
-        label: '待收货'
-      },
-      {
-        status: 3,
-        label: '待评价'
-      },
-    ],
-    status: 9999,
     hasRefund: false,
     badges: [0, 0, 0, 0, 0]
-  },
-  statusTap: function(e) {//没用
-    const status = e.currentTarget.dataset.status;
-    this.setData({
-      status
-    });
-    this.onShow();
   },
   cancelOrderTap: function(e) {
     const that = this;
@@ -137,17 +107,7 @@ Page({
     }
   },
   onLoad: function(options) {
-    if (options && options.type) {
-      if (options.type == 99) {
-        this.setData({
-          hasRefund: true
-        });
-      } else {
-        this.setData({
-          status: options.type
-        });
-      }      
-    }
+    
   },
   getOrderStatistics() {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then(res => {
@@ -189,20 +149,10 @@ Page({
   doneShow() {
     // 获取订单列表
     var that = this;
-    var postData = {
-      token: wx.getStorageSync('token')
-    };
-    if (this.data.hasRefund) {
-      postData.hasRefund = true
-    }
-    if (!postData.hasRefund) {
-      postData.status = that.data.status;
-    }
-    if (postData.status == 9999) {
-      postData.status = ''
-    }
     this.getOrderStatistics();
-    WXAPI.orderList(postData).then(function(res) {
+    WXAPI.orderList({
+      token: wx.getStorageSync('token')
+    }).then(function(res) {
       if (res.code == 0) {
         var orderList = res.data.orderList
         that.setData({

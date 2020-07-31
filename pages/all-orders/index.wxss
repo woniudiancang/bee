@@ -46,7 +46,7 @@
 }
 .no-order{ 
   margin-top: 200rpx;
-  background-color: #F2f2f2;
+  background-color: #FFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -123,6 +123,7 @@ color:#e64340;
   display: flex;
   flex-direction:row-reverse;
   padding-bottom: 30rpx;
+  margin-top: 32rpx;
 }
 .price-box .btn{
   margin-left: 20rpx;
