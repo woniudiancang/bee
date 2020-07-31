@@ -80,20 +80,15 @@
   text-align: center;
   line-height: 80rpx;
 }
-.title-box-1{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 25rpx;
-  width: 700rpx;
-  height: 80rpx;
-  text-align: center;
-  line-height: 80rpx;
+.title-box-0:nth-child(2n+1){
   background-color: #f7f7f7;
 }
 .remark{
   text-align: center;
   margin-top: 30rpx;
   font-size: 25rpx;
+  color: #666;
+  margin-bottom: 64rpx;
 }
 
 

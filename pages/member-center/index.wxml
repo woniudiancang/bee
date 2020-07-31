@@ -6,7 +6,8 @@
       <view class="content">累计消费{{totleConsumed}}元</view>
     </view>
   </view>
-  <view class="state">{{apiUserInfoMap.userLevel.name}}</view>
+  <view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
+  <view wx:else class="state">非会员</view>
   <view class="state-0">消费达到金额可自动成为会员</view>
 </view>
 <view class="system">会员成长体系</view>
@@ -15,14 +16,9 @@
   <view class="title2">购物折扣</view>
   <view class="title3">消费标准(元)</view>
 </view>
-<view class="title-box-0">
-  <view class="title1">黄金会员</view>
-  <view class="title2">9</view>
-  <view class="title3">100</view>
-</view>
-<view class="title-box-1">
-  <view class="title1">钻石会员</view>
-  <view class="title2">8</view>
-  <view class="title3">500</view>
+<view wx:for="{{levelList}}" wx:key="id" class="title-box-0">
+  <view class="title1">{{item.name}}</view>
+  <view class="title2">{{item.rebate}}</view>
+  <view class="title3">{{item.upgradeAmount}}</view>
 </view>
 <view class="remark">注：当购物消费达指定标准自动成为该级别会员</view>
