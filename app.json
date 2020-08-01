@@ -10,9 +10,9 @@
     "pages/shop-cart/index",      
     "pages/youhui-pay/index", 
     "pages/member-center/index",
-    "pages/order/refundApply",
     "pages/order-details/index",
-    "pages/order-details/scan-result"
+    "pages/order-details/scan-result",
+    "pages/about/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

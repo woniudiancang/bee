@@ -25,14 +25,6 @@ Page({
       }
     })
   },
-  refundApply (e) {
-    // 申请售后
-    const orderId = e.currentTarget.dataset.id;
-    const amount = e.currentTarget.dataset.amount;
-    wx.navigateTo({
-      url: "/pages/order/refundApply?id=" + orderId + "&amount=" + amount
-    })
-  },
   toPayTap: function(e) {
     // 防止连续点击--开始
     if (this.data.payButtonClicked) {

@@ -57,13 +57,18 @@
   position: relative;
 }
 .my-bar .background{
-  width: 100%;
+  width: 100vw;
   height: 350rpx; 
 }
 .my-box{
   position: absolute;
-  left:30rpx ;
-  top: 40rpx;
+  width: 100vw;
+  top: 64rpx;
+  left: 0;
+}
+.login-btn {
+  width: 400rpx;
+  margin: auto;
 }
 .my-box .head-bar{
   display: flex;
@@ -83,7 +88,7 @@
 .my-box .head-bar .name-box .state{
   height: 40rpx;
   width: 100rpx;
-  background-color: #e6e6e6;
+  background-color: #999;
   margin-top: 5rpx;
   font-size: 25rpx;
   color: #ffffff;
@@ -123,7 +128,7 @@
   margin-right: 5rpx;
 }
 .my-bar1{
-  padding-top: 20rpx;
+  padding-top: 32rpx;
 }
 .my-bar1 .box{
   display: flex;
