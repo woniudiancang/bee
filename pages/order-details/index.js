@@ -1,41 +1,86 @@
-const app = getApp();
-const CONFIG = require('../../config.js')
+const APP = getApp();
 const WXAPI = require('apifm-wxapi')
-import wxbarcode from 'wxbarcode'
+APP.configLoadOK = () => {
+  wx.setNavigationBarTitle({
+    title: wx.getStorageSync('mallName')
+  })
+}
+const wxbarcode = require('wxbarcode')
+const wxpay = require('../../utils/pay.js')
 
 Page({
     data:{
-      orderId:0,
-      goodsList:[]
+      
     },
     onLoad:function(e){
-      // e.id = 478785
-      const accountInfo = wx.getAccountInfoSync()
-      var orderId = e.id;
-      this.data.orderId = orderId;
+      // e.id = 601144
       this.setData({
-        orderId: orderId,
-        appid: accountInfo.miniProgram.appId
-      });
+        orderId: e.id
+      })
+      this.orderDetail()
     },
     onShow : function () {
-      var that = this;
-      WXAPI.orderDetail(wx.getStorageSync('token'), that.data.orderId).then(function (res) {
-        if (res.code != 0) {
-          wx.showModal({
-            title: '错误',
-            content: res.msg,
-            showCancel: false
+      
+    },
+    async orderDetail() {
+      const res = await WXAPI.orderDetail(wx.getStorageSync('token'), this.data.orderId)
+      if (res.code != 0) {
+        wx.showModal({
+          title: '错误',
+          content: res.msg,
+          showCancel: false
+        })
+        return
+      }
+      // 绘制核销码
+      if (res.data.orderInfo.hxNumber && res.data.orderInfo.status == 1) {
+        wxbarcode.qrcode('qrcode', res.data.orderInfo.hxNumber, 400, 400);
+      }        
+      this.setData({
+        orderDetail: res.data
+      })
+      if (res.data.orderInfo.shopIdZt) {
+        this.shopSubdetail()
+      }
+    },
+    async shopSubdetail() {
+      const res = await WXAPI.shopSubdetail(this.data.orderDetail.orderInfo.shopIdZt)
+      if (res.code == 0) {
+        this.setData({
+          shopSubdetail: res.data
+        })
+      }
+    },
+    async toPayTap() {
+      // 立即支付
+      let res = await WXAPI.userAmount(wx.getStorageSync('token'))
+      if (res.code != 0) {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+        return
+      }
+      const balance = res.data.balance // 当前用户的余额
+      let needPay = this.data.orderDetail.orderInfo.amountReal*1 - balance*1
+      needPay = needPay.toFixed(2)
+      if (needPay <= 0) {
+        // 余额足够
+        WXAPI.orderPay(wx.getStorageSync('token'), this.data.orderDetail.orderInfo.id).then(res => {
+          wx.showToast({
+            title: '支付成功',
+            icon: 'success'
           })
-          return;
-        }
-        // 绘制核销码
-        if (res.data.orderInfo.hxNumber && res.data.orderInfo.status > 0) {
-          wxbarcode.qrcode('qrcode', res.data.orderInfo.hxNumber, 650, 650);
-        }        
-        that.setData({
-          orderDetail: res.data
-        });
+          this.orderDetail();
+        })
+      } else {
+        // 微信支付
+        wxpay.wxpay('order', needPay, this.data.orderDetail.orderInfo.id, "/pages/all-orders/index");
+      }
+    },
+    callshop() {
+      wx.makePhoneCall({
+        phoneNumber: this.data.shopSubdetail.info.linkPhone,
       })
     },
     wuliuDetailsTap:function(e){

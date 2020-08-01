@@ -67,4 +67,21 @@ Page({
     }
     AUTH.register(this);
   },
+  scanOrderCode(){
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        wx.navigateTo({
+          url: '/pages/order-details/scan-result?hxNumber=' + res.result,
+        })
+      },
+      fail(err) {
+        console.error(err)
+        wx.showToast({
+          title: err.errMsg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

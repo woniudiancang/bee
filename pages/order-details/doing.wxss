@@ -1,0 +1,94 @@
+page {
+  background: rgb(231, 231, 231);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.no-order{ 
+  margin-top: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no-order-img{
+  width: 81rpx;
+  height: 96rpx;
+  margin-bottom: 31rpx;
+}
+.no-order .text{
+  font-size:28rpx;
+  color:#666;
+  text-align: center
+}
+.content-1{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 100rpx;
+  color: #666;
+}
+.content-2{
+  font-size:30rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  color: #666;
+}
+.to-index-btn {
+  color: #fff;
+  background: #e64340;
+  border-radius: 6px;
+  width: 290rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+}
+
+.container {
+  margin: auto;
+  margin-top: 64rpx;
+  margin-bottom: 64rpx;
+  width: 650rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding-bottom: 32rpx;
+}
+.status {
+  text-align: center;
+  padding-top: 64rpx;
+}
+.status .txt {
+  color: #666;
+  margin: 32rpx;
+}
+.times {
+  color: #999;
+  padding: 32rpx;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+.call-value {
+  font-size:38rpx;
+  color: #333 !important;
+}
+.shop-info {
+  display: flex;
+  align-items: center;
+  padding-right: 16rpx;
+}
+.qucanghao {
+  color: #e64340;
+  font-size: 64rpx;
+}
+.hx-canvas {
+  margin: auto;
+  width: 400rpx;
+  height: 400rpx;
+}
+.swiper {
+  flex: 1;
+}
+.scroll-view {
+  height: 100%;
+}

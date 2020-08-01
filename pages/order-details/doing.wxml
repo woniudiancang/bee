@@ -1,0 +1,34 @@
+<view wx:if="{{apiOk && !orderList}}" class="no-order">
+  <view class="content-1">您还没有点餐</view>
+  <view class="content-2">快去犒劳一下自己吧！</view>
+  <view class="to-index-btn" bindtap="toIndexPage">去点餐</view>
+</view>
+<swiper class="swiper" indicator-dots circular bindchange="bindchange">
+  <swiper-item wx:for="{{orderList}}" wx:for-item="order" wx:key="id">
+    <scroll-view scroll-y class="scroll-view">
+      <view class="container">      
+        <view wx:if="{{!order.isNeedLogistics}}" class="status">
+          <view class="txt">取餐号</view>
+          <view class="qucanghao">{{order.qudanhao}}</view>
+          <view class="hexiaoma">
+            <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+          </view>
+        </view>
+        <view wx:if="{{order.isNeedLogistics}}" class="status">
+          <van-icon name="logistics" size="88rpx" color="orange" />
+          <view class="txt">正在为您配送</view>
+          <view class="hexiaoma">
+            <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+          </view>
+        </view>
+        <van-divider dashed />
+        <van-cell wx:if="{{logisticsMap[order.id]}}" title="{{logisticsMap[order.id].linkMan}} / {{logisticsMap[order.id].mobile}}" label="{{logisticsMap[order.id].provinceStr}}{{logisticsMap[order.id].cityStr}}{{logisticsMap[order.id].areaStr}}{{logisticsMap[order.id].address}}" />
+        <van-cell wx:for="{{goodsMap[order.id]}}" wx:for-item="goods" wx:key="id" title="{{goods.goodsName}} / x{{goods.number}}" label="{{goods.property}}" value="¥{{goods.amount}}" value-class="call-value" />
+        <van-cell title="合计" value="¥{{order.amountReal}}" value-class="call-value" />
+        <view class="times">
+          <view>下单: {{order.dateAdd}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>

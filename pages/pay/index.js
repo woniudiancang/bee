@@ -175,7 +175,8 @@ Page({
       token: loginToken,
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark,
-      peisongType: that.data.peisongType
+      peisongType: that.data.peisongType,
+      isCanHx: true
     }
     if (this.data.shopInfo) {
       postData.shopIdZt = this.data.shopInfo.id

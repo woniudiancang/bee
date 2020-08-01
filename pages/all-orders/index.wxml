@@ -1,5 +1,5 @@
 <view class="container">
-	<view wx:if="{{!orderList}}" class="no-order">
+	<view wx:if="{{apiOk && !orderList}}" class="no-order">
 		<view class="content-1">您还没有点餐</view>
 		<view class="content-2">快去犒劳一下自己吧！</view>
 		<view class="to-index-btn" bindtap="toIndexPage">去点餐</view>

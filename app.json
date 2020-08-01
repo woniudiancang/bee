@@ -12,6 +12,7 @@
     "pages/member-center/index",
     "pages/order-details/index",
     "pages/order-details/scan-result",
+    "pages/order-details/doing",
     "pages/about/index"
   ],
   "window": {
@@ -32,7 +33,7 @@
         "text": "点餐"
       },
       {
-        "pagePath": "pages/my/index",
+        "pagePath": "pages/order-details/doing",
         "iconPath": "images/nav/qc-off.png",
         "selectedIconPath": "images/nav/qc-on.png",
         "text": "取餐"

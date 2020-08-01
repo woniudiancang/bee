@@ -1,46 +1,9 @@
 <view class="container">
-  <view class="sec-wrap">
-    <view class="order-status">
-      <view class="icon-box">
-        <image wx:if="{{orderDetail.orderInfo.status==-1}}" class="icon" src="/images/order-details/icon-ddgb.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==0}}" class="icon" src="/images/order-details/icon-ddfk.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==1}}" class="icon" src="/images/order-details/icon-ddfh.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==2}}" class="icon" src="/images/order-details/icon-ddsh.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==3 || orderDetail.orderInfo.status==4}}" class="icon" src="/images/order-details/icon-jycg.png"></image>
-      </view>
-      <view class="right-text">
-        <view class="status red">{{orderDetail.orderInfo.statusStr}}</view>
-        <view class="des" hidden="true">请于11时59分59秒内付款，超时订单将自动关闭</view>
-      </view>
-    </view>
-    <block wx:if="{{orderDetail.logistics}}">
-      <view wx:if="{{orderDetail.logisticsTraces}}" class="wuliu-box">
-        <view class="icon-box">
-          <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
-        </view>
-        <view class="right-text" bindtap="wuliuDetailsTap" data-id="{{orderDetail.orderInfo.id}}">
-          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
-          <block wx:if="{{orderDetail.logisticsTraces}}">
-            <view class="wuliu-text">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptStation}}</view>
-            <view class="wuliu-date">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptTime}}</view>
-          </block>
-        </view>
-        <view class="arrow-right">
-          <image class="arrow" src="/images/arrow-right.png"></image>
-        </view>
-      </view>
-      <view wx:else class="wuliu-box">
-        <view class="icon-box">
-          <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
-        </view>
-        <view class="right-text">
-          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
-          <view class="wuliu-text">暂无物流信息</view>
-        </view>
-      </view>
+  <view class="sec-wrap">    
+    <block wx:if="{{orderDetail.logistics}}">            
       <view class="address-sec">
         <view class="icon-box">
-          <image class="icon" src="/images/order-details/icon-address.png"></image>
+          <van-icon name="location-o" />
         </view>
         <view class="right-box">
           <view class="name-tel">{{orderDetail.logistics.linkMan}} {{orderDetail.logistics.mobile}}</view>

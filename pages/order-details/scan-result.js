@@ -1,11 +1,15 @@
 const WXAPI = require('apifm-wxapi')
+const APP = getApp()
+APP.configLoadOK = () => {
+
+}
 
 Page({
   data: {
     
   },
   onLoad: function (e) {
-    // e.hxNumber = '2003201758574236'
+    // e.hxNumber = '2008010532287842'
     this.setData({
       hxNumber: e.hxNumber
     });
@@ -92,7 +96,7 @@ Page({
     } else {
       wx.showToast({
         title: '核销完成',
-        icon: 'none'
+        icon: 'success'
       })
       this.onShow()
     }
