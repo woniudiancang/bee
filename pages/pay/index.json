@@ -1,12 +1,3 @@
 {
-  "navigationBarTitleText": "小蜜蜂点餐",
-  "usingComponents": {
-    "van-icon": "@vant/weapp/icon/index",
-    "van-button": "@vant/weapp/button/index",
-    "van-field": "@vant/weapp/field/index",
-    "van-submit-bar": "@vant/weapp/submit-bar/index",
-    "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index",
-    "van-popup": "@vant/weapp/popup/index"
-  }
+  "navigationBarTitleText": "确认订单"
 }

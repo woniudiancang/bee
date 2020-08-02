@@ -1,11 +1,5 @@
 <view class="youhui-pay-bar">
-	<view class="shop-bar">
-		<view class="shop-name-box">
-			<view class="shop-name">{{shopName}}</view>
-			<view class="ad">{{shopAddress}}</view>
-		</view>
-		<image mode='aspectFill' class='logo' src='{{headUrl}}'></image>
-	</view>
+	<van-cell icon="location-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
 
   <form bindsubmit="bindSave" report-submit="true">
 	  <view class="amount-pay-bar">
@@ -34,6 +28,3 @@
   </form>
 
 </view>
-
-
-<van-dialog id="van-dialog" />

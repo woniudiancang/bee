@@ -1,7 +1,10 @@
-const app = getApp()
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
 const wxpay = require('../../utils/pay.js')
+const APP = getApp()
+APP.configLoadOK = () => {
+
+}
 
 Page({
   data: {
@@ -13,7 +16,6 @@ Page({
 
     totalScoreToPay: 0,
     goodsList: [],
-    isNeedLogistics: 0, // 是否需要物流信息
     allGoodsPrice: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
@@ -30,6 +32,10 @@ Page({
     remark: ''
   },
   onShow(){
+    this.setData({
+      shopInfo: wx.getStorageSync('shopInfo'),
+      peisongType: wx.getStorageSync('peisongType')
+    })
     AUTH.checkHasLogined().then(isLogined => {
       this.setData({
         wxlogin: isLogined
@@ -38,7 +44,9 @@ Page({
         this.doneShow()
       }
     })
-    
+    AUTH.wxaCode().then(code => {
+      this.data.code = code
+    })
   },
   async doneShow() {
     let shopList = [];
@@ -69,32 +77,22 @@ Page({
   },
 
   onLoad(e) {
-    const shopInfo = wx.getStorageSync('shopInfo')
-    this.setData({
-      shopInfo,
-    })
-
-    let _data = {
-      isNeedLogistics: 1
-    }
+    let _data = {}
     if (e.orderType) {
       _data.orderType = e.orderType
     }
     if (e.pingtuanOpenId) {
       _data.pingtuanOpenId = e.pingtuanOpenId
     }
-    this.setData(_data);
+    this.setData(_data)
+    this.getUserApiInfo()
   },
-  // 选中 有currentTarget的方法函数，不能放到onshow里面，否则报错
-  selected: function(e){
-    var pstypeNow = e.currentTarget.dataset
-    var pstype = pstypeNow.pstype
-    // console.log(e)
-    // console.log(pstype)
+  selected(e){
+    const peisongType = e.currentTarget.dataset.pstype
     this.setData({
-      peisongType: pstype
+      peisongType
     })
-
+    wx.setStorageSync('peisongType', peisongType)
   },
   
   getDistrictId: function (obj, aaa) {
@@ -106,71 +104,41 @@ Page({
     }
     return aaa;
   },
-  // 
-  setMobile: function(e){
-    var mobile = e.detail.value
-    this.setData({
-      mobile,
-    })
-
-  },
-  // 获取用户地址中的联系电话
-  getPhoneNumber (e) {
-    var curAddressData = this.data.curAddressData 
-    console.log(curAddressData)
-    var mobile = curAddressData.mobile
-    this.setData({
-      mobile,
-    })
-    if(mobile == ''){
-      wx.showModal({
-        title: '错误',
-        content: '请输入手机号码',
-        showCancel:false
-      })
-    }   
-    
-  },
   // 备注
   remarkChange(e){
     this.data.remark = e.detail.value
   },
   goCreateOrder(){
-    // 检查自取情况下有没有电话号码 
-    var mobile = this.data.mobile
-    if(mobile){
-      const subscribe_ids = wx.getStorageSync('subscribe_ids')
-      if (subscribe_ids) {
-      wx.requestSubscribeMessage({
-        tmplIds: subscribe_ids.split(','),
-        success(res) {
-          
-        },
-        fail(e) {
-          console.error(e)
-        },
-        complete: (e) => {
-          this.createOrder(true)
-        },
+    const mobile = this.data.mobile
+    if (this.data.peisongType == 'zq' && !mobile) {
+      wx.showToast({
+        title: '请输入手机号码',
+        icon: 'none'
       })
-      } else {
-        this.createOrder(true)
-      }
-     
-    } else {
-      wx.showModal({
-        title: '错误',
-        content: '请输入手机号码',
-        showCancel:false
-      })
+      return
     }
-    
-    
+    const subscribe_ids = wx.getStorageSync('subscribe_ids')
+    if (subscribe_ids) {
+    wx.requestSubscribeMessage({
+      tmplIds: subscribe_ids.split(','),
+      success(res) {
+        
+      },
+      fail(e) {
+        console.error(e)
+      },
+      complete: (e) => {
+        this.createOrder(true)
+      },
+    })
+    } else {
+      this.createOrder(true)
+    }
   },
   createOrder: function (e) {
     var that = this;
     var loginToken = wx.getStorageSync('token') // 用户登录 token
-    var remark = "联系电话：" +this.data.mobile + "  " + this.data.remark; // 备注信息 
+    var remark = this.data.remark; // 备注信息
     const postData = {
       token: loginToken,
       goodsJsonStr: that.data.goodsJsonStr,
@@ -187,9 +155,13 @@ Page({
     }
     if (that.data.pingtuanOpenId) {
       postData.pingtuanOpenId = that.data.pingtuanOpenId
-      
     }
-    if (that.data.isNeedLogistics > 0 && postData.peisongType == 'kd') {
+    if (postData.peisongType == 'zq') {
+      const extJsonStr = {}
+      extJsonStr['联系电话'] = this.data.mobile
+      postData.extJsonStr = JSON.stringify(extJsonStr)
+    }
+    if (e && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
         wx.showToast({
@@ -237,7 +209,6 @@ Page({
       if (!e) {
         that.setData({
           totalScoreToPay: res.data.score,
-          isNeedLogistics: res.data.isNeedLogistics,
           allGoodsNumber: res.data.goodsNumber,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
@@ -290,7 +261,6 @@ Page({
       return
     }
     var goodsJsonStr = "[";
-    var isNeedLogistics = 0;
     var allGoodsPrice = 0;
 
 
@@ -300,10 +270,7 @@ Page({
       inviter_id = inviter_id_storge;
     }
     for (let i = 0; i < goodsList.length; i++) {
-      let carShopBean = goodsList[i];
-      if (carShopBean.logistics || carShopBean.logisticsId) {
-        isNeedLogistics = 1;
-      }
+      let carShopBean = goodsList[i]
       allGoodsPrice += carShopBean.price * carShopBean.number;
 
       var goodsJsonStrTmp = '';
@@ -324,7 +291,6 @@ Page({
     }
     goodsJsonStr += "]";
     this.setData({
-      isNeedLogistics: isNeedLogistics,
       goodsJsonStr: goodsJsonStr
     });
     this.createOrder();
@@ -386,6 +352,51 @@ Page({
     }
     AUTH.register(this);
   },
-
-  
+  async getPhoneNumber(e) {
+    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
+      wx.showToast({
+        title: e.detail.errMsg,
+        icon: 'none'
+      })
+      return;
+    }
+    const res = await WXAPI.bindMobileWxapp(wx.getStorageSync('token'), this.data.code, e.detail.encryptedData, e.detail.iv)
+    AUTH.wxaCode().then(code => {
+      this.data.code = code
+    })
+    if (res.code === 10002) {
+      wx.showToast({
+        title: '请先登陆',
+        icon: 'none'
+      })
+      return
+    }
+    if (res.code == 0) {
+      wx.showToast({
+        title: '读取成功',
+        icon: 'success'
+      })
+      this.setData({
+        mobile: res.data
+      })
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+    }
+  },
+  async getUserApiInfo() {
+    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
+    if (res.code == 0) {
+      this.setData({
+        mobile: res.data.base.mobile
+      })
+    }
+  },
+  mobileChange(e) {
+    this.setData({
+      mobile: e.detail
+    })
+  },
 })

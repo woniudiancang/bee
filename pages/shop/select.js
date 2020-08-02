@@ -15,19 +15,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      type: options.type
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.getLocation({
       type: 'wgs84', //wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
@@ -61,33 +52,6 @@ Page({
       })
     }
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
   searchChange(event){
     this.setData({
       searchValue: event.detail.value
@@ -102,9 +66,14 @@ Page({
   },
   goShop(e){
     const idx = e.currentTarget.dataset.idx    
-    wx.setStorageSync('shopInfo', this.data.shops[idx])    
-    wx.switchTab({
-      url: '/pages/index/index'
-    })
+    wx.setStorageSync('shopInfo', this.data.shops[idx])
+    if (this.data.type == 'pay') {
+      wx.navigateBack()
+    } else {
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
+    
   }
 })

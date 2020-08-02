@@ -46,13 +46,16 @@
    justify-content: center;
    height: 100rpx;
    width: 315rpx;
-   background-color: #d3aa79;
+   
    border-radius: 5rpx;
+ }
+ .ziqu.active {
+  background-color: #e64340;
+  color: #ffffff;
  }
 
  .way-bar .ziqu .ziqu-1 {
    margin-left: 10rpx;
-   color: #ffffff;
  }
 
  .way-bar .peisong {
@@ -100,11 +103,9 @@
 
  .goods-title {
    font-size: 28rpx;
-   font-weight: 600;
+   font-weight: bold;
    background-color: #ffffff;
-   padding-left: 32rpx;
-   margin-top: 10rpx;
-   padding-top: 25rpx;
+   padding: 32rpx;
  }
 
  .detail {
@@ -137,6 +138,7 @@
    background-color: #ffffff;
    font-size: 28rpx;
    padding-bottom: 32rpx;
+   padding-top: 32rpx;
  }
 
  .coupon-bar {
@@ -163,7 +165,7 @@
  }
 
  .pay-btn {
-   background-color: #d3aa79 !important;
+   background-color: #e64340 !important;
    border-style: none !important;
 
  }
@@ -239,7 +241,6 @@
  .address-box {
   width: 100vw;
   margin: 20rpx 0;
-  border-top: 1rpx dashed #eee;
 }
 
 .add-address {

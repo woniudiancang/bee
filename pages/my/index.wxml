@@ -35,3 +35,4 @@
 	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
 	<van-cell icon="info-o" title="关于我们" size="large" is-link url="/pages/about/index" />
 </view>
+<view class="version">v{{version}}</view>

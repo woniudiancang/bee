@@ -1,62 +1,51 @@
+<van-cell icon="location-o" title="{{shopInfo.name}} / 距离您{{shopInfo.distance}}km" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
 <view class="pay-bar">
-	<view class="pay-box">
-		<!-- 门店切换 -->
-		<view class="shops">
-			<navigator url="/pages/shop/select">
-				<view class="shops-container">
-					<view class="l">
-						<!-- <image src="/images/index/location.png"></image> -->
-						<text>距离您 {{shopInfo.distance}} km</text>
-					</view>
-					<view class="r">
-						<text>更多门店信息</text>
-						<image mode='aspectFill' class='go' src='/images/icon-font-solid@2x.png'></image>
-					</view>
-				</view>
-			</navigator>
-		</view>
-
-	</view>
-
 	<view class="way-bar">
-		<view class="peisong {{peisongType == 'zq' ? 'ziqu' : ''}}" bindtap="selected" data-pstype="zq">
-			<van-icon name="shop-collect-o" size="40rpx" color="#ffffff" />
+		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
+			<van-icon name="shop-collect-o" color="{{peisongType == 'zq' ? '#fff' : '#333'}}" />
 			<view class="ziqu-1">门店自取</view>
 		</view>
-		<view class="peisong {{peisongType == 'kd' ? 'ziqu' : ''}}" bindtap="selected" data-pstype="kd">
-			<image mode='aspectFill' class='icon' src='/images/peisong.png'></image>
-			<view class="peisong-1">外卖配送</view>
+		<view class="peisong ziqu {{peisongType == 'kd' ? 'active' : ''}}" bindtap="selected" data-pstype="kd">
+			<van-icon name="logistics" color="{{peisongType == 'kd' ? '#fff' : '#333'}}" />
+			<view class="ziqu-1">外卖配送</view>
 		</view>
 	</view>
-
-	<view class="tel-bar">
-		<view class="title">联系电话</view>
-		<view class="num-box">
-			<input class='num' placeholder='请输入手机号码' value="{{mobile}}" bindblur="setMobile"></input>
-			<van-button type="default" size="small" color="#d3aa79" bindtap="getPhoneNumber">重新获取</van-button>
-		</view>
-	</view>
+	<van-divider dashed />
+	<van-field
+		wx:if="{{peisongType == 'zq'}}"
+		size="large"
+    value="{{ mobile }}"
+    label="联系电话"
+		type="number"
+		focus
+		clearable
+		required
+		border="{{false}}"
+    placeholder="请输入手机号码"
+    bind:change="mobileChange">
+		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
+  </van-field>
 	<!-- 地址 -->
-	<view class="address-box" wx:if="{{peisongType == 'kd' && isNeedLogistics > 0}}">
-      <view class="add-address" hidden="{{curAddressData}}" bindtap="addAddress">
-        <image src="/images/index/add-orangered.png"></image>
-        <view>新增收货地址</view>
-      </view>
-      <view class="show-address" hidden="{{!curAddressData}}" bindtap="selectAddress">
-        <view class="l">
-          <view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
-          <view class="addr-text">{{curAddressData.address}}</view>
-        </view>
-        <view class="r">
-          <image class="next" src="/images/icon/next.png"></image>
-        </view>
-      </view>
-    </view>
-
+	<view class="address-box" wx:if="{{peisongType == 'kd'}}">
+		<view class="add-address" wx:if="{{!curAddressData}}" bindtap="addAddress">
+			<van-icon name="add-o" color="#e64340" size="48rpx" />
+			<view>新增配送地址</view>
+		</view>
+		<view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
+			<view class="l">
+				<view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+				<view class="addr-text">{{curAddressData.address}}</view>
+			</view>
+			<view class="r">
+				<van-icon name="arrow" />
+			</view>
+		</view>
+	</view>
+	<van-divider dashed />
 </view>
 
 <view class="goods-title">商品明细</view>
-<van-row custom-class="detail" wx:for="{{goodsList}}" wx:key="{{index}}">
+<van-row custom-class="detail" wx:for="{{goodsList}}" wx:key="index">
 	<van-col span="18">
 		<view class="detail-1">{{item.name}}</view>
 		<view class="goods-label">{{item.label}}
@@ -69,24 +58,6 @@
 	<van-col span="3" class="price">¥{{item.price}}</van-col>
 </van-row>
 
-<!-- <van-row custom-class="detail">
- 	<van-col span="18">
- 		<view class="detail-1">瑶池</view>
- 		<view class="detail-2">甜度：微甜</view>
- 	</van-col>
- 	<van-col span="3" class="num">x2</van-col>
- 	<van-col span="3" class="price">￥20</van-col>
- </van-row> -->
-
-<!-- <van-row custom-class="detail">
-    <van-col span="18">
-      <view class="detail-1">瑶池</view>
-      <view class="detail-2">甜度：微甜</view>
-    </van-col>
-    <van-col span="3" class="num">x2</van-col>
-    <van-col span="3" class="price">￥20</van-col>
-  </van-row> -->
-
 <view class="amount">共计 {{allGoodsNumber}} 件商品，小计：¥ {{allGoodsPrice}}</view>
 
 <view class="peisong-way" hidden="{{hasNoCoupons}}">
@@ -96,13 +67,11 @@
 	<picker bindchange="bindChangeCoupon" range="{{coupons}}" range-key="nameExt">
 		<view class="row-box" style="border-bottom:none;">
 			<view class="row-label">{{curCouponShowText}}</view>
-			<image class="next" src="/images/icon/next.png"></image>
+			<van-icon name="arrow" />
 		</view>
 	</picker>
 </view>
 
-<van-cell-group>
-	<van-field label="备注" value="{{remark}}" input-align="right" placeholder="如需备注请输入" border="{{false}}" bindblur="remarkChange" />
-</van-cell-group>
+<van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
 
 <van-submit-bar price="{{ (allGoodsAndYunPrice*100 - youhuijine*100) }}" button-text="立即支付" bindtap="goCreateOrder" button-class="pay-btn" />

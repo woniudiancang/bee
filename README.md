@@ -4,23 +4,37 @@
 
 大家如果在使用过程有什么问题，欢迎通过lssues与我们交流！
 
+如果本项目对您有所帮助或者启发，请给我们 Star 吧，您的鼓励是我们最大对动力～
+
+# 招募开发者
+
+希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群联系管理员，期待您的加入！
+
+# 荣誉墙
+
+- [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
+- [@wangxy2020 Jack Wong](https://github.com/wangxy2020)
+
 # 功能展示
 ## 首页
-| 首页 | 定位功能及门店信息 | 下单 | 拼单 |
-| :------: | :------: | :------: | :------: |
-| <img src="https://dcdn.it120.cc/2020/07/27/36ed1118-9f8f-4e7e-bb00-ed85586b038a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/bc0fe85c-e6ba-4fa7-9c7d-26e47c087b88.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/bdfc8ac3-7917-42f1-98f8-dd2b6bf032b6.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/0bebe027-4fe7-406b-8be0-4cad2c8825e8.png" width="200px">
+| 首页  | 下单 | 加入购物车|
+| :------: | :------: | :------: | 
+| <img src="https://dcdn.it120.cc/2020/08/02/cde14e39-38c9-4f11-add4-2ab3a116695a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">
 
-## 购物车 支付
-| 购物车 | 支付 | 
-| :------: | :------: | 
-|<img src="https://dcdn.it120.cc/2020/07/27/1acad133-9b1e-4985-b4d8-9f2aa3d486b9.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/bf879a32-cb31-44de-b5e0-58b2b874aae9.png" width="200px">
+## 结算 支付
+| 自取 | 配送 | 优惠买单 | 买单 |
+| :------: | :------: | :------: |:------: |
+|<img src="https://dcdn.it120.cc/2020/08/02/95bf93e9-bad2-4929-8d3d-f946602907ab.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9d5c16a3-5eb0-4546-8214-8ceae986f34f.png" width="200px">|<img src="	https://dcdn.it120.cc/2020/08/02/58a6b990-1436-43aa-9be2-4ae0487421a1.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/1da65ea2-452e-43e7-9eaf-5729539ab13b.png" width="200px">
 
 
-
+## 订单管理
+| 待支付 |全部订单 | 配送 | 取餐 | 交易完成 |
+| :------: | :------: | :------: |:------: |:------: |
+|<img src="	https://dcdn.it120.cc/2020/08/02/140a9490-3332-4725-b26a-4e064898cf37.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/2fd17aa4-d8e9-4b0a-b777-99d7001c3b5a.png" width="200px">|<img src="	https://dcdn.it120.cc/2020/08/02/88fe8565-2f75-40b7-b279-a431236d8cc7.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/4e8b22bf-71fc-4bd6-bf70-9a0d90916d40.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/3bf2bae6-8b1e-4e66-9a7b-d958bfd2860f.png" width="200px">
 ## 我的
-| 我的 | 会员中心 | 优惠买单 | 收货地址 |
+| 我的 | 会员中心 | 收货地址 |关于我们
 | :------: | :------: | :------: | :------: |
-| <img src="https://dcdn.it120.cc/2020/07/27/763290c1-8475-47f9-a991-4510d4f6301a.png" width="200px">| <img src="https://dcdn.it120.cc/2020/07/27/0f9c857f-174a-4dec-a5b4-fec5e4e71eb9.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/fa908388-4669-4587-bca7-e8cf89c86e16.png" width="200px">|<img src="https://dcdn.it120.cc/2020/07/27/99b6ec38-a4d2-4fc8-8b44-596920497115.png" width="200px">
+| <img src="https://dcdn.it120.cc/2020/08/02/9f79e0f0-d9ce-4340-962f-27e754999b26.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/5c040f55-47fa-4dcf-88f7-be7d883d1222.png" width="200px">
 
 
 # QQ交流群

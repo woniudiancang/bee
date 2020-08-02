@@ -1,7 +1,0 @@
-<!--index.wxml-->
-<import src="../template-cart/template-cart.wxml" />
-
-<view class="container">  
-  <template is="{{shippingCarInfo.items.length > 0 ? 'cart-goods-list' : 'no-goods'}}" data="{{...shippingCarInfo, saveHidden, allSelect, noSelect}}"></template>
-</view>
-

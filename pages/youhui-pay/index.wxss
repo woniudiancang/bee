@@ -78,7 +78,7 @@ page{
   margin-top: 20rpx;
   /* width: 180rpx;
   height: 110rpx; */
-  color: #dbb991;
+  color: #e64340;
   font-size: 26rpx;
   font-weight: 500;
   /* border-style:solid ;
@@ -96,7 +96,7 @@ page{
 .charge-detail{
   width: 180rpx;
   height: 110rpx;
-  border: 1rpx solid #dbb991;
+  border: 1rpx solid #e64340;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,7 +105,7 @@ page{
 }
 /*  */
 .c-btn{
-  background: #dbb991;
+  background: #e64340;
   font-size: 30rpx;
   color: white;
 }

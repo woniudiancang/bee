@@ -1,34 +1,36 @@
 <view class="search">
-	<image class="icon" src="/images/icon/search.svg"></image>
+	<view class="icon">
+		<van-icon name="search" />
+	</view>
 	<input placeholder="搜索门店" bindinput="searchChange" bindconfirm="search" />
 </view>
 <view class="shops" wx:for="{{shops}}" wx:key="id">
 	<view class="t">
 		<view class="name">
-			<image src="/images/icon/{{ index == 0?'shop-on':'shop' }}.svg"></image>
-			<text style="color:{{ index == 0?'#FEB21C':'#333333' }}">{{ item.name }}</text>
+			<van-icon name="shop-o" />
+			<text style="color:#333">{{ item.name }}</text>
 		</view>
 		<view wx:if="{{index == 0}}" class="distance">{{ item.distance }}<text>km</text></view>
     
 		<view wx:if="{{index > 0}}" class="distance-black" bindtap="goShop" data-idx="{{ index }}">
 			<text class="d">{{ item.distance }}</text>
 			<text class="u">km</text>
-			<image src="/images/icon/next.svg"></image>
+			<van-icon name="arrow" />
 		</view>
 	</view>
 
 	<view class="p">
-		<image src="/images/icon/pos-gray.svg"></image>
+		<van-icon name="location-o" color="#666" />
 		<text>{{ item.address }}</text>
 	</view>
 	<view class="p">
-		<image src="/images/icon/time-gray.svg"></image>
+		<van-icon name="clock-o" color="#666" />
 		<text>{{ item.openingHours }}</text>
 	</view>
 	<view class="p">
-		<image src="/images/icon/tel-gray.svg"></image>
+		<van-icon name="phone-o" color="#666" />
 		<text>{{ item.linkPhone }}</text>
 	</view>
 
-	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> 进入门店 </button>
+	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> 选择门店 </button>
 </view>

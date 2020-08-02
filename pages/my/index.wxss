@@ -154,3 +154,9 @@
   width: 45rpx;
 
 }
+.version {
+  text-align: center;
+  margin-top: 64rpx;
+  color: #666;
+  font-size: 26rpx;
+}

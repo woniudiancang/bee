@@ -2,16 +2,13 @@ import Dialog from '@vant/weapp/dialog/dialog'
 const WXAPI = require('apifm-wxapi')
 const wxpay = require('../../utils/pay.js')
 const AUTH = require('../../utils/auth')
+const APP = getApp()
+APP.configLoadOK = () => {
 
+}
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    headUrl:'http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20170802/2980294fc240473db5f5ddb06fb012cd.jpeg',
-    rechargeSendRules: [],
-
+    rechargeSendRules: []
   },
   // 
   confirm: function(){
@@ -25,66 +22,13 @@ Page({
       // on close
     });
   },
-  // 
-  getshopInfo: function(){
-    var shopInfo = wx.getStorageSync('shopInfo')    
-    this.setData({
-      shopName: shopInfo.name,
-      shopAddress: shopInfo.address,
-    })
-
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {   
-    this.getshopInfo()
-  
     
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   onShow () {
+    this.setData({
+      shopInfo: wx.getStorageSync('shopInfo')
+    })
     AUTH.checkHasLogined().then(isLogined => {
       if (isLogined) {
         WXAPI.payBillDiscounts().then(res => {
@@ -92,22 +36,6 @@ Page({
             this.setData({
               rechargeSendRules: res.data
             });
-          }
-        })
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '本次操作需要您的登录授权',
-          cancelText: '暂不登录',
-          confirmText: '前往登录',
-          success(res) {
-            if (res.confirm) {
-              wx.switchTab({
-                url: "/pages/my/index"
-              })
-            } else {
-              wx.navigateBack()
-            }
           }
         })
       }
