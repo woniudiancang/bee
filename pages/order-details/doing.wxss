@@ -92,3 +92,8 @@ page {
 .scroll-view {
   height: 100%;
 }
+.login-btn {
+  width: 650rpx;
+  margin: auto;
+  margin-top: 32rpx;
+}

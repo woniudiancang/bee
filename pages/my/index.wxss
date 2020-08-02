@@ -69,6 +69,7 @@
 .login-btn {
   width: 400rpx;
   margin: auto;
+  margin-top: 76rpx;
 }
 .my-box .head-bar{
   display: flex;

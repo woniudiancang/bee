@@ -3,6 +3,12 @@
   <view class="content-2">快去犒劳一下自己吧！</view>
   <view class="to-index-btn" bindtap="toIndexPage">去点餐</view>
 </view>
+<view wx:if="{{!isLogined}}" class="no-order">
+  <view class="content-1">登陆后查看您的取餐订单</view>
+  <view class="login-btn">
+    <van-button type="primary" block open-type="getUserInfo" bind:getuserinfo="processLogin">立即登陆</van-button>
+  </view>
+</view>
 <swiper class="swiper" indicator-dots circular bindchange="bindchange">
   <swiper-item wx:for="{{orderList}}" wx:for-item="order" wx:key="id">
     <scroll-view scroll-y class="scroll-view">

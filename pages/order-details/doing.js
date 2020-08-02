@@ -1,18 +1,27 @@
 const WXAPI = require('apifm-wxapi')
 const wxbarcode = require('wxbarcode')
+const AUTH = require('../../utils/auth')
 const APP = getApp()
 APP.configLoadOK = () => {
 
 }
 Page({
   data: {
-    apiOk: false
+    apiOk: false,
+    isLogined: true
   },
   onLoad: function (options) {
     
   },
   onShow: function () {
-    this.orderList()
+    AUTH.checkHasLogined().then(isLogined => {
+      this.setData({
+        isLogined
+      })
+      if (isLogined) {
+        this.orderList();
+      }
+    })
   },
   toIndexPage: function() {
     wx.switchTab({
@@ -52,5 +61,15 @@ Page({
       return
     }    
     wxbarcode.qrcode('qrcode_' + index, hxNumber, 400, 400);
+  },
+  processLogin(e) {
+    if (!e.detail.userInfo) {
+      wx.showToast({
+        title: '已取消',
+        icon: 'none',
+      })
+      return;
+    }
+    AUTH.register(this);
   },
 })

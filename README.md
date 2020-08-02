@@ -99,7 +99,35 @@ APPID 务必要改成你自己的小程序的 APPID
 - [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
 
 
+# 开发说明
 
+## 如果弹出登陆授权框
+
+- wxml 文件中增加: 
+
+    ```xml
+    <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
+    ```
+
+- js 文件中增加:
+
+    ```js
+    // 引入 auth 
+    const AUTH = require('../../utils/auth')
+    // 弹出框
+    AUTH.openLoginDialog()
+    // 处理授权登陆
+    processLogin(e) {
+        if (!e.detail.userInfo) {
+            wx.showToast({
+            title: '已取消',
+            icon: 'none',
+            })
+            return;
+        }
+        AUTH.register(this);
+    }
+    ```
 
 
 

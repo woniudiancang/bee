@@ -1,4 +1,5 @@
 const WXAPI = require('apifm-wxapi')
+const AUTH = require('../../utils/auth')
 const APP = getApp()
 APP.configLoadOK = () => {
   
@@ -14,7 +15,17 @@ Page({
     this.getUserApiInfo()
   },
   onShow: function () {
-    
+    AUTH.checkHasLogined().then(isLogined => {
+      if (!isLogined) {
+        wx.showModal({
+          content: '登陆后才能访问',
+          showCancel: false,
+          success: () => {
+            wx.navigateBack()
+          }
+        })
+      }
+    })
   },
   async userAmount() {
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))

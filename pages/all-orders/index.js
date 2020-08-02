@@ -106,6 +106,14 @@ Page({
     AUTH.checkHasLogined().then(isLogined => {
       if (isLogined) {
         this.doneShow();
+      } else {
+        wx.showModal({
+          content: '登陆后才能访问',
+          showCancel: false,
+          success: () => {
+            wx.navigateBack()
+          }
+        })
       }
     })
   },

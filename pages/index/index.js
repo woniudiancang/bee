@@ -24,8 +24,13 @@ Page({
       })
     }
     // 读取默认配送方式
+    let peisongType = wx.getStorageSync('peisongType')
+    if (!peisongType) {
+      peisongType = 'zq'
+      wx.setStorageSync('peisongType', peisongType)
+    }
     this.setData({
-      peisongType: wx.getStorageSync('peisongType')
+      peisongType
     })
     // 读取最近的门店数据
     this.getshopInfo()
@@ -64,6 +69,7 @@ Page({
         shops: res.data,
         shopInfo: res.data[0]
       })
+      wx.setStorageSync('shopInfo', res.data[0])
     } 
   },
   changePeisongType(e) {
@@ -165,6 +171,10 @@ Page({
     })
     const res = await WXAPI.shippingCarInfoAddItem(token, item.id, item.minBuyNumber, [])
     wx.hideLoading()
+    if (res.code == 2000) {
+      AUTH.openLoginDialog()
+      return
+    }
     if (res.code != 0) {
       wx.showToast({
         title: res.msg,
@@ -243,6 +253,11 @@ Page({
     })
     const res = await WXAPI.shippingCarInfoAddItem(token, curGoodsMap.basicInfo.id, curGoodsMap.number, sku)
     wx.hideLoading()
+    if (res.code == 2000) {
+      this.hideGoodsDetailPOP()
+      AUTH.openLoginDialog()
+      return
+    }
     if (res.code != 0) {
       wx.showToast({
         title: res.msg,
@@ -340,5 +355,21 @@ Page({
     wx.navigateTo({
       url: '/pages/pay/index',
     })
+  },
+  onShareAppMessage: function() {    
+    return {
+      title: '"' + wx.getStorageSync('mallName') + '" ' + wx.getStorageSync('share_profile'),
+      path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
+    }
+  },
+  processLogin(e) {
+    if (!e.detail.userInfo) {
+      wx.showToast({
+        title: '已取消',
+        icon: 'none',
+      })
+      return;
+    }
+    AUTH.register(this);
   },
 })

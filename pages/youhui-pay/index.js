@@ -23,23 +23,18 @@ Page({
     });
   },
   onLoad: function (options) {   
-    
+    WXAPI.payBillDiscounts().then(res => {
+      if (res.code === 0) {
+        this.setData({
+          rechargeSendRules: res.data
+        });
+      }
+    })
   },
   onShow () {
     this.setData({
       shopInfo: wx.getStorageSync('shopInfo')
-    })
-    AUTH.checkHasLogined().then(isLogined => {
-      if (isLogined) {
-        WXAPI.payBillDiscounts().then(res => {
-          if (res.code === 0) {
-            this.setData({
-              rechargeSendRules: res.data
-            });
-          }
-        })
-      }
-    })    
+    })  
   },
   async bindSave(e) {
     const _this = this    
@@ -53,6 +48,10 @@ Page({
       return
     }
     const userMoney = await WXAPI.userAmount(wx.getStorageSync('token'))
+    if (userMoney.code == 2000) {
+      AUTH.openLoginDialog()
+      return
+    }
     if (userMoney.code != 0) {
       wx.showToast({
         title: userMoney.msg,
@@ -117,5 +116,14 @@ Page({
       })
     }
   },
-
+  processLogin(e) {
+    if (!e.detail.userInfo) {
+      wx.showToast({
+        title: '已取消',
+        icon: 'none',
+      })
+      return;
+    }
+    AUTH.register(this);
+  },
 })
