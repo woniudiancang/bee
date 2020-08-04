@@ -1,1 +1,28 @@
-<text>制作中...</text>
+<view class="container">
+  <image class="shopLogo" src="{{shopInfo.pic}}"></image>
+  
+  <!-- <view class="space"></view> -->
+  <view class="shopInfo">
+    <image class="point" src="/images/point.png"></image>
+    <view class="address">{{shopInfo.address}}</view>
+    <!-- <image class="tel" src="/images/tel2.png" bindtap=""></image> -->
+  </view>
+  <view class="space"></view>
+  <view class="shopNote">
+    <view class="title">店铺特色：</view>
+    <text>{{shopInfo.characteristic}}</text>
+  </view>
+  <view class="space"></view>
+  <view class="map">
+    <view class="mapHead">
+      <image class="tel" src="/images/tel2.png" bindtap="phoneCall"></image>
+      <image class="guide" src="/images/guide.png" bindtap="guideNow"></image>
+    </view>
+    <map id="map" class="maMap" latitude="{{shopInfo.latitude}}" longitude="{{shopInfo.longitude}}" scale="17" markers="{{markers}}" bindcontroltap="controltap" bindmarkertap="markertap" bindregionchange="regionchange" show-location />  
+    
+    
+  </view>
+ 
+  <view></view>
+
+</view>

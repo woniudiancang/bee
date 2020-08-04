@@ -1,1 +1,78 @@
 /* pages/shop/detail.wxss */
+.container{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.shopLogo{
+  width: 100%;
+  height: 286rpx;
+}
+.space{
+  width: 100%;
+  height: 20rpx;
+  background: gainsboro;
+}
+.shopInfo{  
+  width: 92%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.point{
+  width: 50rpx;
+  height: 50rpx;  
+}
+.address{
+  width: 620rpx;
+  margin-left: 20rpx;
+}
+.tel{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+}
+.shopNote{
+  width: 92%;
+  height: 180rpx;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+  height: 60rpx;
+  line-height: 60rpx;
+  color: orangered;
+}
+.shopNote text{
+  width: 100%;  
+  height: auto;
+  text-align: justify;
+  text-align-last: left;
+  color: gray;
+}
+.map{
+  width: 100%;
+}
+.mapHead{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid gainsboro;
+}
+.mapHead image{
+  margin: 0 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+.maMap{
+  width: 100%;
+  height: 500rpx;
+}
