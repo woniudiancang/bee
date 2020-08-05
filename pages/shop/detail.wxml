@@ -1,28 +1,10 @@
 <view class="container">
-  <image class="shopLogo" src="{{shopInfo.pic}}"></image>
-  
-  <!-- <view class="space"></view> -->
-  <view class="shopInfo">
-    <image class="point" src="/images/point.png"></image>
-    <view class="address">{{shopInfo.address}}</view>
-    <!-- <image class="tel" src="/images/tel2.png" bindtap=""></image> -->
+	<image class="shopLogo" mode="aspectFill" src="{{shopInfo.pic}}"></image>
+  <view class="info">
+    <van-cell size="large" icon="shop-collect-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" />
+    <van-cell size="large" icon="hot-o" title="本店特色" label="{{shopInfo.characteristic}}" />
+    <van-cell size="large" icon="phone-o" title="联系我们" value="{{shopInfo.linkPhone}}" is-link bind:click="phoneCall" />
+    <van-cell size="large" icon="location-o" title="查看地图" value="导航到店" is-link bind:click="guideNow" />
   </view>
-  <view class="space"></view>
-  <view class="shopNote">
-    <view class="title">店铺特色：</view>
-    <text>{{shopInfo.characteristic}}</text>
-  </view>
-  <view class="space"></view>
-  <view class="map">
-    <view class="mapHead">
-      <image class="tel" src="/images/tel2.png" bindtap="phoneCall"></image>
-      <image class="guide" src="/images/guide.png" bindtap="guideNow"></image>
-    </view>
-    <map id="map" class="maMap" latitude="{{shopInfo.latitude}}" longitude="{{shopInfo.longitude}}" scale="17" markers="{{markers}}" bindcontroltap="controltap" bindmarkertap="markertap" bindregionchange="regionchange" show-location />  
-    
-    
-  </view>
- 
-  <view></view>
-
+	<map id="map" class="maMap" latitude="{{shopInfo.latitude}}" longitude="{{shopInfo.longitude}}" markers="{{markers}}" show-location enable-3D	show-compass show-scale	enable-rotate	enable-traffic />
 </view>

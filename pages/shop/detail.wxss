@@ -1,6 +1,5 @@
-/* pages/shop/detail.wxss */
 .container{
-  width: 100%;
+  width: 100vw;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -74,5 +73,8 @@
 }
 .maMap{
   width: 100%;
-  height: 500rpx;
+  height: 600rpx;
+}
+.info {
+  width: 100vw;
 }
