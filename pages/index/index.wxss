@@ -331,3 +331,15 @@ page {
   font-size: 26rpx;
   margin-right: 32rpx;
 }
+.couponOverlay-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.couponOverlay-container image {
+  width: 320rpx;
+  height: 320rpx;
+  margin: auto;
+}

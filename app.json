@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index", 
+    "pages/index/index",
     "pages/all-orders/index",
     "pages/my/index",
     "pages/ad/index",
@@ -12,7 +12,8 @@
     "pages/order-details/index",
     "pages/order-details/scan-result",
     "pages/order-details/doing",
-    "pages/about/index"
+    "pages/about/index",
+    "pages/coupons/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -68,7 +69,10 @@
     "van-field": "@vant/weapp/field/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
   },
   "sitemapLocation": "sitemap.json"
 }

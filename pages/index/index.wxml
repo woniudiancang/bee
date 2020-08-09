@@ -163,3 +163,9 @@
 
 
 <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
+
+<van-overlay show="{{ showCouponPop }}" bind:click="couponOverlayClick">
+  <view class="couponOverlay-container">
+    <image src="/images/coupon.png" bindtap="couponImageClick"></image>
+  </view>
+</van-overlay>

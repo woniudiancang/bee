@@ -84,4 +84,9 @@ Page({
       }
     })
   },
+  goCoupons() {
+    wx.navigateTo({
+      url: '/pages/coupons/index?tabIndex=1',
+    })
+  },
 })

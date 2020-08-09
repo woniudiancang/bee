@@ -13,7 +13,7 @@
 			<van-button type="default" block open-type="getUserInfo" bind:getuserinfo="processLogin">立即登录</van-button>
 		</view>	
 		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
-			<view class="coupon">
+			<view class="coupon" bindtap="goCoupons">
 				<view class="num">{{couponStatistics.canUse}}</view>
 				<view class="title1">优惠券</view>
 			</view>

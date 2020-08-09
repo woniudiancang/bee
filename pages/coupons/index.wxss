@@ -1,0 +1,41 @@
+page {
+  background: #ebebec;
+}
+.coupons-container {
+  padding: 32rpx;
+}
+.list {
+  margin-bottom: 32rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  line-height: 48rpx;
+}
+.list .l {
+  text-align: center;
+  width: 200rpx;
+}
+.list .l .price {
+  font-size: 60rpx;
+  color:#e64340;
+}
+.list .l .price text {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+.list .l .hreshold {
+  font-size: 26rpx;
+  color:#666;
+}
+.list .r {
+  margin-left: 32rpx;
+}
+.list .r .name {
+  color: #333;
+}
+.list .r .times {
+  color: #666;
+  font-size: 26rpx;
+}

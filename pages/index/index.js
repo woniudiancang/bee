@@ -14,6 +14,7 @@ Page({
     peisongType: 'zq', // zq 自取，kd 配送
     showCartPop: false, // 是否显示购物车列表
     showGoodsDetailPOP: false, // 是否显示商品详情
+    showCouponPop: false, // 是否弹出优惠券领取提示
   },  
   onLoad: function () {
     // 设置标题
@@ -35,6 +36,7 @@ Page({
     // 读取最近的门店数据
     this.getshopInfo()
     this.categories()
+    this._showCouponPop()
   },
   onShow: function(){
     this.shippingCarInfo()
@@ -71,6 +73,20 @@ Page({
       })
       wx.setStorageSync('shopInfo', res.data[0])
     } 
+  },
+  async _showCouponPop() {
+    // 检测是否需要弹出优惠券的福袋
+    const res = await WXAPI.coupons({
+      token: wx.getStorageSync('token')
+    })
+    if (res.code == 0) {
+      this.data.showCouponPop = true
+    } else {
+      this.data.showCouponPop = false
+    }
+    this.setData({
+      showCouponPop: this.data.showCouponPop
+    })
   },
   changePeisongType(e) {
     const peisongType = e.currentTarget.dataset.type
@@ -371,5 +387,15 @@ Page({
       return;
     }
     AUTH.register(this);
+  },
+  couponOverlayClick() {
+    this.setData({
+      showCouponPop: false
+    })
+  },
+  couponImageClick() {
+    wx.navigateTo({
+      url: '/pages/coupons/index',
+    })
   },
 })

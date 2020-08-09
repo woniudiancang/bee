@@ -1261,6 +1261,30 @@ module.exports = (_module$exports = {
   });
 }, _module$exports.wxOpenAuthorization = function wxOpenAuthorization(data) {
   return request('/user/wxsns/authorization', true, 'post', data);
+}, _module$exports.userAttentioncheck = function userAttentioncheck(token, uid) {
+  return request('/user/attention/check', true, 'get', {
+    token: token, uid: uid
+  });
+}, _module$exports.userAttentionAdd = function userAttentionAdd(token, uid) {
+  return request('/user/attention/add', true, 'post', {
+    token: token, uid: uid
+  });
+}, _module$exports.userAttentionRemove = function userAttentionRemove(token, uid) {
+  return request('/user/attention/remove', true, 'post', {
+    token: token, uid: uid
+  });
+}, _module$exports.userAttentionMeList = function userAttentionMeList(data) {
+  return request('/user/attention/attention-me', true, 'post', data);
+}, _module$exports.userMyAttentionList = function userMyAttentionList(data) {
+  return request('/user/attention/my-attention', true, 'post', data);
+}, _module$exports.userAttentionDetail = function userAttentionDetail(token, uid) {
+  return request('/user/attention/detail', true, 'get', {
+    token: token, uid: uid
+  });
+}, _module$exports.userAttentionStatistics = function userAttentionStatistics(token) {
+  return request('/user/attention/statistics', true, 'get', {
+    token: token
+  });
 }, _module$exports);
 
 /***/ })
