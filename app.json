@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [    
     "pages/index/index",
     "pages/all-orders/index",
     "pages/my/index",
@@ -13,7 +13,8 @@
     "pages/order-details/scan-result",
     "pages/order-details/doing",
     "pages/about/index",
-    "pages/coupons/index"
+    "pages/coupons/index",
+    "pages/booking/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -72,7 +73,8 @@
     "van-dialog": "@vant/weapp/dialog/index",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
   },
   "sitemapLocation": "sitemap.json"
 }

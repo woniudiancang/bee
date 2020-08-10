@@ -1,0 +1,54 @@
+<van-field
+  label="姓名"
+  size="large"
+  focus
+  clearable
+  model:value="{{ name }}"
+  placeholder="请输入联系人"
+/>
+<van-field
+  type="number"
+  label="联系电话"
+  size="large"
+  clearable
+  model:value="{{ mobile }}"
+  placeholder="方便我们联系您"
+/>
+<van-field
+  label="到店时间"
+  size="large"
+  readonly
+  value="{{ time }}"
+  placeholder="选择预计到店时间"
+  is-link
+  bindtap="showDatetimePop"
+/>
+<van-divider contentPosition="center">
+  用餐人数
+</van-divider>
+<view class="persion-num">
+  <view wx:for="{{persionNum}}" wx:key="item" class="item {{persionNumIndex == index ? 'active' : ''}}" data-idx="{{index}}" bindtap="changePersionNum">
+    {{ item }}
+    <van-icon wx:if="{{persionNumIndex == index}}" custom-class="icon" name="success" />
+  </view>
+</view>
+<view class="btn">
+  <van-button type="primary" block bind:click="submit">在线订座</van-button>
+</view>
+<view class="profile">座位预留半小时，逾期作废</view>
+
+
+<van-popup
+  show="{{ showDatetimePop }}"
+  position="bottom"
+  bind:close="onClose">
+  <van-datetime-picker
+    type="datetime"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    formatter="{{ formatter }}"
+    filter="{{ filter }}"
+    bind:confirm="confirm"
+    bind:cancel="hideDatetimePop"
+  />
+</van-popup>

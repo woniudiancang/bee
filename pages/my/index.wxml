@@ -30,6 +30,7 @@
 <view class="my-bar1">
 	<van-cell wx:if="{{canHX}}" icon="qr" title="扫码核销" size="large" is-link bind:click="scanOrderCode" />
 	<van-cell icon="medal-o" title="会员中心" size="large" is-link url="/pages/member-center/index" />
+	<van-cell icon="clock-o" title="在线订座" size="large" is-link url="/pages/booking/index" />
 	<van-cell icon="gold-coin-o" title="优惠买单" size="large" is-link url="/pages/youhui-pay/index" />
 	<van-cell icon="orders-o" title="全部订单" size="large" is-link url="/pages/all-orders/index" />
 	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
