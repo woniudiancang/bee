@@ -1,5 +1,5 @@
 {
-  "pages": [    
+  "pages": [
     "pages/index/index",
     "pages/all-orders/index",
     "pages/my/index",
@@ -14,7 +14,10 @@
     "pages/order-details/doing",
     "pages/about/index",
     "pages/coupons/index",
-    "pages/booking/index"
+    "pages/booking/index",
+    "pages/asset/index",
+    "pages/asset/recharge-log",
+    "pages/asset/cash-log"
   ],
   "window": {
     "backgroundTextStyle": "light",

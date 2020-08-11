@@ -1,0 +1,1 @@
+<van-cell wx:for="{{cashLogsV2}}" wx:key="id" title="{{item.typeStr}}" label="{{item.dateAdd}}" value="¥{{item.amount}}" />

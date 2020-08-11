@@ -98,10 +98,9 @@
   border-radius: 20rpx;
 }
 .coupon-box{
-  width: 300rpx;
   display: flex;
-  margin-left: 280rpx;
-  margin-top:50rpx ;
+  justify-content: center;
+  margin-top:32rpx ;
 }
 .coupon-box .coupon{
   display: flex;
@@ -111,11 +110,14 @@
 .coupon-box .coupon .title1{
   font-size: 25rpx;
 }
+.coupon-box .coupon .num{
+  font-size: 42rpx;
+}
 .coupon-box .balance-box{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 80rpx;
+  margin-left: 88rpx;
 }
 .coupon-box .balance-box .amount-box{
   display: flex;
@@ -125,8 +127,11 @@
   font-size: 25rpx;
 }
 .coupon-box .balance-box .amount-box .amount1{
-  font-size: 25rpx;
+  font-size: 26rpx;
   margin-right: 5rpx;
+}
+.coupon-box .balance-box .amount-box .amount2{
+  font-size: 42rpx;
 }
 .my-bar1{
   padding-top: 32rpx;

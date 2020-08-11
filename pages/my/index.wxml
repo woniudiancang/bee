@@ -17,7 +17,7 @@
 				<view class="num">{{couponStatistics.canUse}}</view>
 				<view class="title1">优惠券</view>
 			</view>
-			<view class="balance-box">
+			<view class="balance-box" bindtap="goBalance">
 				<view class="amount-box">
 					<view class="amount1">¥</view>
 					<view class="amount2">{{balance}}</view>

@@ -17,9 +17,14 @@
 
 # 功能展示
 ## 首页
-| 首页  | 下单 | 加入购物车|
-| :------: | :------: | :------: | 
-| <img src="https://dcdn.it120.cc/2020/08/02/cde14e39-38c9-4f11-add4-2ab3a116695a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">
+| 首页  | 下单 | 加入购物车 | 查看门店信息 |
+| :------: | :------: | :------: |  :------: | 
+| <img src="https://dcdn.it120.cc/2020/08/02/cde14e39-38c9-4f11-add4-2ab3a116695a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/10/b815c836-710e-464a-9f6c-0f91ca521d73.png" width="200px">
+
+## 优惠券
+| 优惠券  | 待领取 | 可使用 | 
+| :------: | :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/08/10/8e35654b-d769-41e4-88cd-2079058018e3.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/10/330cf025-249f-45c0-a299-adb296c6c4ad.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/10/5fc934d1-bf17-428d-9af0-d6adf9ee24d3.png" width="200px">
 
 ## 结算 支付
 | 自取 | 配送 | 优惠买单 | 买单 |
@@ -31,11 +36,18 @@
 | 待支付 |全部订单 | 配送 | 取餐 | 交易完成 |
 | :------: | :------: | :------: |:------: |:------: |
 |<img src="	https://dcdn.it120.cc/2020/08/02/140a9490-3332-4725-b26a-4e064898cf37.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/2fd17aa4-d8e9-4b0a-b777-99d7001c3b5a.png" width="200px">|<img src="	https://dcdn.it120.cc/2020/08/02/88fe8565-2f75-40b7-b279-a431236d8cc7.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/4e8b22bf-71fc-4bd6-bf70-9a0d90916d40.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/3bf2bae6-8b1e-4e66-9a7b-d958bfd2860f.png" width="200px">
+
+
 ## 我的
 | 我的 | 会员中心 | 收货地址 |关于我们
 | :------: | :------: | :------: | :------: |
 | <img src="https://dcdn.it120.cc/2020/08/02/9f79e0f0-d9ce-4340-962f-27e754999b26.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/5c040f55-47fa-4dcf-88f7-be7d883d1222.png" width="200px">
 
+
+## 其他
+| 在线订位 |
+| :------: |
+| <img src="https://dcdn.it120.cc/2020/08/10/0f7e8d16-d05d-40dd-82e0-b4faedf01520.png" width="200px">
 
 # QQ交流群
 
@@ -98,10 +110,24 @@ APPID 务必要改成你自己的小程序的 APPID
 
 - [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
 
+# 常见问题
 
-# 开发说明
+## 无法登陆 / 无法获取 openid
 
-## 如果弹出登陆授权框
+1. 请检查 config.js 文件中的 subDomain 是否已经修改成你自己的专属域名了
+    
+    [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
+
+2. 确保下面3个地方的 appID 你填的是一样的
+
+    - 登录你的小程序商户后台（https://mp.weixin.qq.com）左侧菜单 “开发” --> “开发设置” 中的 appid
+    - 点击你的小程序开发工具 右上角 的“详情” --> “基本信息” 中的 appid
+    - 登录你的 api工厂 后台（https://admin.it120.cc），左侧菜单微信设置中的 appid
+
+
+# 二次开发说明
+
+## 如何弹出登陆授权框
 
 - wxml 文件中增加: 
 

@@ -1,0 +1,70 @@
+.balance {
+  height: 260rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background: #ebebec;
+}
+.balance .t {
+  color: #333;
+}
+.balance .amount {
+  margin-top: 16rpx;
+  color: #333;
+  font-size: 60rpx;
+}
+.balance .amount text {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+.persion-num {
+  padding: 32rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.persion-num .item {
+  width: 327rpx;
+  border: solid 1rpx #969799;
+  color: #333;
+  margin-bottom: 32rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16rpx 0;
+}
+.persion-num .item.active {
+  border: solid 1rpx #149652;
+  color: #149652;
+}
+.persion-num .item .icon {
+  position: absolute;
+  right: 8rpx;
+  top: 8rpx;
+}
+.persion-num .item .a {
+  font-size: 48rpx;
+}
+.persion-num .item .a text {
+  font-size: 28rpx;
+}
+.persion-num .item .b {
+  font-size: 48rpx;
+}
+.persion-num .item .b text {
+  font-size: 28rpx;
+}
+.btn {
+  padding: 0 32rpx;
+  margin-bottom: 64rpx;
+}
+.pop-blank {
+  height: 88rpx;
+}
+.bottom-blank {
+  height: 88rpx;
+}

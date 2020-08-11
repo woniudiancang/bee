@@ -89,4 +89,9 @@ Page({
       url: '/pages/coupons/index?tabIndex=1',
     })
   },
+  goBalance() {
+    wx.navigateTo({
+      url: '/pages/asset/index',
+    })
+  },
 })
