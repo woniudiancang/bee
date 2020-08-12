@@ -17,7 +17,8 @@
     "pages/booking/index",
     "pages/asset/index",
     "pages/asset/recharge-log",
-    "pages/asset/cash-log"
+    "pages/asset/cash-log",
+    "pages/sign/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -77,7 +78,8 @@
     "van-overlay": "@vant/weapp/overlay/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
-    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-calendar": "@vant/weapp/calendar/index"
   },
   "sitemapLocation": "sitemap.json"
 }
