@@ -28,6 +28,7 @@
 	</view>
 </view>
 <view class="my-bar1">
+	<van-cell icon="records" title="每日签到" size="large" is-link url="/pages/sign/index" />
 	<van-cell wx:if="{{canHX}}" icon="qr" title="扫码核销" size="large" is-link bind:click="scanOrderCode" />
 	<van-cell icon="medal-o" title="会员中心" size="large" is-link url="/pages/member-center/index" />
 	<van-cell icon="clock-o" title="在线订座" size="large" is-link url="/pages/booking/index" />

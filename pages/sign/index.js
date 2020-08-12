@@ -1,4 +1,5 @@
 const WXAPI = require('apifm-wxapi')
+const AUTH = require('../../utils/auth')
 
 Page({
   data: {
@@ -12,6 +13,17 @@ Page({
     this.scoreSignLogs()
   },
   onShow: function() {
+    AUTH.checkHasLogined().then(isLogined => {
+      if (!isLogined) {
+        wx.showModal({
+          content: '登陆后才能访问',
+          showCancel: false,
+          success: () => {
+            wx.navigateBack()
+          }
+        })
+      }
+    })
   },
   async scoreSignLogs() {
     const res = await WXAPI.scoreSignLogs({
