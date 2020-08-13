@@ -24,6 +24,10 @@
 				</view>
 				<view class="amount">余额</view>
 			</view>
+			<view class="coupon" bindtap="goScorelog">
+				<view class="num">{{score}}</view>
+				<view class="title1">积分</view>
+			</view>
 		</view>
 	</view>
 </view>

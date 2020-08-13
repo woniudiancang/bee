@@ -117,7 +117,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 88rpx;
+  margin: 0 88rpx;
 }
 .coupon-box .balance-box .amount-box{
   display: flex;

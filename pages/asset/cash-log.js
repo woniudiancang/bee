@@ -20,11 +20,15 @@ Page({
 
   },
   async cashLogsV2() {
+    wx.showLoading({
+      title: '',
+    })
     const res = await WXAPI.cashLogsV2({
       token: wx.getStorageSync('token'),
       page:1,
       pageSize:500
     })
+    wx.hideLoading()
     if (res.code == 0) {
       this.setData({
         cashLogsV2: res.data.result

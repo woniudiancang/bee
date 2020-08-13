@@ -18,7 +18,8 @@
     "pages/asset/index",
     "pages/asset/recharge-log",
     "pages/asset/cash-log",
-    "pages/sign/index"
+    "pages/sign/index",
+    "pages/score/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

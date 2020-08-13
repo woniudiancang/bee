@@ -11,7 +11,8 @@ Page({
     couponStatistics: {
       canUse: 0
     },
-    balance: 0.00
+    balance: 0.00,
+    score: 0
   },
   onLoad() {
     const order_hx_uids = wx.getStorageSync('order_hx_uids')
@@ -53,7 +54,8 @@ Page({
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
-        balance: res.data.balance
+        balance: res.data.balance,
+        score: res.data.score
       })
     }
   },
@@ -92,6 +94,11 @@ Page({
   goBalance() {
     wx.navigateTo({
       url: '/pages/asset/index',
+    })
+  },
+  goScorelog() {
+    wx.navigateTo({
+      url: '/pages/score/logs',
     })
   },
 })

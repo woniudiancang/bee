@@ -14,25 +14,24 @@ Page({
 
   },
   onLoad: function (options) {
-    this.payLogs()
+    this.scoreLogs()
   },
   onShow: function () {
 
   },
-  async payLogs() {
+  async scoreLogs() {
     wx.showLoading({
       title: '',
     })
-    const res = await WXAPI.payLogs({
+    const res = await WXAPI.scoreLogs({
       token: wx.getStorageSync('token'),
       page:1,
-      pageSize:500,
-      status: 1
+      pageSize:500
     })
     wx.hideLoading()
     if (res.code == 0) {
       this.setData({
-        payLogs: res.data
+        scoreLogs: res.data.result
       })
     }
   },
