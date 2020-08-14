@@ -8,7 +8,7 @@
 
 # 招募开发者
 
-希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群联系管理员，期待您的加入！
+希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群 ( 926321567 ) 联系管理员，期待您的加入！
 
 # 荣誉墙
 
@@ -39,10 +39,13 @@
 
 
 ## 我的
-| 我的 | 会员中心 | 收货地址 |关于我们
-| :------: | :------: | :------: | :------: |
-| <img src="https://dcdn.it120.cc/2020/08/02/9f79e0f0-d9ce-4340-962f-27e754999b26.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/5c040f55-47fa-4dcf-88f7-be7d883d1222.png" width="200px">
+| 我的 | 会员中心 | 收货地址 |关于我们 
+| :------: | :------: | :------: | :------: | 
+| <img src="https://dcdn.it120.cc/2020/08/13/efb272e8-6c36-4997-87ef-eb643f0a36fa.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/5c040f55-47fa-4dcf-88f7-be7d883d1222.png" width="200px">
 
+| 我的钱包 |资金明细 | 积分明细 |充值记录
+| :------: | :------: | :------: | :------: |
+|<img src="https://dcdn.it120.cc/2020/08/13/e063c311-7493-46b0-b258-fae298b452a3.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/ab2f640d-9b0e-41d4-b41e-0605f4df0d7e.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/70f9c64e-0c8d-4f35-b50d-0af7f48e2e23.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/39e981cf-cf7e-42f8-9513-9f496f008a03.png" width="200px">
 
 ## 其他
 | 在线订位 |

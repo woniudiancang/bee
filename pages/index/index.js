@@ -37,6 +37,8 @@ Page({
     this.getshopInfo()
     this.categories()
     this._showCouponPop()
+    this.noticeLastOne()
+    this.banners()
   },
   onShow: function(){
     this.shippingCarInfo()
@@ -397,5 +399,35 @@ Page({
     wx.navigateTo({
       url: '/pages/coupons/index',
     })
+  },
+  async noticeLastOne() {
+    const res = await WXAPI.noticeLastOne()
+    if (res.code == 0) {
+      this.setData({
+        noticeLastOne: res.data
+      })
+    }
+  },
+  goNotice(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/notice/detail?id=' + id,
+    })
+  },
+  async banners() {
+    const res = await WXAPI.banners()
+    if (res.code == 0) {
+      this.setData({
+        banners: res.data
+      })
+    }
+  },
+  tapBanner(e) {
+    const url = e.currentTarget.dataset.url
+    if (url) {
+      wx.navigateTo({
+        url
+      })
+    }
   },
 })

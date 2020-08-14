@@ -1,3 +1,12 @@
+<view wx:if="{{noticeLastOne}}" class="notice">
+  <van-notice-bar
+    mode="link"
+    left-icon="volume-o"
+    text="{{noticeLastOne.title}}"
+    bind:click="goNotice"
+    data-id="{{noticeLastOne.id}}"
+  />
+</view>
 <view class="box">
   <view class="shop-name">
     <view class="name">{{shopInfo.name}}</view>
@@ -23,6 +32,11 @@
     </van-sidebar>
   </view>
   <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}">
+    <swiper wx:if="{{banners}}" class="swiper1" indicator-dots="true" autoplay circular>
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+      </swiper-item>
+    </swiper>
     <van-empty wx:if="{{!goods || goods.length == 0}}" description="暂无商品" />
     <van-card
       wx:for="{{goods}}" wx:key="id"

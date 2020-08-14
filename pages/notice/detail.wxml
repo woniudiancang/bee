@@ -1,0 +1,3 @@
+<view class="content">
+  <parser html="{{noticeDetail.content}}" />
+</view>

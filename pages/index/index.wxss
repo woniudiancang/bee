@@ -79,6 +79,14 @@ page {
   overflow-y: scroll;
   width: 550rpx;
 }
+.swiper1 {
+  width: 550rpx;
+  height: 183rpx;
+}
+.swiper1 image {
+  width: 100%;
+  height: 100%;
+}
 .pay-btn{
   background-color: #d3aa79 !important;
   border-style: none !important;

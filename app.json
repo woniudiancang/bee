@@ -19,7 +19,8 @@
     "pages/asset/recharge-log",
     "pages/asset/cash-log",
     "pages/sign/index",
-    "pages/score/logs"
+    "pages/score/logs",
+    "pages/notice/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -80,7 +81,8 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-calendar": "@vant/weapp/calendar/index"
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
   },
   "sitemapLocation": "sitemap.json"
 }
