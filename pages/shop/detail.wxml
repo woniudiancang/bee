@@ -3,6 +3,7 @@
   <view class="info">
     <van-cell size="large" icon="shop-collect-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" />
     <van-cell size="large" icon="hot-o" title="本店特色" label="{{shopInfo.characteristic}}" />
+    <van-cell size="large" icon="clock-o" title="营业时间" value="{{shopInfo.openingHours}}" />
     <van-cell size="large" icon="phone-o" title="联系我们" value="{{shopInfo.linkPhone}}" is-link bind:click="phoneCall" />
     <van-cell size="large" icon="location-o" title="查看地图" value="导航到店" is-link bind:click="guideNow" />
   </view>

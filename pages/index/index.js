@@ -15,6 +15,7 @@ Page({
     showCartPop: false, // 是否显示购物车列表
     showGoodsDetailPOP: false, // 是否显示商品详情
     showCouponPop: false, // 是否弹出优惠券领取提示
+    shopIsOpened: false, // 是否营业
   },  
   onLoad: function () {
     // 设置标题
@@ -53,7 +54,6 @@ Page({
         this.fetchShops(res.latitude, res.longitude, '')
       },      
       fail(e){
-        console.error(e)
         AUTH.checkAndAuthorize('scope.userLocation')
       }
     })
@@ -71,7 +71,8 @@ Page({
       })
       this.setData({
         shops: res.data,
-        shopInfo: res.data[0]
+        shopInfo: res.data[0],
+        shopIsOpened: this.checkIsOpened(res.data[0].openingHours)
       })
       wx.setStorageSync('shopInfo', res.data[0])
     } 
@@ -429,5 +430,21 @@ Page({
         url
       })
     }
+  },
+  checkIsOpened(openingHours) {
+    const date = new Date();
+    const startTime = openingHours.split('-')[0]
+    const endTime = openingHours.split('-')[1]
+    const dangqian=date.toLocaleTimeString('chinese',{hour12:false})
+    
+    const dq=dangqian.split(":")
+    const a = startTime.split(":")
+    const b = endTime.split(":")
+
+    const dqdq=date.setHours(dq[0],dq[1])
+    const aa=date.setHours(a[0],a[1])
+    const bb=date.setHours(b[0],b[1])
+    
+    return aa<dqdq && dqdq<bb
   },
 })

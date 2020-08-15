@@ -313,6 +313,10 @@ page {
   align-items: center;
   justify-content: center;
 }
+.cart-bar .r .topay.noopen {
+  background: #aaa;
+  color: #fff;
+}
 .badge {
   top: 20rpx !important;
   right: 30rpx !important;
