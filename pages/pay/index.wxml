@@ -60,18 +60,12 @@
 
 <view class="amount">共计 {{allGoodsNumber}} 件商品，小计：¥ {{allGoodsPrice}}</view>
 
-<view class="peisong-way" hidden="{{hasNoCoupons}}">
-	<view class="row-box" style="border-bottom:none;">
-		<view class="row-label t">使用优惠券</view>
-	</view>
+<van-cell-group wx:if="{{!hasNoCoupons}}" title="优惠券">
 	<picker bindchange="bindChangeCoupon" range="{{coupons}}" range-key="nameExt">
-		<view class="row-box" style="border-bottom:none;">
-			<view class="row-label">{{curCouponShowText}}</view>
-			<van-icon name="arrow" />
-		</view>
+		<van-cell title="{{curCouponShowText}}" is-link />
 	</picker>
-</view>
+</van-cell-group>
 
 <van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
-
+<view class="bottom"></view>
 <van-submit-bar price="{{ (allGoodsAndYunPrice*100 - youhuijine*100) }}" button-text="立即支付" bindtap="goCreateOrder" button-class="pay-btn" />

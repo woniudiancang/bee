@@ -49,30 +49,22 @@ Page({
     })
   },
   async doneShow() {
-    let shopList = [];
+    let goodsList = [];
     const token = wx.getStorageSync('token')
     //立即购买下单
     if ("buyNow" == this.data.orderType) {
-      var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
-      // console.log(buyNowInfoMem)
-      this.data.kjId = buyNowInfoMem.kjId;
-      if (buyNowInfoMem && buyNowInfoMem.shopList) {
-        shopList = buyNowInfoMem.shopList
-        
-      }
+      goodsList = wx.getStorageSync('pingtuanGoodsList')
     } else {
       //购物车下单
       const res = await WXAPI.shippingCarInfo(token)
       if (res.code == 0) {
-        shopList = res.data.items
+        goodsList = res.data.items
       }
     }
-    var goodsList = shopList //赋值
     this.setData({
       goodsList: goodsList,
       peisongType: this.data.peisongType
     })
-    // console.log(goodsList)
     this.initShippingAddress()
   },
 

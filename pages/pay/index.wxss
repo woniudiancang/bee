@@ -285,3 +285,6 @@
   width: 40rpx;
   height: 40rpx;
 }
+.bottom {
+  height: 120rpx;
+}

@@ -16,8 +16,27 @@ Page({
     showGoodsDetailPOP: false, // 是否显示商品详情
     showCouponPop: false, // 是否弹出优惠券领取提示
     shopIsOpened: false, // 是否营业
+
+    showPingtuanPop: false,
+    share_goods_id: undefined,
+    share_pingtuan_open_id: undefined,
+    lijipingtuanbuy: false,
+    pingtuan_open_id: undefined
   },  
-  onLoad: function () {
+  onLoad: function (e) {
+    // e = {
+    //   share_goods_id: 521055,
+    //   share_pingtuan_open_id: 11267
+    // }
+    if (e.share_goods_id) {
+      this.data.share_goods_id = e.share_goods_id
+      this._showGoodsDetailPOP(e.share_goods_id)
+    }
+    if (e.share_pingtuan_open_id) {
+      this.data.share_pingtuan_open_id = e.share_pingtuan_open_id
+    } else {
+      this._showCouponPop()
+    }
     // 设置标题
     const mallName = wx.getStorageSync('mallName')
     if (mallName) {
@@ -36,8 +55,7 @@ Page({
     })
     // 读取最近的门店数据
     this.getshopInfo()
-    this.categories()
-    this._showCouponPop()
+    this.categories()    
     this.noticeLastOne()
     this.banners()
   },
@@ -218,15 +236,21 @@ Page({
     if (canSubmit) {
       // 读取价格
       let propertyChildIds = "";
-      curGoodsMap.properties.forEach(big => {
-        const small = big.childsCurGoods.find(ele => {
-          return ele.selected
+      if (curGoodsMap.properties) {
+        curGoodsMap.properties.forEach(big => {
+          const small = big.childsCurGoods.find(ele => {
+            return ele.selected
+          })
+          propertyChildIds = propertyChildIds + big.id + ":" + small.id + ","
         })
-        propertyChildIds = propertyChildIds + big.id + ":" + small.id + ","
-      })
+      }
       const res = await WXAPI.goodsPrice(curGoodsMap.basicInfo.id, propertyChildIds)
       if (res.code == 0) {
-        curGoodsMap.price = res.data.price
+        if (this.data.lijipingtuanbuy) {
+          curGoodsMap.price = res.data.pingtuanPrice
+        } else {
+          curGoodsMap.price = res.data.price
+        }
         this.setData({
           curGoodsMap
         })
@@ -236,14 +260,16 @@ Page({
   skuCanSubmit() {
     const curGoodsMap = this.data.curGoodsMap
     let canSubmit = true
-    curGoodsMap.properties.forEach(big => {
-      const small = big.childsCurGoods.find(ele => {
-        return ele.selected
+    if (curGoodsMap.properties) {
+      curGoodsMap.properties.forEach(big => {
+        const small = big.childsCurGoods.find(ele => {
+          return ele.selected
+        })
+        if (!small) {
+          canSubmit = false
+        }
       })
-      if (!small) {
-        canSubmit = false
-      }
-    })
+    }
     return canSubmit
   },
   async addCart2() {
@@ -258,15 +284,17 @@ Page({
       return
     }
     const sku = []
-    curGoodsMap.properties.forEach(big => {
-      const small = big.childsCurGoods.find(ele => {
-        return ele.selected
+    if (curGoodsMap.properties) {
+      curGoodsMap.properties.forEach(big => {
+        const small = big.childsCurGoods.find(ele => {
+          return ele.selected
+        })
+        sku.push({
+          optionId: big.id,
+          optionValueId: small.id
+        })
       })
-      sku.push({
-        optionId: big.id,
-        optionValueId: small.id
-      })
-    })
+    }
     wx.showLoading({
       title: '',
     })
@@ -348,6 +376,10 @@ Page({
   async showGoodsDetailPOP(e) {
     const index = e.currentTarget.dataset.idx
     const goodsId = this.data.goods[index].id
+    this._showGoodsDetailPOP(goodsId)
+  },
+  async _showGoodsDetailPOP(goodsId) {
+    const token = wx.getStorageSync('token')
     const res = await WXAPI.goodsDetail(goodsId)
     if (res.code != 0) {
       wx.showToast({
@@ -359,26 +391,93 @@ Page({
     wx.hideTabBar()
     res.data.price = res.data.basicInfo.minPrice
     res.data.number = res.data.basicInfo.minBuyNumber
-    this.setData({
-      showGoodsDetailPOP: true,
-      curGoodsMap: res.data
-    })
+    const _data = {
+      curGoodsMap: res.data,
+      pingtuan_open_id: null,
+      lijipingtuanbuy: false
+    }
+    if (res.data.basicInfo.pingtuan) {
+      _data.showPingtuanPop = true
+      _data.showGoodsDetailPOP = false
+      // 获取拼团设置
+      const resPintuanSet = await WXAPI.pingtuanSet(goodsId)
+      if (resPintuanSet.code != 0) {
+        _data.showPingtuanPop = false
+        _data.showGoodsDetailPOP = true
+      } else {
+        _data.pintuanSet = resPintuanSet.data
+        // 是否是别人分享的团进来的
+        if (this.data.share_goods_id && this.data.share_goods_id == goodsId && this.data.share_pingtuan_open_id) {
+          // 分享进来的
+          _data.pingtuan_open_id = this.data.share_pingtuan_open_id
+        } else {
+          // 不是通过分享进来的
+          const resPintuanOpen = await WXAPI.pingtuanOpen(token, goodsId)
+          if (resPintuanOpen.code == 2000) {
+            AUTH.openLoginDialog()
+            return
+          }
+          if (resPintuanOpen.code != 0) {
+            wx.showToast({
+              title: resPintuanOpen.msg,
+              icon: 'none'
+            })
+            return
+          }
+          _data.pingtuan_open_id = resPintuanOpen.data.id
+        }
+        // 读取拼团记录
+        const helpUsers = []
+        for (let i = 0; i < _data.pintuanSet.numberOrder; i++) {
+          helpUsers[i] = '/images/who.png'
+        }
+        _data.helpNumers = 0
+        const resPingtuanJoinUsers = await WXAPI.pingtuanJoinUsers(_data.pingtuan_open_id)
+        if (resPingtuanJoinUsers.code == 700 && this.data.share_pingtuan_open_id) {
+          this.data.share_pingtuan_open_id = null
+          this._showGoodsDetailPOP(goodsId)
+          return
+        }
+        if (resPingtuanJoinUsers.code == 0) {
+          _data.helpNumers = resPingtuanJoinUsers.data.length
+          resPingtuanJoinUsers.data.forEach((ele, index) => {
+            if (_data.pintuanSet.numberOrder > index) {
+              helpUsers.splice(index, 1, ele.apiExtUserHelp.avatarUrl)
+            }
+          })
+        }
+        _data.helpUsers = helpUsers
+      }
+    } else {
+      _data.showPingtuanPop = false
+      _data.showGoodsDetailPOP = true
+    }
+    this.setData(_data)
   },
   hideGoodsDetailPOP() {
-    wx.showTabBar()
     this.setData({
-      showGoodsDetailPOP: false
+      showGoodsDetailPOP: false,
+      showPingtuanPop: false
     })
+    wx.showTabBar()
   },
   goPay() {
     wx.navigateTo({
       url: '/pages/pay/index',
     })
   },
-  onShareAppMessage: function() {    
+  onShareAppMessage: function() {
+    let uid = wx.getStorageSync('uid')
+    if (!uid) {
+      uid = ''
+    }
+    let path = '/pages/index/index?inviter_id=' + uid
+    if (this.data.pingtuan_open_id) {
+      path = path + '&share_goods_id=' +  this.data.curGoodsMap.basicInfo.id + '&share_pingtuan_open_id=' +  this.data.pingtuan_open_id
+    }
     return {
       title: '"' + wx.getStorageSync('mallName') + '" ' + wx.getStorageSync('share_profile'),
-      path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
+      path
     }
   },
   processLogin(e) {
@@ -447,4 +546,67 @@ Page({
     
     return aa<dqdq && dqdq<bb
   },
+  yuanjiagoumai() {
+    this.setData({
+      showPingtuanPop: false,
+      showGoodsDetailPOP: true
+    })
+  },
+  _lijipingtuanbuy() {
+    const curGoodsMap = this.data.curGoodsMap
+    curGoodsMap.price = curGoodsMap.basicInfo.pingtuanPrice
+    this.setData({
+      curGoodsMap,
+      showPingtuanPop: false,
+      showGoodsDetailPOP: true,
+      lijipingtuanbuy: true
+    })
+  },
+  pingtuanbuy() {
+    // 加入 storage 里
+    const curGoodsMap = this.data.curGoodsMap
+    const canSubmit = this.skuCanSubmit()
+    if (!canSubmit) {
+      wx.showToast({
+        title: '请选择规格',
+        icon: 'none'
+      })
+      return
+    }
+    const sku = []
+    if (curGoodsMap.properties) {
+      curGoodsMap.properties.forEach(big => {
+        const small = big.childsCurGoods.find(ele => {
+          return ele.selected
+        })
+        sku.push({
+          optionId: big.id,
+          optionValueId: small.id
+        })
+      })
+    }
+    const pingtuanGoodsList = []
+    pingtuanGoodsList.push({
+      goodsId: curGoodsMap.basicInfo.id,
+      number: curGoodsMap.number,
+      categoryId: curGoodsMap.basicInfo.categoryId,
+      shopId: curGoodsMap.basicInfo.shopId,
+      price: curGoodsMap.price,
+      score: curGoodsMap.basicInfo.score,
+      pic: curGoodsMap.basicInfo.pic,
+      name: curGoodsMap.basicInfo.name,
+      minBuyNumber: curGoodsMap.basicInfo.minBuyNumber,
+      logisticsId: curGoodsMap.basicInfo.logisticsId,
+      sku
+    })
+    wx.setStorageSync('pingtuanGoodsList', pingtuanGoodsList)
+    // 跳转
+    wx.navigateTo({
+      url: '/pages/pay/index?orderType=buyNow&pingtuanOpenId=' + this.data.pingtuan_open_id,
+    })
+  },
+  _lijipingtuanbuy2() {
+    this.data.share_pingtuan_open_id = null
+    this._showGoodsDetailPOP(this.data.curGoodsMap.basicInfo.id)
+  }
 })

@@ -196,7 +196,7 @@ page {
   margin-left: 10rpx;
 }
 
-/* .pingtuan-bar{
+.pingtuan-bar{
   margin: 32rpx;
   display: flex;
   align-items: center;
@@ -248,13 +248,17 @@ page {
   margin-right: 10rpx;
 }
 .botton-box{
-  padding: 32rpx 150rpx 0rpx 150rpx;
-
+  display: flex;
+  justify-content: space-between;
+  width: 400rpx;
+  margin: auto;
+  margin-top: 32rpx;
 }
 .liucheng{
   margin: 0rpx 60rpx 32rpx 60rpx;
   display: flex;
   align-items: center;
+  color: #666;
 }
 .liucheng .liucheng-1{
   display: flex;
@@ -269,7 +273,7 @@ page {
 .liucheng .liucheng-1 .content{
   font-size: 25rpx;
   margin-top: 10rpx;
-} */
+}
 
 
 .goods-btn {
@@ -351,7 +355,7 @@ page {
   align-items: center;
 }
 .couponOverlay-container image {
-  width: 320rpx;
-  height: 320rpx;
+  width: 240rpx;
+  height: 240rpx;
   margin: auto;
 }

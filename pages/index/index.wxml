@@ -49,7 +49,8 @@
       title="{{item.name}}"
       thumb="{{item.pic}}">
       <view class="goods-btn" slot="footer">
-        <van-button wx:if="{{item.propertyIds}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-button wx:if="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
+        <van-button wx:elif="{{item.propertyIds}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>
     </van-card>
@@ -100,7 +101,8 @@
       <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" bind:change="goodsStepChange"/>
     </view>
     <view class="add-cart">
-      <van-button block color="#e64340" bind:click="addCart2">加入购物车</van-button>
+      <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">拼团抢购</van-button>
+      <van-button wx:else block color="#e64340" bind:click="addCart2">加入购物车</van-button>
     </view>
   </view>
 </van-popup> 
@@ -128,32 +130,33 @@
   </view>
 </van-popup>
 
-<!-- <van-popup
-  show="{{ true }}"
+<van-popup
+  show="{{ showPingtuanPop }}"
+  custom-style="max-height: 80%;z-index:99999;"
   position="bottom"
   closeable
-  custom-style="height: 60%;"
-  bind:close="onClose"
+  bind:close="hideGoodsDetailPOP"
 >
 <view class="pingtuan-bar">
-  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+  <image mode='aspectFill' class='photos' src='{{curGoodsMap.basicInfo.pic}}'></image>
   <view class="pingtuan-box">
-    <view class="title">昭华</view>
+    <view class="title">{{curGoodsMap.basicInfo.name}}</view>
     <view class="price">
-      <view class="xianjia">¥18</view>
-      <view class="yuanjia">原价¥26</view>
+      <view class="xianjia">¥{{curGoodsMap.basicInfo.pingtuanPrice}}</view>
+      <view wx:if="{{curGoodsMap.basicInfo.minPrice > 0 && curGoodsMap.basicInfo.minPrice != curGoodsMap.basicInfo.pingtuanPrice}}" class="yuanjia">原价¥{{curGoodsMap.basicInfo.minPrice}}</view>
     </view>
-    <view class="jilu">3人成单 / 已拼19件</view>
+    <view class="jilu">{{pintuanSet.numberOrder}}人成单 / 已拼{{curGoodsMap.basicInfo.numberSells}}件</view>
   </view>
 </view>
-<view class="pingdan-title">差2人，即可拼单成功</view>
+<view wx:if="{{pintuanSet.numberOrder > helpNumers}}" class="pingdan-title">差{{pintuanSet.numberOrder - helpNumers}}人，即可拼单成功</view>
+<view wx:else class="pingdan-title">已拼单成功</view>
 <view class="pingtuan-photos">
-  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
-  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
-  <image mode='aspectFill' class='photos' src='http://n.sinaimg.cn/front/789/w429h360/20181017/hh__-hmhswin2107636.jpg'></image>
+  <image wx:for="{{helpUsers}}" wx:key="index" mode='aspectFill' class='photos' src='{{item}}'></image>
 </view>
 <view class="botton-box">
-  <van-button round type="default" block size="small" color="#d3aa79" >立即拼单</van-button>
+  <van-button round type="default" bind:click="yuanjiagoumai">原价购买</van-button>
+  <van-button wx:if="{{pintuanSet.numberOrder > helpNumers}}" round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy">立即拼单</van-button>
+  <van-button wx:else round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy2">重新开团</van-button>
 </view>
 <van-divider contentPosition="center" dashed>拼单流程</van-divider>
 <view class="liucheng">
@@ -167,14 +170,14 @@
   </view>
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/quhuo.png'></image>
-    <view class="content">成功取货</view>
+    <view class="content">成功取餐</view>
   </view>
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/tuikuan.png'></image>
     <view class="content">失败退款</view>
   </view>
 </view>
-</van-popup>  -->
+</van-popup> 
 
 
 <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />

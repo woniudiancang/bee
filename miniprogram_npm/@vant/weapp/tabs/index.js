@@ -23,11 +23,15 @@ component_1.VantComponent({
     },
   },
   props: {
+    sticky: Boolean,
+    border: Boolean,
+    swipeable: Boolean,
+    titleActiveColor: String,
+    titleInactiveColor: String,
     color: {
       type: String,
       observer: 'setLine',
     },
-    sticky: Boolean,
     animated: {
       type: Boolean,
       observer: function () {
@@ -37,10 +41,9 @@ component_1.VantComponent({
         });
       },
     },
-    swipeable: Boolean,
     lineWidth: {
       type: [String, Number],
-      value: -1,
+      value: 40,
       observer: 'setLine',
     },
     lineHeight: {
@@ -48,8 +51,6 @@ component_1.VantComponent({
       value: -1,
       observer: 'setLine',
     },
-    titleActiveColor: String,
-    titleInactiveColor: String,
     active: {
       type: [String, Number],
       value: 0,
@@ -62,10 +63,6 @@ component_1.VantComponent({
     type: {
       type: String,
       value: 'line',
-    },
-    border: {
-      type: Boolean,
-      value: true,
     },
     ellipsis: {
       type: Boolean,
@@ -223,11 +220,14 @@ component_1.VantComponent({
         currentIndex = _a.currentIndex,
         lineWidth = _a.lineWidth,
         lineHeight = _a.lineHeight;
-      this.getRect('.van-tab--' + currentIndex).then(function (rect) {
+      this.getRect('.van-tab', true).then(function (rects) {
+        if (rects === void 0) {
+          rects = [];
+        }
+        var rect = rects[currentIndex];
         if (rect == null) {
           return;
         }
-        var width = lineWidth !== -1 ? lineWidth : rect.width / 2;
         var height =
           lineHeight !== -1
             ? 'height: ' +
@@ -236,7 +236,10 @@ component_1.VantComponent({
               utils_1.addUnit(lineHeight) +
               ';'
             : '';
-        var left = rect.left + (rect.width - width) / 2;
+        var left = rects.slice(0, currentIndex).reduce(function (prev, curr) {
+          return prev + curr.width;
+        }, 0);
+        left += (rect.width - lineWidth) / 2;
         var transition = skipTransition
           ? ''
           : 'transition-duration: ' +
@@ -249,7 +252,7 @@ component_1.VantComponent({
             '\n            ' +
             height +
             '\n            width: ' +
-            utils_1.addUnit(width) +
+            utils_1.addUnit(lineWidth) +
             ';\n            background-color: ' +
             color +
             ';\n            -webkit-transform: translateX(' +
