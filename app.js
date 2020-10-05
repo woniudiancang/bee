@@ -101,7 +101,7 @@ App({
       }
     }
     // 自动登录
-    AUTH.checkHasLogined().then(async isLogined => {
+    AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
         AUTH.login()
       }

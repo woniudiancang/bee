@@ -53,9 +53,9 @@
 |<img src="https://dcdn.it120.cc/2020/08/13/e063c311-7493-46b0-b258-fae298b452a3.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/ab2f640d-9b0e-41d4-b41e-0605f4df0d7e.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/70f9c64e-0c8d-4f35-b50d-0af7f48e2e23.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/13/39e981cf-cf7e-42f8-9513-9f496f008a03.png" width="200px">
 
 ## 其他
-| 在线订位 |
-| :------: |
-| <img src="https://dcdn.it120.cc/2020/08/10/0f7e8d16-d05d-40dd-82e0-b4faedf01520.png" width="200px">
+| 在线订位 | 在线取号 |
+| :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/08/10/0f7e8d16-d05d-40dd-82e0-b4faedf01520.png" width="200px"> | <img src="https://dcdn.it120.cc/2020/10/05/542ac4b7-e49b-4225-8ee0-b99474082924.png" width="190px">
 
 # QQ交流群
 

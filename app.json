@@ -20,7 +20,8 @@
     "pages/asset/cash-log",
     "pages/sign/index",
     "pages/score/logs",
-    "pages/notice/detail"
+    "pages/notice/detail",
+    "pages/queue/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,6 +39,12 @@
         "iconPath": "images/nav/index-off.png",
         "selectedIconPath": "images/nav/index-on.png",
         "text": "点餐"
+      },
+      {
+        "pagePath": "pages/queue/index",
+        "iconPath": "images/nav/qh-off.png",
+        "selectedIconPath": "images/nav/qh-on.png",
+        "text": "取号"
       },
       {
         "pagePath": "pages/order-details/doing",
