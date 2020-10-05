@@ -232,9 +232,22 @@ Page({
     this.setData({
       curGoodsMap
     })
+    this.calculateGoodsPrice()
+  },
+  async calculateGoodsPrice() {
+    const curGoodsMap = this.data.curGoodsMap
+    // 计算最终的商品价格
+    let price = curGoodsMap.basicInfo.minPrice
+    let originalPrice = curGoodsMap.basicInfo.originalPrice
+    let totalScoreToPay = curGoodsMap.basicInfo.minScore
+    let buyNumMax = curGoodsMap.basicInfo.stores
+    let buyNumber = curGoodsMap.basicInfo.minBuyNumber
+    if (this.data.shopType == 'toPingtuan') {
+      price = curGoodsMap.basicInfo.pingtuanPrice
+    }
+    // 计算 sku 价格
     const canSubmit = this.skuCanSubmit()
     if (canSubmit) {
-      // 读取价格
       let propertyChildIds = "";
       if (curGoodsMap.properties) {
         curGoodsMap.properties.forEach(big => {
@@ -246,16 +259,58 @@ Page({
       }
       const res = await WXAPI.goodsPrice(curGoodsMap.basicInfo.id, propertyChildIds)
       if (res.code == 0) {
-        if (this.data.lijipingtuanbuy) {
-          curGoodsMap.price = res.data.pingtuanPrice
-        } else {
-          curGoodsMap.price = res.data.price
+        price = res.data.price
+        if (this.data.shopType == 'toPingtuan') {
+          price = res.data.pingtuanPrice
         }
-        this.setData({
-          curGoodsMap
-        })
+        originalPrice = res.data.originalPrice
+        totalScoreToPay = res.data.score
+        buyNumMax = res.data.stores
       }
     }
+    // 计算配件价格
+    if (this.data.goodsAddition) {
+      this.data.goodsAddition.forEach(big => {
+        big.items.forEach(small => {
+          if (small.active) {
+            price = (price*100 + small.price*100) / 100
+          }
+        })
+      })
+    }
+    curGoodsMap.price = price
+    this.setData({
+      curGoodsMap
+    });
+  },
+  async skuClick2(e) {
+    const propertyindex = e.currentTarget.dataset.idx1
+    const propertychildindex = e.currentTarget.dataset.idx2
+
+    const goodsAddition = this.data.goodsAddition
+    const property = goodsAddition[propertyindex]
+    const child = property.items[propertychildindex]
+    if (child.active) {
+      // 该操作为取消选择
+      child.active = false
+      this.setData({
+        goodsAddition
+      })
+      this.calculateGoodsPrice()
+      return
+    }
+    // 单选配件取消所有子栏目选中状态
+    if (property.type == 0) {
+      property.items.forEach(child => {
+        child.active = false
+      })
+    }
+    // 设置当前选中状态
+    child.active = true
+    this.setData({
+      goodsAddition
+    })
+    this.calculateGoodsPrice()
   },
   skuCanSubmit() {
     const curGoodsMap = this.data.curGoodsMap
@@ -272,11 +327,27 @@ Page({
     }
     return canSubmit
   },
+  additionCanSubmit() {
+    const curGoodsMap = this.data.curGoodsMap
+    let canSubmit = true
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        if (ele.required) {
+          const a = ele.items.find(item => {return item.active})
+          if (!a) {
+            canSubmit = false
+          }
+        }
+      })
+    }
+    return canSubmit
+  },
   async addCart2() {
     const token = wx.getStorageSync('token')
     const curGoodsMap = this.data.curGoodsMap
     const canSubmit = this.skuCanSubmit()
-    if (!canSubmit) {
+    const additionCanSubmit = this.additionCanSubmit()
+    if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'
@@ -295,10 +366,23 @@ Page({
         })
       })
     }
+    const goodsAddition = []
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        ele.items.forEach(item => {
+          if (item.active) {
+            goodsAddition.push({
+              id: item.id,
+              pid: item.pid
+            })
+          }
+        })
+      })
+    }
     wx.showLoading({
       title: '',
     })
-    const res = await WXAPI.shippingCarInfoAddItem(token, curGoodsMap.basicInfo.id, curGoodsMap.number, sku)
+    const res = await WXAPI.shippingCarInfoAddItem(token, curGoodsMap.basicInfo.id, curGoodsMap.number, sku, goodsAddition)
     wx.hideLoading()
     if (res.code == 2000) {
       this.hideGoodsDetailPOP()
@@ -377,6 +461,7 @@ Page({
     const index = e.currentTarget.dataset.idx
     const goodsId = this.data.goods[index].id
     this._showGoodsDetailPOP(goodsId)
+    this.goodsAddition(goodsId)
   },
   async _showGoodsDetailPOP(goodsId) {
     const token = wx.getStorageSync('token')
@@ -566,7 +651,8 @@ Page({
     // 加入 storage 里
     const curGoodsMap = this.data.curGoodsMap
     const canSubmit = this.skuCanSubmit()
-    if (!canSubmit) {
+    const additionCanSubmit = this.additionCanSubmit()
+    if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'
@@ -581,7 +667,24 @@ Page({
         })
         sku.push({
           optionId: big.id,
-          optionValueId: small.id
+          optionValueId: small.id,
+          optionName: big.name,
+          optionValueName: small.name
+        })
+      })
+    }
+    const additions = []
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        ele.items.forEach(item => {
+          if (item.active) {
+            additions.push({
+              id: item.id,
+              pid: item.pid,
+              pname: ele.name,
+              name: item.name
+            })
+          }
         })
       })
     }
@@ -597,7 +700,8 @@ Page({
       name: curGoodsMap.basicInfo.name,
       minBuyNumber: curGoodsMap.basicInfo.minBuyNumber,
       logisticsId: curGoodsMap.basicInfo.logisticsId,
-      sku
+      sku,
+      additions
     })
     wx.setStorageSync('pingtuanGoodsList', pingtuanGoodsList)
     // 跳转
@@ -608,5 +712,17 @@ Page({
   _lijipingtuanbuy2() {
     this.data.share_pingtuan_open_id = null
     this._showGoodsDetailPOP(this.data.curGoodsMap.basicInfo.id)
-  }
+  },
+  async goodsAddition(goodsId){
+    const res = await WXAPI.goodsAddition(goodsId)
+    if (res.code == 0) {
+      this.setData({
+        goodsAddition: res.data
+      })
+    } else {
+      this.setData({
+        goodsAddition: null
+      })
+    }
+  },
 })

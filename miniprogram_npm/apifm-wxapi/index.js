@@ -101,14 +101,15 @@ var subDomain = '-';
 
 var request = function request(url, needSubDomain, method, data) {
   var _url = API_BASE_URL + (needSubDomain ? '/' + subDomain : '') + url;
+  var header = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
   return new Promise(function (resolve, reject) {
     wx.request({
       url: _url,
       method: method,
       data: data,
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+      header: header,
       success: function success(request) {
         resolve(request.data);
       },
@@ -125,18 +126,25 @@ var request = function request(url, needSubDomain, method, data) {
 /**
  * 小程序的promise没有finally方法，自己扩展下
  */
-Promise.prototype.finally = function (callback) {
-  var Promise = this.constructor;
-  return this.then(function (value) {
-    Promise.resolve(callback()).then(function () {
-      return value;
-    });
-  }, function (reason) {
-    Promise.resolve(callback()).then(function () {
-      throw reason;
-    });
-  });
-};
+// Promise.prototype.finally = function (callback) {
+//   var Promise = this.constructor;
+//   return this.then(
+//     function (value) {
+//       Promise.resolve(callback()).then(
+//         function () {
+//           return value;
+//         }
+//       );
+//     },
+//     function (reason) {
+//       Promise.resolve(callback()).then(
+//         function () {
+//           throw reason;
+//         }
+//       );
+//     }
+//   );
+// }
 
 module.exports = (_module$exports = {
   init2: function init2(a, b) {
@@ -372,6 +380,14 @@ module.exports = (_module$exports = {
     return request('/shop/goods/limitation', true, 'get', {
       goodsId: goodsId, priceId: priceId
     });
+  },
+  goodsAddition: function goodsAddition(goodsId) {
+    return request('/shop/goods/goodsAddition', true, 'get', {
+      goodsId: goodsId
+    });
+  },
+  pushNewGoods: function pushNewGoods(data) {
+    return request('/shop/goods/putOrUpdate', true, 'post', data);
   },
   goodsPrice: function goodsPrice(goodsId, propertyChildIds) {
     return request('/shop/goods/price', true, 'post', {
@@ -873,6 +889,9 @@ module.exports = (_module$exports = {
   shopSubApply: function shopSubApply(data) {
     return request('/shop/subshop/apply', true, 'post', data);
   },
+  pickPoints: function pickPoints(data) {
+    return request('/shop/subshop/pickPoints', true, 'post', data);
+  },
   addComment: function addComment(data) {
     return request('/comment/add', true, 'post', data);
   },
@@ -1144,9 +1163,13 @@ module.exports = (_module$exports = {
       token: token
     });
   },
-  shippingCarInfoAddItem: function shippingCarInfoAddItem(token, goodsId, number, sku) {
+  shippingCarInfoAddItem: function shippingCarInfoAddItem(token, goodsId, number, sku, addition) {
     return request('/shopping-cart/add', true, 'post', {
-      token: token, goodsId: goodsId, number: number, sku: JSON.stringify(sku)
+      token: token,
+      goodsId: goodsId,
+      number: number,
+      sku: sku && sku.length > 0 ? JSON.stringify(sku) : '',
+      addition: addition && addition.length > 0 ? JSON.stringify(addition) : ''
     });
   },
   shippingCarInfoModifyNumber: function shippingCarInfoModifyNumber(token, key, number) {
@@ -1246,6 +1269,12 @@ module.exports = (_module$exports = {
   },
   mtjStatistics: function mtjStatistics() {
     return request('/site/statistics/mjt', true, 'get');
+  },
+  mtjTransfer: function mtjTransfer(data) {
+    return request('/mtj/transfer', true, 'post', data);
+  },
+  mtjTransferLogs: function mtjTransferLogs(data) {
+    return request('/mtj/transfer/logs', true, 'post', data);
   },
   register_tt: function register_tt(data) {
     return request('/user/tt/microapp/register', true, 'post', data);

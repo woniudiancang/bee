@@ -247,14 +247,13 @@ Page({
     }
     this.processYunfei();
   },
-  processYunfei() {    
+  processYunfei() {
     var goodsList = this.data.goodsList
     if (goodsList.length == 0) {
       return
     }
-    var goodsJsonStr = "[";
-    var allGoodsPrice = 0;
-
+    const goodsJsonStr = []
+    var isNeedLogistics = 0;
 
     let inviter_id = 0;
     let inviter_id_storge = wx.getStorageSync('referrer');
@@ -262,28 +261,41 @@ Page({
       inviter_id = inviter_id_storge;
     }
     for (let i = 0; i < goodsList.length; i++) {
-      let carShopBean = goodsList[i]
-      allGoodsPrice += carShopBean.price * carShopBean.number;
+      let carShopBean = goodsList[i];
+      if (carShopBean.logistics || carShopBean.logisticsId) {
+        isNeedLogistics = 1;
+      }
 
-      var goodsJsonStrTmp = '';
-      if (i > 0) {
-        goodsJsonStrTmp = ",";
+      const _goodsJsonStr = {
+        propertyChildIds: carShopBean.propertyChildIds
       }
       if (carShopBean.sku && carShopBean.sku.length > 0) {
         let propertyChildIds = ''
         carShopBean.sku.forEach(option => {
           propertyChildIds = propertyChildIds + ',' + option.optionId + ':' + option.optionValueId
         })
-        carShopBean.propertyChildIds = propertyChildIds
+        _goodsJsonStr.propertyChildIds = propertyChildIds
       }
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
-      goodsJsonStr += goodsJsonStrTmp;
-
+      if (carShopBean.additions && carShopBean.additions.length > 0) {
+        let goodsAdditionList = []
+        carShopBean.additions.forEach(option => {
+          goodsAdditionList.push({
+            pid: option.pid,
+            id: option.id
+          })
+        })
+        _goodsJsonStr.goodsAdditionList = goodsAdditionList
+      }
+      _goodsJsonStr.goodsId = carShopBean.goodsId
+      _goodsJsonStr.number = carShopBean.number
+      _goodsJsonStr.logisticsType = 0
+      _goodsJsonStr.inviter_id = inviter_id
+      goodsJsonStr.push(_goodsJsonStr)
 
     }
-    goodsJsonStr += "]";
     this.setData({
-      goodsJsonStr: goodsJsonStr
+      isNeedLogistics: isNeedLogistics,
+      goodsJsonStr: JSON.stringify(goodsJsonStr)
     });
     this.createOrder();
   },

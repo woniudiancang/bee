@@ -50,7 +50,7 @@
       thumb="{{item.pic}}">
       <view class="goods-btn" slot="footer">
         <van-button wx:if="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
-        <van-button wx:elif="{{item.propertyIds}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-button wx:elif="{{item.propertyIds || item.hasAddition}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>
     </van-card>
@@ -84,6 +84,12 @@
     <view class="title">{{item.name}}</view>
     <view class="box-1">
       <view wx:for="{{item.childsCurGoods}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.selected?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick">{{small.name}}</view>
+    </view>
+  </view>
+  <view wx:for="{{goodsAddition}}" wx:key="id" class="content-1">
+    <view class="title">{{item.name}}</view>
+    <view class="box-1">
+      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick2">{{small.name}}</view>
     </view>
   </view>
 
@@ -121,6 +127,7 @@
       <view class="title">{{item.name}}</view>
       <view wx:if="{{item.sku}}" class="content">
         <block wx:for="{{item.sku}}" wx:key="optionValueId" wx:for-item="_sku">{{_sku.optionValueName}} </block>
+        <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">{{option.name}} </block>
       </view>
     </view>
     <view class="r">

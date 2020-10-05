@@ -288,3 +288,8 @@
 .bottom {
   height: 120rpx;
 }
+.goods-label {
+  font-size: 24rpx;
+  margin-top: 8rpx;
+  color: #666;
+}

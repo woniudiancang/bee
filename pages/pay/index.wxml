@@ -52,6 +52,9 @@
 			<block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">
 				{{option.optionName}}:{{option.optionValueName}}
 			</block>
+			<block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">
+				{{option.pname}}:{{option.name}}
+			</block>
 		</view>
 	</van-col>
 	<van-col span="3" class="num">x{{item.number}}</van-col>

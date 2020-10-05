@@ -19,7 +19,12 @@
 ## 首页
 | 首页  | 下单 | 加入购物车 | 查看门店信息 |
 | :------: | :------: | :------: |  :------: | 
-| <img src="https://dcdn.it120.cc/2020/08/02/cde14e39-38c9-4f11-add4-2ab3a116695a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/10/b815c836-710e-464a-9f6c-0f91ca521d73.png" width="200px">
+| <img src="https://dcdn.it120.cc/2020/09/02/234d8e67-2f98-4f0e-af5f-e6b73dda6317.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">| <img src="https://dcdn.it120.cc/2020/09/02/dadf5367-25ca-4a17-9c51-269ee2c87763.png" width="200px">
+
+### 营销功能
+| 拼团 | 签到  | 
+| :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/09/02/a3f3ec3e-0525-43da-9911-5c972e0f8157.jpg" width="200px">| <img src="https://dcdn.it120.cc/2020/09/02/fbd597e5-3d6f-45ee-a7a9-804421dc8fcd.png" width="200px">
 
 ## 优惠券
 | 优惠券  | 待领取 | 可使用 | 
@@ -54,6 +59,8 @@
 
 # QQ交流群
 
+    群号:926321567
+
 <img src="https://dcdn.it120.cc/2020/07/27/e3d09fd2-ace0-4cf4-9d71-e0454591ff54.png " width="200px">
 
 # 本项目使用了下面的组件，在此鸣谢
@@ -71,38 +78,55 @@
 - [生成条码和二维码](https://github.com/alsey/wxbarcode)
 
 # 使用教程
+
 ## 注册开通小程序账号
+
 https://mp.weixin.qq.com/
 根据自己的实际情况选择 “企业”、“个体工商户”身份，注册小程序账号，商城类小程序不支持个人用户上线，所以一定要选择企业或者个体户，获得你自己小程序的 appid 和 secret 信息，保存好，下面会用到：
 - [如何查看小程序的AppID和AppSecret](https://jingyan.baidu.com/article/642c9d340305e3644a46f795.html)
-你需要设置小程序的合法域名，否则开发工具上运行正常，手机访问的时候将看不到数据
+
+    你需要设置小程序的合法域名，否则开发工具上运行正常，手机访问的时候将看不到数据
 - [设置合法服务器域名](https://www.it120.cc/help/tvpou9.html)
+
 ## 注册开通后台账号
+
 https://admin.it120.cc/
 免费注册开通新后台后登录，登录后的首页，请记下你的专属域名，后面会用到
 左侧菜单 “工厂设置” --> “数据克隆” --> “将别人的数据克隆给我”
 对方商户ID填写 27
 点击 “立即克隆”，克隆成功后，F5 刷新一下后台
+
 ## 配置小程序APPID/SECRET
+
 左侧菜单，微信设置，填写配置上一步获得的 appid 和 secret
 这一步很重要！！！
 如果没有正确配置，下面步骤中打开小程序将无法连接你的后台
+
 ## 配置微信支付
+
 左侧菜单，系统设置 -->  在线支付配置，填写您自己的微信支付的信息
+
 ## 下载安装开发工具
+
 https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+
 ## 运行小程序看效果
-双击运行第一步安装的小程序开发工具，打开看效果：
+
+### 双击运行第一步安装的小程序开发工具，打开看效果：
 
 <img src="https://dcdn.it120.cc/yuque/0/2019/png/572726/1575349127431-00ff2059-dd5e-4e4b-99a7-e1d605db02c7.png?x-oss-process=image%2Fresize%2Cw_1500 " width="200px">
 
-导入项目这里，目录选择你 “第二步” 中下载并加压的小程序代码所在目录
+### 导入项目这里
 
-APPID 务必要改成你自己的小程序的 APPID
-APPID 务必要改成你自己的小程序的 APPID
-APPID 务必要改成你自己的小程序的 APPID
+目录选择你 “第二步” 中下载并加压的小程序代码所在目录
 
-然后点击导入按钮
+**APPID 务必要改成你自己的小程序的 APPID**
+
+**APPID 务必要改成你自己的小程序的 APPID**
+
+**APPID 务必要改成你自己的小程序的 APPID**
+
+### 然后点击导入按钮
 
 - [如何查看小程序的AppID和AppSecret](https://jingyan.baidu.com/article/642c9d340305e3644a46f795.html)
 
@@ -112,6 +136,14 @@ APPID 务必要改成你自己的小程序的 APPID
 <img src="https://dcdn.it120.cc/yuque/0/2020/png/572726/1581236703094-ce5c7f32-c60d-4e1b-bacb-21439e1d2721.png?x-oss-process=image%2Fresize%2Cw_1500 " width="200px">
 
 - [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
+
+## 如何修改小程序标题
+
+要修改小程序标题 “蜜蜂点餐” ，请登陆后台，左侧菜单 “系统设置” --> “系统参数”，修改编号为 mallName 的那个参数即可；
+
+## 口味/加料/配菜 设置
+
+[《餐饮口味/加料/配菜/口味选项解决方案》](https://www.it120.cc/help/eoee8a.html)
 
 # 常见问题
 
@@ -126,6 +158,13 @@ APPID 务必要改成你自己的小程序的 APPID
     - 登录你的小程序商户后台（https://mp.weixin.qq.com）左侧菜单 “开发” --> “开发设置” 中的 appid
     - 点击你的小程序开发工具 右上角 的“详情” --> “基本信息” 中的 appid
     - 登录你的 api工厂 后台（https://admin.it120.cc），左侧菜单微信设置中的 appid
+
+3. 在线订座提示“暂无数据”
+
+    - 首先登陆后台，左侧菜单 “预约报名” --> “项目设置”，添加一个预约项目；（如果没有菜单，请去模块管理添加模块）
+    - 添加成功后，记下项目编号（列表第一列中的数字）；
+    - 左侧菜单 “系统设置” --> “系统参数”，修改编号为 “zxdz” 的参数，填写你自己的项目编号；
+    - 小程序开发工具中，点击 “编译”按钮，重新编译小程序即可；
 
 
 # 二次开发说明
