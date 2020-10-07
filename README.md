@@ -8,12 +8,15 @@
 
 # 招募开发者
 
-希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群 ( 926321567 ) 联系管理员，期待您的加入！
+希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以联系管理员，期待您的加入！
+
+QQ群：926321567
 
 # 荣誉墙
 
 - [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
 - [@wangxy2020 Jack Wong](https://github.com/wangxy2020)
+- 期待您的加入
 
 # 功能展示
 ## 首页
@@ -145,6 +148,17 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
 [《餐饮口味/加料/配菜/口味选项解决方案》](https://www.it120.cc/help/eoee8a.html)
 
+
+## 小票打印机
+
+<img src="https://dcdn.it120.cc/2020/10/05/5fc1dd74-130d-421c-83de-ab5555d914bd.png" width="200px">
+
+[《api工厂小票机 / 不干胶标签机配置自动打印》](https://www.it120.cc/help/ggrun8.html)
+
+小票机是打印热敏小票，例如超市购物时候打印的小票；美团、饿了么外卖的打印小票；
+
+标签机是打印的不干胶的，例如奶茶店打印出来贴在杯子上面的；
+
 # 常见问题
 
 ## 无法登陆 / 无法获取 openid
@@ -165,38 +179,6 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
     - 添加成功后，记下项目编号（列表第一列中的数字）；
     - 左侧菜单 “系统设置” --> “系统参数”，修改编号为 “zxdz” 的参数，填写你自己的项目编号；
     - 小程序开发工具中，点击 “编译”按钮，重新编译小程序即可；
-
-
-# 二次开发说明
-
-## 如何弹出登陆授权框
-
-- wxml 文件中增加: 
-
-    ```xml
-    <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
-    ```
-
-- js 文件中增加:
-
-    ```js
-    // 引入 auth 
-    const AUTH = require('../../utils/auth')
-    // 弹出框
-    AUTH.openLoginDialog()
-    // 处理授权登陆
-    processLogin(e) {
-        if (!e.detail.userInfo) {
-            wx.showToast({
-            title: '已取消',
-            icon: 'none',
-            })
-            return;
-        }
-        AUTH.register(this);
-    }
-    ```
-
 
 
 

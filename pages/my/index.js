@@ -39,6 +39,10 @@ Page({
       if (this.data.order_hx_uids && this.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
         _data.canHX = true // 具有扫码核销的权限
       }
+      const admin_uids = wx.getStorageSync('admin_uids')
+      if (admin_uids && admin_uids.indexOf(res.data.base.id) != -1) {
+        _data.isAdmin = true
+      }
       this.setData(_data)
     }
   },
@@ -101,4 +105,10 @@ Page({
       url: '/pages/score/logs',
     })
   },
+  goadmin() {
+    wx.navigateToMiniProgram({
+      appId: 'wx5e5b0066c8d3f33d',
+      path: 'pages/login/auto?token=' + wx.getStorageSync('token'),
+    })
+  }
 })
