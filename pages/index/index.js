@@ -24,10 +24,36 @@ Page({
     pingtuan_open_id: undefined
   },  
   onLoad: function (e) {
+    // 测试拼团入口
     // e = {
     //   share_goods_id: 521055,
     //   share_pingtuan_open_id: 11267
     // }
+
+    // 测试扫码点餐
+    // shopId=36,id=111,key=Y6RoIT 进行 url编码，3个值分别为 门店id，餐桌id，餐桌密钥
+    // e = {
+    //   scene: 'shopId%3d36%2cid%3d111%2ckey%3dY6RoIT' 
+    // }
+
+    
+    if (e && e.scene) {
+      const scene = decodeURIComponent(e.scene) // 处理扫码进商品详情页面的逻辑
+      if (scene && scene.split(',').length == 3) {
+        // 扫码点餐
+        const scanDining = {}
+        scene.split(',').forEach(ele => {
+          scanDining[ele.split('=')[0]] = ele.split('=')[1]
+        })
+        wx.setStorageSync('scanDining', scanDining)
+        this.setData({
+          scanDining: scanDining
+        })
+        this.cyTableToken(scanDining.id, scanDining.key)
+      } else {
+        wx.removeStorageSync('scanDining')
+      }
+    }
     if (e.share_goods_id) {
       this.data.share_goods_id = e.share_goods_id
       this._showGoodsDetailPOP(e.share_goods_id)
@@ -61,6 +87,20 @@ Page({
   },
   onShow: function(){
     this.shippingCarInfo()
+  },
+  async cyTableToken(tableId, key) {
+    const res = await WXAPI.cyTableToken(tableId, key)
+    if (res.code != 0) {
+      wx.showModal({
+        title: '桌码异常',
+        content: res.msg,
+        showCancel: false
+      })
+      return
+    }
+    wx.hideTabBar()
+    wx.setStorageSync('uid', res.data.uid)
+    wx.setStorageSync('token', res.data.token)
   },
   getshopInfo(){
     wx.getLocation({
@@ -190,9 +230,16 @@ Page({
     }
   },
   showCartPop() {
-    this.setData({
-      showCartPop: !this.data.showCartPop
-    })
+    if (this.data.scanDining) {
+      // 扫码点餐，前往购物车页面
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    } else {
+      this.setData({
+        showCartPop: !this.data.showCartPop
+      })
+    }
   },
   hideCartPop() {
     this.setData({
@@ -544,12 +591,21 @@ Page({
       showGoodsDetailPOP: false,
       showPingtuanPop: false
     })
-    wx.showTabBar()
+    if (!this.data.scanDining) {
+      wx.showTabBar()
+    }
   },
   goPay() {
-    wx.navigateTo({
-      url: '/pages/pay/index',
-    })
+    if (this.data.scanDining) {
+      // 扫码点餐，前往购物车
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/pay/index',
+      })
+    }
   },
   onShareAppMessage: function() {
     let uid = wx.getStorageSync('uid')
@@ -722,6 +778,18 @@ Page({
     } else {
       this.setData({
         goodsAddition: null
+      })
+    }
+  },
+  tabbarChange(e) {
+    if (e.detail == 1) {
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    }
+    if (e.detail == 2) {
+      wx.navigateTo({
+        url: '/pages/cart/order',
       })
     }
   },

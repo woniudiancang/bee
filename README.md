@@ -60,6 +60,11 @@ QQ群：926321567
 | :------: | :------: |
 | <img src="https://dcdn.it120.cc/2020/08/10/0f7e8d16-d05d-40dd-82e0-b4faedf01520.png" width="200px"> | <img src="https://dcdn.it120.cc/2020/10/05/542ac4b7-e49b-4225-8ee0-b99474082924.png" width="190px">
 
+## 扫码点餐
+| 扫桌码点餐 | 共享购物车 | 查看已点 | 买单结账 |
+| :------: | :------: | :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/10/08/f7d15bc6-c366-4688-92f4-62183d87c898.png" width="200px"> | <img src="https://dcdn.it120.cc/2020/10/08/31c7fd0c-4cbe-4702-b318-02eccbc1d41f.png" width="190px"> | <img src="https://dcdn.it120.cc/2020/10/08/2ebad9a2-39d1-4c3b-8f9d-a64628e1dd86.png" width="190px"> | <img src="https://dcdn.it120.cc/2020/10/08/f935fb79-7565-41ee-a2b4-5c9a50348479.png" width="190px">
+
 # QQ交流群
 
     群号:926321567
@@ -158,6 +163,31 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 小票机是打印热敏小票，例如超市购物时候打印的小票；美团、饿了么外卖的打印小票；
 
 标签机是打印的不干胶的，例如奶茶店打印出来贴在杯子上面的；
+
+## 扫码点餐
+
+### 生成桌码
+
+1. 首先需要在后台“餐桌管理”中，将你的餐桌信息维护好，例如: A1 A2 B1 B2
+2. 给每个餐桌生成小程序码，前往后台 “微信设置” --> “小程序设置” --> “获取小程序码”
+3. 页面路径填写: pages/index/index
+4. scene参数填写: shopId=36,id=111,key=Y6RoIT （36改成你自己门店的id；111改成对应的餐桌的id；Y6RoIT 改成对应的餐桌的密钥，为了防止用户恶意扫码，建议定期更换密钥后重新生成桌码）
+
+**注意：微信小程序只有正式上线的小程序才可以获取小程序码，所以如果是开发阶段，可以按照下面的说明在开发工具中测试**
+
+### 如何测试扫码点餐
+
+修改 “pages/index/index.js” 文件的 onLoad 方法，放开下面的注释即可：
+
+```js
+// 测试扫码点餐
+// shopId=36,id=111,key=Y6RoIT 进行 url编码，3个值分别为 门店id，餐桌id，餐桌密钥
+// e = {
+//   scene: 'shopId%3d36%2cid%3d111%2ckey%3dY6RoIT' 
+// }
+```
+
+修改 js 文件后，请点击开发工具上的 “编译” 按钮，重新编译一下小程序，即可进行扫码点餐的测试
 
 # 常见问题
 

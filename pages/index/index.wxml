@@ -7,7 +7,7 @@
     data-id="{{noticeLastOne.id}}"
   />
 </view>
-<view class="box">
+<view wx:if="{{ !scanDining }}" class="box">
   <view class="shop-name">
     <view class="name">{{shopInfo.name}}</view>
     <view class="select">
@@ -64,7 +64,7 @@
   </view>  
   <view class="r">
     <view class="amount"><text>¥</text>{{shippingCarInfo.price}}</view>
-    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">结算</view>
+    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">选好了</view>
     <view wx:else class="topay noopen">未营业</view>
   </view>
 </view>
@@ -189,8 +189,17 @@
 
 <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
 
-<van-overlay show="{{ showCouponPop }}" bind:click="couponOverlayClick">
+<van-overlay show="{{ !scanDining && showCouponPop }}" bind:click="couponOverlayClick">
   <view class="couponOverlay-container">
     <image src="/images/coupon.png" bindtap="couponImageClick"></image>
   </view>
 </van-overlay>
+
+
+<block wx:if="{{ scanDining }}">
+  <van-tabbar active="{{ 0 }}" fixed="{{ false }}" inactive-color="#6e6d6b" active-color="#e64340" bind:change="tabbarChange">
+    <van-tabbar-item icon="goods-collect-o">点餐</van-tabbar-item>
+    <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
+    <van-tabbar-item icon="bill-o">已点</van-tabbar-item>
+  </van-tabbar>
+</block>
