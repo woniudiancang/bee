@@ -1,5 +1,5 @@
 module.exports = {
-  version: "3.0.0",
-  note: '增加堂食扫码点餐模式，一桌一码，支持多人同时点餐、加菜',
+  version: "3.1.0",
+  note: '扫码点餐，增加菜品状态：待确认、已下厨、已上菜',
   subDomain: "beeorder", // 根据教程 https://www.it120.cc/help/qr6l4m.html 查看并设置你自己的 subDomain
 }

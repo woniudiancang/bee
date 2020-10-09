@@ -93,7 +93,8 @@
     "van-calendar": "@vant/weapp/calendar/index",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
-    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -12,7 +12,13 @@
       thumb="{{ item.pic }}"
       num="{{ item.number }}"
       centered
-    />
+    >
+      <view slot="footer">
+        <van-tag wx:if="{{ item.cyTableStatus == 0 }}" mark type="warning">待确认</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 1 }}" mark type="success">已下厨</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 2 }}" mark plain type="success">已上菜</van-tag>
+      </view>
+    </van-card>
   </van-cell-group>
   <van-cell-group>
     <van-cell title="菜品数量" value="{{ orderInfo.goodsNumber }}" />

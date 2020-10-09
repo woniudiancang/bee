@@ -65,6 +65,10 @@ QQ群：926321567
 | :------: | :------: | :------: | :------: |
 | <img src="https://dcdn.it120.cc/2020/10/08/f7d15bc6-c366-4688-92f4-62183d87c898.png" width="200px"> | <img src="https://dcdn.it120.cc/2020/10/08/31c7fd0c-4cbe-4702-b318-02eccbc1d41f.png" width="190px"> | <img src="https://dcdn.it120.cc/2020/10/08/2ebad9a2-39d1-4c3b-8f9d-a64628e1dd86.png" width="190px"> | <img src="https://dcdn.it120.cc/2020/10/08/f935fb79-7565-41ee-a2b4-5c9a50348479.png" width="190px">
 
+| 待确认 | 共享购物车 | 查看已点 |
+| :------: | :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/10/09/21a75f2c-75c2-495b-bdbf-505e75b516ce.png" width="200px"> | <img src="https://dcdn.it120.cc/2020/10/09/b1277a38-044b-433d-92b3-8ecf8f433769.png" width="190px"> | <img src="https://dcdn.it120.cc/2020/10/09/3fb83702-8093-4530-ac28-95ba912a7cff.png" width="190px">
+
 # QQ交流群
 
     群号:926321567
