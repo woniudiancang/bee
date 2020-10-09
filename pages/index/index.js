@@ -218,6 +218,13 @@ Page({
   },
   async shippingCarInfo() {
     const res = await WXAPI.shippingCarInfo(wx.getStorageSync('token'))
+    if (res.code == 700) {
+      this.setData({
+        shippingCarInfo: null,
+        showCartPop: false
+      })
+      return
+    }
     if (res.code == 0) {
       this.setData({
         shippingCarInfo: res.data
@@ -457,14 +464,23 @@ Page({
       })
       const res = await WXAPI.shippingCarInfoRemoveItem(token, item.key)
       wx.hideLoading()
-      if (res.code != 0) {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
+      if (res.code == 700) {
+        this.setData({
+          shippingCarInfo: null,
+          showCartPop: false
         })
         return
       }
-      this.shippingCarInfo()
+      if (res.code == 0) {
+        this.setData({
+          shippingCarInfo: res.data
+        })
+      } else {
+        this.setData({
+          shippingCarInfo: null,
+          showCartPop: false
+        })
+      }
     } else {
       // 修改数量
       wx.showLoading({

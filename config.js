@@ -1,5 +1,5 @@
 module.exports = {
-  version: "3.1.0",
-  note: '扫码点餐，增加菜品状态：待确认、已下厨、已上菜',
+  version: "3.1.1",
+  note: '购物车数量1->0 bug',
   subDomain: "beeorder", // 根据教程 https://www.it120.cc/help/qr6l4m.html 查看并设置你自己的 subDomain
 }
