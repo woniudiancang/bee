@@ -206,6 +206,7 @@ Page({
     this.setData({
       goods: res.data
     })
+    this.processBadge()
   },
   categoryClick(e) {
     const index = e.currentTarget.dataset.idx
@@ -223,9 +224,7 @@ Page({
         shippingCarInfo: null,
         showCartPop: false
       })
-      return
-    }
-    if (res.code == 0) {
+    } else if (res.code == 0) {
       this.setData({
         shippingCarInfo: res.data
       })
@@ -235,6 +234,7 @@ Page({
         showCartPop: false
       })
     }
+    this.processBadge()
   },
   showCartPop() {
     if (this.data.scanDining) {
@@ -469,9 +469,7 @@ Page({
           shippingCarInfo: null,
           showCartPop: false
         })
-        return
-      }
-      if (res.code == 0) {
+      } else if (res.code == 0) {
         this.setData({
           shippingCarInfo: res.data
         })
@@ -481,6 +479,7 @@ Page({
           showCartPop: false
         })
       }
+      this.processBadge()
     } else {
       // 修改数量
       wx.showLoading({
@@ -808,5 +807,47 @@ Page({
         url: '/pages/cart/order',
       })
     }
+  },
+  // 显示分类和商品数量徽章
+  processBadge() {
+    const categories = this.data.categories
+    const goods = this.data.goods
+    const shippingCarInfo = this.data.shippingCarInfo
+    if (!categories) {
+      return
+    }
+    if (!goods) {
+      return
+    }
+    categories.forEach(ele => {
+      ele.badge = 0
+    })
+    goods.forEach(ele => {
+      ele.badge = 0
+    })
+    if (shippingCarInfo) {
+      shippingCarInfo.items.forEach(ele => {
+        if (ele.categoryId) {
+          const category = categories.find(a => {
+            return a.id == ele.categoryId
+          })
+          if (category) {
+            category.badge += ele.number
+          }
+        }
+        if (ele.goodsId) {
+          const _goods = goods.find(a => {
+            return a.id == ele.goodsId
+          })
+          if (_goods) {
+            _goods.badge += ele.number
+          }
+        }
+      })
+    }
+    this.setData({
+      categories,
+      goods
+    })
   },
 })

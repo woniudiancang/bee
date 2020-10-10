@@ -28,7 +28,12 @@
 <view class="box1">
   <view class="box-1">
     <van-sidebar>
-      <van-sidebar-item wx:for="{{categories}}" wx:key="id" title="{{item.name}}" data-idx="{{index}}" bind:click="categoryClick" />
+      <van-sidebar-item
+        wx:for="{{categories}}" wx:key="id"
+        title="{{item.name}}"
+        badge="{{ item.badge ? item.badge : '' }}"
+        data-idx="{{index}}" bind:click="categoryClick"
+      />
     </van-sidebar>
   </view>
   <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}">
@@ -45,6 +50,7 @@
       origin-price="{{item.originalPrice > 0 ? item.originalPrice : ''}}"
       price="{{item.minPrice}}"
       thumb-mode="aspectFill"
+      tag="{{ item.badge ? item.badge : '' }}"
       desc="{{item.characteristic}}"
       title="{{item.name}}"
       thumb="{{item.pic}}">
