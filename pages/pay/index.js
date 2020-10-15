@@ -85,6 +85,7 @@ Page({
       peisongType
     })
     wx.setStorageSync('peisongType', peisongType)
+    this.createOrder()
   },
   
   getDistrictId: function (obj, aaa) {
@@ -297,7 +298,7 @@ Page({
       isNeedLogistics: isNeedLogistics,
       goodsJsonStr: JSON.stringify(goodsJsonStr)
     });
-    this.createOrder();
+    this.createOrder()
   },
   addAddress: function () {
     wx.navigateTo({

@@ -207,7 +207,7 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
     - 点击你的小程序开发工具 右上角 的“详情” --> “基本信息” 中的 appid
     - 登录你的 api工厂 后台（https://admin.it120.cc），左侧菜单微信设置中的 appid
 
-3. 在线订座提示“暂无数据”
+## 在线订座提示“暂无数据”
 
     - 首先登陆后台，左侧菜单 “预约报名” --> “项目设置”，添加一个预约项目；（如果没有菜单，请去模块管理添加模块）
     - 添加成功后，记下项目编号（列表第一列中的数字）；
