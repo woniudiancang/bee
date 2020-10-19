@@ -293,3 +293,7 @@
   margin-top: 8rpx;
   color: #666;
 }
+.red {
+  color: #e64340 !important;
+  font-size: 32rpx;
+}

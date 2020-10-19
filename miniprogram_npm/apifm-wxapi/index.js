@@ -1267,6 +1267,9 @@ module.exports = (_module$exports = {
   mtjAsset: function mtjAsset(token) {
     return request('/mtj/asset', true, 'get', { token: token });
   },
+  mtjSetting: function mtjSetting() {
+    return request('/mtj/setting', true, 'get');
+  },
   mtjLogs: function mtjLogs(data) {
     return request('/mtj/logs', true, 'post', data);
   },

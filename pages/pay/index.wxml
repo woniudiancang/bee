@@ -69,6 +69,7 @@
 	</picker>
 </van-cell-group>
 
+<van-cell wx:if="{{ yunPrice }}" title="配送费" value="¥{{ yunPrice }}" value-class="red" />
 <van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
 <view class="bottom"></view>
 <van-submit-bar price="{{ (allGoodsAndYunPrice*100 - youhuijine*100) }}" button-text="立即支付" bindtap="goCreateOrder" button-class="pay-btn" />
