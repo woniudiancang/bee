@@ -39,6 +39,10 @@ QQ群：926321567
 | :------: | :------: | :------: |:------: |
 |<img src="https://dcdn.it120.cc/2020/08/02/95bf93e9-bad2-4929-8d3d-f946602907ab.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9d5c16a3-5eb0-4546-8214-8ceae986f34f.png" width="200px">|<img src="	https://dcdn.it120.cc/2020/08/02/58a6b990-1436-43aa-9be2-4ae0487421a1.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/1da65ea2-452e-43e7-9eaf-5729539ab13b.png" width="200px">
 
+| 选择时间 | 选择时间 | 优惠买单 | 买单 |
+| :------: | :------: | :------: |:------: |
+|<img src="https://dcdn.it120.cc/2020/10/24/fe8127ba-9e56-42b1-9188-cdec3a31a176.png" width="200px">|<img src="https://dcdn.it120.cc/2020/10/24/85ee774b-d531-472b-ab2b-ec57d5437bf0.png" width="200px">|<img src="	https://dcdn.it120.cc/2020/08/02/58a6b990-1436-43aa-9be2-4ae0487421a1.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/1da65ea2-452e-43e7-9eaf-5729539ab13b.png" width="200px">
+
 
 ## 订单管理
 | 待支付 |全部订单 | 配送 | 取餐 | 交易完成 |

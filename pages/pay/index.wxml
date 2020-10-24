@@ -11,20 +11,6 @@
 		</view>
 	</view>
 	<van-divider dashed />
-	<van-field
-		wx:if="{{peisongType == 'zq'}}"
-		size="large"
-    value="{{ mobile }}"
-    label="联系电话"
-		type="number"
-		focus
-		clearable
-		required
-		border="{{false}}"
-    placeholder="请输入手机号码"
-    bind:change="mobileChange">
-		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
-  </van-field>
 	<!-- 地址 -->
 	<view class="address-box" wx:if="{{peisongType == 'kd'}}">
 		<view class="add-address" wx:if="{{!curAddressData}}" bindtap="addAddress">
@@ -41,6 +27,21 @@
 			</view>
 		</view>
 	</view>
+	<van-field
+		wx:if="{{peisongType == 'zq'}}"
+    model:value="{{ mobile }}"
+    label="联系电话"
+		type="number"
+		clearable
+    placeholder="请输入手机号码">
+		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
+  </van-field>
+	<van-cell
+	 	title="{{ peisongType == 'zq' ? '取餐时间' : '送达时间' }}"
+		value="{{ diningTime ? diningTime : '请选择' }}"
+		is-link
+		bind:click="diningTimeShow"
+	/>
 	<van-divider dashed />
 </view>
 
@@ -73,3 +74,21 @@
 <van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
 <view class="bottom"></view>
 <van-submit-bar price="{{ (allGoodsAndYunPrice*100 - youhuijine*100) }}" button-text="立即支付" bindtap="goCreateOrder" button-class="pay-btn" />
+
+<van-popup
+  show="{{ diningTimeShow }}"
+	position="bottom"
+	round
+  bind:close="diningTimeHide"
+>
+<van-datetime-picker
+  type="time"
+	value="{{ currentDate }}"
+	min-hour="{{ 8 }}"
+	max-hour="{{ 22 }}"
+	formatter="{{ formatter }}"
+	filter="{{ filter }}"
+  bind:cancel="diningTimeHide"
+  bind:confirm="diningTimeConfirm"
+/>
+</van-popup>

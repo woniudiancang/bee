@@ -29,7 +29,23 @@ Page({
     curCoupon: null, // 当前选择使用的优惠券
     curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
     peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
-    remark: ''
+    remark: '',
+
+    currentDate: new Date().getHours() + ':' + new Date().getMinutes(),
+    formatter(type, value) {
+      if (type === 'hour') {
+        return `${value}点`;
+      } else if (type === 'minute') {
+        return `${value}分`;
+      }
+      return value;
+    },
+    filter(type, options) {
+      if (type === 'minute') {
+        return options.filter((option) => option % 10 === 0);
+      }
+      return options;
+    },
   },
   onShow(){
     this.setData({
@@ -110,6 +126,13 @@ Page({
       })
       return
     }
+    if (!this.data.diningTime) {
+      wx.showToast({
+        title: '请选择自取/配送时间',
+        icon: 'none'
+      })
+      return
+    }
     const subscribe_ids = wx.getStorageSync('subscribe_ids')
     if (subscribe_ids) {
     wx.requestSubscribeMessage({
@@ -149,11 +172,14 @@ Page({
     if (that.data.pingtuanOpenId) {
       postData.pingtuanOpenId = that.data.pingtuanOpenId
     }
+    const extJsonStr = {}
     if (postData.peisongType == 'zq') {
-      const extJsonStr = {}
       extJsonStr['联系电话'] = this.data.mobile
-      postData.extJsonStr = JSON.stringify(extJsonStr)
+      extJsonStr['取餐时间'] = this.data.diningTime
+    } else {
+      extJsonStr['送达时间'] = this.data.diningTime
     }
+    postData.extJsonStr = JSON.stringify(extJsonStr)
     if (e && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
@@ -399,9 +425,20 @@ Page({
       })
     }
   },
-  mobileChange(e) {
+  diningTimeShow() {
     this.setData({
-      mobile: e.detail
+      diningTimeShow: true
     })
+  },
+  diningTimeHide() {
+    this.setData({
+      diningTimeShow: false
+    })
+  },
+  diningTimeConfirm(e) {
+    this.setData({
+      diningTime: e.detail
+    })
+    this.diningTimeHide()
   },
 })
