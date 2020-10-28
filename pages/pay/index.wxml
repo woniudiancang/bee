@@ -33,6 +33,7 @@
     label="联系电话"
 		type="number"
 		clearable
+		focus
     placeholder="请输入手机号码">
 		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
   </van-field>

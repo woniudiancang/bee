@@ -53,7 +53,7 @@ QQ群：926321567
 ## 我的
 | 我的 | 会员中心 | 收货地址 |关于我们 
 | :------: | :------: | :------: | :------: | 
-| <img src="https://dcdn.it120.cc/2020/08/13/efb272e8-6c36-4997-87ef-eb643f0a36fa.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/5c040f55-47fa-4dcf-88f7-be7d883d1222.png" width="200px">
+| <img src="https://dcdn.it120.cc/2020/08/13/efb272e8-6c36-4997-87ef-eb643f0a36fa.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/3a29305c-0b2b-4f8f-99e7-296e6731ef0f.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/9f31d35d-c812-419e-b904-6e05a281f90c.png" width="200px">|<img src="https://dcdn.it120.cc/2020/10/25/7e00339c-2734-4605-911d-8afde1d026df.png" width="200px">
 
 | 我的钱包 |资金明细 | 积分明细 |充值记录
 | :------: | :------: | :------: | :------: |
