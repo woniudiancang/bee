@@ -211,6 +211,8 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
     - 点击你的小程序开发工具 右上角 的“详情” --> “基本信息” 中的 appid
     - 登录你的 api工厂 后台（https://admin.it120.cc），左侧菜单微信设置中的 appid
 
+## [微信支付 50000 签名错误](https://www.it120.cc/help/nrw662.html)
+
 ## 在线订座提示“暂无数据”
 
     - 首先登陆后台，左侧菜单 “预约报名” --> “项目设置”，添加一个预约项目；（如果没有菜单，请去模块管理添加模块）
