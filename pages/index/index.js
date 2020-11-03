@@ -699,7 +699,11 @@ Page({
     const dqdq=date.setHours(dq[0],dq[1])
     const aa=date.setHours(a[0],a[1])
     const bb=date.setHours(b[0],b[1])
-    
+
+    if (a[0]*1 > b[0]*1) {
+      // 说明是到第二天
+      return !this.checkIsOpened(endTime + '-' + startTime)
+    }
     return aa<dqdq && dqdq<bb
   },
   yuanjiagoumai() {
