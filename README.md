@@ -12,6 +12,12 @@
 
 QQ群：926321567
 
+# 扫码体验
+
+**希望展示您的小程序，请给我们留言**
+
+<img src="https://dcdn.it120.cc/2020/11/05/a8bb669c-878d-4cae-b1b2-708339f67dc4.jpeg">
+
 # 荣誉墙
 
 - [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
