@@ -39,7 +39,7 @@
   <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}">
     <swiper wx:if="{{banners}}" class="swiper1" indicator-dots="true" autoplay circular>
       <swiper-item wx:for="{{banners}}" wx:key="id">
-        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}_m" />
       </swiper-item>
     </swiper>
     <van-empty wx:if="{{!goods || goods.length == 0}}" description="暂无商品" />
@@ -53,7 +53,7 @@
       tag="{{ item.badge ? item.badge : '' }}"
       desc="{{item.characteristic}}"
       title="{{item.name}}"
-      thumb="{{item.pic}}">
+      thumb="{{item.pic}}_m">
       <view class="goods-btn" slot="footer">
         <van-button wx:if="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
         <van-button wx:elif="{{item.propertyIds || item.hasAddition}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
@@ -84,7 +84,7 @@
   close-icon="close"
   position="bottom"
   bind:close="hideGoodsDetailPOP">
-  <image mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}'></image>
+  <image mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}_m'></image>
   <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
   <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
     <view class="title">{{item.name}}</view>
