@@ -17,15 +17,13 @@ Page({
     totalScoreToPay: 0,
     goodsList: [],
     allGoodsPrice: 0,
+    amountReal: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
     pingtuanOpenId: undefined, //拼团的话记录团号
-
-    hasNoCoupons: true,
-    coupons: [],
-    youhuijine: 0, //优惠券金额
+    
     curCoupon: null, // 当前选择使用的优惠券
     curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
     peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
@@ -226,14 +224,29 @@ Page({
         WXAPI.shippingCarInfoRemoveAll(loginToken)
       }
       if (!e) {
+        const coupons = res.data.couponUserList
+        if (coupons) {
+          coupons.forEach(ele => {
+            let moneyUnit = '元'
+            if (ele.moneyType == 1) {
+              moneyUnit = '%'
+            }
+            if (ele.moneyHreshold) {
+              ele.nameExt = ele.name + ' [消费满' + ele.moneyHreshold + '元可减' + ele.money + moneyUnit +']'
+            } else {
+              ele.nameExt = ele.name + ' [减' + ele.money + moneyUnit + ']'
+            }
+          })
+        }
         that.setData({
           totalScoreToPay: res.data.score,
           allGoodsNumber: res.data.goodsNumber,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
-          yunPrice: res.data.amountLogistics
+          yunPrice: res.data.amountLogistics,
+          amountReal: res.data.amountReal,
+          coupons
         });
-        that.getMyCoupons();
         return;
       }
       that.processAfterCreateOrder(res)
@@ -336,33 +349,13 @@ Page({
       url: "/pages/ad/index"
     })
   },
-  async getMyCoupons() {
-    const res = await WXAPI.myCoupons({
-      token: wx.getStorageSync('token'),
-      status: 0
-    })
-    if (res.code == 0) {
-      var coupons = res.data.filter(entity => {
-        return entity.moneyHreshold <= this.data.allGoodsAndYunPrice;
-      })
-      if (coupons.length > 0) {
-        coupons.forEach(ele => {
-          ele.nameExt = ele.name + ' [满' + ele.moneyHreshold + '元可减' + ele.money + '元]'
-        })
-        this.setData({
-          hasNoCoupons: false,
-          coupons: coupons
-        });
-      }
-    }
-  },
   bindChangeCoupon: function (e) {
     const selIndex = e.detail.value;
     this.setData({
-      youhuijine: this.data.coupons[selIndex].money,
       curCoupon: this.data.coupons[selIndex],
       curCouponShowText: this.data.coupons[selIndex].nameExt
-    });
+    })
+    this.createOrder()
   },
   radioChange (e) {
     this.setData({
