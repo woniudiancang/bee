@@ -84,7 +84,7 @@
   close-icon="close"
   position="bottom"
   bind:close="hideGoodsDetailPOP">
-  <image mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}_m'></image>
+  <image wx:if="{{ showGoodsDetailPOP }}" mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}_m'></image>
   <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
   <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
     <view class="title">{{item.name}}</view>

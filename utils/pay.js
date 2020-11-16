@@ -44,7 +44,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
             title: '支付失败:' + aaa
           })
           if (redirectUrl) {
-            wx.switchTab({
+            wx.redirectTo({
               url: redirectUrl,
             })
           }
@@ -55,7 +55,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
             title: '支付成功'
           })
           if (redirectUrl) {
-            wx.switchTab({
+            wx.redirectTo({
               url: redirectUrl,
             })
           }
