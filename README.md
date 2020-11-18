@@ -18,12 +18,6 @@ QQ群：926321567
 
 <img src="https://dcdn.it120.cc/2020/11/05/a8bb669c-878d-4cae-b1b2-708339f67dc4.jpeg">
 
-# 荣誉墙
-
-- [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
-- [@wangxy2020 Jack Wong](https://github.com/wangxy2020)
-- 期待您的加入
-
 # 功能展示
 ## 首页
 | 首页  | 下单 | 加入购物车 | 查看门店信息 |
