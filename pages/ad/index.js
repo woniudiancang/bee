@@ -327,6 +327,8 @@ Page({
     const linkMan = this.data.addressData.linkMan
     const address = this.data.addressData.address
     const mobile = this.data.addressData.mobile
+    const latitude = this.data.addressData.latitude
+    const longitude = this.data.addressData.longitude
 
     if (!linkMan){
       wx.showToast({
@@ -349,6 +351,13 @@ Page({
       })
       return
     }
+    if (!latitude){
+      wx.showToast({
+        title: '请选择定位',
+        icon: 'none',       
+      })
+      return
+    }
     if (!address){
       wx.showToast({
         title: '请填写详细地址',
@@ -363,6 +372,8 @@ Page({
       address: address,
       mobile: mobile,
       isDefault: 'true',
+      latitude,
+      longitude
     }     
 
     // console.log(this.data.pIndex)
@@ -460,9 +471,23 @@ Page({
         content: '手机号码格式不正确',
         showCancel:false
       })
-    }   
-    
+    }
   },
-  
-  
+  chooseLocation() {
+    wx.chooseLocation({
+      success: (res) => {
+        const addressData = this.data.addressData
+        addressData.address = res.address + res.name
+        addressData.latitude = res.latitude
+        addressData.longitude = res.longitude
+        this.setData({
+          addressData
+        })
+      },
+      fail: (e) => {
+        console.error(e)
+      },
+    })
+  }
 })
+

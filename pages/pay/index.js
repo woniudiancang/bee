@@ -187,6 +187,12 @@ Page({
         })
         return;
       }
+      // 达达配送
+      if (this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
+        postData.dadaShopNo = this.data.shopInfo.number
+        postData.dadaLat = this.data.curAddressData.latitude
+        postData.dadaLng = this.data.curAddressData.longitude
+      }
       if (postData.peisongType == 'kd') {
         postData.provinceId = that.data.curAddressData.provinceId;
         postData.cityId = that.data.curAddressData.cityId;

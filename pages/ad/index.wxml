@@ -52,6 +52,7 @@
 			is-link
 		/>
 	</picker>
+  <van-cell title="选择定位" value="{{ addressData.latitude ? (addressData.latitude + ',' + addressData.longitude) : '请选择' }}" is-link bind:click="chooseLocation" />
 	<van-field
     value="{{ addressData.address }}"
     label="详细地址"
