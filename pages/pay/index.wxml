@@ -85,10 +85,12 @@
 <van-datetime-picker
   type="time"
 	value="{{ currentDate }}"
-	min-hour="{{ 8 }}"
+	min-hour="{{ minHour }}"
 	max-hour="{{ 22 }}"
+	min-minute="{{ minMinute }}"
 	formatter="{{ formatter }}"
 	filter="{{ filter }}"
+	bind:change="diningTimeChange"
   bind:cancel="diningTimeHide"
   bind:confirm="diningTimeConfirm"
 />

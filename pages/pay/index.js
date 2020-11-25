@@ -30,6 +30,8 @@ Page({
     remark: '',
 
     currentDate: new Date().getHours() + ':' + new Date().getMinutes(),
+    minHour: new Date().getHours(),
+    minMinute: new Date().getMinutes(),
     formatter(type, value) {
       if (type === 'hour') {
         return `${value}点`;
@@ -40,10 +42,23 @@ Page({
     },
     filter(type, options) {
       if (type === 'minute') {
+        const curMinute = new Date().getMinutes()
         return options.filter((option) => option % 10 === 0);
       }
       return options;
     },
+  },
+  diningTimeChange(a) {
+    const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
+    if (selectedHour == new Date().getHours()) {
+      this.setData({
+        minMinute: new Date().getMinutes()
+      })
+    } else {
+      this.setData({
+        minMinute: 0
+      })
+    }
   },
   onShow(){
     this.setData({
