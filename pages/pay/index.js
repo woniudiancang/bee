@@ -29,7 +29,7 @@ Page({
     peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
     remark: '',
 
-    currentDate: new Date().getHours() + ':' + new Date().getMinutes(),
+    currentDate: new Date().getHours() + ':' + (new Date().getMinutes() % 10 === 0 ? new Date().getMinutes() : Math.ceil(new Date().getMinutes() / 10) * 10),
     minHour: new Date().getHours(),
     minMinute: new Date().getMinutes(),
     formatter(type, value) {
@@ -42,7 +42,6 @@ Page({
     },
     filter(type, options) {
       if (type === 'minute') {
-        const curMinute = new Date().getMinutes()
         return options.filter((option) => option % 10 === 0);
       }
       return options;
@@ -51,8 +50,12 @@ Page({
   diningTimeChange(a) {
     const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
     if (selectedHour == new Date().getHours()) {
+      let minMinute = new Date().getMinutes()
+      if (minMinute % 10 !== 0) {
+        minMinute = minMinute / 10 + 1
+      }
       this.setData({
-        minMinute: new Date().getMinutes()
+        minMinute
       })
     } else {
       this.setData({
