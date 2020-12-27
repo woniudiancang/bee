@@ -13,13 +13,18 @@
 # 荣誉墙
 
 - [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
-- [@wangxy2020 Jack Wong](https://github.com/wangxy2020)
+- [@wangxy2020 Jack Wong 早期项目贡献者](https://github.com/wangxy2020)
 
 # 功能展示
 ## 首页
 | 首页  | 下单 | 加入购物车 | 查看门店信息 |
 | :------: | :------: | :------: |  :------: | 
-| <img src="https://dcdn.it120.cc/2020/08/02/cde14e39-38c9-4f11-add4-2ab3a116695a.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/10/b815c836-710e-464a-9f6c-0f91ca521d73.png" width="200px">
+| <img src="https://dcdn.it120.cc/2020/09/02/234d8e67-2f98-4f0e-af5f-e6b73dda6317.png" width="200px">|<img src="https://dcdn.it120.cc/2020/08/02/adc268d2-51ed-4bac-93d7-303060c17396.png" width="200px">| <img src="https://dcdn.it120.cc/2020/08/02/a208698c-d278-4a21-817f-30ae083a878e.png" width="200px">| <img src="https://dcdn.it120.cc/2020/09/02/dadf5367-25ca-4a17-9c51-269ee2c87763.png" width="200px">
+
+### 营销功能
+| 拼团 | 签到  | 
+| :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/09/02/a3f3ec3e-0525-43da-9911-5c972e0f8157.jpg" width="200px">| <img src="https://dcdn.it120.cc/2020/09/02/fbd597e5-3d6f-45ee-a7a9-804421dc8fcd.png" width="200px">
 
 ## 优惠券
 | 优惠券  | 待领取 | 可使用 | 
@@ -54,7 +59,9 @@
 
 # QQ交流群
 
-<img src="https://dcdn.it120.cc/2020/07/27/e3d09fd2-ace0-4cf4-9d71-e0454591ff54.png " width="200px">
+| 交流群1（926321567） | 交流群2（671428068） |
+| :------: | :------: |
+| <img src="https://dcdn.it120.cc/2020/07/27/e3d09fd2-ace0-4cf4-9d71-e0454591ff54.png" width="200px">| <img src="https://dcdn.it120.cc/2020/12/27/b709cceb-befc-405b-8c5a-c8f9e90a1a5b.png" width="150px">
 
 # 本项目使用了下面的组件，在此鸣谢
 
