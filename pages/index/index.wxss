@@ -6,6 +6,7 @@ page {
 }
 .box{
   height:150rpx;
+  margin-bottom: 32rpx;
 }
 .shop-name{
   display: flex;
@@ -66,7 +67,6 @@ page {
   flex: 1;
   display: flex;
   overflow: hidden;
-  margin-top: 32rpx;
 }
 .box1 .box-1{
   height: 100%;

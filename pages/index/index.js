@@ -24,10 +24,36 @@ Page({
     pingtuan_open_id: undefined
   },  
   onLoad: function (e) {
+    // 测试拼团入口
     // e = {
     //   share_goods_id: 521055,
     //   share_pingtuan_open_id: 11267
     // }
+
+    // 测试扫码点餐
+    // shopId=36,id=111,key=Y6RoIT 进行 url编码，3个值分别为 门店id，餐桌id，餐桌密钥
+    // e = {
+    //   scene: 'shopId%3d36%2cid%3d111%2ckey%3dY6RoIT' 
+    // }
+
+    
+    if (e && e.scene) {
+      const scene = decodeURIComponent(e.scene) // 处理扫码进商品详情页面的逻辑
+      if (scene && scene.split(',').length == 3) {
+        // 扫码点餐
+        const scanDining = {}
+        scene.split(',').forEach(ele => {
+          scanDining[ele.split('=')[0]] = ele.split('=')[1]
+        })
+        wx.setStorageSync('scanDining', scanDining)
+        this.setData({
+          scanDining: scanDining
+        })
+        this.cyTableToken(scanDining.id, scanDining.key)
+      } else {
+        wx.removeStorageSync('scanDining')
+      }
+    }
     if (e.share_goods_id) {
       this.data.share_goods_id = e.share_goods_id
       this._showGoodsDetailPOP(e.share_goods_id)
@@ -61,6 +87,20 @@ Page({
   },
   onShow: function(){
     this.shippingCarInfo()
+  },
+  async cyTableToken(tableId, key) {
+    const res = await WXAPI.cyTableToken(tableId, key)
+    if (res.code != 0) {
+      wx.showModal({
+        title: '桌码异常',
+        content: res.msg,
+        showCancel: false
+      })
+      return
+    }
+    wx.hideTabBar()
+    wx.setStorageSync('uid', res.data.uid)
+    wx.setStorageSync('token', res.data.token)
   },
   getshopInfo(){
     wx.getLocation({
@@ -166,6 +206,7 @@ Page({
     this.setData({
       goods: res.data
     })
+    this.processBadge()
   },
   categoryClick(e) {
     const index = e.currentTarget.dataset.idx
@@ -178,7 +219,12 @@ Page({
   },
   async shippingCarInfo() {
     const res = await WXAPI.shippingCarInfo(wx.getStorageSync('token'))
-    if (res.code == 0) {
+    if (res.code == 700) {
+      this.setData({
+        shippingCarInfo: null,
+        showCartPop: false
+      })
+    } else if (res.code == 0) {
       this.setData({
         shippingCarInfo: res.data
       })
@@ -188,11 +234,19 @@ Page({
         showCartPop: false
       })
     }
+    this.processBadge()
   },
   showCartPop() {
-    this.setData({
-      showCartPop: !this.data.showCartPop
-    })
+    if (this.data.scanDining) {
+      // 扫码点餐，前往购物车页面
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    } else {
+      this.setData({
+        showCartPop: !this.data.showCartPop
+      })
+    }
   },
   hideCartPop() {
     this.setData({
@@ -232,9 +286,22 @@ Page({
     this.setData({
       curGoodsMap
     })
+    this.calculateGoodsPrice()
+  },
+  async calculateGoodsPrice() {
+    const curGoodsMap = this.data.curGoodsMap
+    // 计算最终的商品价格
+    let price = curGoodsMap.basicInfo.minPrice
+    let originalPrice = curGoodsMap.basicInfo.originalPrice
+    let totalScoreToPay = curGoodsMap.basicInfo.minScore
+    let buyNumMax = curGoodsMap.basicInfo.stores
+    let buyNumber = curGoodsMap.basicInfo.minBuyNumber
+    if (this.data.shopType == 'toPingtuan') {
+      price = curGoodsMap.basicInfo.pingtuanPrice
+    }
+    // 计算 sku 价格
     const canSubmit = this.skuCanSubmit()
     if (canSubmit) {
-      // 读取价格
       let propertyChildIds = "";
       if (curGoodsMap.properties) {
         curGoodsMap.properties.forEach(big => {
@@ -246,16 +313,58 @@ Page({
       }
       const res = await WXAPI.goodsPrice(curGoodsMap.basicInfo.id, propertyChildIds)
       if (res.code == 0) {
-        if (this.data.lijipingtuanbuy) {
-          curGoodsMap.price = res.data.pingtuanPrice
-        } else {
-          curGoodsMap.price = res.data.price
+        price = res.data.price
+        if (this.data.shopType == 'toPingtuan') {
+          price = res.data.pingtuanPrice
         }
-        this.setData({
-          curGoodsMap
-        })
+        originalPrice = res.data.originalPrice
+        totalScoreToPay = res.data.score
+        buyNumMax = res.data.stores
       }
     }
+    // 计算配件价格
+    if (this.data.goodsAddition) {
+      this.data.goodsAddition.forEach(big => {
+        big.items.forEach(small => {
+          if (small.active) {
+            price = (price*100 + small.price*100) / 100
+          }
+        })
+      })
+    }
+    curGoodsMap.price = price
+    this.setData({
+      curGoodsMap
+    });
+  },
+  async skuClick2(e) {
+    const propertyindex = e.currentTarget.dataset.idx1
+    const propertychildindex = e.currentTarget.dataset.idx2
+
+    const goodsAddition = this.data.goodsAddition
+    const property = goodsAddition[propertyindex]
+    const child = property.items[propertychildindex]
+    if (child.active) {
+      // 该操作为取消选择
+      child.active = false
+      this.setData({
+        goodsAddition
+      })
+      this.calculateGoodsPrice()
+      return
+    }
+    // 单选配件取消所有子栏目选中状态
+    if (property.type == 0) {
+      property.items.forEach(child => {
+        child.active = false
+      })
+    }
+    // 设置当前选中状态
+    child.active = true
+    this.setData({
+      goodsAddition
+    })
+    this.calculateGoodsPrice()
   },
   skuCanSubmit() {
     const curGoodsMap = this.data.curGoodsMap
@@ -272,11 +381,27 @@ Page({
     }
     return canSubmit
   },
+  additionCanSubmit() {
+    const curGoodsMap = this.data.curGoodsMap
+    let canSubmit = true
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        if (ele.required) {
+          const a = ele.items.find(item => {return item.active})
+          if (!a) {
+            canSubmit = false
+          }
+        }
+      })
+    }
+    return canSubmit
+  },
   async addCart2() {
     const token = wx.getStorageSync('token')
     const curGoodsMap = this.data.curGoodsMap
     const canSubmit = this.skuCanSubmit()
-    if (!canSubmit) {
+    const additionCanSubmit = this.additionCanSubmit()
+    if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'
@@ -295,10 +420,23 @@ Page({
         })
       })
     }
+    const goodsAddition = []
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        ele.items.forEach(item => {
+          if (item.active) {
+            goodsAddition.push({
+              id: item.id,
+              pid: item.pid
+            })
+          }
+        })
+      })
+    }
     wx.showLoading({
       title: '',
     })
-    const res = await WXAPI.shippingCarInfoAddItem(token, curGoodsMap.basicInfo.id, curGoodsMap.number, sku)
+    const res = await WXAPI.shippingCarInfoAddItem(token, curGoodsMap.basicInfo.id, curGoodsMap.number, sku, goodsAddition)
     wx.hideLoading()
     if (res.code == 2000) {
       this.hideGoodsDetailPOP()
@@ -326,14 +464,22 @@ Page({
       })
       const res = await WXAPI.shippingCarInfoRemoveItem(token, item.key)
       wx.hideLoading()
-      if (res.code != 0) {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
+      if (res.code == 700) {
+        this.setData({
+          shippingCarInfo: null,
+          showCartPop: false
         })
-        return
+      } else if (res.code == 0) {
+        this.setData({
+          shippingCarInfo: res.data
+        })
+      } else {
+        this.setData({
+          shippingCarInfo: null,
+          showCartPop: false
+        })
       }
-      this.shippingCarInfo()
+      this.processBadge()
     } else {
       // 修改数量
       wx.showLoading({
@@ -377,6 +523,7 @@ Page({
     const index = e.currentTarget.dataset.idx
     const goodsId = this.data.goods[index].id
     this._showGoodsDetailPOP(goodsId)
+    this.goodsAddition(goodsId)
   },
   async _showGoodsDetailPOP(goodsId) {
     const token = wx.getStorageSync('token')
@@ -459,12 +606,21 @@ Page({
       showGoodsDetailPOP: false,
       showPingtuanPop: false
     })
-    wx.showTabBar()
+    if (!this.data.scanDining) {
+      wx.showTabBar()
+    }
   },
   goPay() {
-    wx.navigateTo({
-      url: '/pages/pay/index',
-    })
+    if (this.data.scanDining) {
+      // 扫码点餐，前往购物车
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/pay/index',
+      })
+    }
   },
   onShareAppMessage: function() {
     let uid = wx.getStorageSync('uid')
@@ -543,7 +699,11 @@ Page({
     const dqdq=date.setHours(dq[0],dq[1])
     const aa=date.setHours(a[0],a[1])
     const bb=date.setHours(b[0],b[1])
-    
+
+    if (a[0]*1 > b[0]*1) {
+      // 说明是到第二天
+      return !this.checkIsOpened(endTime + '-' + startTime)
+    }
     return aa<dqdq && dqdq<bb
   },
   yuanjiagoumai() {
@@ -566,7 +726,8 @@ Page({
     // 加入 storage 里
     const curGoodsMap = this.data.curGoodsMap
     const canSubmit = this.skuCanSubmit()
-    if (!canSubmit) {
+    const additionCanSubmit = this.additionCanSubmit()
+    if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'
@@ -581,7 +742,24 @@ Page({
         })
         sku.push({
           optionId: big.id,
-          optionValueId: small.id
+          optionValueId: small.id,
+          optionName: big.name,
+          optionValueName: small.name
+        })
+      })
+    }
+    const additions = []
+    if (curGoodsMap.basicInfo.hasAddition) {
+      this.data.goodsAddition.forEach(ele => {
+        ele.items.forEach(item => {
+          if (item.active) {
+            additions.push({
+              id: item.id,
+              pid: item.pid,
+              pname: ele.name,
+              name: item.name
+            })
+          }
         })
       })
     }
@@ -597,7 +775,8 @@ Page({
       name: curGoodsMap.basicInfo.name,
       minBuyNumber: curGoodsMap.basicInfo.minBuyNumber,
       logisticsId: curGoodsMap.basicInfo.logisticsId,
-      sku
+      sku,
+      additions
     })
     wx.setStorageSync('pingtuanGoodsList', pingtuanGoodsList)
     // 跳转
@@ -608,5 +787,71 @@ Page({
   _lijipingtuanbuy2() {
     this.data.share_pingtuan_open_id = null
     this._showGoodsDetailPOP(this.data.curGoodsMap.basicInfo.id)
-  }
+  },
+  async goodsAddition(goodsId){
+    const res = await WXAPI.goodsAddition(goodsId)
+    if (res.code == 0) {
+      this.setData({
+        goodsAddition: res.data
+      })
+    } else {
+      this.setData({
+        goodsAddition: null
+      })
+    }
+  },
+  tabbarChange(e) {
+    if (e.detail == 1) {
+      wx.navigateTo({
+        url: '/pages/cart/index',
+      })
+    }
+    if (e.detail == 2) {
+      wx.navigateTo({
+        url: '/pages/cart/order',
+      })
+    }
+  },
+  // 显示分类和商品数量徽章
+  processBadge() {
+    const categories = this.data.categories
+    const goods = this.data.goods
+    const shippingCarInfo = this.data.shippingCarInfo
+    if (!categories) {
+      return
+    }
+    if (!goods) {
+      return
+    }
+    categories.forEach(ele => {
+      ele.badge = 0
+    })
+    goods.forEach(ele => {
+      ele.badge = 0
+    })
+    if (shippingCarInfo) {
+      shippingCarInfo.items.forEach(ele => {
+        if (ele.categoryId) {
+          const category = categories.find(a => {
+            return a.id == ele.categoryId
+          })
+          if (category) {
+            category.badge += ele.number
+          }
+        }
+        if (ele.goodsId) {
+          const _goods = goods.find(a => {
+            return a.id == ele.goodsId
+          })
+          if (_goods) {
+            _goods.badge += ele.number
+          }
+        }
+      })
+    }
+    this.setData({
+      categories,
+      goods
+    })
+  },
 })

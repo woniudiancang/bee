@@ -15,13 +15,7 @@ Page({
   onShow: function() {
     AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
-        wx.showModal({
-          content: '登陆后才能访问',
-          showCancel: false,
-          success: () => {
-            wx.navigateBack()
-          }
-        })
+        AUTH.openLoginDialog()
       }
     })
   },
@@ -76,5 +70,15 @@ Page({
       })
       this.scoreSignLogs()
     }
+  },
+  processLogin(e) {
+    if (!e.detail.userInfo) {
+      wx.showToast({
+        title: '已取消',
+        icon: 'none',
+      })
+      return;
+    }
+    AUTH.register(this);
   },
 })

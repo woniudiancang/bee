@@ -1,0 +1,28 @@
+<van-empty wx:if="{{ !shippingCarInfo }}" description="暂无菜品" />
+<block wx:else>
+  <view class="empty-box" bindtap="clearCart">
+    <van-icon name="delete" />
+    <view class="empty-1">清空购物车</view>
+  </view>
+  <van-card
+  wx:for="{{shippingCarInfo.items}}" wx:key="key"
+    price="{{ item.price }}"
+    title="{{ item.name }}"
+    thumb="{{ item.pic }}"
+    centered
+  >
+    <view slot="desc">
+      <block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">
+        {{option.optionName}}:{{option.optionValueName}}
+      </block>
+      <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">
+        {{option.pname}}:{{option.name}}
+      </block>
+    </view>
+    <view slot="num" style="text-align:right;">
+      <van-stepper value="{{ item.number }}" min="0" async-change disable-input data-idx="{{index}}" bind:change="cartStepChange" />
+    </view>
+  </van-card>
+  <view class="bottom"></view>
+  <van-submit-bar price="{{ shippingCarInfo.price*100 }}" label="{{ shippingCarInfo.number }}个菜 " button-text="立即下单" bindtap="goCreateOrder" />
+</block>

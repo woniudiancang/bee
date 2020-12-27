@@ -1,0 +1,16 @@
+.bottom {
+  height: 120rpx;
+}
+.paySuccess {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.paySuccess .txt {
+  margin-top: 64rpx;
+  color: #666;
+  font-size: 40rpx;
+}

@@ -17,19 +17,51 @@ Page({
     totalScoreToPay: 0,
     goodsList: [],
     allGoodsPrice: 0,
+    amountReal: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
     pingtuanOpenId: undefined, //拼团的话记录团号
-
-    hasNoCoupons: true,
-    coupons: [],
-    youhuijine: 0, //优惠券金额
+    
     curCoupon: null, // 当前选择使用的优惠券
     curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
     peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
-    remark: ''
+    remark: '',
+
+    currentDate: new Date().getHours() + ':' + (new Date().getMinutes() % 10 === 0 ? new Date().getMinutes() : Math.ceil(new Date().getMinutes() / 10) * 10),
+    minHour: new Date().getHours(),
+    minMinute: new Date().getMinutes(),
+    formatter(type, value) {
+      if (type === 'hour') {
+        return `${value}点`;
+      } else if (type === 'minute') {
+        return `${value}分`;
+      }
+      return value;
+    },
+    filter(type, options) {
+      if (type === 'minute') {
+        return options.filter((option) => option % 10 === 0);
+      }
+      return options;
+    },
+  },
+  diningTimeChange(a) {
+    const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
+    if (selectedHour == new Date().getHours()) {
+      let minMinute = new Date().getMinutes()
+      if (minMinute % 10 !== 0) {
+        minMinute = minMinute / 10 + 1
+      }
+      this.setData({
+        minMinute
+      })
+    } else {
+      this.setData({
+        minMinute: 0
+      })
+    }
   },
   onShow(){
     this.setData({
@@ -85,6 +117,7 @@ Page({
       peisongType
     })
     wx.setStorageSync('peisongType', peisongType)
+    this.createOrder()
   },
   
   getDistrictId: function (obj, aaa) {
@@ -105,6 +138,13 @@ Page({
     if (this.data.peisongType == 'zq' && !mobile) {
       wx.showToast({
         title: '请输入手机号码',
+        icon: 'none'
+      })
+      return
+    }
+    if (!this.data.diningTime) {
+      wx.showToast({
+        title: '请选择自取/配送时间',
         icon: 'none'
       })
       return
@@ -148,11 +188,14 @@ Page({
     if (that.data.pingtuanOpenId) {
       postData.pingtuanOpenId = that.data.pingtuanOpenId
     }
+    const extJsonStr = {}
     if (postData.peisongType == 'zq') {
-      const extJsonStr = {}
       extJsonStr['联系电话'] = this.data.mobile
-      postData.extJsonStr = JSON.stringify(extJsonStr)
+      extJsonStr['取餐时间'] = this.data.diningTime
+    } else {
+      extJsonStr['送达时间'] = this.data.diningTime
     }
+    postData.extJsonStr = JSON.stringify(extJsonStr)
     if (e && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
@@ -161,6 +204,12 @@ Page({
           icon: 'none'
         })
         return;
+      }
+      // 达达配送
+      if (this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
+        postData.dadaShopNo = this.data.shopInfo.number
+        postData.dadaLat = this.data.curAddressData.latitude
+        postData.dadaLng = this.data.curAddressData.longitude
       }
       if (postData.peisongType == 'kd') {
         postData.provinceId = that.data.curAddressData.provinceId;
@@ -199,14 +248,29 @@ Page({
         WXAPI.shippingCarInfoRemoveAll(loginToken)
       }
       if (!e) {
+        const coupons = res.data.couponUserList
+        if (coupons) {
+          coupons.forEach(ele => {
+            let moneyUnit = '元'
+            if (ele.moneyType == 1) {
+              moneyUnit = '%'
+            }
+            if (ele.moneyHreshold) {
+              ele.nameExt = ele.name + ' [消费满' + ele.moneyHreshold + '元可减' + ele.money + moneyUnit +']'
+            } else {
+              ele.nameExt = ele.name + ' [减' + ele.money + moneyUnit + ']'
+            }
+          })
+        }
         that.setData({
           totalScoreToPay: res.data.score,
           allGoodsNumber: res.data.goodsNumber,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
-          yunPrice: res.data.amountLogistics
+          yunPrice: res.data.amountLogistics,
+          amountReal: res.data.amountReal,
+          coupons
         });
-        that.getMyCoupons();
         return;
       }
       that.processAfterCreateOrder(res)
@@ -247,14 +311,13 @@ Page({
     }
     this.processYunfei();
   },
-  processYunfei() {    
+  processYunfei() {
     var goodsList = this.data.goodsList
     if (goodsList.length == 0) {
       return
     }
-    var goodsJsonStr = "[";
-    var allGoodsPrice = 0;
-
+    const goodsJsonStr = []
+    var isNeedLogistics = 0;
 
     let inviter_id = 0;
     let inviter_id_storge = wx.getStorageSync('referrer');
@@ -262,30 +325,43 @@ Page({
       inviter_id = inviter_id_storge;
     }
     for (let i = 0; i < goodsList.length; i++) {
-      let carShopBean = goodsList[i]
-      allGoodsPrice += carShopBean.price * carShopBean.number;
+      let carShopBean = goodsList[i];
+      if (carShopBean.logistics || carShopBean.logisticsId) {
+        isNeedLogistics = 1;
+      }
 
-      var goodsJsonStrTmp = '';
-      if (i > 0) {
-        goodsJsonStrTmp = ",";
+      const _goodsJsonStr = {
+        propertyChildIds: carShopBean.propertyChildIds
       }
       if (carShopBean.sku && carShopBean.sku.length > 0) {
         let propertyChildIds = ''
         carShopBean.sku.forEach(option => {
           propertyChildIds = propertyChildIds + ',' + option.optionId + ':' + option.optionValueId
         })
-        carShopBean.propertyChildIds = propertyChildIds
+        _goodsJsonStr.propertyChildIds = propertyChildIds
       }
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
-      goodsJsonStr += goodsJsonStrTmp;
-
+      if (carShopBean.additions && carShopBean.additions.length > 0) {
+        let goodsAdditionList = []
+        carShopBean.additions.forEach(option => {
+          goodsAdditionList.push({
+            pid: option.pid,
+            id: option.id
+          })
+        })
+        _goodsJsonStr.goodsAdditionList = goodsAdditionList
+      }
+      _goodsJsonStr.goodsId = carShopBean.goodsId
+      _goodsJsonStr.number = carShopBean.number
+      _goodsJsonStr.logisticsType = 0
+      _goodsJsonStr.inviter_id = inviter_id
+      goodsJsonStr.push(_goodsJsonStr)
 
     }
-    goodsJsonStr += "]";
     this.setData({
-      goodsJsonStr: goodsJsonStr
+      isNeedLogistics: isNeedLogistics,
+      goodsJsonStr: JSON.stringify(goodsJsonStr)
     });
-    this.createOrder();
+    this.createOrder()
   },
   addAddress: function () {
     wx.navigateTo({
@@ -297,33 +373,13 @@ Page({
       url: "/pages/ad/index"
     })
   },
-  async getMyCoupons() {
-    const res = await WXAPI.myCoupons({
-      token: wx.getStorageSync('token'),
-      status: 0
-    })
-    if (res.code == 0) {
-      var coupons = res.data.filter(entity => {
-        return entity.moneyHreshold <= this.data.allGoodsAndYunPrice;
-      })
-      if (coupons.length > 0) {
-        coupons.forEach(ele => {
-          ele.nameExt = ele.name + ' [满' + ele.moneyHreshold + '元可减' + ele.money + '元]'
-        })
-        this.setData({
-          hasNoCoupons: false,
-          coupons: coupons
-        });
-      }
-    }
-  },
   bindChangeCoupon: function (e) {
     const selIndex = e.detail.value;
     this.setData({
-      youhuijine: this.data.coupons[selIndex].money,
       curCoupon: this.data.coupons[selIndex],
       curCouponShowText: this.data.coupons[selIndex].nameExt
-    });
+    })
+    this.createOrder()
   },
   radioChange (e) {
     this.setData({
@@ -386,9 +442,20 @@ Page({
       })
     }
   },
-  mobileChange(e) {
+  diningTimeShow() {
     this.setData({
-      mobile: e.detail
+      diningTimeShow: true
     })
+  },
+  diningTimeHide() {
+    this.setData({
+      diningTimeShow: false
+    })
+  },
+  diningTimeConfirm(e) {
+    this.setData({
+      diningTime: e.detail
+    })
+    this.diningTimeHide()
   },
 })

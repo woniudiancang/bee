@@ -40,5 +40,6 @@
 	<van-cell icon="orders-o" title="全部订单" size="large" is-link url="/pages/all-orders/index" />
 	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
 	<van-cell icon="info-o" title="关于我们" size="large" is-link url="/pages/about/index" />
+	<van-cell icon="desktop-o" title="管理员入口" is-link bind:click="goadmin" />
 </view>
 <view class="version">v{{version}}</view>

@@ -1,0 +1,14 @@
+<van-empty wx:if="{{!list}}" description="暂无队列" />
+<van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
+<view class="btn-groups">
+  <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} (共 {{item.numberGet}} 号，当前第 {{item.curNumber}} 号)</van-button>
+</view>
+<van-cell-group wx:if="{{ mylist }}" title="我的号子">
+  <van-cell
+    value-class="cell-red"
+    wx:for="{{mylist}}" wx:key="id"
+    title="{{ item.typeEntity.name }}"
+    label="{{ item.statusStr }} {{ item.waitMinitus ? '预计等待: ' + item.waitMinitus + '分钟' : '' }}"
+    value="{{ item.number }}号" 
+  />
+</van-cell-group>

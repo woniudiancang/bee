@@ -7,7 +7,7 @@
     data-id="{{noticeLastOne.id}}"
   />
 </view>
-<view class="box">
+<view wx:if="{{ !scanDining }}" class="box">
   <view class="shop-name">
     <view class="name">{{shopInfo.name}}</view>
     <view class="select">
@@ -28,13 +28,18 @@
 <view class="box1">
   <view class="box-1">
     <van-sidebar>
-      <van-sidebar-item wx:for="{{categories}}" wx:key="id" title="{{item.name}}" data-idx="{{index}}" bind:click="categoryClick" />
+      <van-sidebar-item
+        wx:for="{{categories}}" wx:key="id"
+        title="{{item.name}}"
+        badge="{{ item.badge ? item.badge : '' }}"
+        data-idx="{{index}}" bind:click="categoryClick"
+      />
     </van-sidebar>
   </view>
   <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}">
     <swiper wx:if="{{banners}}" class="swiper1" indicator-dots="true" autoplay circular>
       <swiper-item wx:for="{{banners}}" wx:key="id">
-        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}_m" />
       </swiper-item>
     </swiper>
     <van-empty wx:if="{{!goods || goods.length == 0}}" description="暂无商品" />
@@ -45,12 +50,13 @@
       origin-price="{{item.originalPrice > 0 ? item.originalPrice : ''}}"
       price="{{item.minPrice}}"
       thumb-mode="aspectFill"
+      tag="{{ item.badge ? item.badge : '' }}"
       desc="{{item.characteristic}}"
       title="{{item.name}}"
-      thumb="{{item.pic}}">
+      thumb="{{item.pic}}_m">
       <view class="goods-btn" slot="footer">
         <van-button wx:if="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
-        <van-button wx:elif="{{item.propertyIds}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-button wx:elif="{{item.propertyIds || item.hasAddition}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>
     </van-card>
@@ -64,7 +70,7 @@
   </view>  
   <view class="r">
     <view class="amount"><text>¥</text>{{shippingCarInfo.price}}</view>
-    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">结算</view>
+    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">选好了</view>
     <view wx:else class="topay noopen">未营业</view>
   </view>
 </view>
@@ -78,12 +84,18 @@
   close-icon="close"
   position="bottom"
   bind:close="hideGoodsDetailPOP">
-  <image mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}'></image>
+  <image wx:if="{{ showGoodsDetailPOP }}" mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}_m'></image>
   <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
   <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
     <view class="title">{{item.name}}</view>
     <view class="box-1">
       <view wx:for="{{item.childsCurGoods}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.selected?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick">{{small.name}}</view>
+    </view>
+  </view>
+  <view wx:for="{{goodsAddition}}" wx:key="id" class="content-1">
+    <view class="title">{{item.name}}</view>
+    <view class="box-1">
+      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick2">{{small.name}}</view>
     </view>
   </view>
 
@@ -121,6 +133,7 @@
       <view class="title">{{item.name}}</view>
       <view wx:if="{{item.sku}}" class="content">
         <block wx:for="{{item.sku}}" wx:key="optionValueId" wx:for-item="_sku">{{_sku.optionValueName}} </block>
+        <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">{{option.name}} </block>
       </view>
     </view>
     <view class="r">
@@ -182,8 +195,17 @@
 
 <van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
 
-<van-overlay show="{{ showCouponPop }}" bind:click="couponOverlayClick">
+<van-overlay show="{{ !scanDining && showCouponPop }}" bind:click="couponOverlayClick">
   <view class="couponOverlay-container">
     <image src="/images/coupon.png" bindtap="couponImageClick"></image>
   </view>
 </van-overlay>
+
+
+<block wx:if="{{ scanDining }}">
+  <van-tabbar active="{{ 0 }}" fixed="{{ false }}" inactive-color="#6e6d6b" active-color="#e64340" bind:change="tabbarChange">
+    <van-tabbar-item icon="goods-collect-o">点餐</van-tabbar-item>
+    <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
+    <van-tabbar-item icon="bill-o">已点</van-tabbar-item>
+  </van-tabbar>
+</block>

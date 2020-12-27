@@ -1,0 +1,19 @@
+.empty-box{
+  display: flex;
+  align-items: center;
+  padding-top: 15rpx;
+  padding-left: 20rpx;
+  padding-bottom: 15rpx;
+  background-color: #eeeeee;
+}
+.empty-box .empty-0{
+  height:30rpx;
+  width: 30rpx;
+}
+.empty-box .empty-1{
+  font-size:25rpx ;
+  margin-left: 10rpx;
+}
+.bottom {
+  height: 120rpx;
+}

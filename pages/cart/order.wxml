@@ -1,0 +1,34 @@
+<van-empty wx:if="{{ !paySuccess && !orderInfo }}" description="暂无菜品" />
+<block wx:if="{{ !paySuccess && orderInfo }}">
+  <van-cell-group>
+    <van-cell title="桌号" value="{{ orderInfo.tableCode }}" />
+  </van-cell-group>
+  <van-cell-group title="已点菜品">
+    <van-card
+      wx:for="{{goodsList}}" wx:key="id"
+      price="{{ item.amount }}"
+      title="{{ item.goodsName }}"
+      desc="{{ item.property }}"
+      thumb="{{ item.pic }}"
+      num="{{ item.number }}"
+      centered
+    >
+      <view slot="footer">
+        <van-tag wx:if="{{ item.cyTableStatus == 0 }}" mark type="warning">待确认</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 1 }}" mark type="success">已下厨</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 2 }}" mark plain type="success">已上菜</van-tag>
+      </view>
+    </van-card>
+  </van-cell-group>
+  <van-cell-group>
+    <van-cell title="菜品数量" value="{{ orderInfo.goodsNumber }}" />
+    <van-cell title="消费金额" value="{{ orderInfo.amount }}" />
+    <van-cell title="应付金额" value="{{ orderInfo.amountReal }}" />
+  </van-cell-group>
+  <view class="bottom"></view>
+  <van-submit-bar price="{{ orderInfo.amountReal*100 }}" button-text="结账买单" bindtap="goPayOrder" />
+</block>
+<view wx:if="{{ paySuccess }}" class="paySuccess">
+  <van-icon name="checked" size="260rpx" color="#07c160" />
+  <view class="txt">买单成功</view>
+</view>

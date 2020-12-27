@@ -53,7 +53,7 @@ App({
         wx.hideToast()
       }
     })
-    WXAPI.queryConfigBatch('mallName,myBg,mapPos,order_hx_uids,subscribe_ids,share_profile,zxdz').then(res => {
+    WXAPI.queryConfigBatch('mallName,myBg,mapPos,order_hx_uids,subscribe_ids,share_profile,zxdz,admin_uids').then(res => {
       if (res.code == 0) {
         res.data.forEach(config => {
           wx.setStorageSync(config.key, config.value);
@@ -101,7 +101,7 @@ App({
       }
     }
     // 自动登录
-    AUTH.checkHasLogined().then(async isLogined => {
+    AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
         AUTH.login()
       }

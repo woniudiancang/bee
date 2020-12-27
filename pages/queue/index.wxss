@@ -1,0 +1,12 @@
+.btn-groups {
+  padding-top: 168rpx;
+  padding-bottom: 64rpx;
+  width: 600rpx;
+  margin: auto;
+}
+.btn-groups .btn {
+  margin: 32rpx 0;
+}
+.cell-red {
+  color: #e64340 !important;
+}
