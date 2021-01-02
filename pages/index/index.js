@@ -551,6 +551,11 @@ Page({
       if (resPintuanSet.code != 0) {
         _data.showPingtuanPop = false
         _data.showGoodsDetailPOP = true
+        wx.showToast({
+          title: "拼团功能未开启",
+          icon: 'none'
+        })
+        return
       } else {
         _data.pintuanSet = resPintuanSet.data
         // 是否是别人分享的团进来的
