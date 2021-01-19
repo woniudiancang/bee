@@ -34,6 +34,7 @@ Page({
     })
     const res = await WXAPI.orderList({
       token: wx.getStorageSync('token'),
+      type: 0,
       statusBatch: '1,2'
     })
     wx.hideLoading()
