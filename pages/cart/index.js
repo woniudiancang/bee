@@ -50,7 +50,7 @@ Page({
       })
       const res = await WXAPI.shippingCarInfoRemoveItem(token, item.key)
       wx.hideLoading()
-      if (res.code != 0) {
+      if (res.code != 0 && res.code != 700) {
         wx.showToast({
           title: res.msg,
           icon: 'none'
