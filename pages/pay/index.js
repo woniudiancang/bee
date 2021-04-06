@@ -390,16 +390,6 @@ Page({
   cancelLogin() {
     wx.navigateBack()
   },
-  processLogin(e) {
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-      })
-      return;
-    }
-    AUTH.register(this);
-  },
   async getPhoneNumber(e) {
     if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
       wx.showToast({
@@ -438,6 +428,8 @@ Page({
     const res = await WXAPI.userDetail(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
+        nick: res.data.base.nick,
+        avatarUrl: res.data.base.avatarUrl,
         mobile: res.data.base.mobile
       })
     }
@@ -458,4 +450,42 @@ Page({
     })
     this.diningTimeHide()
   },
+  updateUserInfo(e) {
+    wx.getUserProfile({
+      lang: 'zh_CN',
+      desc: '用于完善会员资料',
+      success: res => {
+        console.log(res);
+        this._updateUserInfo(res.userInfo)
+      },
+      fail: err => {
+        wx.showToast({
+          title: err.errMsg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  async _updateUserInfo(userInfo) {
+    const postData = {
+      token: wx.getStorageSync('token'),
+      nick: userInfo.nickName,
+      avatarUrl: userInfo.avatarUrl,
+      city: userInfo.city,
+      province: userInfo.province,
+      gender: userInfo.gender,
+    }
+    const res = await WXAPI.modifyUserInfo(postData)
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    wx.showToast({
+      title: '登陆成功',
+    })
+    this.getUserApiInfo()
+  }
 })

@@ -75,11 +75,19 @@
 <van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
 <view class="bottom"></view>
 <van-submit-bar
+	wx:if="{{ nick && avatarUrl }}"
 	price="{{ amountReal*100 }}"
 	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : '立即支付'}}"
 	bind:submit="goCreateOrder"
 	button-class="pay-btn"
 	disabled="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin}}"
+/>
+<van-submit-bar
+  wx:else
+	price="{{ amountReal*100 }}"
+	button-text="授权登陆"
+	bind:submit="updateUserInfo"
+	button-class="pay-btn"
 />
 
 <van-popup

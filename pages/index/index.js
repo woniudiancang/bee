@@ -63,6 +63,11 @@ Page({
     } else {
       this._showCouponPop()
     }
+    // 静默式授权注册/登陆
+    AUTH.authorize().then(res => {
+      AUTH.bindSeller()
+      TOOLS.showTabBarBadge()
+    })
     // 设置标题
     const mallName = wx.getStorageSync('mallName')
     if (mallName) {
@@ -263,7 +268,7 @@ Page({
     const res = await WXAPI.shippingCarInfoAddItem(token, item.id, item.minBuyNumber, [])
     wx.hideLoading()
     if (res.code == 2000) {
-      AUTH.openLoginDialog()
+      AUTH.login(this)
       return
     }
     if (res.code != 0) {
@@ -440,7 +445,7 @@ Page({
     wx.hideLoading()
     if (res.code == 2000) {
       this.hideGoodsDetailPOP()
-      AUTH.openLoginDialog()
+      AUTH.login(this)
       return
     }
     if (res.code != 0) {
@@ -566,7 +571,7 @@ Page({
           // 不是通过分享进来的
           const resPintuanOpen = await WXAPI.pingtuanOpen(token, goodsId)
           if (resPintuanOpen.code == 2000) {
-            AUTH.openLoginDialog()
+            AUTH.login(this)
             return
           }
           if (resPintuanOpen.code != 0) {
@@ -640,16 +645,6 @@ Page({
       title: '"' + wx.getStorageSync('mallName') + '" ' + wx.getStorageSync('share_profile'),
       path
     }
-  },
-  processLogin(e) {
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-      })
-      return;
-    }
-    AUTH.register(this);
   },
   couponOverlayClick() {
     this.setData({

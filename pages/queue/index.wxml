@@ -1,5 +1,4 @@
 <van-empty wx:if="{{!list}}" description="暂无队列" />
-<van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
 <view class="btn-groups">
   <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} (共 {{item.numberGet}} 号，当前第 {{item.curNumber}} 号)</van-button>
 </view>

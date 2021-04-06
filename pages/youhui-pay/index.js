@@ -49,7 +49,7 @@ Page({
     }
     const userMoney = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (userMoney.code == 2000) {
-      AUTH.openLoginDialog()
+      AUTH.login(this)
       return
     }
     if (userMoney.code != 0) {
@@ -115,15 +115,5 @@ Page({
         }        
       })
     }
-  },
-  processLogin(e) {
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-      })
-      return;
-    }
-    AUTH.register(this);
   },
 })

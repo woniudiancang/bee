@@ -53,7 +53,7 @@ Page({
     const queueType = this.data.list[index]
     const isLogined = await AUTH.checkHasLogined()
     if (!isLogined) {
-      AUTH.openLoginDialog()
+      AUTH.login(this)
       return
     }
     wx.showLoading({
@@ -74,15 +74,5 @@ Page({
       })
       this.queuingMy()
     }
-  },
-  processLogin(e) {
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-      })
-      return;
-    }
-    AUTH.register(this);
   },
 })

@@ -192,9 +192,6 @@
 </view>
 </van-popup> 
 
-
-<van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
-
 <van-overlay show="{{ !scanDining && showCouponPop }}" bind:click="couponOverlayClick">
   <view class="couponOverlay-container">
     <image src="/images/coupon.png" bindtap="couponImageClick"></image>

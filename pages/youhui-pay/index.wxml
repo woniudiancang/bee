@@ -28,6 +28,3 @@
   </form>
 
 </view>
-
-
-<van-dialog id="van-dialog-auth-login" bind:getuserinfo="processLogin" />
