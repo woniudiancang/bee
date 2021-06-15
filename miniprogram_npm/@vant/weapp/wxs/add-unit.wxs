@@ -1,5 +1,5 @@
 /* eslint-disable */
-var REGEXP = getRegExp('^\d+(\.\d+)?$');
+var REGEXP = getRegExp('^-?\d+(\.\d+)?$');
 
 function addUnit(value) {
   if (value == null) {
@@ -9,6 +9,4 @@ function addUnit(value) {
   return REGEXP.test('' + value) ? value + 'px' : value;
 }
 
-module.exports = {
-  addUnit: addUnit
-};
+module.exports = addUnit;

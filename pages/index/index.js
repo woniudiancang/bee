@@ -66,7 +66,6 @@ Page({
     // 静默式授权注册/登陆
     AUTH.authorize().then(res => {
       AUTH.bindSeller()
-      TOOLS.showTabBarBadge()
     })
     // 设置标题
     const mallName = wx.getStorageSync('mallName')

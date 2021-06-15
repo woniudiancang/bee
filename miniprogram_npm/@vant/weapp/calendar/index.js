@@ -1,13 +1,10 @@
 'use strict';
-var __spreadArrays =
-  (this && this.__spreadArrays) ||
-  function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++)
-      s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-        r[k] = a[j];
-    return r;
+var __spreadArray =
+  (this && this.__spreadArray) ||
+  function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+      to[j] = from[i];
+    return to;
   };
 var __importDefault =
   (this && this.__importDefault) ||
@@ -41,8 +38,12 @@ component_1.VantComponent({
       value: '确定',
     },
     rangePrompt: String,
+    showRangePrompt: {
+      type: Boolean,
+      value: true,
+    },
     defaultDate: {
-      type: [Number, Array],
+      type: null,
       observer: function (val) {
         this.setData({ currentDate: val });
         this.scrollIntoView();
@@ -72,7 +73,7 @@ component_1.VantComponent({
       value: 'bottom',
     },
     rowHeight: {
-      type: [Number, String],
+      type: null,
       value: utils_1.ROW_HEIGHT,
     },
     round: {
@@ -108,8 +109,12 @@ component_1.VantComponent({
       value: true,
     },
     maxRange: {
-      type: [Number, String],
+      type: null,
       value: null,
+    },
+    firstDayOfWeek: {
+      type: Number,
+      value: 0,
     },
   },
   data: {
@@ -182,6 +187,7 @@ component_1.VantComponent({
           poppable = _a.poppable,
           minDate = _a.minDate,
           maxDate = _a.maxDate;
+        // @ts-ignore
         var targetDate = type === 'single' ? currentDate : currentDate[0];
         var displayed = show || !poppable;
         if (!targetDate || !displayed) {
@@ -216,6 +222,7 @@ component_1.VantComponent({
         currentDate = _a.currentDate,
         allowSameDay = _a.allowSameDay;
       if (type === 'range') {
+        // @ts-ignore
         var startDay = currentDate[0],
           endDay = currentDate[1];
         if (startDay && !endDay) {
@@ -232,6 +239,7 @@ component_1.VantComponent({
         }
       } else if (type === 'multiple') {
         var selectedIndex_1;
+        // @ts-ignore
         var selected = currentDate.some(function (dateItem, index) {
           var equal = utils_1.compareDay(dateItem, date) === 0;
           if (equal) {
@@ -240,11 +248,13 @@ component_1.VantComponent({
           return equal;
         });
         if (selected) {
+          // @ts-ignore
           var cancelDate = currentDate.splice(selectedIndex_1, 1);
           this.setData({ currentDate: currentDate });
           this.unselect(cancelDate);
         } else {
-          this.select(__spreadArrays(currentDate, [date]));
+          // @ts-ignore
+          this.select(__spreadArray(__spreadArray([], currentDate), [date]));
         }
       } else {
         this.select(date, true);
@@ -289,16 +299,21 @@ component_1.VantComponent({
     checkRange: function (date) {
       var _a = this.data,
         maxRange = _a.maxRange,
-        rangePrompt = _a.rangePrompt;
+        rangePrompt = _a.rangePrompt,
+        showRangePrompt = _a.showRangePrompt;
       if (maxRange && utils_1.calcDateNum(date) > maxRange) {
-        toast_1.default({
-          context: this,
-          message:
-            rangePrompt ||
-            '\u9009\u62E9\u5929\u6570\u4E0D\u80FD\u8D85\u8FC7 ' +
-              maxRange +
-              ' \u5929',
-        });
+        if (showRangePrompt) {
+          toast_1.default({
+            duration: 0,
+            context: this,
+            message:
+              rangePrompt ||
+              '\u9009\u62E9\u5929\u6570\u4E0D\u80FD\u8D85\u8FC7 ' +
+                maxRange +
+                ' \u5929',
+          });
+        }
+        this.$emit('over-range');
         return false;
       }
       return true;
@@ -312,6 +327,7 @@ component_1.VantComponent({
         return;
       }
       wx.nextTick(function () {
+        // @ts-ignore
         _this.$emit('confirm', utils_1.copyDates(_this.data.currentDate));
       });
     },

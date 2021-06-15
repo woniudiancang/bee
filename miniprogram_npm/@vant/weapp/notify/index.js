@@ -2,6 +2,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 var component_1 = require('../common/component');
 var color_1 = require('../common/color');
+var utils_1 = require('../common/utils');
 component_1.VantComponent({
   props: {
     message: String,
@@ -30,9 +31,12 @@ component_1.VantComponent({
   },
   data: {
     show: false,
+    onOpened: null,
+    onClose: null,
+    onClick: null,
   },
   created: function () {
-    var statusBarHeight = wx.getSystemInfoSync().statusBarHeight;
+    var statusBarHeight = utils_1.getSystemInfoSync().statusBarHeight;
     this.setData({ statusBarHeight: statusBarHeight });
   },
   methods: {

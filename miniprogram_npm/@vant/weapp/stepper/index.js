@@ -16,7 +16,7 @@ var __assign =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 var component_1 = require('../common/component');
-var utils_1 = require('../common/utils');
+var validator_1 = require('../common/validator');
 var LONG_PRESS_START_TIME = 600;
 var LONG_PRESS_INTERVAL = 200;
 // add num and avoid float number
@@ -33,19 +33,15 @@ component_1.VantComponent({
   props: {
     value: {
       type: null,
-      observer: function (value) {
-        if (!equal(value, this.data.currentValue)) {
-          this.setData({ currentValue: this.format(value) });
-        }
-      },
+      observer: 'observeValue',
     },
     integer: {
       type: Boolean,
       observer: 'check',
     },
     disabled: Boolean,
-    inputWidth: null,
-    buttonSize: null,
+    inputWidth: String,
+    buttonSize: String,
     asyncChange: Boolean,
     disableInput: Boolean,
     decimalLength: {
@@ -81,6 +77,7 @@ component_1.VantComponent({
       type: Boolean,
       value: true,
     },
+    theme: String,
   },
   data: {
     currentValue: '',
@@ -91,6 +88,14 @@ component_1.VantComponent({
     });
   },
   methods: {
+    observeValue: function () {
+      var _a = this.data,
+        value = _a.value,
+        currentValue = _a.currentValue;
+      if (!equal(value, currentValue)) {
+        this.setData({ currentValue: this.format(value) });
+      }
+    },
     check: function () {
       var val = this.format(this.data.currentValue);
       if (!equal(val, this.data.currentValue)) {
@@ -98,18 +103,17 @@ component_1.VantComponent({
       }
     },
     isDisabled: function (type) {
+      var _a = this.data,
+        disabled = _a.disabled,
+        disablePlus = _a.disablePlus,
+        disableMinus = _a.disableMinus,
+        currentValue = _a.currentValue,
+        max = _a.max,
+        min = _a.min;
       if (type === 'plus') {
-        return (
-          this.data.disabled ||
-          this.data.disablePlus ||
-          this.data.currentValue >= this.data.max
-        );
+        return disabled || disablePlus || currentValue >= max;
       }
-      return (
-        this.data.disabled ||
-        this.data.disableMinus ||
-        this.data.currentValue <= this.data.min
-      );
+      return disabled || disableMinus || currentValue <= min;
     },
     onFocus: function (event) {
       this.$emit('focus', event.detail);
@@ -137,7 +141,7 @@ component_1.VantComponent({
       value = value === '' ? 0 : +value;
       value = Math.max(Math.min(this.data.max, value), this.data.min);
       // format decimal
-      if (utils_1.isDef(this.data.decimalLength)) {
+      if (validator_1.isDef(this.data.decimalLength)) {
         value = value.toFixed(this.data.decimalLength);
       }
       return value;
@@ -152,7 +156,7 @@ component_1.VantComponent({
       var formatted = this.filter(value);
       // limit max decimal length
       if (
-        utils_1.isDef(this.data.decimalLength) &&
+        validator_1.isDef(this.data.decimalLength) &&
         formatted.indexOf('.') !== -1
       ) {
         var pair = formatted.split('.');

@@ -34,13 +34,14 @@ component_1.VantComponent({
     },
     asyncClose: Boolean,
     name: {
-      type: [Number, String],
+      type: null,
       value: '',
     },
   },
   mixins: [touch_1.touch],
   data: {
     catchMove: false,
+    wrapperStyle: '',
   },
   created: function () {
     this.offset = 0;
@@ -126,7 +127,7 @@ component_1.VantComponent({
       }
       this.dragging = true;
       ARRAY.filter(function (item) {
-        return item !== _this;
+        return item !== _this && item.offset !== 0;
       }).forEach(function (item) {
         return item.close();
       });

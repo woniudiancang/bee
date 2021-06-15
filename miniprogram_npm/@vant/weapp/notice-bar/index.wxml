@@ -1,9 +1,10 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
+<wxs src="./index.wxs" module="computed" />
 
 <view
   wx:if="{{ show }}"
   class="custom-class {{ utils.bem('notice-bar', { withicon: mode, wrapable }) }}"
-  style="color: {{ color }}; background-color: {{ backgroundColor }}; background: {{ background }}"
+  style="{{ computed.rootStyle({ color, backgroundColor, background }) }}"
   bind:tap="onClick"
 >
   <van-icon
@@ -15,8 +16,9 @@
   <slot wx:else name="left-icon" />
 
   <view class="van-notice-bar__wrap">
-    <view class="van-notice-bar__content {{ !scrollable && !wrapable ? 'van-ellipsis' : '' }}" animation="{{ animationData }}">
+    <view class="van-notice-bar__content {{ scrollable === false && !wrapable ? 'van-ellipsis' : '' }}" animation="{{ animationData }}">
       {{ text }}
+      <slot wx:if="{{ !text }}"></slot>
     </view>
   </view>
 
