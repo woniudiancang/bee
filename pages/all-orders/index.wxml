@@ -12,7 +12,7 @@
 			</navigator>
 			<scroll-view class="goods-img-container" scroll-x="true">
 				<view class="img-box" wx:for="{{goodsMap[item.id]}}" wx:key="index">
-					<image mode="aspectFill" src="{{item.pic}}_m" class="goods-img"></image>
+					<image mode="aspectFill" src="{{item.pic}}" class="goods-img"></image>
 				</view>
 			</scroll-view>
 			<view class="order-info-box">

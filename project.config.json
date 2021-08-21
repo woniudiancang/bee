@@ -29,17 +29,16 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "bundle": false,
+    "enableEngineNative": false,
     "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.16.0",
+  "libVersion": "2.19.2",
   "appid": "wx47586bbed56a5001",
   "projectname": "%E5%B0%8F%E8%9C%9C%E8%9C%82%E7%82%B9%E9%A4%90",
   "debugOptions": {

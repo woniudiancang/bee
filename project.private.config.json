@@ -1,0 +1,30 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/youhui-pay/index",
+          "pathName": "pages/youhui-pay/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/sign/index",
+          "pathName": "pages/sign/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

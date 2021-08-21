@@ -1,0 +1,132 @@
+<view class="container">
+  <view class="swiper-container" id="swiper-container">
+    <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff"
+      autoplay="{{!goodsDetail.basicInfo.videoId}}" circular>
+      <swiper-item wx:if="{{goodsDetail.basicInfo.videoId}}">
+        <video src="{{videoMp4Src}}" autoplay="true" loop="true" style='width:100%;height:100%;'></video>
+      </swiper-item>
+      <swiper-item wx:for="{{goodsDetail.pics}}" wx:key="id">
+        <image src="{{item.pic}}" class="slide-image" mode="aspectFill" lazy-load="true" />
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="goods-info">
+    <view class="goods-info-top-container">
+      <view class="goods-profile">
+        <view class="p"><text>¥</text> {{selectSizePrice}}</view>
+        <view wx:if="{{goodsDetail.basicInfo.originalPrice && goodsDetail.basicInfo.originalPrice > 0}}"
+          class="goods-price" style='color:#aaa;text-decoration:line-through;padding: 15rpx 0rpx 0rpx 15rpx;'>
+          <text>¥</text> {{selectSizeOPrice}}
+        </view>
+      </view>
+    </view>
+    <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
+    <view class="characteristic">{{goodsDetail.basicInfo.characteristic}}</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">分享有赏，好友下单后可得
+      {{goodsDetail.basicInfo.commission}} 积分奖励</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">分享有赏，好友下单后可得
+      {{goodsDetail.basicInfo.commission}}元 现金奖励</view>
+  </view>
+  <van-cell wx:if="{{ shareQuanziProduct && show_wx_quanzi == '1' }}" custom-class="vw100 vcell" center title="微信圈子 好物圈"
+    border="{{false}}">
+    <view class="r">{{goodsDetail.basicInfo.numberSells}}人已买</view>
+    <share-button type="1" fore-color="#e64340" product="{{ shareQuanziProduct }}" bind:error="on_share_quanzi_error" />
+  </van-cell>
+  <van-cell wx:if="{{hasMoreSelect && goodsDetailSkuShowType==0}}" custom-class="vw100 goods-property-container"
+    border="{{false}}" is-link bind:click="bindGuiGeTap">
+    <view slot="title">
+      请选择:
+      <block wx:for="{{goodsDetail.properties}}" wx:key="id"> {{item.name}}</block>
+      <block wx:for="{{goodsAddition}}" wx:key="id"> {{item.name}}</block>
+    </view>
+  </van-cell>
+  <view class="size-label-box2" wx:if="{{goodsDetailSkuShowType==1}}">
+    <view class="label-title">选择商品规格</view>
+    <view class="size-label-box">
+      <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+        <view class="label">{{property.name}}</view>
+        <view class="label-item-box">
+          <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
+            bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+            {{item.name}}
+          </view>
+        </view>
+      </block>
+    </view>
+    <van-cell title="购买数量">
+      <view>
+        <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
+      </view>
+    </van-cell>
+  </view>
+  <view wx:if="{{shopSubdetail}}" class="shop-container">
+    <image mode="aspectFill" src="{{shopSubdetail.info.pic}}"></image>
+    <view class="info">
+      <view class="title">{{shopSubdetail.info.name}}</view>
+      <view class="address">{{shopSubdetail.info.address}}</view>
+    </view>
+  </view>
+  <view class="goods-des-info" id="goods-des-info">
+    <view class="label-title">
+      <view class="left">商品详情</view>
+    </view>
+    <view class="goods-text">
+      <parser html="{{goodsDetail.content}}" />
+    </view>
+  </view>
+  <van-goods-action>
+    <van-goods-action-button text="加入购物车" type="warning"
+      bind:click="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}" />
+  </van-goods-action>
+</view>
+
+<block wx:if="{{posterShow}}">
+  <view class="poster-mask"></view>
+  <view class="poster">
+    <canvas class="canvas" style="{{canvasstyle}}" canvas-id="firstCanvas"></canvas>
+  </view>
+  <view class="poster-btn">
+    <button type="primary" size="mini" bindtap='_saveToMobile'> 保存图片 </button>
+    <button type="warn" size="mini" bindtap='closePop'> 关闭 </button>
+  </view>
+</block>
+
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+<view wx:if="{{showposterImg}}" class="popup-mask"></view>
+<view wx:if="{{showposterImg}}" class="posterImg-box">
+  <image mode="widthFix" class="posterImg" src="{{posterImg}}"></image>
+  <view class="btn-create" bindtap="savePosterPic">保存到相册</view>
+</view>
+
+<van-popup show="{{ !hideShopPopup }}" round closeable position="bottom"
+  custom-style="padding-top:48rpx;max-height: 80%;" bind:close="closePopupTap">
+  <van-card centered price="{{ selectSizePrice }}"
+    origin-price="{{ selectSizePrice != selectSizePrice ? selectSizeOPrice : '' }}"
+    title="{{ goodsDetail.basicInfo.name }}" thumb="{{ skuGoodsPic }}" />
+  <view class="size-label-box">
+    <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+      <view class="label">{{property.name}}</view>
+      <view class="label-item-box">
+        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
+          bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{goodsAddition}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+      <view class="label">{{property.name}}</view>
+      <view class="label-item-box">
+        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id"
+          bindtap="labelItemTap2" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </block>
+  </view>
+  <van-cell title="购买数量">
+    <view>
+      <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
+    </view>
+  </van-cell>
+  <van-button bindtap="addShopCar" type="danger" block>加入购物车</van-button>
+</van-popup>

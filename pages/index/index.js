@@ -140,12 +140,17 @@ Page({
     } 
   },
   async _showCouponPop() {
+    const a = wx.getStorageSync('has_pop_coupons')
+    if (a) {
+      return
+    }
     // 检测是否需要弹出优惠券的福袋
     const res = await WXAPI.coupons({
       token: wx.getStorageSync('token')
     })
     if (res.code == 0) {
       this.data.showCouponPop = true
+      wx.setStorageSync('has_pop_coupons', true)
     } else {
       this.data.showCouponPop = false
     }

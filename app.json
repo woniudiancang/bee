@@ -23,7 +23,8 @@
     "pages/notice/detail",
     "pages/queue/index",
     "pages/cart/index",
-    "pages/cart/order"
+    "pages/cart/order",
+    "pages/goods-details/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -94,7 +95,10 @@
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
-    "van-tag": "@vant/weapp/tag/index"
+    "van-tag": "@vant/weapp/tag/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index"
   },
   "sitemapLocation": "sitemap.json"
 }
