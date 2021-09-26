@@ -1,9 +1,6 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
-const APP = getApp()
-APP.configLoadOK = () => {
 
-}
 Page({
   data: {
 
@@ -12,8 +9,20 @@ Page({
     
   },
   onShow: function () {
-    this.queuingTypes()
-    this.queuingMy()
+    AUTH.checkHasLogined().then(isLogin => {
+      if (isLogin) {
+        this.queuingTypes()
+        this.queuingMy()
+        AUTH.bindSeller()
+      } else {
+        AUTH.authorize().then(res => {
+          this.queuingTypes()
+          this.queuingMy()
+          AUTH.bindSeller()
+        })
+      }
+    })
+    
   },
   async queuingTypes() {
     wx.showLoading({

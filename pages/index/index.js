@@ -33,10 +33,10 @@ Page({
     // 测试扫码点餐
     // shopId=36,id=111,key=Y6RoIT 进行 url编码，3个值分别为 门店id，餐桌id，餐桌密钥
     // e = {
-    //   scene: 'shopId%3d36%2cid%3d111%2ckey%3dY6RoIT' 
+    //   scene: 'shopId%3d12879%2cid%3d111%2ckey%3dY6RoIT' 
     // }
 
-    
+    let mod = 0 // 0 普通模式； 1 扫码点餐模式
     if (e && e.scene) {
       const scene = decodeURIComponent(e.scene) // 处理扫码进商品详情页面的逻辑
       if (scene && scene.split(',').length == 3) {
@@ -50,6 +50,7 @@ Page({
           scanDining: scanDining
         })
         this.cyTableToken(scanDining.id, scanDining.key)
+        mod = 1
       } else {
         wx.removeStorageSync('scanDining')
       }
@@ -64,9 +65,17 @@ Page({
       this._showCouponPop()
     }
     // 静默式授权注册/登陆
-    AUTH.authorize().then(res => {
-      AUTH.bindSeller()
-    })
+    if (mod == 0) {
+      AUTH.checkHasLogined().then(isLogin => {
+        if (isLogin) {
+          AUTH.bindSeller()
+        } else {
+          AUTH.authorize().then(res => {
+            AUTH.bindSeller()
+          })
+        }
+      })
+    }
     // 设置标题
     const mallName = wx.getStorageSync('mallName')
     if (mallName) {
@@ -691,6 +700,9 @@ Page({
     }
   },
   checkIsOpened(openingHours) {
+    if (!openingHours) {
+      return true
+    }
     const date = new Date();
     const startTime = openingHours.split('-')[0]
     const endTime = openingHours.split('-')[1]
