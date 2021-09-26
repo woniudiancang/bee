@@ -15,9 +15,38 @@
 - [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
 - [@wangxy2020 Jack Wong 早期项目贡献者](https://github.com/wangxy2020)
 
-# 扫码体验
+# 自提/外卖 扫码体验
 
 <img src="https://dcdn.it120.cc/2021/01/19/b388b014-7ae0-4b3a-9d6f-30c8b3082fe6.jpg" width="200px">
+
+
+# 扫码点餐演示
+
+| 座号A1 | 座号A2 | 座号A3 | 座号A4 | 座号A5 |
+| :------: | :------: | :------: | :------: | :------: |
+| <img src="https://dcdn.it120.cc/cuser/27/2021/09/26/cbb91217-47b1-4af1-a0e5-55df0efd3566.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/7be3a174-eb87-4cff-ba1b-aebbee6d8cea.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/19b69a13-83fb-4ce3-b527-156b14ff6c50.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/8ace05df-78a2-4830-8064-2eca6cf507af.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/ca336f27-e282-4d77-9ec6-7346fe3b4b74.png" width="200px"> |
+
+
+| 座号A6 | 座号A7 | 座号A8 | 座号A9 | 座号A10 |
+| :------: | :------: | :------: | :------: | :------: |
+| <img src="https://7.s2m.cc/cuser/27/2021/09/26/938cb53d-dab2-4951-a213-0b4bcfb8a4a1.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/6009eefe-cbcf-4ffa-a8c4-a827a406d652.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/ccbd919c-1789-4bbc-b53a-406d4047706d.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/46547c5d-bfc2-4080-96b3-4ec6037bdff1.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/98592236-5216-4308-963c-1e0a369e5b9e.png" width="200px"> |
+
+## 桌号管理
+
+    登录后台，左侧菜单 “桌号管理”，添加并管理你的桌号信息，添加以后在列表你将可以看到 ID 和 密钥，这两个数据用来生成桌子的二维码
+
+<img src="https://7.s2m.cc/2021/09/26/c723ff20-5f1b-457b-a09e-dc17d9107c91.png">
+
+## 生成桌子二维码
+
+    例如上面的ID为 308，密钥为 d3PiIY，那么现在去左侧菜单微信设置 -> 小程序设置 -> 获取小程序二维码（圆形码），即可获取小程序码：
+    填写信息如下：
+- 页面路径: pages/index/index
+- scene参数: shopId=12879,id=308,key=d3PiIY
+
+其中 shopId 为你对应的门店ID，其他参数默认就可以了
+
+<img src="https://7.s2m.cc/2021/09/26/f150e6cd-91b3-4122-be18-5bcda935ff4b.png">
 
 
 # QQ交流群
