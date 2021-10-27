@@ -11,6 +11,7 @@ APP.configLoadOK = () => {
 
 Page({
   data: {
+    page: 1,
     peisongType: 'zq', // zq 自取，kd 配送
     showCartPop: false, // 是否显示购物车列表
     showGoodsDetailPOP: false, // 是否显示商品详情
@@ -188,6 +189,7 @@ Page({
       return
     }    
     this.setData({
+      page: 1,
       categories: res.data,
       categorySelected: res.data[0]
     })
@@ -198,15 +200,17 @@ Page({
       title: '',
     })
     const res = await WXAPI.goods({
+      page: this.data.page,
       categoryId: this.data.categorySelected.id,
-      page: 1,
       pageSize: 10000
     })
     wx.hideLoading()
     if (res.code == 700) {
-      this.setData({
-        goods: null
-      });
+      if (this.data.page == 1) {
+        this.setData({
+          goods: null
+        })
+      }
       return
     }
     if (res.code != 0) {
@@ -221,15 +225,26 @@ Page({
         ele.characteristic = '清凉一夏'
       }
     })
-    this.setData({
-      goods: res.data
-    })
+    if (this.data.page == 1) {
+      this.setData({
+        goods: res.data
+      })
+    } else {
+      this.setData({
+        goods: this.data.goods.concat(res.data)
+      })
+    }
     this.processBadge()
+  },
+  _onReachBottom() {
+    this.data.page++
+    this.getGoodsList()
   },
   categoryClick(e) {
     const index = e.currentTarget.dataset.idx
     const categorySelected = this.data.categories[index]
     this.setData({
+      page: 1,
       categorySelected,
       scrolltop: 0
     })
