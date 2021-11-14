@@ -27,6 +27,7 @@ Page({
     curCoupon: null, // 当前选择使用的优惠券
     curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
     peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
+    submitLoding: false,
     remark: '',
 
     currentDate: new Date().getHours() + ':' + (new Date().getMinutes() % 10 === 0 ? new Date().getMinutes() : Math.ceil(new Date().getMinutes() / 10) * 10),
@@ -134,6 +135,7 @@ Page({
     this.data.remark = e.detail.value
   },
   goCreateOrder(){
+    if (this.data.submitLoding) return
     const mobile = this.data.mobile
     if (this.data.peisongType == 'zq' && !mobile) {
       wx.showToast({
@@ -149,20 +151,24 @@ Page({
       })
       return
     }
+    this.setData({
+      submitLoding: true
+    })
     const subscribe_ids = wx.getStorageSync('subscribe_ids')
     if (subscribe_ids) {
-    wx.requestSubscribeMessage({
-      tmplIds: subscribe_ids.split(','),
-      success(res) {
-        
-      },
-      fail(e) {
-        console.error(e)
-      },
-      complete: (e) => {
-        this.createOrder(true)
-      },
-    })
+      wx.requestSubscribeMessage({
+        tmplIds: subscribe_ids.split(','),
+        success(res) {},
+        fail(e) {
+          this.setData({
+            submitLoding: false
+          })
+          console.error(e)
+        },
+        complete: (e) => {
+          this.createOrder(true)
+        },
+      })
     } else {
       this.createOrder(true)
     }
@@ -273,7 +279,15 @@ Page({
         });
         return;
       }
-      that.processAfterCreateOrder(res)
+      return that.processAfterCreateOrder(res)
+    })
+    .finally(() => {
+      // 再唤起微信支付的时候，有大约1s的弹窗动画过度，加上 1s 的延迟可以稳定防止重复下单
+      setTimeout(() => {
+        this.setData({
+          submitLoding: false
+        })
+      }, 1000)
     })
   },
   async processAfterCreateOrder(res) {
