@@ -80,7 +80,7 @@
 	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : '立即支付'}}"
 	bind:submit="goCreateOrder"
 	button-class="pay-btn"
-	disabled="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin}}"
+	disabled="{{(peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin) || submitLoding }}"
 />
 <van-submit-bar
   wx:else
