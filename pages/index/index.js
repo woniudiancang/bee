@@ -146,6 +146,12 @@ Page({
         shopIsOpened: this.checkIsOpened(res.data[0].openingHours)
       })
       wx.setStorageSync('shopInfo', res.data[0])
+      const shop_goods_split = wx.getStorageSync('shop_goods_split')
+      if (shop_goods_split == '1') {
+        // 商品需要区分门店
+        wx.setStorageSync('shopIds', res.data[0].id) // 当前选择的门店
+        this.getGoodsList()
+      }
     } 
   },
   async _showCouponPop() {
@@ -191,9 +197,20 @@ Page({
       categories: res.data,
       categorySelected: res.data[0]
     })
-    this.getGoodsList()
+    const shop_goods_split = wx.getStorageSync('shop_goods_split')
+    if (shop_goods_split != '1') {
+      this.getGoodsList()
+    }
   },
   async getGoodsList() {
+    const shop_goods_split = wx.getStorageSync('shop_goods_split')
+    if (shop_goods_split == '1') {
+      // 商品需要区分门店
+      const shopIds = wx.getStorageSync('shopIds') // 当前选择的门店
+      if (!shopIds) {
+        return
+      }
+    }
     wx.showLoading({
       title: '',
     })
@@ -237,12 +254,7 @@ Page({
   },
   async shippingCarInfo() {
     const res = await WXAPI.shippingCarInfo(wx.getStorageSync('token'))
-    if (res.code == 700) {
-      this.setData({
-        shippingCarInfo: null,
-        showCartPop: false
-      })
-    } else if (res.code == 0) {
+    if (res.code == 0) {
       this.setData({
         shippingCarInfo: res.data
       })

@@ -53,7 +53,7 @@ App({
         wx.hideToast()
       }
     })
-    WXAPI.queryConfigBatch('mallName,myBg,mapPos,order_hx_uids,subscribe_ids,share_profile,zxdz,admin_uids').then(res => {
+    WXAPI.queryConfigBatch('mallName,myBg,mapPos,order_hx_uids,subscribe_ids,share_profile,zxdz,admin_uids,shop_goods_split').then(res => {
       if (res.code == 0) {
         res.data.forEach(config => {
           wx.setStorageSync(config.key, config.value);
