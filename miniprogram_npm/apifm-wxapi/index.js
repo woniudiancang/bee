@@ -1114,6 +1114,9 @@ module.exports = {
   mapDistanceNavigation: function mapDistanceNavigation(key, mode, from, to) {
     return request('/common/map/qq/distance', false, 'post', { key: key, mode: mode, from: from, to: to });
   },
+  gpsDistance: (data) => {
+    return request('/common/map/qq/distance', false, 'post', data)
+  },
   mapQQAddress: function mapQQAddress() {
     var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var coord_type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '5';

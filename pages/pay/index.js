@@ -1,6 +1,7 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
 const wxpay = require('../../utils/pay.js')
+const CONFIG = require('../../config.js')
 const APP = getApp()
 APP.configLoadOK = () => {
 
@@ -170,6 +171,13 @@ Page({
         },
       })
     } else {
+      if (this.data.shopInfo.serviceDistance && this.data.distance && this.data.distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
+        wx.showToast({
+          title: '当前地址超出配送范围',
+          icon: 'none'
+        })
+        return
+      }
       this.createOrder(true)
     }
   },
@@ -315,9 +323,34 @@ Page({
   async initShippingAddress() {
     const res = await WXAPI.defaultAddress(wx.getStorageSync('token'))
     if (res.code == 0) {
+      const curAddressData = res.data.info
+      // 计算距离
+      const distanceRes = await WXAPI.gpsDistance({
+        key: CONFIG.baiduMapKey,
+        mode: 'bicycling',
+        from: this.data.shopInfo.latitude + ',' + this.data.shopInfo.longitude,
+        to: curAddressData.latitude + ',' + curAddressData.longitude
+      })
+      let distance = 0
+      if (distanceRes.code !== 0 && this.data.peisongType == 'kd') {
+        wx.showToast({
+          title: '当前地址超出配送范围',
+          icon: 'none'
+        })
+      } else {
+        distance = distanceRes.data.result.rows[0].elements[0].distance / 1000.0
+        if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
+          wx.showToast({
+            title: '当前地址超出配送范围',
+            icon: 'none'
+          })
+        }
+      }
+      
       this.setData({
-        curAddressData: res.data.info
-      });
+        curAddressData,
+        distance
+      })
     } else {
       this.setData({
         curAddressData: null

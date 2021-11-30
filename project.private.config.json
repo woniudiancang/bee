@@ -23,6 +23,12 @@
           "pathName": "pages/sign/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/pay/index",
+          "pathName": "pages/pay/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
