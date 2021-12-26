@@ -9,7 +9,7 @@
 </view>
 <view wx:if="{{ !scanDining }}" class="box">
   <view class="shop-name">
-    <view class="name">{{shopInfo.name}}</view>
+    <view class="name" bindtap="selectshop">{{shopInfo.name}}</view>
     <view class="select">
       <view class="{{peisongType == 'zq' ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">自取</view>
       <view class="{{peisongType == 'kd' ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">外卖</view>

@@ -94,13 +94,17 @@ Page({
       peisongType
     })
     // 读取最近的门店数据
-    this.getshopInfo()
     this.categories()    
     this.noticeLastOne()
     this.banners()
   },
   onShow: function(){
     this.shippingCarInfo()
+    const refreshIndex = wx.getStorageSync('refreshIndex')
+    if (refreshIndex) {
+      this.getshopInfo()
+      wx.removeStorageSync('refreshIndex')
+    }
   },
   async cyTableToken(tableId, key) {
     const res = await WXAPI.cyTableToken(tableId, key)
@@ -117,6 +121,20 @@ Page({
     wx.setStorageSync('token', res.data.token)
   },
   getshopInfo(){
+    const shopInfo = wx.getStorageSync('shopInfo')
+    if (shopInfo) {
+      this.setData({
+        shopInfo: shopInfo,
+        shopIsOpened: this.checkIsOpened(shopInfo.openingHours)
+      })
+      const shop_goods_split = wx.getStorageSync('shop_goods_split')
+      if (shop_goods_split == '1') {
+        // 商品需要区分门店
+        wx.setStorageSync('shopIds', shopInfo.id) // 当前选择的门店
+        this.getGoodsList()
+      }
+      return
+    }
     wx.getLocation({
       type: 'wgs84', //wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
       success: (res) => {
@@ -142,7 +160,6 @@ Page({
         ele.distance = ele.distance.toFixed(1) // 距离保留3位小数
       })
       this.setData({
-        shops: res.data,
         shopInfo: res.data[0],
         shopIsOpened: this.checkIsOpened(res.data[0].openingHours)
       })
@@ -199,6 +216,7 @@ Page({
       categories: res.data,
       categorySelected: res.data[0]
     })
+    this.getshopInfo()
     const shop_goods_split = wx.getStorageSync('shop_goods_split')
     if (shop_goods_split != '1') {
       this.getGoodsList()
@@ -895,6 +913,11 @@ Page({
     this.setData({
       categories,
       goods
+    })
+  },
+  selectshop() {
+    wx.navigateTo({
+      url: '/pages/shop/select?type=index',
     })
   },
 })

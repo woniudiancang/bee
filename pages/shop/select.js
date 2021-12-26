@@ -67,7 +67,9 @@ Page({
   goShop(e){
     const idx = e.currentTarget.dataset.idx    
     wx.setStorageSync('shopInfo', this.data.shops[idx])
-    wx.setStorageSync('shopIds', this.data.shops[idx].id) // 当前选择的门店
+    if (this.data.type == 'index') {
+      wx.setStorageSync('refreshIndex', 1)
+    }
     if (this.data.type == 'pay') {
       wx.navigateBack()
     } else {
