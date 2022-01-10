@@ -86,7 +86,11 @@ Page({
     wx.showLoading({
       title: '处理中...',
     })
-    const res = await WXAPI.orderHX(this.data.hxNumber)
+    // https://www.yuque.com/apifm/nu0f75/sq4sma
+    const res = await WXAPI.orderHXV2({
+      token: wx.getStorageSync('token'),
+      hxNumber: this.data.hxNumber
+    })
     wx.hideLoading()
     if (res.code != 0) {
       wx.showToast({
