@@ -56,6 +56,13 @@ Page({
         wx.removeStorageSync('scanDining')
       }
     }
+    if (wx.getStorageSync('scanDining')) {
+      mod = 1
+      this.setData({
+        scanDining: wx.getStorageSync('scanDining')
+      })
+      wx.hideTabBar()
+    }
     if (e.share_goods_id) {
       this.data.share_goods_id = e.share_goods_id
       this._showGoodsDetailPOP(e.share_goods_id)

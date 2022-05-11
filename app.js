@@ -65,6 +65,24 @@ App({
     })
   },
   onShow (e) {
+    if (e && e.query && e.query.scene) {
+      const scene = decodeURIComponent(e.query.scene) // 处理扫码进商品详情页面的逻辑
+      if (scene && scene.split(',').length == 3) {
+        // 扫码点餐
+      } else {
+        AUTH.checkHasLogined().then(isLogined => {
+          if (!isLogined) {
+            AUTH.authorize()
+          }
+        })
+      }
+    } else {
+      AUTH.checkHasLogined().then(isLogined => {
+        if (!isLogined) {
+          AUTH.authorize()
+        }
+      })
+    }
     // 保存邀请人
     if (e && e.query && e.query.inviter_id) {
       wx.setStorageSync('referrer', e.query.inviter_id)
@@ -100,12 +118,6 @@ App({
         })
       }
     }
-    // 自动登录
-    AUTH.checkHasLogined().then(isLogined => {
-      if (!isLogined) {
-        AUTH.authorize()
-      }
-    })
   },
   globalData: {
     isConnected: true
