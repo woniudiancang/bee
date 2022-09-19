@@ -10,10 +10,10 @@
 
 希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群 ( 671428068 ) 联系管理员，期待您的加入！
 
-# 荣誉墙
+# 加微信联系我
 
-- [@woniudiancang 蜗牛小姐姐，本项目主导者、发起人](https://github.com/woniudiancang)
-- [@wangxy2020 Jack Wong 早期项目贡献者](https://github.com/wangxy2020)
+<img src="https://dcdn.it120.cc/2022/09/19/7b884d58-541a-404b-a805-457540d7f87f.jpeg" width="200px">
+
 
 # 自提/外卖 扫码体验
 
