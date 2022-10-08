@@ -14,6 +14,13 @@
 
 <img src="https://dcdn.it120.cc/2022/09/19/7b884d58-541a-404b-a805-457540d7f87f.jpeg" width="200px">
 
+# 推荐一个订座取号的开源项目
+
+最近经常有人咨询说需要订座和取号的功能，api工厂有一个基于 uni-app 的开源模板，可能大家没注意，再把地址贴一下，有需要的自取：
+
+- [仿海底捞订座排队 (uni-app)](https://github.com/gooking/dingzuopaidui)
+- [码云镜像](https://gitee.com/javazj/dingzuopaidui)
+
 
 # 自提/外卖 扫码体验
 
