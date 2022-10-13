@@ -142,5 +142,11 @@ Page({
       title: '登陆成功',
     })
     this.getUserApiInfo()
+  },
+  clearStorage() {
+    wx.clearStorageSync()
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
   }
 })

@@ -151,7 +151,15 @@ Page({
         this.fetchShops(res.latitude, res.longitude, '')
       },      
       fail(e){
-        AUTH.checkAndAuthorize('scope.userLocation')
+        if (e.errMsg.indexOf('fail auth deny') != -1) {
+          AUTH.checkAndAuthorize('scope.userLocation')
+        } else {
+          wx.showModal({
+            title: '出错了~',
+            content: e.errMsg,
+            showCancel: false
+          })
+        }
       }
     })
   },

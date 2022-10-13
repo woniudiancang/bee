@@ -26,6 +26,11 @@
     "pages/cart/order",
     "pages/goods-details/index"
   ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "chooseAddress"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

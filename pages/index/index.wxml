@@ -72,6 +72,7 @@
   <view class="r">
     <view class="amount"><text>¥</text>{{shippingCarInfo.price}}</view>
     <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">选好了</view>
+    <view wx:elif="{{ !shopInfo }}" class="topay" bindtap="getshopInfo">获取门店</view>
     <view wx:else class="topay noopen">未营业</view>
   </view>
 </view>
