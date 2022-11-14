@@ -325,28 +325,29 @@ Page({
     if (res.code == 0) {
       const curAddressData = res.data.info
       // 计算距离
-      const distanceRes = await WXAPI.gpsDistance({
-        key: CONFIG.baiduMapKey,
-        mode: 'bicycling',
-        from: this.data.shopInfo.latitude + ',' + this.data.shopInfo.longitude,
-        to: curAddressData.latitude + ',' + curAddressData.longitude
-      })
       let distance = 0
-      if (distanceRes.code !== 0 && this.data.peisongType == 'kd') {
-        wx.showToast({
-          title: '当前地址超出配送范围',
-          icon: 'none'
+      if (CONFIG.baiduMapKey) {
+        const distanceRes = await WXAPI.gpsDistance({
+          key: CONFIG.baiduMapKey,
+          mode: 'bicycling',
+          from: this.data.shopInfo.latitude + ',' + this.data.shopInfo.longitude,
+          to: curAddressData.latitude + ',' + curAddressData.longitude
         })
-      } else {
-        distance = distanceRes.data.result.rows[0].elements[0].distance / 1000.0
-        if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
+        if (distanceRes.code !== 0 && this.data.peisongType == 'kd') {
           wx.showToast({
             title: '当前地址超出配送范围',
             icon: 'none'
           })
+        } else {
+          distance = distanceRes.data.result.rows[0].elements[0].distance / 1000.0
+          if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
+            wx.showToast({
+              title: '当前地址超出配送范围',
+              icon: 'none'
+            })
+          }
         }
       }
-      
       this.setData({
         curAddressData,
         distance

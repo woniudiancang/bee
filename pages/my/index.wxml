@@ -1,17 +1,14 @@
 <view class="my-bar">
 	<image mode='aspectFill' class='background' src='{{myBg}}'></image>	
 	<view class="my-box">
-		<view wx:if="{{apiUserInfoMap && apiUserInfoMap.base.nick && apiUserInfoMap.base.avatarUrl}}" class="head-bar">
-			<button class="userinfo-avatar" style="background-image: url({{apiUserInfoMap.base.avatarUrl}})" size="default" bindtap="updateUserInfo"></button>
+		<view class="head-bar">
+      <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
 			<view class="name-box">
-				<view class="name">{{apiUserInfoMap.base.nick}}</view>
+				<view class="name"><open-data type="userNickName"></open-data></view>
 				<view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
   			<view wx:else class="state">非会员</view>
 			</view>
 		</view>
-		<view wx:else class="login-btn">
-			<van-button type="default" block bind:click="updateUserInfo">立即登录</van-button>
-		</view>	
 		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
 			<view class="coupon" bindtap="goCoupons">
 				<view class="num">{{couponStatistics.canUse}}</view>

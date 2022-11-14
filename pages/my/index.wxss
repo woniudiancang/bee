@@ -20,6 +20,7 @@
   border-radius: 50%;
   background-size: cover;
   background-color: white;
+  overflow: hidden;
 }
 
 .userinfo-avatar[size] {
