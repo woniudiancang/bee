@@ -78,5 +78,10 @@ Page({
       })
     }
     
-  }
+  },
+  joinApply() {
+    wx.navigateTo({
+      url: '/pages/shop/join-apply',
+    })
+  },
 })

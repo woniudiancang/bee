@@ -29,7 +29,7 @@
 	</view>
 </view>
 <view class="my-bar1">
-	<van-cell icon="records" title="每日签到" size="large" is-link url="/pages/sign/index" />
+	<van-cell icon="sign" title="每日签到" size="large" is-link url="/pages/sign/index" />
 	<van-cell wx:if="{{canHX}}" icon="qr" title="扫码核销" size="large" is-link bind:click="scanOrderCode" />
 	<van-cell icon="medal-o" title="会员中心" size="large" is-link url="/pages/member-center/index" />
 	<van-cell icon="clock-o" title="在线订座" size="large" is-link url="/pages/booking/index" />
@@ -38,6 +38,6 @@
 	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
 	<van-cell icon="info-o" title="关于我们" size="large" is-link url="/pages/about/index" />
   <van-cell icon="points" title="清除缓存" size="large" is-link bind:click="clearStorage" />
-	<van-cell icon="desktop-o" title="管理员入口" is-link bind:click="goadmin" />
+	<van-cell icon="records" title="意见反馈" is-link url="/pages/my/feedback" />
 </view>
 <view class="version">v{{version}}</view>

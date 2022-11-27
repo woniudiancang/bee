@@ -22,3 +22,6 @@ page,view,image,input {
   border: 1rpx solid #fff;
   border-radius: 50%;
 }
+.block-btn {
+  padding: 0 32rpx;
+}
