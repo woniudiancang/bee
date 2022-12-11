@@ -12,7 +12,8 @@ Page({
       canUse: 0
     },
     balance: 0.00,
-    score: 0
+    score: 0,
+    nick: undefined,
   },
   onLoad() {
     const order_hx_uids = wx.getStorageSync('order_hx_uids')
@@ -40,6 +41,7 @@ Page({
     if (res.code == 0) {
       const _data = {}
       _data.apiUserInfoMap = res.data
+      _data.nick = res.data.base.nick
       if (this.data.order_hx_uids && this.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
         _data.canHX = true // 具有扫码核销的权限
       }
@@ -105,30 +107,33 @@ Page({
       path: 'pages/login/auto?token=' + wx.getStorageSync('token'),
     })
   },
-  updateUserInfo(e) {
-    wx.getUserProfile({
-      lang: 'zh_CN',
-      desc: '用于完善会员资料',
-      success: res => {
-        console.log(res);
-        this._updateUserInfo(res.userInfo)
-      },
-      fail: err => {
-        wx.showToast({
-          title: err.errMsg,
-          icon: 'none'
-        })
-      }
+  clearStorage() {
+    wx.clearStorageSync()
+    wx.reLaunch({
+      url: '/pages/index/index',
     })
   },
-  async _updateUserInfo(userInfo) {
+  govip() {
+    wx.navigateTo({
+      url: '/pages/member-center/index',
+    })
+  },
+  editNick() {
+    this.setData({
+      nickShow: true
+    })
+  },
+  async _editNick() {
+    if (!this.data.nick) {
+      wx.showToast({
+        title: '请填写昵称',
+        icon: 'none'
+      })
+      return
+    }
     const postData = {
       token: wx.getStorageSync('token'),
-      nick: userInfo.nickName,
-      avatarUrl: userInfo.avatarUrl,
-      city: userInfo.city,
-      province: userInfo.province,
-      gender: userInfo.gender,
+      nick: this.data.nick,
     }
     const res = await WXAPI.modifyUserInfo(postData)
     if (res.code != 0) {
@@ -139,14 +144,35 @@ Page({
       return
     }
     wx.showToast({
-      title: '登陆成功',
+      title: '设置成功',
     })
     this.getUserApiInfo()
   },
-  clearStorage() {
-    wx.clearStorageSync()
-    wx.reLaunch({
-      url: '/pages/index/index',
+  async onChooseAvatar(e) {
+    console.log(e);
+    const avatarUrl = e.detail.avatarUrl
+    let res = await WXAPI.uploadFile(wx.getStorageSync('token'), avatarUrl)
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    res = await WXAPI.modifyUserInfo({
+      token: wx.getStorageSync('token'),
+      avatarUrl: res.data.url,
     })
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    wx.showToast({
+      title: '设置成功',
+    })
+    this.getUserApiInfo()
   }
 })

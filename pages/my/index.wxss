@@ -22,15 +22,10 @@
   background-color: white;
   overflow: hidden;
 }
-
-.userinfo-avatar[size] {
-  width: 100rpx;
-  height: 100rpx;
-}
-
-
-.userinfo-avatar:after {
-  border: none;
+.userinfo-avatar-img {
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: -28rpx;
 }
 
 .userinfo-nickname {
@@ -74,7 +69,7 @@
 }
 .my-box .head-bar{
   display: flex;
-
+  align-items: center;
 }
 .my-box .head-bar .head{
   height: 120rpx;

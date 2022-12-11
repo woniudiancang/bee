@@ -2,11 +2,14 @@
 	<image mode='aspectFill' class='background' src='{{myBg}}'></image>	
 	<view class="my-box">
 		<view class="head-bar">
-      <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
+      <!-- <image src="/images/default.png" mode="aspectFill" class="userinfo-avatar"></image> -->
+      <button class="userinfo-avatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="userinfo-avatar-img"></image>
+      </button> 
 			<view class="name-box">
-				<view class="name"><open-data type="userNickName"></open-data></view>
-				<view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
-  			<view wx:else class="state">非会员</view>
+				<view class="name" bindtap="editNick">{{ nick ? nick : '点击设置昵称' }}</view>
+				<view wx:if="{{apiUserInfoMap.userLevel}}" class="state" bindtap="govip">{{apiUserInfoMap.userLevel.name}}</view>
+  			<view wx:else class="state" bindtap="govip">非会员</view>
 			</view>
 		</view>
 		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
@@ -41,3 +44,19 @@
 	<van-cell icon="records" title="意见反馈" is-link url="/pages/my/feedback" />
 </view>
 <view class="version">v{{version}}</view>
+
+<van-dialog
+  use-slot
+  title="修改昵称"
+  show="{{ nickShow }}"
+  show-cancel-button
+  bind:confirm="_editNick"
+>
+  <van-field
+    model:value="{{ nick }}"
+    type="nickname"
+    placeholder="请输入昵称"
+    size="large"
+    clearable
+  />
+</van-dialog>
