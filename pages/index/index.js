@@ -2,13 +2,6 @@ const APP = getApp()
 const AUTH = require('../../utils/auth')
 const WXAPI = require('apifm-wxapi')
 
-// fixed首次打开不显示标题的bug
-APP.configLoadOK = () => {
-  wx.setNavigationBarTitle({
-    title: wx.getStorageSync('mallName')
-  })
-}
-
 Page({
   data: {
     page: 1,
@@ -90,6 +83,14 @@ Page({
       wx.setNavigationBarTitle({
         title: mallName
       })
+    }
+    APP.configLoadOK = () => {
+      const mallName = wx.getStorageSync('mallName')
+      if (mallName) {
+        wx.setNavigationBarTitle({
+          title: mallName
+        })
+      }
     }
     // 读取默认配送方式
     let peisongType = wx.getStorageSync('peisongType')
