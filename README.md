@@ -31,12 +31,12 @@
 
 | 座号A1 | 座号A2 | 座号A3 | 座号A4 | 座号A5 |
 | :------: | :------: | :------: | :------: | :------: |
-| <img src="https://dcdn.it120.cc/cuser/27/2021/09/26/cbb91217-47b1-4af1-a0e5-55df0efd3566.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/7be3a174-eb87-4cff-ba1b-aebbee6d8cea.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/19b69a13-83fb-4ce3-b527-156b14ff6c50.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/8ace05df-78a2-4830-8064-2eca6cf507af.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/ca336f27-e282-4d77-9ec6-7346fe3b4b74.png" width="200px"> |
+| <img src="https://dcdn.it120.cc/cuser/27/2021/09/26/cbb91217-47b1-4af1-a0e5-55df0efd3566.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/cbb30b43-15df-4564-87ef-3416f58ab0c8.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/150cd47b-e769-49fc-bca6-be8c5fe84f49.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/b5a44d1f-cea4-437f-802d-a36c728ff459.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/99c47ba3-50ba-4431-93c6-e10f527a5e28.png" width="200px"> |
 
 
 | 座号A6 | 座号A7 | 座号A8 | 座号A9 | 座号A10 |
 | :------: | :------: | :------: | :------: | :------: |
-| <img src="https://7.s2m.cc/cuser/27/2021/09/26/938cb53d-dab2-4951-a213-0b4bcfb8a4a1.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/6009eefe-cbcf-4ffa-a8c4-a827a406d652.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/ccbd919c-1789-4bbc-b53a-406d4047706d.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/46547c5d-bfc2-4080-96b3-4ec6037bdff1.png" width="200px"> | <img src="https://7.s2m.cc/cuser/27/2021/09/26/98592236-5216-4308-963c-1e0a369e5b9e.png" width="200px"> |
+| <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/aca7a7fd-72c9-4d89-a903-d82e6b8b8f83.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/77f16752-656f-4218-99df-c82c5db1921a.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/e3be04c4-9c0f-41c8-9482-b645699d1df4.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/352c7e84-56ec-4961-9e7d-cc4e752cf154.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/78adb196-231d-41b7-be8d-51febc022bac.png" width="200px"> |
 
 ## 桌号管理
 
