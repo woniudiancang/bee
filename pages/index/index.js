@@ -5,7 +5,7 @@ const WXAPI = require('apifm-wxapi')
 Page({
   data: {
     page: 1,
-    peisongType: 'zq', // zq 自取，kd 配送
+    peisongType: 'zq', // zq 自
     showCartPop: false, // 是否显示购物车列表
     showGoodsDetailPOP: false, // 是否显示商品详情
     showCouponPop: false, // 是否弹出优惠券领取提示
