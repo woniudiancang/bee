@@ -339,7 +339,15 @@ Page({
     wx.showLoading({
       title: '',
     })
-    const res = await WXAPI.shippingCarInfoAddItem(token, item.id, item.minBuyNumber, [])
+    let number = item.minBuyNumber // 加入购物车的数量
+    if (this.data.shippingCarInfo && this.data.shippingCarInfo.items) {
+      const goods = this.data.shippingCarInfo.items.find(ele => { return ele.goodsId == item.id})
+      console.log(goods);
+      if (goods) {
+        number = 1
+      }
+    }
+    const res = await WXAPI.shippingCarInfoAddItem(token, item.id, number, [])
     wx.hideLoading()
     if (res.code == 2000) {
       AUTH.login(this)
