@@ -70,6 +70,12 @@
 .my-box .head-bar{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 32rpx;
+}
+.head-bar-left {
+  display: flex;
+  align-items: center;
 }
 .my-box .head-bar .head{
   height: 120rpx;
@@ -93,6 +99,17 @@
   line-height: 40rpx;
   border-radius: 20rpx;
 }
+.user-code {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-code .txt {
+  font-size: 24rpx;
+  color: #333;
+}
+
 .coupon-box{
   display: flex;
   justify-content: center;

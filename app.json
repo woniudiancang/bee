@@ -4,6 +4,7 @@
     "pages/all-orders/index",
     "pages/my/index",
     "pages/my/feedback",
+    "pages/my/user-code",
     "pages/ad/index",
     "pages/pay/index",
     "pages/shop/select",

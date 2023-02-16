@@ -174,5 +174,10 @@ Page({
       title: '设置成功',
     })
     this.getUserApiInfo()
-  }
+  },
+  goUserCode() {
+    wx.navigateTo({
+      url: '/pages/my/user-code',
+    })
+  },
 })
