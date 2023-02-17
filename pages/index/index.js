@@ -213,23 +213,27 @@ Page({
     if ((peisongType == 'zq' && shopInfo.openZiqu) || (peisongType == 'kd' && shopInfo.openWaimai)) {
       //pass
     } else if (peisongType == 'zq' && !shopInfo.openZiqu) {
-      if (shopInfo.openWaimai) {
-        peisongType = 'kd'
-      }
       wx.showToast({
         title: '商家暂不支持到店自取.',
         icon: 'none',
         duration: 1200
       })
-    } else if (peisongType == 'kd' && !shopInfo.openWaimai) {
-      if (shopInfo.openZiqu) {
-        peisongType = 'zq'
+      if (shopInfo.openWaimai) {
+        peisongType = 'kd'
+      } else {
+        return
       }
+    } else if (peisongType == 'kd' && !shopInfo.openWaimai) {
       wx.showToast({
         title: '商家暂不支持外卖配送.',
         icon: 'none',
         duration: 1200
       })
+      if (shopInfo.openZiqu) {
+        peisongType = 'zq'
+      } else {
+        return
+      }
     } else {
       return
     }
