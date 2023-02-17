@@ -1,13 +1,13 @@
 <van-cell icon="location-o" title="{{shopInfo.name}} / 距离您{{shopInfo.distance}}km" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
 <view class="pay-bar">
 	<view class="way-bar">
-		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
-			<van-icon name="shop-collect-o" color="{{peisongType == 'zq' ? '#fff' : '#333'}}" />
-			<view class="ziqu-1">门店自取</view>
+		<view class="peisong ziqu {{(peisongType == 'zq' && shopInfo.openZiqu) ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
+			<van-icon name="shop-collect-o" color="{{(peisongType == 'zq' && shopInfo.openZiqu) ? '#fff' : (shopInfo.openZiqu ? '#333' : '#888')}}" />
+			<view class="ziqu-{{shopInfo.openZiqu ? 1 : 2}}">门店自取</view>
 		</view>
-		<view class="peisong ziqu {{peisongType == 'kd' ? 'active' : ''}}" bindtap="selected" data-pstype="kd">
-			<van-icon name="logistics" color="{{peisongType == 'kd' ? '#fff' : '#333'}}" />
-			<view class="ziqu-1">外卖配送</view>
+		<view class="peisong ziqu {{(peisongType == 'kd' && shopInfo.openWaimai) ? 'active' : ''}}" bindtap="selected" data-pstype="kd">
+			<van-icon name="logistics" color="{{(peisongType == 'kd' && shopInfo.openWaimai) ? '#fff' : (shopInfo.openWaimai ? '#333' : '#888')}}" />
+			<view class="ziqu-{{shopInfo.openWaimai ? 1 : 2}}" >外卖配送</view>
 		</view>
 	</view>
 	<van-divider dashed />
@@ -80,7 +80,7 @@
 	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : '立即支付'}}"
 	bind:submit="goCreateOrder"
 	button-class="pay-btn"
-	disabled="{{(peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin) || submitLoding }}"
+	disabled="{{(peisongType == 'kd' && (!shopInfo.openWaimai || amountReal < shopInfo.serviceAmountMin)) || (peisongType == 'zq' && !shopInfo.openZiqu) || submitLoding }}"
 />
 <van-submit-bar
   wx:else

@@ -11,8 +11,8 @@
   <view class="shop-name">
     <view class="name" bindtap="selectshop">{{shopInfo.name}}</view>
     <view class="select">
-      <view class="{{peisongType == 'zq' ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">自取</view>
-      <view class="{{peisongType == 'kd' ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">外卖</view>
+      <view class="{{(peisongType == 'zq' && shopInfo.openZiqu) ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">自取</view>
+      <view class="{{(peisongType == 'kd' && shopInfo.openWaimai) ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">外卖</view>
     </view>
   </view>
   <view class="distance-bar">

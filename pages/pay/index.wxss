@@ -58,6 +58,11 @@
    margin-left: 10rpx;
  }
 
+ .way-bar .ziqu-2 {
+  margin-left: 10rpx;
+  color: #888;
+}
+
  .way-bar .peisong {
    display: flex;
    align-items: center;
