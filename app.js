@@ -121,14 +121,17 @@ App({
     this.refreshStorageShopInfo()
   },
   async refreshStorageShopInfo() {
-    // 刷新本地缓存的门店信息
-    const shopInfo = wx.getStorageSync('shopInfo')
+    // 刷新本地缓存的门店信息 https://www.yuque.com/apifm/nu0f75/cu4cfi
+    let shopInfo = wx.getStorageSync('shopInfo')
     if (!shopInfo) {
       return
     }
     const res = await WXAPI.shopSubdetail(shopInfo.id)
     if (res.code == 0) {
-      wx.setStorageSync('shopInfo',  res.data.info)
+      const distance = shopInfo.distance
+      shopInfo = res.data.info
+      shopInfo.distance = distance
+      wx.setStorageSync('shopInfo',  shopInfo)
     }
   },
   globalData: {

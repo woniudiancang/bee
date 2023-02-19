@@ -15,6 +15,11 @@ Page({
   },
   onShow: function () {
   },
+  onPullDownRefresh() {
+    this.getUserAmount()
+    this.dynamicUserCode()
+    wx.stopPullDownRefresh()
+  },
   async getUserAmount() {
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res.code == 0) {

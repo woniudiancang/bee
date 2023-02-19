@@ -128,8 +128,8 @@ Page({
     wx.setStorageSync('uid', res.data.uid)
     wx.setStorageSync('token', res.data.token)
   },
-  getshopInfo(){
-    const shopInfo = wx.getStorageSync('shopInfo')
+  async getshopInfo(){
+    let shopInfo = wx.getStorageSync('shopInfo')
     if (shopInfo) {
       this.setData({
         shopInfo: shopInfo,

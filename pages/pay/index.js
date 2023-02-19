@@ -27,7 +27,7 @@ Page({
     
     curCoupon: null, // 当前选择使用的优惠券
     curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
-    peisongType: 'zq', // 配送方式 kd,zq 分别表示快递/到店自取
+    peisongType: '', // 配送方式 kd,zq 分别表示快递/到店自取【默认值到onshow修改，这里修改无效】
     submitLoding: false,
     remark: '',
 
@@ -66,9 +66,20 @@ Page({
     }
   },
   onShow(){
+    const shopInfo = wx.getStorageSync('shopInfo')
+    let peisongType = wx.getStorageSync('peisongType')
+    if (!peisongType) {
+      peisongType = 'zq' // 此处修改默认值
+    }
+    if (shopInfo.openWaimai && !shopInfo.openZiqu) {
+      peisongType = 'kd'
+    }
+    if (!shopInfo.openWaimai && shopInfo.openZiqu) {
+      peisongType = 'zq'
+    }
     this.setData({
-      shopInfo: wx.getStorageSync('shopInfo'),
-      peisongType: wx.getStorageSync('peisongType')
+      shopInfo,
+      peisongType
     })
     AUTH.checkHasLogined().then(isLogined => {
       this.setData({
@@ -96,8 +107,7 @@ Page({
       }
     }
     this.setData({
-      goodsList: goodsList,
-      peisongType: this.data.peisongType
+      goodsList: goodsList
     })
     this.initShippingAddress()
   },
@@ -193,6 +203,14 @@ Page({
       isCanHx: true
     }
     if (this.data.shopInfo) {
+      if (!this.data.shopInfo.openWaimai && !this.data.shopInfo.openZiqu) {
+        wx.showModal({
+          title: '错误',
+          content: '堂食和外卖服务已关闭',
+          showCancel: false
+        })
+        return;
+      }
       postData.shopIdZt = this.data.shopInfo.id
       postData.shopNameZt = this.data.shopInfo.name
     }
@@ -428,15 +446,6 @@ Page({
       curCouponShowText: this.data.coupons[selIndex].nameExt
     })
     this.createOrder()
-  },
-  radioChange (e) {
-    this.setData({
-      peisongType: e.detail.value
-    })
-    this.processYunfei()
-  },
-  cancelLogin() {
-    wx.navigateBack()
   },
   async getPhoneNumber(e) {
     if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {

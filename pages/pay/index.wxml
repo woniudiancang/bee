@@ -1,6 +1,6 @@
-<van-cell icon="location-o" title="{{shopInfo.name}} / 距离您{{shopInfo.distance}}km" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
+<van-cell icon="location-o" title="{{shopInfo.name}}{{shopInfo.distance ? ' / 距离您' + shopInfo.distance + 'km' : ''}}" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
 <view class="pay-bar">
-	<view class="way-bar">
+	<view wx:if="{{ shopInfo.openWaimai && shopInfo.openZiqu }}" class="way-bar">
 		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
 			<van-icon name="shop-collect-o" color="{{peisongType == 'zq' ? '#fff' : '#333'}}" />
 			<view class="ziqu-1">门店自取</view>
