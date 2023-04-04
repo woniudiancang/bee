@@ -48,6 +48,7 @@ Page({
       }
       return options;
     },
+    packaging_fee_use: '1', // 自提需要包装费
   },
   diningTimeChange(a) {
     const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
@@ -113,7 +114,11 @@ Page({
   },
 
   onLoad(e) {
-    let _data = {}
+    let _data = {
+      kjId: e.kjId,
+      create_order_select_time: wx.getStorageSync('create_order_select_time'),
+      packaging_fee: wx.getStorageSync('packaging_fee'),
+    }
     if (e.orderType) {
       _data.orderType = e.orderType
     }
@@ -122,6 +127,7 @@ Page({
     }
     this.setData(_data)
     this.getUserApiInfo()
+    this._peisonFeeList()
   },
   selected(e){
     const peisongType = e.currentTarget.dataset.pstype
@@ -155,7 +161,7 @@ Page({
       })
       return
     }
-    if (!this.data.diningTime) {
+    if (!this.data.diningTime && this.data.create_order_select_time == '1') {
       wx.showToast({
         title: '请选择自取/配送时间',
         icon: 'none'
@@ -191,7 +197,7 @@ Page({
       this.createOrder(true)
     }
   },
-  createOrder: function (e) {
+  async createOrder(e) {
     var that = this;
     var loginToken = wx.getStorageSync('token') // 用户登录 token
     var remark = this.data.remark; // 备注信息
@@ -223,11 +229,28 @@ Page({
     const extJsonStr = {}
     if (postData.peisongType == 'zq') {
       extJsonStr['联系电话'] = this.data.mobile
-      extJsonStr['取餐时间'] = this.data.diningTime
-    } else {
-      extJsonStr['送达时间'] = this.data.diningTime
+      if (this.data.packaging_fee && this.data.packaging_fee_use == '1') {
+        postData.trips = this.data.packaging_fee
+      }
+    }
+    if (this.data.create_order_select_time == '1') {
+      if (postData.peisongType == 'zq') {
+        extJsonStr['取餐时间'] = this.data.diningTime
+      } else {
+        extJsonStr['送达时间'] = this.data.diningTime
+      }
     }
     postData.extJsonStr = JSON.stringify(extJsonStr)
+    // 有设置了配送费的情况下，计算运费
+    if (this.data.peisonFeeList && postData.peisongType == 'kd') {
+      let distance = await this.getDistance(this.data.curAddressData)
+      const peisonFee = this.data.peisonFeeList.find(ele => {
+        return ele.distance >= distance
+      })
+      if (peisonFee) {
+        postData.peisongFeeId = peisonFee.id
+      }
+    }
     if (e && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
@@ -240,8 +263,8 @@ Page({
       // 达达配送
       if (this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
         postData.dadaShopNo = this.data.shopInfo.number
-        postData.dadaLat = this.data.curAddressData.latitude
-        postData.dadaLng = this.data.curAddressData.longitude
+        postData.lat = this.data.curAddressData.latitude
+        postData.lng = this.data.curAddressData.longitude
       }
       if (postData.peisongType == 'kd') {
         postData.provinceId = that.data.curAddressData.provinceId;
@@ -300,6 +323,7 @@ Page({
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
           yunPrice: res.data.amountLogistics,
+          peisongfee: res.data.peisongfee,
           amountReal: res.data.amountReal,
           coupons
         });
@@ -338,36 +362,60 @@ Page({
       wxpay.wxpay('order', money, res.data.id, "/pages/all-orders/index");
     }
   },
+  async getDistance(curAddressData) {
+    // 计算门店与收货地址之间的距离
+    if (!this.data.shopInfo || !this.data.shopInfo.latitude || !this.data.shopInfo.longitude || !curAddressData || !curAddressData.latitude || !curAddressData.longitude) {
+      return 0
+    }
+    let distance = 0
+    const QQ_MAP_KEY = wx.getStorageSync('QQ_MAP_KEY')
+    if (QQ_MAP_KEY == '1') {
+      const distanceRes = await WXAPI.gpsDistance({
+        key: QQ_MAP_KEY,
+        mode: 'bicycling',
+        from: this.data.shopInfo.latitude + ',' + this.data.shopInfo.longitude,
+        to: curAddressData.latitude + ',' + curAddressData.longitude
+      })
+      if (distanceRes.code != 0) {
+        wx.showToast({
+          title: distanceRes.msg,
+          icon: 'none'
+        })
+        return distance
+      }
+      distance = distanceRes.data.result.rows[0].elements[0].distance / 1000.0
+      return distance
+    }
+    // 只能计算直线距离
+    return this.getDistanceLine(this.data.shopInfo.latitude, this.data.shopInfo.longitude, curAddressData.latitude, curAddressData.longitude) / 1000
+  },
+  getDistanceLine(lat1, lng1, lat2, lng2) {
+    var dis = 0;
+    var radLat1 = toRadians(lat1);
+    var radLat2 = toRadians(lat2);
+    var deltaLat = radLat1 - radLat2;
+    var deltaLng = toRadians(lng1) - toRadians(lng2);
+    var dis = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(deltaLng / 2), 2)));
+    return dis * 6378137;
+  
+    function toRadians(d) {
+      return d * Math.PI / 180;
+    }
+  },
   async initShippingAddress() {
     const res = await WXAPI.defaultAddress(wx.getStorageSync('token'))
     if (res.code == 0) {
-      const curAddressData = res.data.info
       // 计算距离
-      let distance = 0
-      if (CONFIG.baiduMapKey) {
-        const distanceRes = await WXAPI.gpsDistance({
-          key: CONFIG.baiduMapKey,
-          mode: 'bicycling',
-          from: this.data.shopInfo.latitude + ',' + this.data.shopInfo.longitude,
-          to: curAddressData.latitude + ',' + curAddressData.longitude
+      let distance = await this.getDistance(res.data.info)
+      console.log('distance', distance);
+      if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
+        wx.showToast({
+          title: '当前地址超出配送范围',
+          icon: 'none'
         })
-        if (distanceRes.code !== 0 && this.data.peisongType == 'kd') {
-          wx.showToast({
-            title: '当前地址超出配送范围',
-            icon: 'none'
-          })
-        } else {
-          distance = distanceRes.data.result.rows[0].elements[0].distance / 1000.0
-          if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
-            wx.showToast({
-              title: '当前地址超出配送范围',
-              icon: 'none'
-            })
-          }
-        }
       }
       this.setData({
-        curAddressData,
+        curAddressData: res.data.info,
         distance
       })
     } else {
@@ -392,6 +440,9 @@ Page({
     }
     for (let i = 0; i < goodsList.length; i++) {
       let carShopBean = goodsList[i];
+      if (carShopBean.stores < carShopBean.minBuyNumber) {
+        continue
+      }
       if (carShopBean.logistics || carShopBean.logisticsId) {
         isNeedLogistics = 1;
       }
@@ -421,7 +472,6 @@ Page({
       _goodsJsonStr.logisticsType = 0
       _goodsJsonStr.inviter_id = inviter_id
       goodsJsonStr.push(_goodsJsonStr)
-
     }
     this.setData({
       isNeedLogistics: isNeedLogistics,
@@ -544,5 +594,25 @@ Page({
       title: '登陆成功',
     })
     this.getUserApiInfo()
-  }
+  },
+  async _peisonFeeList() {
+    // https://www.yuque.com/apifm/nu0f75/nx465k
+    const res = await WXAPI.peisonFeeList()
+    if (res.code == 0) {
+      this.data.peisonFeeList = res.data
+    }
+  },
+  packaging_fee_Change(event) {
+    this.setData({
+      packaging_fee_use: event.detail,
+    })
+    this.createOrder()
+  },
+  packaging_fee_Click(event) {
+    const { name } = event.currentTarget.dataset;
+    this.setData({
+      packaging_fee_use: name,
+    })
+    this.createOrder()
+  },
 })

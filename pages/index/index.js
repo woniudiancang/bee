@@ -273,7 +273,13 @@ Page({
     }
     res.data.forEach(ele => {
       if (!ele.characteristic) {
-        ele.characteristic = '清凉一夏'
+        ele.characteristic = '清凉一夏' // 給一个默认的商品特色描述
+      }
+      if (ele.miaosha) {
+        // 秒杀商品，显示倒计时
+        const _now = new Date().getTime()
+        ele.dateStartInt = new Date(ele.dateStart.replace(/-/g, '/')).getTime() - _now
+        ele.dateEndInt = new Date(ele.dateEnd.replace(/-/g, '/')).getTime() -_now
       }
     })
     if (this.data.page == 1) {
@@ -942,6 +948,13 @@ Page({
   selectshop() {
     wx.navigateTo({
       url: '/pages/shop/select?type=index',
+    })
+  },
+  goGoodsDetail(e) {
+    const index = e.currentTarget.dataset.idx
+    const goodsId = this.data.goods[index].id
+    wx.navigateTo({
+      url: '/pages/goods-details/index?id=' + goodsId,
     })
   },
 })

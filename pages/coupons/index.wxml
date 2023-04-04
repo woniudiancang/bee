@@ -7,7 +7,7 @@
   <van-empty wx:if="{{!coupons || coupons.length == 0}}" description="暂无数据" />
   <view class="list" wx:for="{{coupons}}" wx:key="id" bindtap="fetchCounpon" data-idx="{{index}}">
     <view class="l">
-      <view class="price"><text>¥</text>{{item.moneyMin}}</view>
+      <view class="price"><text wx:if="{{ item.moneyType == 0 }}">¥</text>{{item.moneyMin}}<text wx:if="{{ item.moneyType == 1 }}">%</text></view>
       <view wx:if="{{item.moneyHreshold > 0}}" class="hreshold">满{{item.moneyHreshold}}元可用</view>
     </view>
     <view class="r">
@@ -21,7 +21,7 @@
   <van-empty wx:if="{{!mycoupons}}" description="暂无数据" />
   <view class="list" wx:for="{{mycoupons}}" wx:key="id">
     <view class="l">
-      <view class="price"><text>¥</text>{{item.money}}</view>
+      <view class="price"><text wx:if="{{ item.moneyType == 0 }}">¥</text>{{item.money}}<text wx:if="{{ item.moneyType == 1 }}">%</text></view>
       <view wx:if="{{item.moneyHreshold > 0}}" class="hreshold">满{{item.moneyHreshold}}元可用</view>
     </view>
     <view class="r">

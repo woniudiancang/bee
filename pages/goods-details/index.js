@@ -85,6 +85,7 @@ Page({
     const token = wx.getStorageSync('token')
     const that = this;
     const goodsDetailRes = await WXAPI.goodsDetail(goodsId, token ? token : '')
+    const goodsKanjiaSetRes = await WXAPI.kanjiaSet(goodsId)
     if (goodsDetailRes.code == 0) {
       if (!goodsDetailRes.data.pics || goodsDetailRes.data.pics.length == 0) {
         goodsDetailRes.data.pics = [{
@@ -113,6 +114,29 @@ Page({
         totalScoreToPay: goodsDetailRes.data.basicInfo.minScore,
         buyNumMax: goodsDetailRes.data.basicInfo.stores,
         buyNumber: (goodsDetailRes.data.basicInfo.stores > 0) ? 1 : 0
+      }
+      if (goodsKanjiaSetRes.code == 0) {
+        _data.curGoodsKanjia = goodsKanjiaSetRes.data[0]
+        that.data.kjId = _data.curGoodsKanjia.id
+        // 获取当前砍价进度
+        if (!that.data.kjJoinUid) {
+          that.data.kjJoinUid = wx.getStorageSync('uid')
+        }
+        const curKanjiaprogress = await WXAPI.kanjiaDetail(_data.curGoodsKanjia.id, that.data.kjJoinUid)
+        const myHelpDetail = await WXAPI.kanjiaHelpDetail(wx.getStorageSync('token'), _data.curGoodsKanjia.id, that.data.kjJoinUid)
+        if (curKanjiaprogress.code == 0) {
+          _data.curKanjiaprogress = curKanjiaprogress.data
+        }
+        if (myHelpDetail.code == 0) {
+          _data.myHelpDetail = myHelpDetail.data
+        }
+        //砍价商品 tabs栏显示砍价情况
+        // var tabs = that.data.tabs
+        // tabs[2].tabs_name="砍价记录"
+        // tabs[2].view_id="kanjia"
+        // that.setData({
+        //   tabs:tabs
+        // })
       }
       that.setData(_data)
       that.initShareQuanziProduct()
@@ -349,6 +373,10 @@ Page({
         })
       })
     }
+    // 砍价的话先清空现有购物车
+    if (this.data.curKanjiaprogress && this.data.curKanjiaprogress.kanjiaInfo.uid == this.data.curuid) {
+      await WXAPI.shippingCarInfoRemoveAll(token)
+    }
     const res = await WXAPI.shippingCarInfoAddItem(token, goodsId, this.data.buyNumber, sku, goodsAddition)
     if (res.code != 0) {
       wx.showToast({
@@ -364,6 +392,12 @@ Page({
       icon: 'success'
     })
     this.shippingCartInfo()
+    // 砍价的话跳转到下单页面
+    if (this.data.curKanjiaprogress && this.data.curKanjiaprogress.kanjiaInfo.uid == this.data.curuid) {
+      wx.navigateTo({
+        url: '/pages/pay/index?kjId=' + this.data.curGoodsKanjia.id,
+      })
+    }
   },
   onShareAppMessage() {
     let _data = {
@@ -375,6 +409,10 @@ Page({
       fail: function (res) {
         // 转发失败
       }
+    }
+    if (this.data.kjJoinUid) {
+      _data.title = this.data.curKanjiaprogress.joiner.nick + '邀请您帮TA砍价'
+      _data.path += '&kjJoinUid=' + this.data.kjJoinUid
     }
     return _data
   },
@@ -594,6 +632,38 @@ Page({
   backToHome() {
     wx.switchTab({
       url: '/pages/index/index',
+    })
+  },
+  joinKanjia() {
+    AUTH.checkHasLogined().then(isLogined => {
+      if (isLogined) {
+        this.doneJoinKanjia();
+      }
+    })
+  },
+  doneJoinKanjia: function () { // 报名参加砍价活动
+    const _this = this;
+    if (!_this.data.curGoodsKanjia) {
+      return;
+    }
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    WXAPI.kanjiaJoin(wx.getStorageSync('token'), _this.data.curGoodsKanjia.id).then(function (res) {
+      wx.hideLoading()
+      if (res.code == 0) {
+        _this.setData({
+          kjJoinUid: wx.getStorageSync('uid'),
+          myHelpDetail: null
+        })
+        _this.getGoodsDetailAndKanjieInfo(_this.data.goodsDetail.basicInfo.id)
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
 })

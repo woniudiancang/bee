@@ -359,3 +359,7 @@ page {
   height: 240rpx;
   margin: auto;
 }
+.count-downno-start .van-count-down {
+  color: #ed6a0c;
+  padding: 8rpx 0;
+}

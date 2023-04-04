@@ -47,16 +47,31 @@
       wx:for="{{goods}}" wx:key="id"
       centered="true"
       lazy-load="true"
-      origin-price="{{item.originalPrice > 0 ? item.originalPrice : ''}}"
+      origin-price="{{ (item.originalPrice > 0 && item.originalPrice != item.minPrice) ? item.originalPrice : '' }}"
       price="{{item.minPrice}}"
       thumb-mode="aspectFill"
       tag="{{ item.badge ? item.badge : '' }}"
-      desc="{{item.characteristic}}"
       title="{{item.name}}"
       thumb-link="/pages/goods-details/index?id={{ item.id }}"
       thumb="{{item.pic}}">
+      <view slot="desc">
+        <view wx:if="{{ item.miaosha && item.dateStartInt > 0 }}">
+          <van-count-down class="count-downno-start" time="{{ item.dateStartInt }}" format="HH时mm分ss秒"></van-count-down>
+        </view>
+        <view wx:elif="{{ item.miaosha && item.dateStartInt <= 0 && item.dateEndInt > 0 }}">
+          <van-count-down class="count-downno-start" time="{{ item.dateEndInt }}" format="HH时mm分ss秒"></van-count-down>
+        </view>
+        <view wx:elif="{{ item.kanjia }}">
+          到手价 {{ item.kanjiaPrice }} 元
+        </view>
+        <view wx:else>{{ item.characteristic }}</view>
+      </view>
       <view class="goods-btn" slot="footer">
-        <van-button wx:if="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
+        <van-button wx:if="{{ item.stores < item.minBuyNumber }}" size="small" color="#e64340" round disabled>补货中</van-button>
+        <van-button wx:elif="{{ item.miaosha && item.dateStartInt > 0 }}" size="small" color="#e64340" round disabled>即将开抢</van-button>
+        <van-button wx:elif="{{ item.miaosha && item.dateEndInt <= 0 }}" size="small" color="#e64340" round disabled>秒杀结束</van-button>
+        <van-button wx:elif="{{item.kanjia}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="goGoodsDetail">砍价</van-button>
+        <van-button wx:elif="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
         <van-button wx:elif="{{item.propertyIds || item.hasAddition}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>

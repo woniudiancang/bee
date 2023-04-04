@@ -109,7 +109,11 @@
     "van-goods-action-button": "@vant/weapp/goods-action-button/index",
     "van-uploader": "@vant/weapp/uploader/index",
     "van-grid": "@vant/weapp/grid/index",
-    "van-grid-item": "@vant/weapp/grid-item/index"
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
   },
   "sitemapLocation": "sitemap.json"
 }

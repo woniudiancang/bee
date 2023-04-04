@@ -171,6 +171,7 @@ swiper-item image {
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 12px;
+  padding-bottom: 64rpx;
 }
 
 .label-title {
@@ -188,7 +189,7 @@ swiper-item image {
 }
 
 .goods-text {
-  padding: 0 10rpx;
+  padding: 0 32rpx;
   font-size: 28rpx;
   color: #666666;
   line-height: 56rpx;

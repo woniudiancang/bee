@@ -16,7 +16,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      type: options.type
+      type: options.type,
+      shop_join_open: wx.getStorageSync('shop_join_open')
     })
   },
   onShow: function () {
