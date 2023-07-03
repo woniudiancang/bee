@@ -1,41 +1,153 @@
 page {
-  background: #ebebec;
+  background-color: #f7f8fa;
 }
-.coupons-container {
-  padding: 32rpx;
+.coupons {
+  display:flex;
+  justify-content:space-between;
+  margin-top: 24rpx;
+  margin-left: 24rpx;
+  width: 702rpx;
+  height: 258rpx;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(36,44,69,0.20);
+  border-radius: 8rpx;
 }
-.list {
-  margin-bottom: 32rpx;
+.coupons .icon {
+  margin-left: 64rpx;
+  margin-top: 44rpx;
+  width: 160rpx;
+  height: 144rpx;
+}
+.coupons .profile {
+  display: flex;
+  flex-direction:column;
+  align-items:flex-end;
+}
+.coupons .profile .name {
+  display: flex;
+  margin-top: 32rpx;
+}
+.coupons .profile .name .t {
+  width: 80rpx;
+  height: 30rpx;
+  background: #FEB21C;
+  border-radius: 4rpx;
+
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  line-height: 30rpx;
+  text-align: center;
+}
+.coupons .profile .name .n {
+  margin-left: 16rpx;
+  margin-right: 24rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #333333;
+  letter-spacing: 0;
+  line-height: 30rpx;
+}
+.coupons .profile .price {
+  display: flex;
+  align-items:baseline;
+  margin-top: 24rpx;
+}
+.coupons .profile .price .tj {
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 20rpx;
+}
+.coupons .profile .price .amount {
+  font-family: PingFangSC-Medium;
+  font-size: 56rpx;
+  color: #FEB21C;
+  letter-spacing: 0;
+  line-height: 56rpx;
+  margin-right: 24rpx;
+}
+.coupons .profile .price .amount text {
+  margin-left: 16rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FEB21C;
+  letter-spacing: 0;
+  line-height: 20rpx;  
+}
+.disabled1 {
+  background: #999999 !important;
+  color: #FFFFFF !important;
+}
+.disabled2 {
+  color: #999999 !important;
+}
+.coupons .profile .btn {
+  margin-top: 24rpx;
+  width: 182rpx;
+  height: 60rpx;
+  text-align: center;
+
+  background: #FFFFFF;
+  border: 2rpx solid #979797;
+  border-right: none;
+  border-radius: 200rpx 2rpx 2rpx 200rpx;
+
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 60rpx;
+}
+
+
+
+.bottom {
+  width: 100vw;
+  height: 24rpx;
+}
+
+
+.pwd-coupons-mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+}
+.pwd-coupons {
+  position: fixed;
+  top: 300rpx;
+  left: 100rpx;
+  width: 550rpx;
   background: #fff;
   border-radius: 12rpx;
-  padding: 32rpx;
-  display: flex;
-  align-items: center;
-  line-height: 48rpx;
 }
-.list .l {
+.pwd-coupons .t {
+  margin-top: 32rpx;
   text-align: center;
-  width: 200rpx;
+  font-size: 32rpx;
+  font-weight: bold;
 }
-.list .l .price {
-  font-size: 60rpx;
-  color:#e64340;
+.pwd-coupons .input {
+  margin: 32rpx;
+  border: 1rpx solid #666;
+  border-radius: 8rpx;
+  height: 88rpx;
+  line-height: 88rpx;
 }
-.list .l .price text {
-  font-size: 28rpx;
-  margin-right: 8rpx;
+.pwd-coupons button {
+  margin: 32rpx;
 }
-.list .l .hreshold {
-  font-size: 26rpx;
-  color:#666;
+.koulingcoupon {
+  margin-top: 32rpx;
 }
-.list .r {
-  margin-left: 32rpx;
+.block-btn {
+  margin: 32rpx 0;
 }
-.list .r .name {
-  color: #333;
-}
-.list .r .times {
-  color: #666;
-  font-size: 26rpx;
+.hecheng {
+  margin-top: 16rpx;
 }
