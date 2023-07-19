@@ -187,3 +187,28 @@ APPID 务必要改成你自己的小程序的 APPID
 https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhoneNumber.html
 
 官方文档有说明，获取手机号码的前提条件是：非个人开发者，且完成了认证的小程序开放（不包含海外主体）
+
+## wx.getLocation 改为 wx.getFuzzyLocation (getLocation的接口权限太难申请了)
+
+微信申请 getLocation 接口的审核比较严格，可能比较难申请到这个接口，可以用 wx.getFuzzyLocation 来代替： https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.getFuzzyLocation.html
+
+
+开发工具，全局替换以下代码：
+
+需要替换3次
+
+`scope.userLocation` 替换为 `scope.userFuzzyLocation`
+
+如图：
+
+
+<img src="https://dcdn.it120.cc/yuque/0/2023/png/572726/1680937230066-f31f9661-7c15-4ffe-86b1-9d70ce5a6062.png">
+
+
+再全局替换代码：
+
+`wx.getLocation` 替换为 `wx.getFuzzyLocation`
+
+再全局替换代码：
+
+`"getLocation"` 替换为 `"getFuzzyLocation"`
