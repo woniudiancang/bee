@@ -55,6 +55,25 @@ Page({
   readConfigVal() {
 
   },
+  async _goodsTimesSchedule() {
+    const res = await WXAPI.goodsTimesSchedule(this.data.goodsId, '') // todo sku
+    if (res.code == 0) {
+      const goodsTimesSchedule = res.data
+      res.data.forEach(ele => {
+        ele.active = false
+      })
+      goodsTimesSchedule[0].active = true
+      goodsTimesSchedule[0].items[0].active = true
+      this.setData({
+        goodsTimesSchedule
+      })
+      this.calculateGoodsPrice()
+    } else {
+      this.setData({
+        goodsTimesSchedule: null
+      })
+    }
+  },
   async goodsAddition() {
     const res = await WXAPI.goodsAddition(this.data.goodsId)
     if (res.code == 0) {
@@ -140,6 +159,7 @@ Page({
       }
       that.setData(_data)
       that.initShareQuanziProduct()
+      that._goodsTimesSchedule()
     }
   },
   async shopSubdetail(shopId) {
@@ -155,19 +175,20 @@ Page({
       url: "/pages/shop-cart/index"
     });
   },
-  toAddShopCar: function () {
+  async toAddShopCar() {
     this.bindGuiGeTap();
   },
   /**
    * 规格选择弹出框
    */
-  bindGuiGeTap: function () {
+  async bindGuiGeTap() {
     this.setData({
       hideShopPopup: false,
       selectSizePrice: this.data.goodsDetail.basicInfo.minPrice,
       selectSizeOPrice: this.data.goodsDetail.basicInfo.originalPrice,
       skuGoodsPic: this.data.goodsDetail.basicInfo.pic
     })
+    await this._goodsTimesSchedule()
   },
   /**
    * 规格选择弹出框隐藏
@@ -257,6 +278,17 @@ Page({
         buyNumMax = res.data.stores
       }
     }
+    // 计算时段定价的价格
+    if (this.data.goodsTimesSchedule) {
+      const a = this.data.goodsTimesSchedule.find(ele => ele.active)
+      if (a) {
+        const b = a.items.find(ele => ele.active)
+        if (b) {
+          price = b.price
+          buyNumMax = b.stores
+        }
+      }
+    }
     // 计算配件价格
     if (this.data.goodsAddition) {
       this.data.goodsAddition.forEach(big => {
@@ -304,6 +336,33 @@ Page({
     child.active = true
     this.setData({
       goodsAddition
+    })
+    this.calculateGoodsPrice()
+  },
+  async skuClick3(e) {
+    const propertyindex = e.currentTarget.dataset.idx1
+    const propertychildindex = e.currentTarget.dataset.idx2
+
+    const goodsTimesSchedule = this.data.goodsTimesSchedule
+    const property = goodsTimesSchedule[propertyindex]
+    const child = property.items[propertychildindex]
+    if (child.stores <= 0) {
+      wx.showToast({
+        title: '已售罄',
+        icon: 'none'
+      })
+      return
+    }
+    goodsTimesSchedule.forEach(a => {
+      a.active = false
+      a.items.forEach(b => {
+        b.active = false
+      })
+    })
+    property.active = true
+    child.active = true
+    this.setData({
+      goodsTimesSchedule
     })
     this.calculateGoodsPrice()
   },
@@ -377,7 +436,24 @@ Page({
     if (this.data.curKanjiaprogress && this.data.curKanjiaprogress.kanjiaInfo.uid == this.data.curuid) {
       await WXAPI.shippingCarInfoRemoveAll(token)
     }
-    const res = await WXAPI.shippingCarInfoAddItem(token, goodsId, this.data.buyNumber, sku, goodsAddition)
+    const d = {
+      token,
+      goodsId,
+      number: this.data.buyNumber,
+      sku,
+      addition: goodsAddition
+    }
+    if (this.data.goodsTimesSchedule) {
+      const a = this.data.goodsTimesSchedule.find(ele => ele.active)
+      if (a) {
+        const b = a.items.find(ele => ele.active)
+        if (b) {
+          d.goodsTimesDay = a.day
+          d.goodsTimesItem = b.name
+        }
+      }
+    }
+    const res = await WXAPI.shippingCarInfoAddItemV2(d)
     if (res.code != 0) {
       wx.showToast({
         title: res.msg,

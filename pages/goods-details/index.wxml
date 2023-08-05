@@ -171,6 +171,15 @@
         </view>
       </view>
     </block>
+    <block wx:for="{{goodsTimesSchedule}}" wx:for-item="property" wx:key="id">
+      <view class="label">{{property.day}}</view>
+      <view class="label-item-box">
+        <view class="label-item {{item.active ? 'active' : '' }}" wx:for-index="index2" wx:for="{{property.items}}" wx:key="id"
+          bindtap="skuClick3" data-idx1="{{index}}" data-idx2="{{index2}}">
+          {{item.name}}
+        </view>
+      </view>
+    </block>
   </view>
   <van-cell wx:if="{{ !(curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid) }}" title="购买数量">
     <view>

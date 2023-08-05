@@ -471,6 +471,8 @@ Page({
       _goodsJsonStr.number = carShopBean.number
       _goodsJsonStr.logisticsType = 0
       _goodsJsonStr.inviter_id = inviter_id
+      _goodsJsonStr.goodsTimesDay = carShopBean.goodsTimesDay || ''
+      _goodsJsonStr.goodsTimesItem = carShopBean.goodsTimesItem || ''
       goodsJsonStr.push(_goodsJsonStr)
     }
     this.setData({

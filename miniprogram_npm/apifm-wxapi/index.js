@@ -1337,6 +1337,9 @@ module.exports = {
       addition: addition && addition.length > 0 ? JSON.stringify(addition) : ''
     });
   },
+  shippingCarInfoAddItemV2: data => {
+    return request('/shopping-cart/add', true, 'post', data)
+  },
   shippingCarInfoModifyNumber: function shippingCarInfoModifyNumber(token, key, number) {
     return request('/shopping-cart/modifyNumber', true, 'post', {
       token: token, key: key, number: number

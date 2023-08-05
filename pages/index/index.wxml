@@ -72,7 +72,7 @@
         <van-button wx:elif="{{ item.miaosha && item.dateEndInt <= 0 }}" size="small" color="#e64340" round disabled>秒杀结束</van-button>
         <van-button wx:elif="{{item.kanjia}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="goGoodsDetail">砍价</van-button>
         <van-button wx:elif="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
-        <van-button wx:elif="{{item.propertyIds || item.hasAddition}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-button wx:elif="{{item.propertyIds || item.hasAddition || item.hasGoodsTimes}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>
     </van-card>
@@ -115,6 +115,12 @@
       <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick2">{{small.name}}</view>
     </view>
   </view>
+  <view wx:for="{{goodsTimesSchedule}}" wx:key="id" class="content-1">
+    <view class="title">{{item.day}}</view>
+    <view class="box-1">
+      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick3">{{small.name}}</view>
+    </view>
+  </view>
 
   <view wx:if="{{curGoodsMap.content}}" class="introduce">
     <view class="title">产品介绍</view>
@@ -127,7 +133,7 @@
   <view class="add-bar">
     <view class="add-box">
       <view class="price"><text>¥</text>{{curGoodsMap.price}}</view>
-      <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" bind:change="goodsStepChange"/>
+      <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" max="{{ buyNumMax }}" bind:change="goodsStepChange"/>
     </view>
     <view class="add-cart">
       <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">拼团抢购</van-button>
@@ -151,6 +157,9 @@
       <view wx:if="{{item.sku}}" class="content">
         <block wx:for="{{item.sku}}" wx:key="optionValueId" wx:for-item="_sku">{{_sku.optionValueName}} </block>
         <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">{{option.name}} </block>
+      </view>
+      <view wx:if="{{item.goodsTimesDay && item.goodsTimesItem}}" class="content">
+        <block>{{ item.goodsTimesDay }} {{ item.goodsTimesItem }}</block>
       </view>
     </view>
     <view class="r">
