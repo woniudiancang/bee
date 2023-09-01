@@ -440,8 +440,8 @@ Page({
       token,
       goodsId,
       number: this.data.buyNumber,
-      sku,
-      addition: goodsAddition
+      sku: sku && sku.length > 0 ? JSON.stringify(sku) : '',
+      addition: goodsAddition && goodsAddition.length > 0 ? JSON.stringify(goodsAddition) : '',
     }
     if (this.data.goodsTimesSchedule) {
       const a = this.data.goodsTimesSchedule.find(ele => ele.active)
