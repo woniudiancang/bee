@@ -20,7 +20,8 @@ Page({
     this.setData({
       myBg: wx.getStorageSync('myBg'),
       version: CONFIG.version,
-      order_hx_uids
+      order_hx_uids,
+      customerServiceType: CONFIG.customerServiceType
     })
   },
   onShow() {
@@ -178,6 +179,16 @@ Page({
   goUserCode() {
     wx.navigateTo({
       url: '/pages/my/user-code',
+    })
+  },
+  customerService() {
+    wx.openCustomerServiceChat({
+      extInfo: {url: wx.getStorageSync('customerServiceChatUrl')},
+      corpId: wx.getStorageSync('customerServiceChatCorpId'),
+      success: res => {},
+      fail: err => {
+        console.error(err)
+      }
     })
   },
 })

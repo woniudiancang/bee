@@ -156,6 +156,8 @@
       <view class="title">{{item.name}}</view>
       <view wx:if="{{item.sku}}" class="content">
         <block wx:for="{{item.sku}}" wx:key="optionValueId" wx:for-item="_sku">{{_sku.optionValueName}} </block>
+      </view>
+      <view wx:if="{{item.additions}}" class="content">
         <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">{{option.name}} </block>
       </view>
       <view wx:if="{{item.goodsTimesDay && item.goodsTimesItem}}" class="content">
