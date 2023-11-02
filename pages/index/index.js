@@ -537,7 +537,7 @@ Page({
       })
     }
     const goodsAddition = []
-    if (curGoodsMap.basicInfo.hasAddition) {
+    if (this.data.goodsAddition) {
       this.data.goodsAddition.forEach(ele => {
         ele.items.forEach(item => {
           if (item.active) {
