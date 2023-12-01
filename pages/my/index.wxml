@@ -7,6 +7,7 @@
           <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="userinfo-avatar-img"></image>
         </button> 
         <view class="name-box">
+          <view class="name">用户ID:{{ apiUserInfoMap.base.id }}</view>
           <view class="name" bindtap="editNick">{{ nick ? nick : '点击设置昵称' }}</view>
           <view wx:if="{{apiUserInfoMap.userLevel}}" class="state" bindtap="govip">{{apiUserInfoMap.userLevel.name}}</view>
           <view wx:else class="state" bindtap="govip">非会员</view>

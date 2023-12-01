@@ -86,7 +86,7 @@ https://mp.weixin.qq.com/
 根据自己的实际情况选择 “企业”、“个体工商户”身份，注册小程序账号，商城类小程序不支持个人用户上线，所以一定要选择企业或者个体户，获得你自己小程序的 appid 和 secret 信息，保存好，下面会用到：
 - [如何查看小程序的AppID和AppSecret](https://jingyan.baidu.com/article/642c9d340305e3644a46f795.html)
 你需要设置小程序的合法域名，否则开发工具上运行正常，手机访问的时候将看不到数据
-- [设置合法服务器域名](https://www.it120.cc/help/tvpou9.html)
+- [设置合法服务器域名](https://www.yuque.com/apifm/doc/tvpou9)
 ## 注册开通后台账号
 https://admin.it120.cc/
 免费注册开通新后台后登录，登录后的首页，请记下你的专属域名，后面会用到
@@ -121,7 +121,7 @@ APPID 务必要改成你自己的小程序的 APPID
 
 <img src="https://dcdn.it120.cc/yuque/0/2020/png/572726/1581236703094-ce5c7f32-c60d-4e1b-bacb-21439e1d2721.png?x-oss-process=image%2Fresize%2Cw_1500 " width="200px">
 
-- [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
+- [如何查看自己的subDomain](https://www.yuque.com/apifm/doc/qr6l4m)
 
 ## 用户自提的订单如何扫码核销
 
@@ -168,13 +168,18 @@ APPID 务必要改成你自己的小程序的 APPID
 1. 左侧菜单 “预约报名” --> “项目设置” ，添加一个项目，添加完以后会得到一个编号
 2. 左侧菜单 “系统设置” --> “系统参数”， 修改编号为 `zxdz` 的参数，将你的编号填进去即可
 
+## 配置达达配送
+
+1. [如何对接达达配送，先按这个教程完成配置](https://www.yuque.com/apifm/doc/gxk08t)
+2. 后台 “商城管理” --> “门店管理”， 编辑，门店编号填写你达达对应的门店编号，生鲜配送输入框填写 `dada`
+
 # 常见问题
 
 ## 无法登陆 / 无法获取 openid
 
 1. 请检查 config.js 文件中的 subDomain 是否已经修改成你自己的专属域名了
     
-    [如何查看自己的subDomain](https://www.it120.cc/help/qr6l4m.html)
+    [如何查看自己的subDomain](https://www.yuque.com/apifm/doc/qr6l4m)
 
 2. 确保下面3个地方的 appID 你填的是一样的
 
@@ -212,3 +217,11 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhone
 再全局替换代码：
 
 `"getLocation"` 替换为 `"getFuzzyLocation"`
+
+## 小程序订单中心path 怎么填
+
+请填写 `pages/all-orders/index`
+
+## 微信支付MA授权(appid和mch_id不匹配)
+
+[微信支付MA授权(appid和mch_id不匹配)](https://www.yuque.com/apifm/doc/zrui8q)

@@ -85,5 +85,5 @@
   },
   "projectname": "%E5%B0%8F%E8%9C%9C%E8%9C%82%E7%82%B9%E9%A4%90",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "2.33.0"
+  "libVersion": "3.2.1"
 }

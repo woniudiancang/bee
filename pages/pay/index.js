@@ -251,6 +251,20 @@ Page({
         postData.peisongFeeId = peisonFee.id
       }
     }
+    // 达达配送
+    if (this.data.shopInfo && this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
+      if (!that.data.curAddressData) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '请设置配送地址',
+          icon: 'none'
+        })
+        return;
+      }
+      postData.dadaShopNo = this.data.shopInfo.number
+      postData.lat = this.data.curAddressData.latitude
+      postData.lng = this.data.curAddressData.longitude
+    }
     if (e && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
@@ -259,12 +273,6 @@ Page({
           icon: 'none'
         })
         return;
-      }
-      // 达达配送
-      if (this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
-        postData.dadaShopNo = this.data.shopInfo.number
-        postData.lat = this.data.curAddressData.latitude
-        postData.lng = this.data.curAddressData.longitude
       }
       if (postData.peisongType == 'kd') {
         postData.provinceId = that.data.curAddressData.provinceId;
