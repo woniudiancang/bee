@@ -252,7 +252,7 @@ Page({
       }
     }
     // 达达配送
-    if (this.data.shopInfo && this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada') {
+    if (this.data.shopInfo && this.data.shopInfo.number && this.data.shopInfo.expressType == 'dada' && postData.peisongType == 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
         wx.showToast({
@@ -274,17 +274,15 @@ Page({
         })
         return;
       }
-      if (postData.peisongType == 'kd') {
-        postData.provinceId = that.data.curAddressData.provinceId;
-        postData.cityId = that.data.curAddressData.cityId;
-        if (that.data.curAddressData.districtId) {
-          postData.districtId = that.data.curAddressData.districtId;
-        }
-        postData.address = that.data.curAddressData.address;
-        postData.linkMan = that.data.curAddressData.linkMan;
-        postData.mobile = that.data.curAddressData.mobile;
-        postData.code = that.data.curAddressData.code;
-      }      
+      postData.provinceId = that.data.curAddressData.provinceId;
+      postData.cityId = that.data.curAddressData.cityId;
+      if (that.data.curAddressData.districtId) {
+        postData.districtId = that.data.curAddressData.districtId;
+      }
+      postData.address = that.data.curAddressData.address;
+      postData.linkMan = that.data.curAddressData.linkMan;
+      postData.mobile = that.data.curAddressData.mobile;
+      postData.code = that.data.curAddressData.code;     
     }
     if (that.data.curCoupon) {
       postData.couponId = that.data.curCoupon.id;
