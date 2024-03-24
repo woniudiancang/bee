@@ -1,0 +1,75 @@
+/* pages/firstpage/firstpage.wxss */
+.swiper1 {
+  height: 600rpx;
+}
+.swiper1 image {
+  width: 100%;
+  height: 100%;
+}
+.WellcomeView {
+  background-color: rgb(245, 245, 245);
+  position: absolute;
+  top: 590rpx; /* 距离父元素顶部 50px */
+  margin-left: 30rpx;
+  height: 170rpx;
+  width: 100%;
+  display: flex;
+  flex-direction:row ; /*决定主轴的方向，水平或者垂直*/
+  align-items: center;    /*定义项目在交叉轴上如何对齐*/
+  justify-content:space-around;  /*定义了项目在主轴上的对齐方式*/
+}
+.textarea1{
+  display: flex;
+  flex-direction:column ; /*决定主轴的方向，水平或者垂直*/
+
+}
+
+
+.loginBtn{
+  color: white; /* 文字颜色 */
+  background-color: black; /* 背景颜色 */
+  font-size: 12px; /* 字体大小 */
+  border-radius: 2px; /* 边框圆角 */
+  padding: 0px 20px; /* 内边距 */
+}
+
+.FunctionSubView1 {
+  background-color: rgb(245, 245, 245);
+  position: absolute;
+  top: 790rpx; /* 距离父元素顶部 50px */
+  margin-left: 30rpx;
+  height: 170rpx;
+  width: 100%;
+  display: flex;
+  flex-direction:row ; /*决定主轴的方向，水平或者垂直*/
+  align-items: center;    /*定义项目在交叉轴上如何对齐*/
+  justify-content:space-around;  /*定义了项目在主轴上的对齐方式*/
+}
+.Funtextarea1 {
+  display: flex;
+  flex-direction:column ; /*决定主轴的方向，水平或者垂直*/
+  align-items: center;    /*定义项目在交叉轴上如何对齐*/
+  justify-content:space-between; /*定义了项目在主轴上的对齐方式*/
+
+}
+
+.FunctionSubView2 {
+  background-color: rgb(245, 245, 245);
+  position: absolute;
+  top: 960rpx; /* 距离父元素顶部 50px */
+  margin-left: 30rpx;
+  height: 170rpx;
+  width: 100%;
+  display: flex;
+  flex-direction:row ; /*决定主轴的方向，水平或者垂直*/
+  align-items: center;    /*定义项目在交叉轴上如何对齐*/
+  justify-content:space-around;  /*定义了项目在主轴上的对齐方式*/
+}
+
+.Funtextarea2 {
+  display: flex;
+  flex-direction:column ; /*决定主轴的方向，水平或者垂直*/
+  align-items: center;    /*定义项目在交叉轴上如何对齐*/
+  justify-content:space-around; /*定义了项目在主轴上的对齐方式*/
+
+}
