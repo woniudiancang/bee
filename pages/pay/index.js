@@ -351,7 +351,7 @@ Page({
     if (res.data.status != 0) {
       // 待支付状态才需要支付
       wx.redirectTo({
-        url: "/pages/order-list/index"
+        url: "/pages/all-orders/index"
       })
       return
     }
