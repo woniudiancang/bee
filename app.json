@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/first-page/firstpage",
     "pages/index/index",
     "pages/all-orders/index",
     "pages/my/index",
@@ -45,6 +46,13 @@
     "selectedColor": "#e64340",
     "backgroundColor": "#fff",
     "list": [
+
+      {
+        "pagePath": "pages/first-page/firstpage",
+        "iconPath": "images/nav/firstpage-off.png",
+        "selectedIconPath": "images/nav/firstpage-on.png",
+        "text": "首页"
+      },
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/nav/index-off.png",
@@ -77,7 +85,7 @@
     }
   },
   "usingComponents": {
-    "parser":"/components/parser.20200731.min/parser",
+    "parser": "/components/parser.20200731.min/parser",
     "van-button": "@vant/weapp/button/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",

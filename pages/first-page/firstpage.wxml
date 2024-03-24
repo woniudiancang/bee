@@ -1,0 +1,49 @@
+<!--pages/firstpage/firstpage.wxml-->
+
+
+<swiper wx:if="{{banners}}" class="swiper1" indicator-dots="true" autoplay circular>
+  <view bindtap="goDetail">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+      </swiper-item>
+  </view>
+      
+</swiper>
+<view class="WellcomeView" >
+  <view class="textarea1">
+    <text style="font-size: 40rpx;margin: 20rpx;">欢迎光临bee小食</text>
+    <text style="font-size: 28rpx;margin-left: 20rpx;">登录可领取阿喜卡，激活贵宾特权</text>
+  </view>
+  <button class="loginBtn" bindtap="goLogin">立即登录</button>
+</view>
+
+<view class="FunctionSubView1" >
+  <view class="Funtextarea1">
+    <text bindtap="goDetail" style="font-size: 50rpx;">到店取</text>
+    <text style="font-size: 30rpx;">提前下单免排队</text>
+  </view>
+  <view class="Funtextarea1">
+    <text bindtap="goDetail" style="font-size: 50rpx;">bee外送</text>
+    <text style="font-size: 30rpx;">随时送饮品到家</text>
+  </view>
+</view>
+
+<view class="FunctionSubView2" >
+  <view class="Funtextarea2">
+    <van-icon bindtap="goDetail" class="iconfont" class-prefix="icon" name="peifang" color ="rgb(252, 159, 20)" size="60rpx"></van-icon>
+    <text style="font-size: 30rpx;">配方原料揭秘</text>
+  </view>
+  <view class="Funtextarea2">
+    <van-icon bindtap="goDetail" class="iconfont" class-prefix="icon" name="huiyuan" color ="rgb(252, 159, 20)" size="60rpx"></van-icon>
+    <text style="font-size: 30rpx;">bee卡</text>
+  </view>
+  <view class="Funtextarea2">
+    <van-icon bindtap="goDetail" class="iconfont" class-prefix="icon" name="hehuoren" color ="rgb(252, 159, 20)" size="60rpx"></van-icon>
+    <text style="font-size: 30rpx;">成为合伙人</text>
+  </view>
+    <view class="Funtextarea2">
+    <van-icon bindtap="goDetail" class="iconfont" class-prefix="icon" name="tuancan" color ="rgb(252, 159, 20)" size="60rpx"></van-icon>
+    <text style="font-size: 30rpx;">阿蜜团餐</text>
+  </view>
+  
+</view>
