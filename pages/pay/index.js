@@ -347,8 +347,16 @@ Page({
     })
   },
   async processAfterCreateOrder(res) {
+    const token = wx.getStorageSync('token')
+    if (res.data.status != 0) {
+      // 待支付状态才需要支付
+      wx.redirectTo({
+        url: "/pages/order-list/index"
+      })
+      return
+    }
     // 直接弹出支付，取消支付的话，去订单列表
-    const res1 = await WXAPI.userAmount(wx.getStorageSync('token'))
+    const res1 = await WXAPI.userAmount(token)
     if (res1.code != 0) {
       wx.showToast({
         title: '无法获取用户资金信息',
@@ -361,6 +369,9 @@ Page({
     }
     const money = res.data.amountReal * 1 - res1.data.balance*1
     if (money <= 0) {
+      // 使用余额支付
+      await WXAPI.orderPay(token, res.data.id)
+      // 跳到订单列表
       wx.redirectTo({
         url: "/pages/all-orders/index"
       })
