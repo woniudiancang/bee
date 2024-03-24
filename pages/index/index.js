@@ -803,7 +803,9 @@ Page({
     const res = await WXAPI.banners()
     if (res.code == 0) {
       this.setData({
-        banners: res.data
+        banners : res.data.filter((item, i, arr) => {
+          return item.businessId === 0
+        })
       })
     }
   },
