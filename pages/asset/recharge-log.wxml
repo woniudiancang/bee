@@ -1,2 +1,2 @@
 <van-cell wx:for="{{payLogs}}" wx:key="id" title="{{item.payGateStr}}" label="{{item.dateUpdate}}" value="¥{{item.money}}" />
-<van-empty wx:if="{{!payLogs}}" description="暂无数据" />
+<van-empty wx:if="{{!payLogs}}" description="{{ $t.common.empty }}" />

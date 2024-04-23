@@ -1,21 +1,21 @@
 <view class="balance">
-  <view class="t">可用余额</view>
+  <view class="t">{{ $t.order.balance }}</view>
   <view class="amount"><text>¥</text>{{balance}}</view>
 </view>
-<van-divider contentPosition="center">余额充值</van-divider>
+<van-divider contentPosition="center">{{ $t.asset.recharge }}</van-divider>
 <view class="persion-num">
   <view wx:for="{{rechargeSendRules}}" wx:key="id" class="item {{ruleSelIndex == index ? 'active' : ''}}" data-idx="{{index}}" bindtap="changePersionNum">
-    <view class="a"><text>充¥</text>{{item.confine}}</view>
-    <view class="b"><text>送¥</text>{{item.send}}</view>
+    <view class="a"><text>{{ $t.asset.confine }}¥</text>{{item.confine}}</view>
+    <view class="b"><text>{{ $t.asset.send }}¥</text>{{item.send}}</view>
     <van-icon wx:if="{{ruleSelIndex == index}}" custom-class="icon" name="success" />
   </view>
   <view class="item {{ruleSelIndex == -1 ? 'active' : ''}}" data-idx="-1" bindtap="changePersionNum">
-    <view class="a">其他</view>
+    <view class="a">{{ $t.asset.other }}</view>
     <van-icon wx:if="{{ruleSelIndex == -1}}" custom-class="icon" name="success" />
   </view>
 </view>
 <view class="btn">
-  <van-button type="primary" block bind:click="submit1">确认充值</van-button>
+  <van-button type="primary" block bind:click="submit1">{{ $t.asset.confirmBtn }}</van-button>
 </view>
 
 
@@ -26,19 +26,19 @@
   bind:close="onClose">
   <view class="pop-blank"></view>
   <van-field
-    label="充值金额"
+    label="{{ $t.asset.amount }}"
     size="large"
     type="digit"
     clearable
     model:value="{{ amount2 }}"
-    placeholder="请输入充值金额"
+    placeholder="{{ $t.asset.amountPlaceholder }}"
     bind:change="onChange"
   />
   <view class="btn">
-    <van-button type="primary" block bind:click="submit2">确认充值</van-button>
+    <van-button type="primary" block bind:click="submit2">{{ $t.asset.confirmBtn }}</van-button>
   </view>
 </van-popup>
 
-<van-cell title="充值记录" size="large" is-link url="/pages/asset/recharge-log" />
-<van-cell title="资金明细" size="large" is-link url="/pages/asset/cash-log" />
+<van-cell title="{{ $t.asset.rechargeLogs }}" size="large" is-link url="/pages/asset/recharge-log" />
+<van-cell title="{{ $t.cashLog.title }}" size="large" is-link url="/pages/asset/cash-log" />
 <view class="bottom-blank"></view>

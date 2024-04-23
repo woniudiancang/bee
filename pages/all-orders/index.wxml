@@ -1,8 +1,8 @@
 <view class="container">
 	<view wx:if="{{apiOk && !orderList}}" class="no-order">
-		<view class="content-1">您还没有点餐</view>
-		<view class="content-2">快去犒劳一下自己吧！</view>
-		<view class="to-index-btn" bindtap="toIndexPage">去点餐</view>
+		<view class="content-1">{{ $t.order.empty.t1 }}</view>
+		<view class="content-2">{{ $t.order.empty.t2 }}</view>
+		<view class="to-index-btn" bindtap="toIndexPage">{{ $t.order.empty.btn }}</view>
 	</view>
 
 	<view wx:if="{{orderList}}" class="order-list">
@@ -17,16 +17,16 @@
 			</scroll-view>
 			<view class="order-info-box">
 				<view class="l">
-					<view>下单时间：{{item.dateAdd}}</view>
-					<view>订单编号：{{item.orderNumber}}</view>
+					<view>{{ $t.order.dateAdd }}：{{item.dateAdd}}</view>
+					<view>{{ $t.order.orderNumber }}：{{item.orderNumber}}</view>
 				</view>
 				<view class="r"><text>¥</text>{{item.amountReal}}</view>
 			</view>
 			<view class="price-box">
-				<van-button wx:if="{{item.status > 0}}" type="primary" plain hairline size="small" bind:click="callShop" data-shopid="{{item.shopIdZt}}">联系商家</van-button>
-				<van-button wx:if="{{item.status== -1}}" type="danger" plain hairline size="small" bind:click="deleteOrder" data-id="{{item.id}}">删除订单</van-button>
-				<van-button custom-class="btn" wx:if="{{item.status== 0}}" type="warning" plain hairline size="small" bind:click="cancelOrderTap" data-id="{{item.id}}">关闭订单</van-button>
-				<van-button wx:if="{{item.status== 0}}" type="primary" plain hairline size="small" bind:click="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">立即支付</van-button>
+				<van-button wx:if="{{item.status > 0}}" type="primary" plain hairline size="small" bind:click="callShop" data-shopid="{{item.shopIdZt}}">{{ $t.order.callShop }}</van-button>
+				<van-button wx:if="{{item.status== -1}}" type="danger" plain hairline size="small" bind:click="deleteOrder" data-id="{{item.id}}">{{ $t.order.deleteOrder }}</van-button>
+				<van-button custom-class="btn" wx:if="{{item.status== 0}}" type="warning" plain hairline size="small" bind:click="cancelOrderTap" data-id="{{item.id}}">{{ $t.order.cancelOrder }}</van-button>
+				<van-button wx:if="{{item.status== 0}}" type="primary" plain hairline size="small" bind:click="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">{{ $t.order.toPayTap }}</van-button>
 			</view>
 		</view>
 	</view>

@@ -15,8 +15,7 @@ Page({
     wx.showModal({
       confirmText: this.data.$t.common.confirm,
       cancelText: this.data.$t.common.cancel,
-      title: this.data.$t.order.cancelProfile,
-      content: '',
+      content: this.data.$t.order.cancelProfile,
       success: function(res) {
         if (res.confirm) {
           WXAPI.orderClose(wx.getStorageSync('token'), orderId).then(function(res) {
@@ -51,27 +50,26 @@ Page({
         // 增加提示框
         if (res.data.score < needScore) {
           wx.showToast({
-            title: '您的积分不足，无法支付',
+            title: that.data.$t.order.scoreNotEnough,
             icon: 'none'
           })
           return;
         }
-        let _msg = '订单金额: ' + money +' 元'
+        let _msg = that.data.$t.order.amountReal + ' ' + money
         if (res.data.balance > 0) {
-          _msg += ',可用余额为 ' + res.data.balance +' 元'
+          _msg += ' ' + that.data.$t.order.balance + ' ' + res.data.balance
           if (money - res.data.balance > 0) {
-            _msg += ',仍需微信支付 ' + (money - res.data.balance) + ' 元'
+            _msg += ' ' + that.data.$t.order.payAmount + ' ' + (money - res.data.balance)
           }          
         }
         if (needScore > 0) {
-          _msg += ',并扣除 ' + needScore + ' 积分'
+          _msg += ' ' + that.data.$t.order.payScore + ' ' + needScore
         }
         money = money - res.data.balance
         wx.showModal({
-          title: '请确认支付',
           content: _msg,
-          confirmText: "确认支付",
-          cancelText: "取消支付",
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
           success: function (res) {
             console.log(res);
             if (res.confirm) {
@@ -81,9 +79,9 @@ Page({
         });
       } else {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: '无法获取用户资金信息',
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
+          content: that.data.$t.order.noCashAccount,
           showCancel: false
         })
       }
@@ -102,6 +100,9 @@ Page({
   },
   onLoad: function(options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.order.title,
+    })
   },
   onShow: function() {
     AUTH.checkHasLogined().then(isLogined => {
@@ -131,14 +132,17 @@ Page({
     if (res.code == 0) {
       const orderList = res.data.orderList
       orderList.forEach(ele => {
+        if (ele.status == -1) {
+          ele.statusStr = this.data.$t.order.status.st01
+        }
         if (ele.status == 1 && ele.isNeedLogistics) {
-          ele.statusStr = '配送中'
+          ele.statusStr = this.data.$t.order.status.st11
         }
         if (ele.status == 1 && !ele.isNeedLogistics) {
-          ele.statusStr = '待取餐'
+          ele.statusStr = this.data.$t.order.status.st10
         }
         if (ele.status == 3) {
-          ele.statusStr = '已完成'
+          ele.statusStr = this.data.$t.order.status.st3
         }
       })
       this.setData({
@@ -170,7 +174,7 @@ Page({
     wx.showModal({
       confirmText: this.data.$t.common.confirm,
       cancelText: this.data.$t.common.cancel,
-      content: '确定要删除该订单吗？',
+      content: this.data.$t.order.deleteProfile,
       success: function (res) {
         if (res.confirm) {
           WXAPI.orderDelete(wx.getStorageSync('token'), id).then(function (res) {  

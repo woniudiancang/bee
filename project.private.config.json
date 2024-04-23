@@ -7,6 +7,48 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/cart/index",
+          "pathName": "pages/cart/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/booking/index",
+          "pathName": "pages/booking/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/asset/recharge-log",
+          "pathName": "pages/asset/recharge-log",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/asset/index",
+          "pathName": "pages/asset/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/asset/cash-log",
+          "pathName": "pages/asset/cash-log",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/all-orders/index",
+          "pathName": "pages/all-orders/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/all-orders/index",
           "pathName": "pages/all-orders/index",
           "query": "",

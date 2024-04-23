@@ -17,6 +17,9 @@ Page({
   },
   onLoad: function (options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.asset.title,
+    })
     this.rechargeRule()
   },
   onShow: function () {
@@ -70,7 +73,7 @@ Page({
   submit2() {
     if (!this.data.amount2) {
       wx.showToast({
-        title: '请输入充值金额',
+        title: this.data.$t.asset.amountPlaceholder,
         icon: 'none'
       })
       return
@@ -97,13 +100,13 @@ Page({
           fail: function (aaa) {
             console.error(aaa)
             wx.showToast({
-              title: '支付失败:' + aaa
+              title: aaa
             })
           },
           success: function () {
             // 提示支付成功
             wx.showToast({
-              title: '支付成功'
+              title: this.data.$t.asset.success
             })
             _this.setData({
               showRechargePop: false
@@ -115,7 +118,6 @@ Page({
         wx.showModal({
           confirmText: this.data.$t.common.confirm,
           cancelText: this.data.$t.common.cancel,
-          title: '出错了',
           content: JSON.stringify(res),
           showCancel: false
         })      

@@ -8,23 +8,12 @@ APP.configLoadOK = () => {
 }
 Page({
   data: {
-    persionNum: ['1-2人', '3-4人', '5-8人', '8人以上'],
+    persionNum: { // 每种语言列举
+      zh_CN: ['1-2人', '3-4人', '5-8人', '8人以上'],
+      en: ['1-2 Person', '3-4 Person', '5-8 Person', 'More than 8'],
+    },
     persionNumIndex: 0,
     showDatetimePop: false,
-    formatter(type, value) {
-      if (type === 'year') {
-        return `${value}年`;
-      } else if (type === 'month') {
-        return `${value}月`;
-      } else if (type === 'day') {
-        return `${value}日`;
-      } else if (type === 'hour') {
-        return `${value}点`;
-      } else if (type === 'minute') {
-        return `${value}分`;
-      }
-      return value;
-    },
     filter(type, options) {
       if (type === 'minute') {
         return options.filter((option) => option % 10 === 0);
@@ -36,6 +25,25 @@ Page({
   },
   onLoad: function (options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.booking.title,
+    })
+    this.setData({
+      formatter: (type, value) => {
+        if (type === 'year') {
+          return `${value}` + this.data.$t.date.year;
+        } else if (type === 'month') {
+          return `${value}` + this.data.$t.date.month;
+        } else if (type === 'day') {
+          return `${value}` + this.data.$t.date.day;
+        } else if (type === 'hour') {
+          return `${value}` + this.data.$t.date.hour;
+        } else if (type === 'minute') {
+          return `${value}` + this.data.$t.date.minutes;
+        }
+        return value;
+      }
+    })
   },
   onShow: function () {
     AUTH.checkHasLogined().then(isLogined => {
@@ -83,7 +91,7 @@ Page({
     extJsonStr['姓名'] = this.data.name
     extJsonStr['联系电话'] = this.data.mobile
     extJsonStr['到店时间'] = this.data.time
-    extJsonStr['用餐人数'] = this.data.persionNum[this.data.persionNumIndex]
+    extJsonStr['用餐人数'] = this.data.persionNum['zh_CN'][this.data.persionNumIndex]
     const res = await WXAPI.yuyueJoin({
       token: wx.getStorageSync('token'),
       yuyueId: wx.getStorageSync('zxdz'),
@@ -96,7 +104,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '提交成功',
+        title: this.data.$t.common.submitSuccess,
         icon: 'success'
       })
       setTimeout(() => {
