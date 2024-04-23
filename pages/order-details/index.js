@@ -13,6 +13,7 @@ Page({
       
     },
     onLoad:function(e){
+      getApp().initLanguage(this)
       // e.id = 601144
       this.setData({
         orderId: e.id
@@ -26,7 +27,8 @@ Page({
       const res = await WXAPI.orderDetail(wx.getStorageSync('token'), this.data.orderId)
       if (res.code != 0) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })
@@ -93,6 +95,8 @@ Page({
       let that = this;
       let orderId = this.data.orderId;
       wx.showModal({
+        confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           title: '确认您已收到商品？',
           content: '',
           success: function(res) {

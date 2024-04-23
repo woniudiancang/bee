@@ -10,11 +10,8 @@ Page({
     addressList: [],
     addressEdit: false,
     cancelBtn: false,
-
     pickerRegionRange: [],
     pickerSelect:[0, 0, 0],
-    showRegionStr: '选择行政地址（省、市、区县）',
-
     addressData: {}
   },
   // 添加地址
@@ -74,8 +71,9 @@ Page({
                
       } else {
         wx.showModal({
-          title: '错误',
-          content: '无法获取快递地址数据',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
+          content: this.data.$t.ad_index.apiError,
           showCancel: false
         })
       }
@@ -101,8 +99,9 @@ Page({
     const id = e.currentTarget.dataset.id;
     console.log(id)
     wx.showModal({
-      title: '提示',
-      content: '确定要删除该收货地址吗？',
+      confirmText: this.data.$t.common.confirm,
+      cancelText: this.data.$t.common.cancel,
+      content: this.data.$t.ad_index.deleteProfile,
       success: function (res) {
         if (res.confirm) {
           WXAPI.deleteAddress(wx.getStorageSync('token'), id).then(function () {
@@ -112,8 +111,6 @@ Page({
             })
             _this.initShippingAddress()
           })
-        } else {
-          console.log('用户点击取消')
         }
       }
     })
@@ -156,8 +153,8 @@ Page({
       if (res.code === 0) {
         let _pickerRegionRange = []
         _pickerRegionRange.push(res.data)
-        _pickerRegionRange.push([{ name: '请选择' }])
-        _pickerRegionRange.push([{ name: '请选择' }])
+        _pickerRegionRange.push([{ name: this.data.$t.common.select }])
+        _pickerRegionRange.push([{ name: this.data.$t.common.select }])
         this.data.pickerRegionRange = _pickerRegionRange
         this.bindcolumnchange({ detail: { column: 0, value: 0 } })
       }
@@ -242,11 +239,11 @@ Page({
       return
     }
     if (column === 1) {
-      this.data.pickerRegionRange[2] = [{ name: '请选择' }]
+      this.data.pickerRegionRange[2] = [{ name: this.data.$t.common.select }]
     }
     if (column === 0) {
-      this.data.pickerRegionRange[1] = [{ name: '请选择' }]
-      this.data.pickerRegionRange[2] = [{ name: '请选择' }]
+      this.data.pickerRegionRange[1] = [{ name: this.data.$t.common.select }]
+      this.data.pickerRegionRange[2] = [{ name: this.data.$t.common.select }]
     }
     // // 后面的数组全部清空
     // this.data.pickerRegionRange.splice(column+1)
@@ -332,35 +329,35 @@ Page({
 
     if (!linkMan){
       wx.showToast({
-        title: '请填写用户姓名',
+        title: this.data.$t.ad_index.linkManPlaceholder,
         icon: 'none',        
       })
       return
     }
     if (!mobile){
       wx.showToast({
-        title: '请填写手机号码',
+        title: this.data.$t.ad_index.mobilePlaceholder,
         icon: 'none',        
       })
       return
     }
     if (!this.data.pObject || !this.data.cObject || !this.data.dObject){
       wx.showToast({
-        title: '请选择行政区划',
+        title: this.data.$t.ad_index.region,
         icon: 'none',        
       })
       return
     }
     if (!latitude){
       wx.showToast({
-        title: '请选择定位',
+        title: this.data.$t.ad_index.location,
         icon: 'none',       
       })
       return
     }
     if (!address){
       wx.showToast({
-        title: '请填写详细地址',
+        title: this.data.$t.ad_index.address,
         icon: 'none',       
       })
       return
@@ -418,9 +415,16 @@ Page({
     }    
     
   },
-  onLoad: function (e) {    
+  onLoad(e) {
+    getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.ad_index.title,
+    })
+    this.setData({
+      showRegionStr: this.data.$t.ad_index.regionPlaceholder
+    })
     const _this = this
-    _this.initRegionPicker() // 初始化省市区选择器
+    this.initRegionPicker() // 初始化省市区选择器
     if (e.id) { // 修改初始化数据库数据
       WXAPI.addressDetail(e.id, wx.getStorageSync('token')).then(function (res) {
         if (res.code === 0) {
@@ -433,8 +437,9 @@ Page({
           return;
         } else {
           wx.showModal({
-            title: '提示',
-            content: '无法获取快递地址数据',
+            confirmText: this.data.$t.common.confirm,
+            cancelText: this.data.$t.common.cancel,
+            content: this.data.$t.ad_index.apiError,
             showCancel: false
           })
         }
@@ -447,7 +452,9 @@ Page({
         this.initShippingAddress();
       } else {
         wx.showModal({
-          content: '登陆后才能访问',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
+          content: this.data.$t.auth.needLogin,
           showCancel: false,
           success: () => {
             wx.navigateBack()
@@ -455,23 +462,6 @@ Page({
         })
       }
     })
-  },  
-  
-  // 判断电话号码格式
-  setTelModal:function(e) {
-    // console.log(e)    
-    var mobile = /^[1][3,4,5,7,8][0-9]{9}$/;
-    // var myreg = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;  //判断是否是座机电话
-    
-    var isMobile = mobile.exec(e.detail.value)
-    //输入有误的话，弹出模态框提示
-    if(!isMobile){
-      wx.showModal({
-        title: '错误',
-        content: '手机号码格式不正确',
-        showCancel:false
-      })
-    }
   },
   chooseLocation() {
     wx.chooseLocation({
@@ -488,6 +478,6 @@ Page({
         console.error(e)
       },
     })
-  }
+  },
 })
 

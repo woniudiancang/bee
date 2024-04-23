@@ -40,7 +40,7 @@
 	<van-cell
     wx:if="{{ create_order_select_time == '1' }}"
 	 	title="{{ peisongType == 'zq' ? '取餐时间' : '送达时间' }}"
-		value="{{ diningTime ? diningTime : '请选择' }}"
+		value="{{ diningTime ? diningTime : $t.common.select }}"
 		is-link
 		bind:click="diningTimeShow"
 	/>

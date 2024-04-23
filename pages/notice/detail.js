@@ -8,6 +8,7 @@ Page({
 
   },
   onLoad: function (options) {
+    getApp().initLanguage(this)
     this.noticeDetail(options.id)
   },
 

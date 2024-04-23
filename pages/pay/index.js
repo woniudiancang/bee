@@ -114,6 +114,7 @@ Page({
   },
 
   onLoad(e) {
+    getApp().initLanguage(this)
     let _data = {
       kjId: e.kjId,
       create_order_select_time: wx.getStorageSync('create_order_select_time'),
@@ -211,7 +212,8 @@ Page({
     if (this.data.shopInfo) {
       if (!this.data.shopInfo.openWaimai && !this.data.shopInfo.openZiqu) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '堂食和外卖服务已关闭',
           showCancel: false
         })
@@ -297,7 +299,8 @@ Page({
       console.log(res.data) 
       if (res.code != 0) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })

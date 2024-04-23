@@ -11,7 +11,7 @@ Page({
     isLogined: true
   },
   onLoad: function (options) {
-    
+    getApp().initLanguage(this)
   },
   onShow: function () {
     AUTH.checkHasLogined().then(isLogined => {

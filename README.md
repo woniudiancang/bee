@@ -6,20 +6,9 @@
 
 如果本项目对您有所帮助或者启发，请给我们 Star 吧，您的鼓励是我们最大对动力～
 
-# 招募开发者
-
-希望找一些志同道合的朋友一起来完善这个开源项目，持续更新下去，有兴趣的可以加入QQ群 ( 详见下面的QQ群 ) 联系管理员，期待您的加入！
-
 # 加微信联系我
 
 <img src="https://dcdn.it120.cc/2022/09/19/7b884d58-541a-404b-a805-457540d7f87f.jpeg" width="200px">
-
-# 推荐一个订座取号的开源项目
-
-最近经常有人咨询说需要订座和取号的功能，api工厂有一个基于 uni-app 的开源模板，可能大家没注意，再把地址贴一下，有需要的自取：
-
-- [仿海底捞订座排队 (uni-app)](https://github.com/gooking/dingzuopaidui)
-- [码云镜像](https://gitee.com/javazj/dingzuopaidui)
 
 
 # 自提/外卖 扫码体验
@@ -37,23 +26,6 @@
 | 座号A6 | 座号A7 | 座号A8 | 座号A9 | 座号A10 |
 | :------: | :------: | :------: | :------: | :------: |
 | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/aca7a7fd-72c9-4d89-a903-d82e6b8b8f83.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/77f16752-656f-4218-99df-c82c5db1921a.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/e3be04c4-9c0f-41c8-9482-b645699d1df4.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/352c7e84-56ec-4961-9e7d-cc4e752cf154.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/78adb196-231d-41b7-be8d-51febc022bac.png" width="200px"> |
-
-## 桌号管理
-
-    登录后台，左侧菜单 “桌号管理”，添加并管理你的桌号信息，添加以后在列表你将可以看到 ID 和 密钥，这两个数据用来生成桌子的二维码
-
-<img src="https://dcdn.it120.cc/2022/12/30/e76a0320-992a-4932-9d58-dec3fd6630b8.png">
-
-## 生成桌子二维码
-
-    例如上面的ID为 308，密钥为 d3PiIY，那么现在去左侧菜单微信设置 -> 小程序设置 -> 获取小程序二维码（圆形码），即可获取小程序码：
-    填写信息如下：
-- 页面路径: pages/index/index
-- scene参数: shopId=12879,id=308,key=d3PiIY
-
-其中 shopId 为你对应的门店ID，其他参数默认就可以了
-
-<img src="https://dcdn.it120.cc/2022/12/30/6c807326-8db9-465a-912e-58847b28658c.png">
 
 
 # QQ交流群
@@ -95,6 +67,7 @@
 - [酒店客房服务小程序](https://github.com/gooking/hotelRoomService)  / [码云镜像](https://gitee.com/javazj/hotelRoomService)
 
 # 使用教程
+
 ## 注册开通小程序账号
 https://mp.weixin.qq.com/
 根据自己的实际情况选择 “企业”、“个体工商户”身份，注册小程序账号，商城类小程序不支持个人用户上线，所以一定要选择企业或者个体户，获得你自己小程序的 appid 和 secret 信息，保存好，下面会用到：
@@ -148,7 +121,22 @@ APPID 务必要改成你自己的小程序的 APPID
 
 重新进入小程序以后，就可以看见 “扫码核销” 的菜单了
 
-# 配置说明
+## 桌号管理
+
+    登录后台，左侧菜单 “桌号管理”，添加并管理你的桌号信息，添加以后在列表你将可以看到 ID 和 密钥，这两个数据用来生成桌子的二维码
+
+<img src="https://dcdn.it120.cc/2022/12/30/e76a0320-992a-4932-9d58-dec3fd6630b8.png">
+
+## 生成桌子二维码
+
+    例如上面的ID为 308，密钥为 d3PiIY，那么现在去左侧菜单微信设置 -> 小程序设置 -> 获取小程序二维码（圆形码），即可获取小程序码：
+    填写信息如下：
+- 页面路径: pages/index/index
+- scene参数: shopId=12879,id=308,key=d3PiIY
+
+其中 shopId 为你对应的门店ID，其他参数默认就可以了
+
+<img src="https://dcdn.it120.cc/2022/12/30/6c807326-8db9-465a-912e-58847b28658c.png">
 
 ## 如何修改小程序首页标题
 
@@ -186,6 +174,12 @@ APPID 务必要改成你自己的小程序的 APPID
 
 1. [如何对接达达配送，先按这个教程完成配置](https://www.yuque.com/apifm/doc/gxk08t)
 2. 后台 “商城管理” --> “门店管理”， 编辑，门店编号填写你达达对应的门店编号，生鲜配送输入框填写 `dada`
+
+## 二次开发如何使用国际化实现多语言
+
+1. `js` 文件中，onload 方法中，加入： `getApp().initLanguage(this)` ;注意这里的路径要填正确，否则提示文件找不到;
+2. 页面中可以直接显示语言包中的内容: `{{ $t.test.name }}`;
+3. 语言内容，直接修改 `i18n` 文件夹中对应的语言的文件即可；
 
 # 常见问题
 
@@ -239,3 +233,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhone
 ## 微信支付MA授权(appid和mch_id不匹配)
 
 [微信支付MA授权(appid和mch_id不匹配)](https://www.yuque.com/apifm/doc/zrui8q)
+
+## 使用国际化多语言，切换语言后底部菜单显示不对
+
+`/i18n/index.js` 文件里面的菜单内容估计忘记修改了

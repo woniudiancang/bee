@@ -20,6 +20,7 @@ Page({
     canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
   },
   onLoad(e) {
+    getApp().initLanguage(this)
     // e.id = 122843
     // 读取分享链接中的邀请人编号
     if (e && e.inviter_id) {
@@ -529,6 +530,8 @@ Page({
         myHelpDetail: res.data
       });
       wx.showModal({
+        confirmText: this.data.$t.common.confirm,
+        cancelText: this.data.$t.common.cancel,
         title: '成功',
         content: '成功帮TA砍掉 ' + res.data.cutPrice + ' 元',
         showCancel: false

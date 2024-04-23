@@ -4,6 +4,23 @@ page {
   display: flex;
   flex-direction: column;
 }
+.custom-navigation {
+  display: flex;
+  align-items: center;
+}
+.custom-navigation .language {
+  display: flex;
+  padding-left: 16rpx;
+}
+.custom-navigation .language .language-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+.custom-navigation .mallName {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+}
 .box{
   height:150rpx;
   margin-bottom: 32rpx;

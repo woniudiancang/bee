@@ -18,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-
+    getApp().initLanguage(this)
   },
 
   /**
@@ -127,7 +127,8 @@ Page({
     }).then(function (res) {
       if (res.code == 20001 || res.code == 20002) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '来晚了',
           showCancel: false
         })
@@ -135,7 +136,8 @@ Page({
       }
       if (res.code == 20003) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '你领过了，别贪心哦~',
           showCancel: false
         })
@@ -143,7 +145,8 @@ Page({
       }
       if (res.code == 30001) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '您的积分不足',
           showCancel: false
         })
@@ -151,7 +154,8 @@ Page({
       }
       if (res.code == 20004) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '已过期~',
           showCancel: false
         })
@@ -164,7 +168,8 @@ Page({
         })
       } else {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })

@@ -1,4 +1,6 @@
 const WXAPI = require('apifm-wxapi')
+const i18n = require("../i18n/index")
+const $t = i18n.$t()
 
 async function checkSession(){
   return new Promise((resolve, reject) => {
@@ -82,6 +84,8 @@ async function login(page){
           if (res.code != 0) {
             // 登录错误
             wx.showModal({
+              confirmText: $t.common.confirm,
+              cancelText: $t.common.cancel,
               title: '无法登录',
               content: res.msg,
               showCancel: false
@@ -104,6 +108,8 @@ async function login(page){
           if (res.code != 0) {
             // 登录错误
             wx.showModal({
+              confirmText: $t.common.confirm,
+              cancelText: $t.common.cancel,
               title: '无法登录',
               content: res.msg,
               showCancel: false

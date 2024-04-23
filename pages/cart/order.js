@@ -12,7 +12,7 @@ Page({
     
   },
   onLoad: function (options) {
-
+    getApp().initLanguage(this)
   },
   onShow: function () {
     this.fetchOrder()
@@ -48,6 +48,8 @@ Page({
     })
     if (res.code != 0) {
       wx.showModal({
+        confirmText: this.data.$t.common.confirm,
+        cancelText: this.data.$t.common.cancel,
         title: '出错了',
         content: res.msg,
         showCancel: false
@@ -68,6 +70,8 @@ Page({
     res = await WXAPI.wxpay(postData)
     if (res.code != 0) {
       wx.showModal({
+        confirmText: this.data.$t.common.confirm,
+        cancelText: this.data.$t.common.cancel,
         title: '出错了',
         content: JSON.stringify(res),
         showCancel: false

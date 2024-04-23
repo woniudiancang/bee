@@ -1,4 +1,6 @@
 const WXAPI = require('apifm-wxapi')
+const i18n = require("../i18n/index")
+const $t = i18n.$t()
 
 /**
  * type: order 支付订单 recharge 充值 paybill 优惠买单
@@ -63,6 +65,8 @@ function wxpay(type, money, orderId, redirectUrl, data) {
       })
     } else {
       wx.showModal({
+        confirmText: $t.common.confirm,
+        cancelText: $t.common.cancel,
         title: '出错了',
         content: JSON.stringify(res),
         showCancel: false

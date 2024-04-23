@@ -6,7 +6,7 @@ Page({
 
   },
   onLoad: function (options) {
-    
+    getApp().initLanguage(this)
   },
   onShow: function () {
     AUTH.checkHasLogined().then(isLogin => {

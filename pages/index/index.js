@@ -1,7 +1,6 @@
 const APP = getApp()
 const AUTH = require('../../utils/auth')
 const WXAPI = require('apifm-wxapi')
-
 Page({
   data: {
     page: 1,
@@ -15,9 +14,12 @@ Page({
     share_goods_id: undefined,
     share_pingtuan_open_id: undefined,
     lijipingtuanbuy: false,
-    pingtuan_open_id: undefined
+    pingtuan_open_id: undefined,
+    menuButtonBoundingClientRect: wx.getMenuButtonBoundingClientRect(),
   },  
   onLoad: function (e) {
+    getApp().initLanguage(this)
+    const _data = {}
     // 测试拼团入口
     // e = {
     //   share_goods_id: 521055,
@@ -40,9 +42,7 @@ Page({
           scanDining[ele.split('=')[0]] = ele.split('=')[1]
         })
         wx.setStorageSync('scanDining', scanDining)
-        this.setData({
-          scanDining: scanDining
-        })
+        _data.scanDining = scanDining
         this.cyTableToken(scanDining.id, scanDining.key)
         mod = 1
       } else {
@@ -51,11 +51,10 @@ Page({
     }
     if (wx.getStorageSync('scanDining')) {
       mod = 1
-      this.setData({
-        scanDining: wx.getStorageSync('scanDining')
-      })
+      _data.scanDining = wx.getStorageSync('scanDining')
       wx.hideTabBar()
     }
+    this.setData(_data)
     if (e.share_goods_id) {
       this.data.share_goods_id = e.share_goods_id
       this._showGoodsDetailPOP(e.share_goods_id)
@@ -80,8 +79,8 @@ Page({
     // 设置标题
     const mallName = wx.getStorageSync('mallName')
     if (mallName) {
-      wx.setNavigationBarTitle({
-        title: mallName
+      this.setData({
+        mallName
       })
     }
     APP.configLoadOK = () => {
@@ -118,6 +117,8 @@ Page({
     const res = await WXAPI.cyTableToken(tableId, key)
     if (res.code != 0) {
       wx.showModal({
+        confirmText: this.data.$t.common.confirm,
+        cancelText: this.data.$t.common.cancel,
         title: '桌码异常',
         content: res.msg,
         showCancel: false
@@ -156,6 +157,8 @@ Page({
           AUTH.checkAndAuthorize('scope.userLocation')
         } else {
           wx.showModal({
+            confirmText: this.data.$t.common.confirm,
+            cancelText: this.data.$t.common.cancel,
             title: '出错了~',
             content: e.errMsg,
             showCancel: false
@@ -1043,5 +1046,8 @@ Page({
       goodsTimesSchedule
     })
     this.calculateGoodsPrice()
+  },
+  changeLang() {
+    getApp().changeLang(this)
   },
 })

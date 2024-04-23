@@ -10,6 +10,7 @@ Page({
     },
   },
   onLoad: function(options) {
+    getApp().initLanguage(this)
     this.scoreSignLogs()
   },
   onShow: function() {

@@ -1,14 +1,19 @@
 const WXAPI = require('apifm-wxapi')
 const CONFIG = require('config.js')
 const AUTH = require('utils/auth')
+const i18n = require("i18n/index")
 App({
-  onLaunch: function() {    
+  onLaunch: function() {
+    i18n.getLanguage()
+    const $t = i18n.$t()
     WXAPI.init(CONFIG.subDomain)
     const that = this;
     // 检测新版本
     const updateManager = wx.getUpdateManager()
     updateManager.onUpdateReady(function () {
       wx.showModal({
+        confirmText: $t.common.confirm,
+        cancelText: $t.common.cancel,
         title: '更新提示',
         content: '新版本已经准备好，是否重启应用？',
         success(res) {
@@ -133,6 +138,28 @@ App({
       shopInfo.distance = distance
       wx.setStorageSync('shopInfo',  shopInfo)
     }
+  },
+  initLanguage(_this) {
+    _this.setData({
+      language: i18n.getLanguage(),
+      $t: i18n.$t(),
+    })
+  },
+  changeLang(_this) {
+    const langs = i18n.langs
+    const nameArray = []
+    langs.forEach(ele => nameArray.push(ele.name))
+    wx.showActionSheet({
+      itemList: nameArray,
+      success: (e) => {
+        const lang = langs[e.tapIndex]
+        wx.setStorageSync('Language', lang.code)
+        _this.setData({
+          language: i18n.getLanguage(),
+          $t: i18n.$t(),
+        })
+      }
+    })
   },
   globalData: {
     isConnected: true

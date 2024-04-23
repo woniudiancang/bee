@@ -22,7 +22,8 @@ Page({
       // on close
     });
   },
-  onLoad: function (options) {   
+  onLoad: function (options) {
+    getApp().initLanguage(this) 
     WXAPI.payBillDiscounts().then(res => {
       if (res.code === 0) {
         this.setData({
@@ -102,12 +103,16 @@ Page({
       WXAPI.payBill(wx.getStorageSync('token'), amount).then(function (res) {
         if (res.code == 0) {
           wx.showModal({
+            confirmText: this.data.$t.common.confirm,
+            cancelText: this.data.$t.common.cancel,
             title: '成功',
             content: '买单成功，欢迎下次光临！',
             showCancel: false
           })
         } else {
           wx.showModal({
+            confirmText: this.data.$t.common.confirm,
+            cancelText: this.data.$t.common.cancel,
             title: '失败',
             content: res.msg,
             showCancel: false

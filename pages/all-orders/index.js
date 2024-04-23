@@ -13,7 +13,9 @@ Page({
     const that = this;
     const orderId = e.currentTarget.dataset.id;
     wx.showModal({
-      title: '确定要取消该订单吗？',
+      confirmText: this.data.$t.common.confirm,
+      cancelText: this.data.$t.common.cancel,
+      title: this.data.$t.order.cancelProfile,
       content: '',
       success: function(res) {
         if (res.confirm) {
@@ -30,7 +32,7 @@ Page({
     // 防止连续点击--开始
     if (this.data.payButtonClicked) {
       wx.showToast({
-        title: '休息一下~',
+        title: this.data.$t.common.doubleClick,
         icon: 'none'
       })
       return
@@ -74,14 +76,13 @@ Page({
             console.log(res);
             if (res.confirm) {
               that._toPayTap(orderId, money)
-            } else {
-              console.log('用户点击取消支付')
             }
           }
         });
       } else {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: '无法获取用户资金信息',
           showCancel: false
         })
@@ -100,7 +101,7 @@ Page({
     }
   },
   onLoad: function(options) {
-    
+    getApp().initLanguage(this)
   },
   onShow: function() {
     AUTH.checkHasLogined().then(isLogined => {
@@ -108,7 +109,9 @@ Page({
         this.doneShow();
       } else {
         wx.showModal({
-          content: '登陆后才能访问',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
+          content: this.data.$t.auth.needLogin,
           showCancel: false,
           success: () => {
             wx.navigateBack()
@@ -165,7 +168,8 @@ Page({
     const id = e.currentTarget.dataset.id;
     
     wx.showModal({
-      title: '提示',
+      confirmText: this.data.$t.common.confirm,
+      cancelText: this.data.$t.common.cancel,
       content: '确定要删除该订单吗？',
       success: function (res) {
         if (res.confirm) {
@@ -175,8 +179,6 @@ Page({
             }              
             
           })
-        } else {
-          console.log('用户点击取消')
         }
       }
     })

@@ -11,7 +11,7 @@ Page({
 
   },
   onLoad: function (options) {
-
+    getApp().initLanguage(this)
   },
   onShow: function () {
     this.shippingCarInfo()

@@ -35,13 +35,15 @@ Page({
     minDate: new Date().getTime(),
   },
   onLoad: function (options) {
-
+    getApp().initLanguage(this)
   },
   onShow: function () {
     AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
         wx.showModal({
-          content: '登陆后才能访问',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
+          content: this.data.$t.auth.needLogin,
           showCancel: false,
           success: () => {
             wx.navigateBack()

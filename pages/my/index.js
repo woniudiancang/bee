@@ -16,6 +16,7 @@ Page({
     nick: undefined,
   },
   onLoad() {
+    getApp().initLanguage(this)
     const order_hx_uids = wx.getStorageSync('order_hx_uids')
     this.setData({
       myBg: wx.getStorageSync('myBg'),

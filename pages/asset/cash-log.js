@@ -14,6 +14,7 @@ Page({
 
   },
   onLoad: function (options) {
+    getApp().initLanguage(this)
     this.cashLogsV2()
   },
   onShow: function () {

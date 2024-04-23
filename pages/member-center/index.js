@@ -10,6 +10,7 @@ Page({
     totleConsumed: 0
   },
   onLoad: function (options) {
+    getApp().initLanguage(this)
     this.userLevelList()
     this.userAmount()
     this.getUserApiInfo()
@@ -18,7 +19,9 @@ Page({
     AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
         wx.showModal({
-          content: '登陆后才能访问',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
+          content: this.data.$t.auth.needLogin,
           showCancel: false,
           success: () => {
             wx.navigateBack()

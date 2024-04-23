@@ -16,6 +16,7 @@ Page({
     showRechargePop: false
   },
   onLoad: function (options) {
+    getApp().initLanguage(this)
     this.rechargeRule()
   },
   onShow: function () {
@@ -112,6 +113,8 @@ Page({
         })
       } else {
         wx.showModal({
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           title: '出错了',
           content: JSON.stringify(res),
           showCancel: false

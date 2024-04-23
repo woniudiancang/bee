@@ -10,6 +10,7 @@ Page({
     userCode: undefined
   },
   onLoad(e) {
+    getApp().initLanguage(this)
     this.getUserAmount()
     this.dynamicUserCode()
   },

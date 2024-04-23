@@ -9,6 +9,7 @@ Page({
     
   },
   onLoad: function (e) {
+    getApp().initLanguage(this)
     // e.hxNumber = '2008010532287842'
     this.setData({
       hxNumber: e.hxNumber
@@ -19,7 +20,8 @@ Page({
     WXAPI.orderDetail(wx.getStorageSync('token'), '', this.data.hxNumber).then(function (res) {
       if (res.code != 0) {
         wx.showModal({
-          title: '错误',
+          confirmText: this.data.$t.common.confirm,
+          cancelText: this.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })
@@ -41,6 +43,8 @@ Page({
     let orderId = this.data.orderId;
     wx.showModal({
       title: '确认您已收到商品？',
+      confirmText: this.data.$t.common.confirm,
+      cancelText: this.data.$t.common.cancel,
       content: '',
       success: function (res) {
         if (res.confirm) {
