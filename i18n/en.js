@@ -81,7 +81,7 @@ module.exports = {
   booking: {
     title: 'Booking',
     name: 'Name',
-    namePlaceholder: 'Please enter contact person',
+    namePlaceholder: 'Enter contact person',
     mobile: 'Mobile',
     mobilePlaceholder: 'Convenient for us to contact you',
     time: 'Arrival',
@@ -89,4 +89,12 @@ module.exports = {
     person: 'Person',
     tip: 'Seat reserved for half an hour, invalid if overdue',
   },
+  cart: {
+    title: 'Cart',
+    empty: 'No Data',
+    clear: 'Clear All',
+    num: 'Num',
+    btn: 'Submit',
+    ordered: 'Ordered Dishes',
+  }
 }

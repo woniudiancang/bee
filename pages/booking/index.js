@@ -68,21 +68,21 @@ Page({
   async submit() {
     if (!this.data.name) {
       wx.showToast({
-        title: '请填写姓名',
+        title: this.data.$t.booking.namePlaceholder,
         icon: 'none'
       })
       return
     }
     if (!this.data.mobile) {
       wx.showToast({
-        title: '请填写联系电话',
+        title: this.data.$t.booking.mobilePlaceholder,
         icon: 'none'
       })
       return
     }
     if (!this.data.time) {
       wx.showToast({
-        title: '请选择到店时间',
+        title: this.data.$t.booking.timePlaceholder,
         icon: 'none'
       })
       return

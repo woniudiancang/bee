@@ -1,4 +1,4 @@
-<van-empty wx:if="{{ !paySuccess && !orderInfo }}" description="暂无菜品" />
+<van-empty wx:if="{{ !paySuccess && !orderInfo }}" description="{{ $t.cart.empty }}" />
 <block wx:if="{{ !paySuccess && orderInfo }}">
   <van-cell-group>
     <van-cell title="桌号" value="{{ orderInfo.tableCode }}" />
@@ -30,5 +30,5 @@
 </block>
 <view wx:if="{{ paySuccess }}" class="paySuccess">
   <van-icon name="checked" size="260rpx" color="#07c160" />
-  <view class="txt">买单成功</view>
+  <view class="txt">{{ $t.asset.success }}</view>
 </view>

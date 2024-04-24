@@ -103,17 +103,15 @@ Page({
       WXAPI.payBill(wx.getStorageSync('token'), amount).then(function (res) {
         if (res.code == 0) {
           wx.showModal({
-            confirmText: this.data.$t.common.confirm,
-            cancelText: this.data.$t.common.cancel,
-            title: '成功',
-            content: '买单成功，欢迎下次光临！',
+            confirmText: _this.data.$t.common.confirm,
+            cancelText: _this.data.$t.common.cancel,
+            content: _this.data.$t.asset.success,
             showCancel: false
           })
         } else {
           wx.showModal({
-            confirmText: this.data.$t.common.confirm,
-            cancelText: this.data.$t.common.cancel,
-            title: '失败',
+            confirmText: _this.data.$t.common.confirm,
+            cancelText: _this.data.$t.common.cancel,
             content: res.msg,
             showCancel: false
           })

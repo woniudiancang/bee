@@ -89,4 +89,12 @@ module.exports = {
     person: '用餐人数',
     tip: '座位预留半小时，逾期作废',
   },
+  cart: {
+    title: '购物车',
+    empty: '暂无菜品',
+    clear: '清空购物车',
+    num: '个商品',
+    btn: '立即下单',
+    ordered: '已点菜品',
+  }
 }

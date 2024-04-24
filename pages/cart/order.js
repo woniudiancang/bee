@@ -13,6 +13,9 @@ Page({
   },
   onLoad: function (options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+        title: this.data.$t.cart.ordered,
+    })
   },
   onShow: function () {
     this.fetchOrder()
@@ -50,7 +53,6 @@ Page({
       wx.showModal({
         confirmText: this.data.$t.common.confirm,
         cancelText: this.data.$t.common.cancel,
-        title: '出错了',
         content: res.msg,
         showCancel: false
       })
@@ -72,7 +74,6 @@ Page({
       wx.showModal({
         confirmText: this.data.$t.common.confirm,
         cancelText: this.data.$t.common.cancel,
-        title: '出错了',
         content: JSON.stringify(res),
         showCancel: false
       })
@@ -88,13 +89,13 @@ Page({
       fail: function (aaa) {
         console.error(aaa)
         wx.showToast({
-          title: '支付失败:' + aaa
+          title: aaa
         })
       },
       success: function () {
         // 提示支付成功
         wx.showToast({
-          title: '买单成功'
+          title: _this.data.$t.asset.success
         })
         _this.setData({
           paySuccess: true

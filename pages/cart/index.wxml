@@ -1,8 +1,8 @@
-<van-empty wx:if="{{ !shippingCarInfo }}" description="暂无菜品" />
+<van-empty wx:if="{{ !shippingCarInfo }}" description="{{ $t.cart.empty }}" />
 <block wx:else>
   <view class="empty-box" bindtap="clearCart">
     <van-icon name="delete" />
-    <view class="empty-1">清空购物车</view>
+    <view class="empty-1">{{ $t.cart.clear }}</view>
   </view>
   <van-card
   wx:for="{{shippingCarInfo.items}}" wx:key="key"
@@ -24,5 +24,5 @@
     </view>
   </van-card>
   <view class="bottom"></view>
-  <van-submit-bar price="{{ shippingCarInfo.price*100 }}" label="{{ shippingCarInfo.number }}个菜 " button-text="立即下单" bindtap="goCreateOrder" />
+  <van-submit-bar price="{{ shippingCarInfo.price*100 }}" label="{{ shippingCarInfo.number }}{{ $t.cart.num }} " button-text="{{ $t.cart.btn }}" bindtap="goCreateOrder" />
 </block>
