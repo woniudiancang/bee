@@ -7,6 +7,55 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/order-details/index",
+          "pathName": "pages/order-details/index",
+          "query": "id=3953809",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/order-details/doing",
+          "pathName": "pages/order-details/doing",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/notice/detail",
+          "pathName": "pages/notice/detail",
+          "query": "id=15690",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/index",
+          "pathName": "pages/my/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/feedback",
+          "pathName": "pages/my/feedback",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/index",
+          "pathName": "pages/my/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/member-center/index",
+          "pathName": "pages/member-center/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/goods-details/index",
           "pathName": "pages/goods-details/index",
           "query": "id=521059",

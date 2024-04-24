@@ -16,28 +16,29 @@ function $t(){
 }
 
 function setTabBarLanguage(){
+  const $t = this.$t()
   wx.setTabBarItem({
     index: 0,
     pagePath: "pages/index/index",
-    iconPath: "images/nav/home-off.png",
-    selectedIconPath: "images/nav/home-on.png",
-    text: translateTxt("首页")
+    iconPath: "images/nav/index-off.png",
+    selectedIconPath: "images/nav/index-on.png",
+    text: $t.index.order
   })
 
   wx.setTabBarItem({
     index: 1,
-    pagePath: "pages/category/category",
-    iconPath: "images/nav/ic_catefory_normal.png",
-    selectedIconPath: "images/nav/ic_catefory_pressed.png",
-    text: translateTxt("分类")
+    pagePath: "pages/queue/index",
+    iconPath: "images/nav/qh-off.png",
+    selectedIconPath: "images/nav/qh-on.png",
+    text: $t.queue.t
   })
 
   wx.setTabBarItem({
     index: 2,
-    pagePath: "pages/shop-cart/index",
-    iconPath: "images/nav/cart-off.png",
-    selectedIconPath: "images/nav/cart-on.png",
-    text: translateTxt("购物车")
+    pagePath: "pages/order-details/doing",
+    iconPath: "images/nav/qc-off.png",
+    selectedIconPath: "images/nav/qc-on.png",
+    text: $t.index.PickingUp
   })
 
   wx.setTabBarItem({
@@ -45,7 +46,7 @@ function setTabBarLanguage(){
     pagePath: "pages/my/index",
     iconPath: "images/nav/my-off.png",
     selectedIconPath: "images/nav/my-on.png",
-    text: translateTxt("我的")
+    text: $t.my.title
   })
 }
 module.exports = {

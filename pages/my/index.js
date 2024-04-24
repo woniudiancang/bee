@@ -16,7 +16,6 @@ Page({
     nick: undefined,
   },
   onLoad() {
-    getApp().initLanguage(this)
     const order_hx_uids = wx.getStorageSync('order_hx_uids')
     this.setData({
       myBg: wx.getStorageSync('myBg'),
@@ -26,6 +25,10 @@ Page({
     })
   },
   onShow() {
+    getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.my.title,
+    })
     AUTH.checkHasLogined().then(isLogined => {
       if (isLogined) {
         this.getUserApiInfo()
@@ -128,7 +131,7 @@ Page({
   async _editNick() {
     if (!this.data.nick) {
       wx.showToast({
-        title: '请填写昵称',
+        title: this.data.$t.my.nickRequired,
         icon: 'none'
       })
       return
@@ -146,7 +149,7 @@ Page({
       return
     }
     wx.showToast({
-      title: '设置成功',
+      title: this.data.$t.common.submitSuccess,
     })
     this.getUserApiInfo()
   },
@@ -173,7 +176,7 @@ Page({
       return
     }
     wx.showToast({
-      title: '设置成功',
+      title: this.data.$t.common.submitSuccess,
     })
     this.getUserApiInfo()
   },

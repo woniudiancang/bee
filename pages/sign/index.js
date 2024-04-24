@@ -11,6 +11,9 @@ Page({
   },
   onLoad: function(options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.my.signDaily,
+    })
     this.scoreSignLogs()
   },
   onShow: function() {

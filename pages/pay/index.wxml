@@ -3,11 +3,11 @@
 	<view wx:if="{{ shopInfo.openWaimai && shopInfo.openZiqu }}" class="way-bar">
 		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
 			<van-icon name="shop-collect-o" color="{{peisongType == 'zq' ? '#fff' : '#333'}}" />
-			<view class="ziqu-1">门店自取</view>
+			<view class="ziqu-1">{{ $t.index.pickup }}</view>
 		</view>
 		<view class="peisong ziqu {{peisongType == 'kd' ? 'active' : ''}}" bindtap="selected" data-pstype="kd">
 			<van-icon name="logistics" color="{{peisongType == 'kd' ? '#fff' : '#333'}}" />
-			<view class="ziqu-1">外卖配送</view>
+			<view class="ziqu-1">{{ $t.index.Delivery }}</view>
 		</view>
 	</view>
 	<van-divider dashed />
@@ -69,7 +69,7 @@
 
 <view class="amount">共计 {{allGoodsNumber}} 件商品，小计：¥ {{allGoodsPrice}}</view>
 
-<van-cell-group wx:if="{{coupons}}" title="优惠券">
+<van-cell-group wx:if="{{coupons}}" title="{{ $t.coupons.title }}">
 	<picker bindchange="bindChangeCoupon" range="{{coupons}}" range-key="nameExt">
 		<van-cell title="{{curCouponShowText}}" is-link />
 	</picker>
@@ -97,7 +97,8 @@
 <van-submit-bar
 	wx:if="{{ nick && avatarUrl }}"
 	price="{{ amountReal*100 }}"
-	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : '立即支付'}}"
+  label="{{ $t.PickingUp.total }}"
+	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : $t.order.toPayTap }}"
 	bind:submit="goCreateOrder"
 	button-class="pay-btn"
 	disabled="{{(peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin) || submitLoding }}"

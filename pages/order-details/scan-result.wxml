@@ -15,7 +15,7 @@
     </block>
   </view>
   <view class="goods-list">
-    <view class="list-title">商品信息</view>
+    <view class="list-title">{{ $t.PickingUp.goodsInfo }}</view>
     <form bindsubmit="submitReputation" report-submit="true">
       <block wx:for="{{orderDetail.goods}}" wx:key="{{index}}">
         <view class="a-goods">
@@ -38,37 +38,37 @@
   </view>
   <view class="peisong-way" hidden="true">
     <view class="row-box">
-      <view class="row-label">配送方式</view>
-      <view class="right-text">顺丰快递</view>
+      <view class="row-label">{{ $t.PickingUp.DeliveryMethod }}</view>
+      <view class="right-text">{{ $t.PickingUp.sf }}</view>
     </view>
     <view class="row-box">
-      <view class="row-label">留言</view>
+      <view class="row-label">{{ $t.PickingUp.remark }}</view>
       <view class="right-text">
-        <input name="remark" type="text" class="liuyan" placeholder="如需留言请输入" />
+        <input name="remark" type="text" class="liuyan" placeholder="{{ $t.PickingUp.remarkPlaceholder }}" />
       </view>
     </view>
   </view>
   <view wx:if="{{orderDetail.goodsCoupons}}" class="goods-info" style="margin-bottom:32rpx;">
     <view wx:for="{{orderDetail.goodsCoupons}}" wx:key="{{item.id}}" class="row-box">
-      <view wx:if="{{item.type == 0}}" class="row-label">优惠券</view>
+      <view wx:if="{{item.type == 0}}" class="row-label">{{ $t.coupons.title }}</view>
       <view wx:if="{{item.type == 0}}" class="right-text">{{item.coupon}}</view>
       <image mode="widthFix" wx:if="{{item.type == 1}}" src="{{item.coupon}}" style="max-width:100%;"></image>
     </view>
   </view>
   <view class="goods-info">
     <view class="row-box">
-      <view class="row-label">商品金额</view>
+      <view class="row-label">{{ $t.PickingUp.goodsAmount }}</view>
       <view class="right-text">¥ {{orderDetail.orderInfo.amount}}</view>
     </view>
     <view class="row-box">
-      <view class="row-label">运费</view>
+      <view class="row-label">{{ $t.PickingUp.freight }}</view>
       <view class="right-text">+ ¥ {{orderDetail.orderInfo.amountLogistics}}</view>
     </view>
     <view class="row-box">
-      <view class="row-label">应付总额</view>
+      <view class="row-label">{{ $t.PickingUp.realAmount }}</view>
       <view class="right-text">¥ {{orderDetail.orderInfo.amountReal}}</view>
     </view>
   </view>
 </view>
 
-<view wx:if="{{orderDetail.orderInfo.status ==1 || orderDetail.orderInfo.status ==2}}" class="hx-btn" bindtap="doneHx">确认核销</view>
+<view wx:if="{{orderDetail.orderInfo.status ==1 || orderDetail.orderInfo.status ==2}}" class="hx-btn" bindtap="doneHx">{{ $t.PickingUp.ConfirmVerification }}</view>

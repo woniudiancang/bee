@@ -11,6 +11,9 @@ Page({
   },
   onLoad(e) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.my.userCode,
+    })
     this.getUserAmount()
     this.dynamicUserCode()
   },

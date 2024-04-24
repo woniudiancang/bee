@@ -5,6 +5,7 @@ const i18n = require("i18n/index")
 App({
   onLaunch: function() {
     i18n.getLanguage()
+    this.setTabBarLanguage()
     const $t = i18n.$t()
     WXAPI.init(CONFIG.subDomain)
     const that = this;
@@ -158,8 +159,12 @@ App({
           language: i18n.getLanguage(),
           $t: i18n.$t(),
         })
+        this.setTabBarLanguage()
       }
     })
+  },
+  setTabBarLanguage() {
+    i18n.setTabBarLanguage()
   },
   globalData: {
     isConnected: true

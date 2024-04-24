@@ -20,7 +20,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
     };
   }
   if (type === 'paybill') {
-    postData.remark = "优惠买单 ：" + data.money;
+    postData.remark = $t.my.youhuimaidan + " ：" + data.money;
     postData.nextAction = {
       type: 4,
       uid: wx.getStorageSync('uid'),
@@ -43,7 +43,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
         fail: function (aaa) {
           console.error(aaa)
           wx.showToast({
-            title: '支付失败:' + aaa
+            title: aaa
           })
           if (redirectUrl) {
             wx.redirectTo({
@@ -54,7 +54,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
         success: function () {
           // 提示支付成功
           wx.showToast({
-            title: '支付成功'
+            title: $t.asset.success
           })
           if (redirectUrl) {
             wx.redirectTo({
@@ -67,7 +67,6 @@ function wxpay(type, money, orderId, redirectUrl, data) {
       wx.showModal({
         confirmText: $t.common.confirm,
         cancelText: $t.common.cancel,
-        title: '出错了',
         content: JSON.stringify(res),
         showCancel: false
       })      

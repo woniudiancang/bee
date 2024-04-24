@@ -17,15 +17,15 @@
   <view class="shop-name">
     <view class="name" bindtap="selectshop">{{shopInfo.name}}</view>
     <view wx:if="{{ shopInfo.openWaimai && shopInfo.openZiqu }}" class="select">
-      <view class="{{peisongType == 'zq' ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">自取</view>
-      <view class="{{peisongType == 'kd' ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">外卖</view>
+      <view class="{{peisongType == 'zq' ? 'on' : 'off'}}" data-type="zq" bindtap="changePeisongType">{{ $t.index.pickup }}</view>
+      <view class="{{peisongType == 'kd' ? 'on' : 'off'}}" data-type="kd" bindtap="changePeisongType">{{ $t.index.Delivery }}</view>
     </view>
   </view>
   <view class="distance-bar">
-    <view class="distance">距离您{{shopInfo.distance}}千米</view>
+    <view class="distance">{{shopInfo.distance}}km</view>
     <navigator url="/pages/shop/detail?id={{shopInfo.id}}" hover-class="none">
       <view class="shop-message">
-        <view class="message">查看门店信息</view>
+        <view class="message">{{ $t.index.shopDetail }}</view>
         <van-icon name="arrow" />
       </view>
     </navigator>
@@ -48,7 +48,7 @@
         <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
       </swiper-item>
     </swiper>
-    <van-empty wx:if="{{!goods || goods.length == 0}}" description="暂无商品" />
+    <van-empty wx:if="{{!goods || goods.length == 0}}" description="{{ $t.common.empty }}" />
     <van-card
       wx:for="{{goods}}" wx:key="id"
       centered="true"
@@ -68,17 +68,17 @@
           <van-count-down class="count-downno-start" time="{{ item.dateEndInt }}" format="HH时mm分ss秒"></van-count-down>
         </view>
         <view wx:elif="{{ item.kanjia }}">
-          到手价 {{ item.kanjiaPrice }} 元
+          {{ $t.index.minPrice }} {{ item.kanjiaPrice }}
         </view>
         <view wx:else>{{ item.characteristic }}</view>
       </view>
       <view class="goods-btn" slot="footer">
         <van-button wx:if="{{ item.stores < item.minBuyNumber }}" size="small" color="#e64340" round disabled>{{ $t.goodsDetail.storeing }}</van-button>
-        <van-button wx:elif="{{ item.miaosha && item.dateStartInt > 0 }}" size="small" color="#e64340" round disabled>即将开抢</van-button>
-        <van-button wx:elif="{{ item.miaosha && item.dateEndInt <= 0 }}" size="small" color="#e64340" round disabled>秒杀结束</van-button>
-        <van-button wx:elif="{{item.kanjia}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="goGoodsDetail">砍价</van-button>
-        <van-button wx:elif="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">一起拼</van-button>
-        <van-button wx:elif="{{item.propertyIds || item.hasAddition || item.hasGoodsTimes}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">选规格</van-button>
+        <van-button wx:elif="{{ item.miaosha && item.dateStartInt > 0 }}" size="small" color="#e64340" round disabled>{{ $t.index.noStart }}</van-button>
+        <van-button wx:elif="{{ item.miaosha && item.dateEndInt <= 0 }}" size="small" color="#e64340" round disabled>{{ $t.index.miaoshaEnd }}</van-button>
+        <van-button wx:elif="{{item.kanjia}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="goGoodsDetail">{{ $t.goodsDetail.kanjia }}</van-button>
+        <van-button wx:elif="{{item.pingtuan}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">{{ $t.index.pingtuan }}</van-button>
+        <van-button wx:elif="{{item.propertyIds || item.hasAddition || item.hasGoodsTimes}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="showGoodsDetailPOP">{{ $t.index.selectSku }}</van-button>
         <van-icon wx:else name="add" color="#e64340" size="50rpx" data-idx="{{index}}" bind:click="addCart1" />
       </view>
     </van-card>
@@ -87,14 +87,14 @@
 
 <view class="cart-bar" wx:if="{{shippingCarInfo && shippingCarInfo.number}}">
   <view class="l" bindtap="showCartPop">
-    <van-button type="default" round icon="shopping-cart-o">购物车</van-button>
+    <van-button type="default" round icon="shopping-cart-o">{{ $t.cart.title }}</van-button>
     <view class="badge">{{shippingCarInfo.number}}</view>
   </view>  
   <view class="r">
     <view class="amount"><text>¥</text>{{shippingCarInfo.price}}</view>
-    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">选好了</view>
-    <view wx:elif="{{ !shopInfo }}" class="topay" bindtap="getshopInfo">获取门店</view>
-    <view wx:else class="topay noopen">未营业</view>
+    <view wx:if="{{shopIsOpened}}" class="topay" bindtap="goPay">{{ $t.index.submit }}</view>
+    <view wx:elif="{{ !shopInfo }}" class="topay" bindtap="getshopInfo">{{ $t.index.selectShop }}</view>
+    <view wx:else class="topay noopen">{{ $t.index.noBusiness }}</view>
   </view>
 </view>
 
@@ -129,7 +129,7 @@
   </view>
 
   <view wx:if="{{curGoodsMap.content}}" class="introduce">
-    <view class="title">产品介绍</view>
+    <view class="title">{{ $t.goodsDetail.title }}</view>
     <view class="content">
       <parser html="{{curGoodsMap.content}}" />
     </view>
@@ -142,7 +142,7 @@
       <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" max="{{ buyNumMax }}" bind:change="goodsStepChange"/>
     </view>
     <view class="add-cart">
-      <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">拼团抢购</van-button>
+      <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">{{ $t.index.pingtuan }}</van-button>
       <van-button wx:else block color="#e64340" bind:click="addCart2">{{ $t.goodsDetail.addCartBtn }}</van-button>
     </view>
   </view>
@@ -155,7 +155,7 @@
   bind:close="hideCartPop">
   <view class="empty-box" bindtap="clearCart">
     <van-icon name="delete" />
-    <view class="empty-1">清空购物车</view>
+    <view class="empty-1">{{ $t.cart.clear }}</view>
   </view>
   <view wx:for="{{shippingCarInfo.items}}" wx:key="key" class="cart-goods-list">
     <view class="l">
@@ -192,36 +192,36 @@
       <view class="xianjia">¥{{curGoodsMap.basicInfo.pingtuanPrice}}</view>
       <view wx:if="{{curGoodsMap.basicInfo.minPrice > 0 && curGoodsMap.basicInfo.minPrice != curGoodsMap.basicInfo.pingtuanPrice}}" class="yuanjia">{{ $t.goodsDetail.originalPrice }} ¥{{curGoodsMap.basicInfo.minPrice}}</view>
     </view>
-    <view class="jilu">{{pintuanSet.numberOrder}}人成单 / 已拼{{curGoodsMap.basicInfo.numberSells}}件</view>
+    <view class="jilu">{{pintuanSet.numberOrder}}{{ $t.index.p_persion }} / {{ $t.index.p_numsuc }}{{curGoodsMap.basicInfo.numberSells}}</view>
   </view>
 </view>
-<view wx:if="{{pintuanSet.numberOrder > helpNumers}}" class="pingdan-title">差{{pintuanSet.numberOrder - helpNumers}}人，即可拼单成功</view>
-<view wx:else class="pingdan-title">已拼单成功</view>
+<view wx:if="{{pintuanSet.numberOrder > helpNumers}}" class="pingdan-title">{{ $t.index.remain }}{{pintuanSet.numberOrder - helpNumers}}{{ $t.index.remainToSuccess }}</view>
+<view wx:else class="pingdan-title">{{ $t.index.pingSuccess }}</view>
 <view class="pingtuan-photos">
   <image wx:for="{{helpUsers}}" wx:key="index" mode='aspectFill' class='photos' src='{{item}}'></image>
 </view>
 <view class="botton-box">
-  <van-button round type="default" bind:click="yuanjiagoumai">原价购买</van-button>
-  <van-button wx:if="{{pintuanSet.numberOrder > helpNumers}}" round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy">立即拼单</van-button>
-  <van-button wx:else round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy2">重新开团</van-button>
+  <van-button round type="default" bind:click="yuanjiagoumai">{{ $t.index.originalPriceBuy }}</van-button>
+  <van-button wx:if="{{pintuanSet.numberOrder > helpNumers}}" round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy">{{ $t.index.pingtuan }}</van-button>
+  <van-button wx:else round type="default" color="#d3aa79" bind:click="_lijipingtuanbuy2">{{ $t.index.openNewPingtuan }}</van-button>
 </view>
-<van-divider contentPosition="center" dashed>拼单流程</van-divider>
+<van-divider contentPosition="center" dashed>{{ $t.index.pingtuanProcess }}</van-divider>
 <view class="liucheng">
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/pay-pingtuan.png'></image>
-    <view class="content">支付开拼</view>
+    <view class="content">{{ $t.index.step1 }}</view>
   </view>
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/friend.png'></image>
-    <view class="content">好友参与</view>
+    <view class="content">{{ $t.index.step2 }}</view>
   </view>
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/quhuo.png'></image>
-    <view class="content">成功取餐</view>
+    <view class="content">{{ $t.index.step3 }}</view>
   </view>
   <view class="liucheng-1">
     <image mode='aspectFill' class='icon' src='/images/tuikuan.png'></image>
-    <view class="content">失败退款</view>
+    <view class="content">{{ $t.index.step4 }}</view>
   </view>
 </view>
 </van-popup> 
@@ -235,8 +235,8 @@
 
 <block wx:if="{{ scanDining }}">
   <van-tabbar active="{{ 0 }}" fixed="{{ false }}" inactive-color="#6e6d6b" active-color="#e64340" bind:change="tabbarChange">
-    <van-tabbar-item icon="goods-collect-o">点餐</van-tabbar-item>
-    <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
-    <van-tabbar-item icon="bill-o">已点</van-tabbar-item>
+    <van-tabbar-item icon="goods-collect-o">{{ $t.index.order }}</van-tabbar-item>
+    <van-tabbar-item icon="shopping-cart-o">{{ $t.cart.title }}</van-tabbar-item>
+    <van-tabbar-item icon="bill-o">{{ $t.index.ordered }}</van-tabbar-item>
   </van-tabbar>
 </block>

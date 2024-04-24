@@ -12,28 +12,30 @@ Page({
    */
   onLoad: function(options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.feedback.title,
+    })
   },
   onShow: function() {
   },
   async bindSave() {    
     if (!this.data.name) {
       wx.showToast({
-        title: '请填写您的姓名',
+        title: this.data.$t.feedback.nameRequired,
         icon: 'none',
       })
       return
     }
     if (!this.data.content) {
       wx.showToast({
-        title: '请填写反馈信息',
+        title: this.data.$t.feedback.contentRequired,
         icon: 'none',
       })
       return
     }
     const extJsonStr = {}
     extJsonStr['姓名'] = this.data.name
-    extJsonStr['联系电话'] = this.data.mobile
-    extJsonStr['微信'] = this.data.wx
+    extJsonStr['联系电话'] = this.data.mobile || ''
 
     // 批量上传附件
     if (this.data.picsList) {
@@ -53,17 +55,8 @@ Page({
       content: this.data.content
     })
     if (res.code == 0) {
-      // 提交次数 + 1 
-      let feedbackTimes = this.data.feedbackTimes
-      if (!feedbackTimes) {
-        feedbackTimes = {
-          id: '',
-          refId: 0,
-          content: '{}'
-        }
-      }
       wx.showToast({
-        title: '提交成功',
+        title: this.data.$t.common.submitSuccess,
       })
       setTimeout(() => {
         wx.navigateBack({

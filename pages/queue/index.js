@@ -6,9 +6,10 @@ Page({
 
   },
   onLoad: function (options) {
-    getApp().initLanguage(this)
+    
   },
   onShow: function () {
+    getApp().initLanguage(this)
     AUTH.checkHasLogined().then(isLogin => {
       if (isLogin) {
         this.queuingTypes()

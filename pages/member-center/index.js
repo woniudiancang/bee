@@ -11,6 +11,9 @@ Page({
   },
   onLoad: function (options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.vip.title,
+    })
     this.userLevelList()
     this.userAmount()
     this.getUserApiInfo()

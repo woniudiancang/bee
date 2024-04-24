@@ -11,9 +11,13 @@ Page({
     isLogined: true
   },
   onLoad: function (options) {
-    getApp().initLanguage(this)
+    
   },
   onShow: function () {
+    getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.index.PickingUp,
+    })
     AUTH.checkHasLogined().then(isLogined => {
       this.setData({
         isLogined

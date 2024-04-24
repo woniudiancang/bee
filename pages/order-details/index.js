@@ -14,6 +14,9 @@ Page({
     },
     onLoad:function(e){
       getApp().initLanguage(this)
+      wx.setNavigationBarTitle({
+        title: this.data.$t.order.detail,
+      })
       // e.id = 601144
       this.setData({
         orderId: e.id
@@ -70,7 +73,7 @@ Page({
         // 余额足够
         WXAPI.orderPay(wx.getStorageSync('token'), this.data.orderDetail.orderInfo.id).then(res => {
           wx.showToast({
-            title: '支付成功',
+            title: this.data.$t.asset.success,
             icon: 'success'
           })
           this.orderDetail();
@@ -91,14 +94,13 @@ Page({
         url: "/pages/wuliu/index?id=" + orderId
       })
     },
-    confirmBtnTap:function(e){
+    confirmBtnTap(e){
       let that = this;
       let orderId = this.data.orderId;
       wx.showModal({
         confirmText: this.data.$t.common.confirm,
           cancelText: this.data.$t.common.cancel,
-          title: '确认您已收到商品？',
-          content: '',
+          content: this.data.$t.order.askConfirm,
           success: function(res) {
             if (res.confirm) {
               WXAPI.orderDelivery(wx.getStorageSync('token'), orderId).then(function (res) {

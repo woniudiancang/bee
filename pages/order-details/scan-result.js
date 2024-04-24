@@ -10,6 +10,9 @@ Page({
   },
   onLoad: function (e) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.my.scanHx,
+    })
     // e.hxNumber = '2008010532287842'
     this.setData({
       hxNumber: e.hxNumber
@@ -38,14 +41,13 @@ Page({
       url: "/pages/wuliu/index?id=" + orderId
     })
   },
-  confirmBtnTap: function (e) {
+  confirmBtnTap(e) {
     let that = this;
     let orderId = this.data.orderId;
     wx.showModal({
-      title: '确认您已收到商品？',
+      content: this.data.$t.order.askConfirm,
       confirmText: this.data.$t.common.confirm,
       cancelText: this.data.$t.common.cancel,
-      content: '',
       success: function (res) {
         if (res.confirm) {
           WXAPI.orderDelivery(wx.getStorageSync('token'), orderId).then(function (res) {
@@ -88,7 +90,7 @@ Page({
   },
   async doneHx(){
     wx.showLoading({
-      title: '处理中...',
+      title: '',
     })
     // https://www.yuque.com/apifm/nu0f75/sq4sma
     const res = await WXAPI.orderHXV2({
@@ -103,7 +105,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '核销完成',
+        title: this.data.$t.order.VerificationCompleted,
         icon: 'success'
       })
       this.onShow()

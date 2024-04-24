@@ -7,54 +7,54 @@
           <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="userinfo-avatar-img"></image>
         </button> 
         <view class="name-box">
-          <view class="name">用户ID:{{ apiUserInfoMap.base.id }}</view>
-          <view class="name" bindtap="editNick">{{ nick ? nick : '点击设置昵称' }}</view>
+          <view class="name">{{ $t.my.uid }}:{{ apiUserInfoMap.base.id }}</view>
+          <view class="name" bindtap="editNick">{{ nick ? nick : $t.my.nickSet }}</view>
           <view wx:if="{{apiUserInfoMap.userLevel}}" class="state" bindtap="govip">{{apiUserInfoMap.userLevel.name}}</view>
-          <view wx:else class="state" bindtap="govip">非会员</view>
+          <view wx:else class="state" bindtap="govip">{{ $t.vip.notVIP }}</view>
         </view>
       </view>
       <view class="user-code" bindtap="goUserCode">
         <van-icon name="qr" size="64rpx" />
-        <view class="txt">会员码</view>
+        <view class="txt">{{ $t.my.userCode }}</view>
       </view>
 		</view>
 		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
 			<view class="coupon" bindtap="goCoupons">
 				<view class="num">{{couponStatistics.canUse}}</view>
-				<view class="title1">优惠券</view>
+				<view class="title1">{{ $t.coupons.title }}</view>
 			</view>
 			<view class="balance-box" bindtap="goBalance">
 				<view class="amount-box">
 					<view class="amount1">¥</view>
 					<view class="amount2">{{balance}}</view>
 				</view>
-				<view class="amount">余额</view>
+				<view class="amount">{{ $t.order.balance }}</view>
 			</view>
 			<view class="coupon" bindtap="goScorelog">
 				<view class="num">{{score}}</view>
-				<view class="title1">积分</view>
+				<view class="title1">{{ $t.my.score }}</view>
 			</view>
 		</view>
 	</view>
 </view>
 <view class="my-bar1">
-	<van-cell icon="sign" title="每日签到" size="large" is-link url="/pages/sign/index" />
-	<van-cell wx:if="{{canHX}}" icon="qr" title="扫码核销" size="large" is-link bind:click="scanOrderCode" />
-	<van-cell icon="medal-o" title="会员中心" size="large" is-link url="/pages/member-center/index" />
-	<van-cell icon="clock-o" title="在线订座" size="large" is-link url="/pages/booking/index" />
-	<van-cell icon="gold-coin-o" title="优惠买单" size="large" is-link url="/pages/youhui-pay/index" />
-	<van-cell icon="orders-o" title="全部订单" size="large" is-link url="/pages/all-orders/index" />
-	<van-cell icon="location-o" title="收货地址" size="large" is-link url="/pages/ad/index" />
-	<van-cell icon="info-o" title="关于我们" size="large" is-link url="/pages/about/index" />
-  <van-cell icon="service-o" wx:if="{{ customerServiceType == 'QW' }}" title="联系客服" size="large" is-link bind:click="customerService" />
-  <van-cell icon="points" title="清除缓存" size="large" is-link bind:click="clearStorage" />
-	<van-cell icon="records" title="意见反馈" is-link url="/pages/my/feedback" />
+	<van-cell icon="sign" title="{{ $t.my.signDaily }}" size="large" is-link url="/pages/sign/index" />
+	<van-cell wx:if="{{canHX}}" icon="qr" title="{{ $t.my.scanHx }}" size="large" is-link bind:click="scanOrderCode" />
+	<van-cell icon="medal-o" title="{{ $t.vip.title }}" size="large" is-link url="/pages/member-center/index" />
+	<van-cell icon="clock-o" title="{{ $t.booking.title }}" size="large" is-link url="/pages/booking/index" />
+	<van-cell icon="gold-coin-o" title="{{ $t.my.youhuimaidan }}" size="large" is-link url="/pages/youhui-pay/index" />
+	<van-cell icon="orders-o" title="{{ $t.order.title }}" size="large" is-link url="/pages/all-orders/index" />
+	<van-cell icon="location-o" title="{{ $t.ad_index.title }}" size="large" is-link url="/pages/ad/index" />
+	<van-cell icon="info-o" title="{{ $t.my.aboutUs }}" size="large" is-link url="/pages/about/index" />
+  <van-cell icon="service-o" wx:if="{{ customerServiceType == 'QW' }}" title="{{ $t.my.Contact }}" size="large" is-link bind:click="customerService" />
+  <van-cell icon="points" title="{{ $t.my.clearStorage }}" size="large" is-link bind:click="clearStorage" />
+	<van-cell icon="records" title="{{ $t.feedback.title }}" is-link url="/pages/my/feedback" />
 </view>
 <view class="version">v{{version}}</view>
 
 <van-dialog
   use-slot
-  title="修改昵称"
+  title="{{ $t.my.nickEdit }}"
   show="{{ nickShow }}"
   show-cancel-button
   bind:confirm="_editNick"
@@ -62,7 +62,7 @@
   <van-field
     model:value="{{ nick }}"
     type="nickname"
-    placeholder="请输入昵称"
+    placeholder="{{ $t.my.nickRequired }}"
     size="large"
     clearable
   />

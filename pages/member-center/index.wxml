@@ -3,22 +3,22 @@
     <image mode='aspectFill' class='head' src='{{apiUserInfoMap.base.avatarUrl}}'></image>
     <view class="name-box">
       <view class="name">{{apiUserInfoMap.base.nick}}</view>
-      <view class="content">累计消费{{totleConsumed}}元</view>
+      <view class="content">{{ $t.vip.consumption }} ￥{{totleConsumed}}</view>
     </view>
   </view>
   <view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
-  <view wx:else class="state">非会员</view>
-  <view class="state-0">消费达到金额可自动成为会员</view>
+  <view wx:else class="state">{{ $t.vip.notVIP }}</view>
+  <view class="state-0">{{ $t.vip.tip }}</view>
 </view>
-<view class="system">会员成长体系</view>
+<view class="system">{{ $t.vip.growth }}</view>
 <view class="title-box">
-  <view class="title1">级别名称</view>
-  <view class="title2">购物折扣</view>
-  <view class="title3">消费标准(元)</view>
+  <view class="title1">{{ $t.vip.growthName }}</view>
+  <view class="title2">{{ $t.vip.growthDiscount }}</view>
+  <view class="title3">{{ $t.vip.growthConsumption }}</view>
 </view>
 <view wx:for="{{levelList}}" wx:key="id" class="title-box-0">
   <view class="title1">{{item.name}}</view>
   <view class="title2">{{item.rebate}}</view>
   <view class="title3">{{item.upgradeAmount}}</view>
 </view>
-<view class="remark">注：当购物消费达指定标准自动成为该级别会员</view>
+<view class="remark">{{ $t.vip.profile }}</view>

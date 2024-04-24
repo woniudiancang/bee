@@ -23,7 +23,10 @@ Page({
     });
   },
   onLoad: function (options) {
-    getApp().initLanguage(this) 
+    getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.my.youhuimaidan,
+    })
     WXAPI.payBillDiscounts().then(res => {
       if (res.code === 0) {
         this.setData({

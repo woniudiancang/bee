@@ -25,7 +25,7 @@
     <van-uploader
       accept="media"
       multiple
-      upload-text="图片/视频"
+      upload-text="{{ $t.feedback.imageOrVideo }}"
       image-fit="aspectFill"
       file-list="{{ picsList }}"
       bind:after-read="afterPicRead"

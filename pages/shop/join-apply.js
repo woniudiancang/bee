@@ -73,7 +73,7 @@ Page({
         }
       }
       wx.showToast({
-        title: '提交成功',
+        title: this.data.$t.common.submitSuccess,
       })
       setTimeout(() => {
         wx.navigateBack({

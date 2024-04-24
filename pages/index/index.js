@@ -119,7 +119,6 @@ Page({
       wx.showModal({
         confirmText: this.data.$t.common.confirm,
         cancelText: this.data.$t.common.cancel,
-        title: '桌码异常',
         content: res.msg,
         showCancel: false
       })
@@ -152,14 +151,13 @@ Page({
         this.data.longitude = res.longitude
         this.fetchShops(res.latitude, res.longitude, '')
       },      
-      fail(e){
+      fail: (e) => {
         if (e.errMsg.indexOf('fail auth deny') != -1) {
           AUTH.checkAndAuthorize('scope.userLocation')
         } else {
           wx.showModal({
             confirmText: this.data.$t.common.confirm,
             cancelText: this.data.$t.common.cancel,
-            title: '出错了~',
             content: e.errMsg,
             showCancel: false
           })
@@ -275,9 +273,6 @@ Page({
       return
     }
     res.data.forEach(ele => {
-      if (!ele.characteristic) {
-        ele.characteristic = '清凉一夏' // 給一个默认的商品特色描述
-      }
       if (ele.miaosha) {
         // 秒杀商品，显示倒计时
         const _now = new Date().getTime()
@@ -689,7 +684,7 @@ Page({
         _data.showPingtuanPop = false
         _data.showGoodsDetailPOP = true
         wx.showToast({
-          title: "拼团功能未开启",
+          title: this.data.$t.index.pingtuanNoOpen,
           icon: 'none'
         })
         return
