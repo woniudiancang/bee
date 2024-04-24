@@ -19,6 +19,9 @@ Page({
    */
   onLoad: function (e) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+        title: this.data.$t.coupons.title,
+    })
   },
 
   /**
@@ -89,7 +92,7 @@ Page({
   getCounpon2(){
     if (!this.data.couponPwd) {
       wx.showToast({
-        title: '请输入口令',
+        title: this.data.$t.coupons.inputpassword,
         icon: 'none'
       })
       return
@@ -127,49 +130,49 @@ Page({
     }).then(function (res) {
       if (res.code == 20001 || res.code == 20002) {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: '来晚了',
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
+          content: that.data.$t.coupons.Cominglate,
           showCancel: false
         })
         return;
       }
       if (res.code == 20003) {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: '你领过了，别贪心哦~',
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
+          content: that.data.$t.coupons.receivedgreedy,
           showCancel: false
         })
         return;
       }
       if (res.code == 30001) {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: '您的积分不足',
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
+          content: that.data.$t.coupons.pointsinsufficient,
           showCancel: false
         })
         return;
       }
       if (res.code == 20004) {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: '已过期~',
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
+          content: that.data.$t.coupons.Expired,
           showCancel: false
         })
         return;
       }
       if (res.code == 0) {
         wx.showToast({
-          title: '领取成功',
+          title: that.data.$t.coupons.Successfullyclaimed,
           icon: 'success'
         })
       } else {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })
@@ -290,14 +293,14 @@ Page({
   async exchangeCoupons() {
     if (!this.data.number) {
       wx.showToast({
-        title: '请输入券号',
+        title: this.data.$t.coupons.enternum,
         icon: 'none'
       })
       return
     }
     if (!this.data.pwd) {
       wx.showToast({
-        title: '请输入密码',
+        title: this.data.$t.coupons.password,
         icon: 'none'
       })
       return
@@ -322,19 +325,19 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '兑换成功'
+        title: this.data.$t.coupons.Redemption,
       })
     }
   },
   onShareAppMessage: function() {    
     return {
-      title: wx.getStorageSync('mallName') + '邀您领取优惠券',
+      title: wx.getStorageSync('mallName') + this.data.$t.coupons.Invitingcoupons,
       path: '/pages/coupons/index?inviter_id=' + wx.getStorageSync('uid')
     }
   },
   onShareTimeline() {    
     return {
-      title: wx.getStorageSync('mallName') + '邀您领取优惠券',
+      title: wx.getStorageSync('mallName') + this.data.$t.coupons.Invitingcoupons,
       query: 'inviter_id=' + wx.getStorageSync('uid'),
       imageUrl: wx.getStorageSync('share_pic')
     }

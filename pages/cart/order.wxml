@@ -1,9 +1,9 @@
 <van-empty wx:if="{{ !paySuccess && !orderInfo }}" description="{{ $t.cart.empty }}" />
 <block wx:if="{{ !paySuccess && orderInfo }}">
   <van-cell-group>
-    <van-cell title="桌号" value="{{ orderInfo.tableCode }}" />
+    <van-cell title="{{$t.cart.tableNum }}" value="{{ orderInfo.tableCode }}" />
   </van-cell-group>
-  <van-cell-group title="已点菜品">
+  <van-cell-group title="{{$t.cart.ordered }}">
     <van-card
       wx:for="{{goodsList}}" wx:key="id"
       price="{{ item.amount }}"
@@ -14,19 +14,19 @@
       centered
     >
       <view slot="footer">
-        <van-tag wx:if="{{ item.cyTableStatus == 0 }}" mark type="warning">待确认</van-tag>
-        <van-tag wx:if="{{ item.cyTableStatus == 1 }}" mark type="success">已下厨</van-tag>
-        <van-tag wx:if="{{ item.cyTableStatus == 2 }}" mark plain type="success">已上菜</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 0 }}" mark type="warning">"{{$t.cart.Tobeconfirmed }}"</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 1 }}" mark type="success">"{{$t.cart.Cooked }}"</van-tag>
+        <van-tag wx:if="{{ item.cyTableStatus == 2 }}" mark plain type="success">"{{$t.cart.Served }}"</van-tag>
       </view>
     </van-card>
   </van-cell-group>
   <van-cell-group>
-    <van-cell title="菜品数量" value="{{ orderInfo.goodsNumber }}" />
-    <van-cell title="消费金额" value="{{ orderInfo.amount }}" />
-    <van-cell title="应付金额" value="{{ orderInfo.amountReal }}" />
+    <van-cell title="{{$t.cart.Numofdishes }}" value="{{ orderInfo.goodsNumber }}" />
+    <van-cell title="{{$t.cart.Consumptionamount }}" value="{{ orderInfo.amount }}" />
+    <van-cell title="{{$t.cart.Payableamount }}" value="{{ orderInfo.amountReal }}" />
   </van-cell-group>
   <view class="bottom"></view>
-  <van-submit-bar price="{{ orderInfo.amountReal*100 }}" button-text="结账买单" bindtap="goPayOrder" />
+  <van-submit-bar price="{{ orderInfo.amountReal*100 }}" button-text="{{$t.cart.Check }}" bindtap="goPayOrder" />
 </block>
 <view wx:if="{{ paySuccess }}" class="paySuccess">
   <van-icon name="checked" size="260rpx" color="#07c160" />

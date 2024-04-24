@@ -96,5 +96,27 @@ module.exports = {
     num: '个商品',
     btn: '立即下单',
     ordered: '已点菜品',
+    tableNum: '桌号',
+    Tobeconfirmed: '待确认',
+    Cooked:'已下厨',
+    Served:'已上菜',
+    Numofdishes:'菜品数量',
+    Consumptionamount:'消费金额',
+    Payableamount:'应付金额',
+    Check:'结账买单',
+  },
+  coupons: {
+    title: '优惠卷',
+    inputpassword:'请输入口令',
+    Cominglate:'来晚了',
+    receivedgreedy:'你领过了，别贪心哦~',
+    pointsinsufficient:'您的积分不足~',
+    Expired :'已过期~',
+    Successfullyclaimed :'领取成功~',
+    enternum:'请输入券号',
+    password:'请输入密码',
+    Redemption:'兑换成功',
+    Invitingcoupons:'邀您领取优惠券',
+    
   }
 }
