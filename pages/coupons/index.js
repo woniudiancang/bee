@@ -8,7 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ['可领', '已领', '失效', '口令'],
+    tabs: {
+      zh_CN: ['可领', '已领', '失效', '口令'],
+      en: ['Can Fetch', 'Available', 'Invalid', 'Exchange'],
+    },
     activeIndex: 0,
 
     showPwdPop: false

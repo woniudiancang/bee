@@ -22,21 +22,21 @@
     </view>
     <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
     <view class="characteristic">{{goodsDetail.basicInfo.characteristic}}</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">分享有赏，好友下单后可得
-      {{goodsDetail.basicInfo.commission}} 积分奖励</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">分享有赏，好友下单后可得
-      {{goodsDetail.basicInfo.commission}}元 现金奖励</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">{{ $t.goodsDetail.commission1 }}
+      {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission2 }}</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">{{ $t.goodsDetail.commission1 }}
+      {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission3 }}</view>
   </view>
-  <van-cell-group wx:if="{{curGoodsKanjia}}" title="商品砍价设置">
-    <van-cell title="限量" value="{{curGoodsKanjia.number}}份" />
-    <van-cell title="已售" value="{{curGoodsKanjia.numberBuy}}份" />
-    <van-cell title="原价" value="￥{{curGoodsKanjia.originalPrice}}" />
-    <van-cell title="底价" value="￥{{curGoodsKanjia.minPrice}}" />
-    <van-cell title="截止" value="{{curGoodsKanjia.dateEnd}}" />
+  <van-cell-group wx:if="{{curGoodsKanjia}}" title="{{ $t.goodsDetail.kanJiaSetting }}">
+    <van-cell title="{{ $t.goodsDetail.limit }}" value="{{curGoodsKanjia.number}}" />
+    <van-cell title="{{ $t.goodsDetail.saledNum }}" value="{{curGoodsKanjia.numberBuy}}" />
+    <van-cell title="{{ $t.goodsDetail.originalPrice }}" value="￥{{curGoodsKanjia.originalPrice}}" />
+    <van-cell title="{{ $t.goodsDetail.minPrice }}" value="￥{{curGoodsKanjia.minPrice}}" />
+    <van-cell title="{{ $t.goodsDetail.end }}" value="{{curGoodsKanjia.dateEnd}}" />
   </van-cell-group>
   <view class="curKanjiaprogress" wx:if="{{curKanjiaprogress}}">
-    <view class="name">帮
-      <text style='color:red;font-weight:bold;'>{{curKanjiaprogress.joiner.nick}}</text> 砍价吧！
+    <view class="name">{{ $t.goodsDetail.help }}
+      <text style='color:red;font-weight:bold;'>{{curKanjiaprogress.joiner.nick}}</text> {{ $t.goodsDetail.kanjia }}！
     </view>
     <van-progress
       percentage="{{100 * (curGoodsKanjia.originalPrice - curKanjiaprogress.kanjiaInfo.curPrice) / (curGoodsKanjia.originalPrice - curGoodsKanjia.minPrice)}}"
@@ -47,28 +47,23 @@
     />
     <view class="flex">
       <view class="kjbutton">
-        <button type="primary" open-type="share">邀请朋友帮忙</button>
+        <button type="primary" open-type="share">{{ $t.goodsDetail.inviteKanJiaFriend }}</button>
       </view>
     </view>
-    <van-cell title="帮砍人数" value="{{curKanjiaprogress.kanjiaInfo .helpNumber}}" />
-    <van-cell title="状态" value="{{curKanjiaprogress.kanjiaInfo .statusStr}}" />
-    <van-cell title="报名时间" value="{{curKanjiaprogress.kanjiaInfo .dateAdd}}" />
+    <van-cell title="{{ $t.goodsDetail.helpPerson }}" value="{{curKanjiaprogress.kanjiaInfo .helpNumber}}" />
+    <van-cell title="{{ $t.goodsDetail.status }}" value="{{curKanjiaprogress.kanjiaInfo .statusStr}}" />
+    <van-cell title="{{ $t.goodsDetail.joinTime }}" value="{{curKanjiaprogress.kanjiaInfo .dateAdd}}" />
   </view>
-  <van-cell wx:if="{{ shareQuanziProduct && show_wx_quanzi == '1' }}" custom-class="vw100 vcell" center title="微信圈子 好物圈"
-    border="{{false}}">
-    <view class="r">{{goodsDetail.basicInfo.numberSells}}人已买</view>
-    <share-button type="1" fore-color="#e64340" product="{{ shareQuanziProduct }}" bind:error="on_share_quanzi_error" />
-  </van-cell>
   <van-cell wx:if="{{hasMoreSelect && goodsDetailSkuShowType==0}}" custom-class="vw100 goods-property-container"
     border="{{false}}" is-link bind:click="bindGuiGeTap">
     <view slot="title">
-      请选择:
+      {{ $t.common.select }}:
       <block wx:for="{{goodsDetail.properties}}" wx:key="id"> {{item.name}}</block>
       <block wx:for="{{goodsAddition}}" wx:key="id"> {{item.name}}</block>
     </view>
   </van-cell>
   <view class="size-label-box2" wx:if="{{goodsDetailSkuShowType==1}}">
-    <view class="label-title">选择商品规格</view>
+    <view class="label-title">{{ $t.goodsDetail.noSelectSku }}</view>
     <view class="size-label-box">
       <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
         <view class="label">{{property.name}}</view>
@@ -80,7 +75,7 @@
         </view>
       </block>
     </view>
-    <van-cell title="购买数量">
+    <van-cell title="{{ $t.goodsDetail.buyNumber }}">
       <view>
         <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
       </view>
@@ -95,37 +90,37 @@
   </view>
   <view class="goods-des-info" id="goods-des-info">
     <view class="label-title">
-      <view class="left">商品详情</view>
+      <view class="left">{{ $t.goodsDetail.title }}</view>
     </view>
     <view class="goods-text">
       <parser html="{{goodsDetail.content}}" />
     </view>
   </view>
-  <van-cell-group wx:if="{{curKanjiaprogress && curKanjiaprogress.helps && curKanjiaprogress.helps.length>0}}" title="砍价记录">
+  <van-cell-group wx:if="{{curKanjiaprogress && curKanjiaprogress.helps && curKanjiaprogress.helps.length>0}}" title="{{ $t.goodsDetail.kanjiaLogs }}">
     <view class="kjlj"  wx:for="{{curKanjiaprogress.helps}}" wx:key="*this">
       <image class="kjlj-l" src="{{item.avatarUrl}}" mode="aspectFill" />
-      <van-cell custom-class="kjlj-r" title="￥ {{item.cutPrice}}" label="{{item.nick}} {{item.dateAdd}} 帮砍" size="large" />
+      <van-cell custom-class="kjlj-r" title="￥ {{item.cutPrice}}" label="{{item.nick}} {{item.dateAdd}} {{ $t.goodsDetail.help2 }}" size="large" />
     </view>
     <view style="height: 64rpx;"></view>
   </van-cell-group>
   <view class='kjBuyButton' wx:if="{{curGoodsKanjia && curKanjiaprogress}}">
     <view class="item" wx:if="{{curKanjiaprogress.kanjiaInfo.uid != curuid}}">
       <van-button type="primary" block bind:click="helpKanjia" disabled="{{myHelpDetail}}">
-        {{myHelpDetail?"您已砍过":"帮TA砍"}}</van-button>
+        {{myHelpDetail ? $t.goodsDetail.helped : $t.goodsDetail.helphe}}</van-button>
     </view>
     <view class="item" wx:else>
-      <van-button type="danger" block bind:click="tobuy">用当前价购买</van-button>
+      <van-button type="danger" block bind:click="tobuy">{{ $t.goodsDetail.buyUseCurPrice }}</van-button>
     </view>
   </view>
   <van-goods-action wx:if="{{ goodsDetail.basicInfo.stores < goodsDetail.basicInfo.minBuyNumber }}">
-    <van-goods-action-button text='补货中' type="warning" disabled />
+    <van-goods-action-button text='{{ $t.goodsDetail.storeing }}' type="warning" disabled />
   </van-goods-action>
   <van-goods-action wx:else>
-    <van-goods-action-button wx:if="{{ curKanjiaprogress }}" text='{{myHelpDetail?"您已砍过":"帮TA砍"}}' type="danger" bind:click="helpKanjia" disabled="{{ myHelpDetail }}" />
-    <van-goods-action-button wx:if="{{ goodsDetail.basicInfo.kanjia && !curGoodsKanjia }}" text="砍价已结束" type="warning" disabled />
-    <van-goods-action-button wx:elif="{{curGoodsKanjia && (!curKanjiaprogress || curKanjiaprogress.kanjiaInfo.uid != curuid)}}" text="发起砍价｜邀请好友助力" type="warning" bind:click="joinKanjia" />
-    <van-goods-action-button wx:elif="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" text="￥{{curKanjiaprogress.kanjiaInfo.curPrice}} 购买" type="warning" bind:click="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}" />
-    <van-goods-action-button wx:else text="加入购物车" type="warning" bind:click="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}" />
+    <van-goods-action-button wx:if="{{ curKanjiaprogress }}" text='{{myHelpDetail ? $t.goodsDetail.helped : $t.goodsDetail.helphe}}' type="danger" bind:click="helpKanjia" disabled="{{ myHelpDetail }}" />
+    <van-goods-action-button wx:if="{{ goodsDetail.basicInfo.kanjia && !curGoodsKanjia }}" text="{{ $t.goodsDetail.ended }}" type="warning" disabled />
+    <van-goods-action-button wx:elif="{{curGoodsKanjia && (!curKanjiaprogress || curKanjiaprogress.kanjiaInfo.uid != curuid)}}" text="{{ $t.goodsDetail.kanjiaBtn }}" type="warning" bind:click="joinKanjia" />
+    <van-goods-action-button wx:elif="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" text="￥{{curKanjiaprogress.kanjiaInfo.curPrice}} {{ $t.goodsDetail.buy }}" type="warning" bind:click="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}" />
+    <van-goods-action-button wx:else text="{{ $t.goodsDetail.addCartBtn }}" type="warning" bind:click="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}" />
   </van-goods-action>
 </view>
 
@@ -135,8 +130,8 @@
     <canvas class="canvas" style="{{canvasstyle}}" canvas-id="firstCanvas"></canvas>
   </view>
   <view class="poster-btn">
-    <button type="primary" size="mini" bindtap='_saveToMobile'> 保存图片 </button>
-    <button type="warn" size="mini" bindtap='closePop'> 关闭 </button>
+    <button type="primary" size="mini" bindtap='_saveToMobile'> {{ $t.goodsDetail.saveImage }} </button>
+    <button type="warn" size="mini" bindtap='closePop'> {{ $t.common.cancel }} </button>
   </view>
 </block>
 
@@ -144,7 +139,7 @@
 <view wx:if="{{showposterImg}}" class="popup-mask"></view>
 <view wx:if="{{showposterImg}}" class="posterImg-box">
   <image mode="widthFix" class="posterImg" src="{{posterImg}}"></image>
-  <view class="btn-create" bindtap="savePosterPic">保存到相册</view>
+  <view class="btn-create" bindtap="savePosterPic">{{ $t.goodsDetail.saveImage }}</view>
 </view>
 
 <van-popup show="{{ !hideShopPopup }}" round closeable position="bottom"
@@ -181,11 +176,11 @@
       </view>
     </block>
   </view>
-  <van-cell wx:if="{{ !(curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid) }}" title="购买数量">
+  <van-cell wx:if="{{ !(curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid) }}" title="{{ $t.goodsDetail.buyNumber }}">
     <view>
       <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
     </view>
   </van-cell>
-  <van-button wx:if="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" bindtap="addShopCar" type="danger" block>￥{{curKanjiaprogress.kanjiaInfo.curPrice}} 购买</van-button>
-  <van-button wx:else bindtap="addShopCar" type="danger" block>加入购物车</van-button>
+  <van-button wx:if="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" bindtap="addShopCar" type="danger" block>￥{{curKanjiaprogress.kanjiaInfo.curPrice}} {{ $t.goodsDetail.buy }}</van-button>
+  <van-button wx:else bindtap="addShopCar" type="danger" block>{{ $t.goodsDetail.addCartBtn }}</van-button>
 </van-popup>

@@ -522,7 +522,7 @@ Page({
     const additionCanSubmit = this.additionCanSubmit()
     if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
-        title: '请选择规格',
+        title: this.data.$t.goodsDetail.noSelectSku,
         icon: 'none'
       })
       return
@@ -864,7 +864,7 @@ Page({
     const additionCanSubmit = this.additionCanSubmit()
     if (!canSubmit || !additionCanSubmit) {
       wx.showToast({
-        title: '请选择规格',
+        title: this.data.$t.goodsDetail.noSelectSku,
         icon: 'none'
       })
       return
@@ -1029,7 +1029,7 @@ Page({
     const child = property.items[propertychildindex]
     if (child.stores <= 0) {
       wx.showToast({
-        title: '已售罄',
+        title: this.data.$t.goodsDetail.noStores,
         icon: 'none'
       })
       return

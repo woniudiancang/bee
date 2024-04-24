@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/goods-details/index",
+          "pathName": "pages/goods-details/index",
+          "query": "id=521059",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/coupons/index",
           "pathName": "pages/coupons/index",
           "query": "",

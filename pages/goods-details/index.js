@@ -21,6 +21,9 @@ Page({
   },
   onLoad(e) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.goodsDetail.title,
+    })
     // e.id = 122843
     // 读取分享链接中的邀请人编号
     if (e && e.inviter_id) {
@@ -152,14 +155,13 @@ Page({
         }
         //砍价商品 tabs栏显示砍价情况
         // var tabs = that.data.tabs
-        // tabs[2].tabs_name="砍价记录"
+        // tabs[2].tabs_name=that.data.$t.goodsDetail.kanjiaLogs
         // tabs[2].view_id="kanjia"
         // that.setData({
         //   tabs:tabs
         // })
       }
       that.setData(_data)
-      that.initShareQuanziProduct()
       that._goodsTimesSchedule()
     }
   },
@@ -349,7 +351,7 @@ Page({
     const child = property.items[propertychildindex]
     if (child.stores <= 0) {
       wx.showToast({
-        title: '已售罄',
+        title: this.data.$t.goodsDetail.noStores,
         icon: 'none'
       })
       return
@@ -374,7 +376,7 @@ Page({
     if (this.data.goodsDetail.properties && !this.data.canSubmit) {
       if (!this.data.canSubmit) {
         wx.showToast({
-          title: '请选择规格',
+          title: this.data.$t.goodsDetail.noSelectSku,
           icon: 'none'
         })
       }
@@ -404,7 +406,7 @@ Page({
       })
       if (!canSubmit) {
         wx.showToast({
-          title: '请选择配件',
+          title: this.data.$t.goodsDetail.noSelectAddtion,
           icon: 'none'
         })
         this.bindGuiGeTap()
@@ -413,7 +415,7 @@ Page({
     }
     if (this.data.buyNumber < 1) {
       wx.showToast({
-        title: '请选择购买数量',
+        title: this.data.$t.goodsDetail.noSelectNumber,
         icon: 'none'
       })
       return
@@ -465,7 +467,7 @@ Page({
 
     this.closePopupTap();
     wx.showToast({
-      title: '加入购物车',
+      title: this.data.$t.goodsDetail.addCartSuccess,
       icon: 'success'
     })
     this.shippingCartInfo()
@@ -488,7 +490,7 @@ Page({
       }
     }
     if (this.data.kjJoinUid) {
-      _data.title = this.data.curKanjiaprogress.joiner.nick + '邀请您帮TA砍价'
+      _data.title = this.data.curKanjiaprogress.joiner.nick + ' ' + this.data.$t.goodsDetail.inviteKanJia
       _data.path += '&kjJoinUid=' + this.data.kjJoinUid
     }
     return _data
@@ -530,10 +532,9 @@ Page({
         myHelpDetail: res.data
       });
       wx.showModal({
-        confirmText: this.data.$t.common.confirm,
-        cancelText: this.data.$t.common.cancel,
-        title: '成功',
-        content: '成功帮TA砍掉 ' + res.data.cutPrice + ' 元',
+        confirmText: _this.data.$t.common.confirm,
+        cancelText: _this.data.$t.common.cancel,
+        content: _this.data.$t.goodsDetail.kanJiaAmount + ' ' + res.data.cutPrice,
         showCancel: false
       })
       _this.getGoodsDetailAndKanjieInfo(_this.data.goodsDetail.basicInfo.id)
@@ -627,7 +628,7 @@ Page({
           {
             x: 352,
             y: _baseHeight + 320,
-            text: '长按识别小程序码',
+            text: _this.data.$t.goodsDetail.longTapQrcode,
             fontSize: 28,
             color: '#999'
           }
@@ -653,9 +654,9 @@ Page({
       filePath: this.data.posterImg,
       success: (res) => {
         wx.showModal({
-          content: '已保存到手机相册',
+          content: _this.data.$t.goodsDetail.qrcodeSaved,
           showCancel: false,
-          confirmText: '知道了',
+          confirmText: _this.data.$t.common.gotIt,
           confirmColor: '#333'
         })
       },
@@ -672,28 +673,6 @@ Page({
         })
       }
     })
-  },
-  initShareQuanziProduct() {
-    this.setData({
-      shareQuanziProduct: {
-        "item_code": this.data.goodsDetail.basicInfo.id + '',
-        "title": this.data.goodsDetail.basicInfo.name,
-        "category_list": [
-          this.data.goodsDetail.category.name
-        ],
-        "image_list": [
-          this.data.goodsDetail.basicInfo.pic
-        ],
-        "src_mini_program_path": '/pages/goods-details/index?id=' + this.data.goodsDetail.basicInfo.id
-      }
-    })
-  },
-  on_share_quanzi_error(e) {
-    wx.showToast({
-      title: '暂时无法推荐',
-      icon: 'none'
-    })
-    console.error(e)
   },
   previewImage(e) {
     const url = e.currentTarget.dataset.url
@@ -726,8 +705,7 @@ Page({
       return;
     }
     wx.showLoading({
-      title: '加载中',
-      mask: true
+      title: ''
     })
     WXAPI.kanjiaJoin(wx.getStorageSync('token'), _this.data.curGoodsKanjia.id).then(function (res) {
       wx.hideLoading()

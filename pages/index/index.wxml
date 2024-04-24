@@ -73,7 +73,7 @@
         <view wx:else>{{ item.characteristic }}</view>
       </view>
       <view class="goods-btn" slot="footer">
-        <van-button wx:if="{{ item.stores < item.minBuyNumber }}" size="small" color="#e64340" round disabled>补货中</van-button>
+        <van-button wx:if="{{ item.stores < item.minBuyNumber }}" size="small" color="#e64340" round disabled>{{ $t.goodsDetail.storeing }}</van-button>
         <van-button wx:elif="{{ item.miaosha && item.dateStartInt > 0 }}" size="small" color="#e64340" round disabled>即将开抢</van-button>
         <van-button wx:elif="{{ item.miaosha && item.dateEndInt <= 0 }}" size="small" color="#e64340" round disabled>秒杀结束</van-button>
         <van-button wx:elif="{{item.kanjia}}" size="small" color="#e64340" round data-idx="{{index}}" bind:click="goGoodsDetail">砍价</van-button>
@@ -143,7 +143,7 @@
     </view>
     <view class="add-cart">
       <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">拼团抢购</van-button>
-      <van-button wx:else block color="#e64340" bind:click="addCart2">加入购物车</van-button>
+      <van-button wx:else block color="#e64340" bind:click="addCart2">{{ $t.goodsDetail.addCartBtn }}</van-button>
     </view>
   </view>
 </van-popup> 
@@ -190,7 +190,7 @@
     <view class="title">{{curGoodsMap.basicInfo.name}}</view>
     <view class="price">
       <view class="xianjia">¥{{curGoodsMap.basicInfo.pingtuanPrice}}</view>
-      <view wx:if="{{curGoodsMap.basicInfo.minPrice > 0 && curGoodsMap.basicInfo.minPrice != curGoodsMap.basicInfo.pingtuanPrice}}" class="yuanjia">原价¥{{curGoodsMap.basicInfo.minPrice}}</view>
+      <view wx:if="{{curGoodsMap.basicInfo.minPrice > 0 && curGoodsMap.basicInfo.minPrice != curGoodsMap.basicInfo.pingtuanPrice}}" class="yuanjia">{{ $t.goodsDetail.originalPrice }} ¥{{curGoodsMap.basicInfo.minPrice}}</view>
     </view>
     <view class="jilu">{{pintuanSet.numberOrder}}人成单 / 已拼{{curGoodsMap.basicInfo.numberSells}}件</view>
   </view>

@@ -52,7 +52,7 @@
 	<van-col span="18">
 		<view class="detail-1 {{ (item.minBuyNumber && item.stores < item.minBuyNumber) ? 'quehuo' : '' }}">
       {{item.name}}
-      <van-tag wx:if="{{ item.minBuyNumber && item.stores < item.minBuyNumber }}" type="danger">补货中</van-tag>
+      <van-tag wx:if="{{ item.minBuyNumber && item.stores < item.minBuyNumber }}" type="danger">{{ $t.goodsDetail.storeing }}</van-tag>
     </view>
 		<view class="goods-label">{{item.label}}
 			<block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">

@@ -37,6 +37,6 @@
   <van-cell title="合计" value="¥{{orderDetail.orderInfo.amountReal}}" value-class="call-value" />
   <view class="times">
     <view>下单: {{orderDetail.orderInfo.dateAdd}}</view>
-    <view wx:if="{{orderDetail.orderInfo.status == -1}}">关闭: {{orderDetail.orderInfo.dateClose}}</view>
+    <view wx:if="{{orderDetail.orderInfo.status == -1}}">{{ $t.common.cancel }}: {{orderDetail.orderInfo.dateClose}}</view>
   </view>
 </view>

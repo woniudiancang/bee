@@ -12,11 +12,6 @@ async function showTabBarBadge(noTabBarPage){
   if (res.code == 0) {
     number += res.data.number
   }
-  // vop 购物车
-  res = await WXAPI.jdvopCartInfo(token)
-  if (res.code == 0) {
-    number += res.data.number
-  }
   if (!noTabBarPage) {
     if (number == 0) {
       // 删除红点点
