@@ -9,6 +9,13 @@ module.exports = {
     submitSuccess: 'Submitted',
     gotIt: 'Got it',
     search: 'Search',
+    getCodeError: 'Fetch code Fail',
+    loginFail: 'Can\'t Login',
+    authorizeRequired: 'Need Authorization',
+    authorize: 'Auth',
+    upgrade: 'The new version is ready. Do you want to restart the application?',
+    noNetwork: 'Currently no network available',
+    networkDown: 'Network disconnected',
   },
   auth: {
     needLogin: 'Please Login First',
@@ -325,5 +332,13 @@ module.exports = {
     signed: 'Signed',
     signSuccess: 'Sign Success',
     signBtn: 'Sign',
-  }
+  },
+  youhuipay: {
+    amountRequired: 'Please fill in the correct consumption amount',
+    curAmount: 'Your current consumption',
+    youhui: 'Discount',
+    askAmount: 'Please ask the waiter and enter',
+    btn: 'Confirm payment',
+    youhuiList: 'Discount information',
+  },
 }

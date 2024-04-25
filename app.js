@@ -15,8 +15,7 @@ App({
       wx.showModal({
         confirmText: $t.common.confirm,
         cancelText: $t.common.cancel,
-        title: '更新提示',
-        content: '新版本已经准备好，是否重启应用？',
+        content: $t.common.upgrade,
         success(res) {
           if (res.confirm) {
             // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
@@ -35,9 +34,8 @@ App({
         if (networkType === 'none') {
           that.globalData.isConnected = false
           wx.showToast({
-            title: '当前无网络',
-            icon: 'loading',
-            duration: 2000
+            title: $t.common.noNetwork,
+            icon: 'loading'
           })
         }
       }
@@ -50,9 +48,8 @@ App({
       if (!res.isConnected) {
         that.globalData.isConnected = false
         wx.showToast({
-          title: '网络已断开',
-          icon: 'loading',
-          duration: 2000
+          title: $t.common.networkDown,
+          icon: 'loading'
         })
       } else {
         that.globalData.isConnected = true
@@ -116,7 +113,7 @@ App({
                     console.error(err)
                   })
                 } else {
-                  console.error('登录失败！' + loginRes.errMsg)
+                  console.error(loginRes.errMsg)
                 }
               }
             })

@@ -57,10 +57,10 @@ async function wxaCode(){
       },
       fail() {
         wx.showToast({
-          title: '获取code失败',
+          title: $t.common.getCodeError,
           icon: 'none'
         })
-        return resolve('获取code失败')
+        return resolve($t.common.getCodeError)
       }
     })
   })
@@ -86,7 +86,7 @@ async function login(page){
             wx.showModal({
               confirmText: $t.common.confirm,
               cancelText: $t.common.cancel,
-              title: '无法登录',
+              title: $t.common.loginFail,
               content: res.msg,
               showCancel: false
             })
@@ -110,7 +110,7 @@ async function login(page){
             wx.showModal({
               confirmText: $t.common.confirm,
               cancelText: $t.common.cancel,
-              title: '无法登录',
+              title: $t.common.loginFail,
               content: res.msg,
               showCancel: false
             })
@@ -207,10 +207,9 @@ async function checkAndAuthorize (scope) {
               //   })
               // }
               wx.showModal({
-                title: '无权操作',
-                content: '需要获得您的授权',
+                content: $t.common.authorizeRequired,
                 showCancel: false,
-                confirmText: '立即授权',
+                confirmText: $t.common.authorize,
                 confirmColor: '#e64340',
                 success(res) {
                   wx.openSetting();

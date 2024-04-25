@@ -9,6 +9,13 @@ module.exports = {
     submitSuccess: '提交成功',
     gotIt: '知道了',
     search: '搜索',
+    getCodeError: '获取code失败',
+    loginFail: '无法登录',
+    authorizeRequired: '需要获得您的授权',
+    authorize: '立即授权',
+    upgrade: '新版本已经准备好，是否重启应用？',
+    noNetwork: '当前无网络',
+    networkDown: '网络已断开',
   },
   auth: {
     needLogin: '登陆后才能访问',
@@ -325,5 +332,13 @@ module.exports = {
     signed: '已签到',
     signSuccess: '签到成功',
     signBtn: '点击签到',
-  }
+  },
+  youhuipay: {
+    amountRequired: '请填写正确的消费金额',
+    curAmount: '您本次消费',
+    youhui: '优惠',
+    askAmount: '请询问服务员后输入',
+    btn: '确认付款',
+    youhuiList: '优惠信息',
+  },
 }

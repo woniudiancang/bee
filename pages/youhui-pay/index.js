@@ -10,18 +10,6 @@ Page({
   data: {
     rechargeSendRules: []
   },
-  // 
-  confirm: function(){
-    Dialog.alert({
-      confirmButtonText:"确认支付",
-      cancelButtonText:"取消支付",
-      showCancelButton: true,
-      title: '请确认买单金额',
-      message: '本次买单300元\n满减优惠5元\n还需微信支付295.00元',
-    }).then(() => {
-      // on close
-    });
-  },
   onLoad: function (options) {
     getApp().initLanguage(this)
     wx.setNavigationBarTitle({
@@ -46,7 +34,7 @@ Page({
     console.log(amount)
     if (amount == "" || amount * 1 < 0) {
       wx.showToast({
-        title: '请填写正确的消费金额',
+        title: this.data.$t.youhuipay.amountRequired,
         icon: 'none'
       })
       return
@@ -68,14 +56,14 @@ Page({
     }).find(ele => {
       return amount >= ele.consume
     })
-    let _msg = '您本次消费 ' + amount + ' 元'
+    let _msg = this.data.$t.youhuipay.curAmount + ' ￥' + amount + ' '
     let needPayAmount = amount*1
     if (rechargeSendRule) {
       needPayAmount -= rechargeSendRule.discounts
-      _msg += ',优惠 ' + rechargeSendRule.discounts + ' 元'
+      _msg += ','+ this.data.$t.youhuipay.youhui +' ￥' + rechargeSendRule.discounts + ' '
     }
     if (userMoney.data.balance*1 > 0) {
-      _msg += ',当前账户可用余额 ' + userMoney.data.balance + ' 元'
+      _msg += ',' + this.data.$t.order.balance + ' ￥' + userMoney.data.balance + ' '
     }
     needPayAmount = needPayAmount.toFixed(2) // 需要买单支付的金额
     const wxpayAmount = (needPayAmount - userMoney.data.balance).toFixed(2) // 需要额外微信支付的金额
@@ -83,13 +71,12 @@ Page({
     console.log(wxpayAmount)
     
     if (wxpayAmount > 0) {
-      _msg += ',仍需微信支付 ' + wxpayAmount + ' 元'
+      _msg += ',' + this.data.$t.order.payAmount + ' ￥' + wxpayAmount
     }
     wx.showModal({
-      title: '请确认消费金额',
       content: _msg,
-      confirmText: "确认支付",
-      cancelText: "取消支付",
+      confirmText: this.data.$t.common.confirm,
+      cancelText: this.data.$t.common.cancel,
       success: function (res) {
         console.log(res);
         if (res.confirm) {
