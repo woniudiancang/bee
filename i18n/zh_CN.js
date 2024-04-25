@@ -260,5 +260,37 @@ module.exports = {
     freight: '运费',
     realAmount: '应付总额',
     ConfirmVerification: '确认核销',
+  },
+  pay: {
+      title: '确认订单',
+      choose: '请选择使用优惠券',
+      inputphoneNO: '请输入手机号码',
+      select: '请选择自取/配送时间',
+      address: '当前地址超出配送范围',
+      servicesclosed: '堂食和外卖服务已关闭',
+      setaddress: '请设置配送地址',
+      Receivingaddress: '请设置收货地址',
+      information: '无法获取用户资金信息',
+      login: '请先登陆',
+      fetchsuccessful: '读取成功',
+      memberinformation: '用于完善会员资料',
+      Loginsuccessful: '登陆成功',
+      Fullconsumption: '消费满',
+      RMBreduced: '元可减',
+      reduce: '减',
+      Mealtime: '取餐时间',
+      Deliverytime: '送达时间',
+      Addaddress: '新增配送地址',
+      Productdetails: '商品明细',
+      Total: '共计',
+      piecegoods: '件商品',
+      Subtotal: '小计',
+      Insulationbag: '保温袋',
+      Needbag: '需要',
+      UNneedbag: '不需要',
+
+
+      
+      
   }
 }

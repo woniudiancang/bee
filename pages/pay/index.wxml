@@ -15,7 +15,7 @@
 	<view class="address-box" wx:if="{{peisongType == 'kd'}}">
 		<view class="add-address" wx:if="{{!curAddressData}}" bindtap="addAddress">
 			<van-icon name="add-o" color="#e64340" size="48rpx" />
-			<view>新增配送地址</view>
+			<view>{{ $t.pay.Addaddress }}</view>
 		</view>
 		<view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
 			<view class="l">
@@ -30,16 +30,16 @@
 	<van-field
 		wx:if="{{peisongType == 'zq'}}"
     model:value="{{ mobile }}"
-    label="联系电话"
+    label="{{ $t.booking.mobile }}"
 		type="number"
 		clearable
 		focus
-    placeholder="请输入手机号码">
+    placeholder="{{ $t.pay.inputphoneNO }}">
 		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
   </van-field>
 	<van-cell
     wx:if="{{ create_order_select_time == '1' }}"
-	 	title="{{ peisongType == 'zq' ? '取餐时间' : '送达时间' }}"
+	 	title="{{ peisongType == 'zq' ? $t.pay.Mealtime : $t.pay.Deliverytime }}"
 		value="{{ diningTime ? diningTime : $t.common.select }}"
 		is-link
 		bind:click="diningTimeShow"
@@ -47,7 +47,7 @@
 	<van-divider dashed />
 </view>
 
-<view class="goods-title">商品明细</view>
+<view class="goods-title">{{ $t.pay.Productdetails }}</view>
 <van-row custom-class="detail" wx:for="{{goodsList}}" wx:key="index">
 	<van-col span="18">
 		<view class="detail-1 {{ (item.minBuyNumber && item.stores < item.minBuyNumber) ? 'quehuo' : '' }}">
@@ -67,7 +67,7 @@
 	<van-col span="3" class="price">¥{{item.price}}</van-col>
 </van-row>
 
-<view class="amount">共计 {{allGoodsNumber}} 件商品，小计：¥ {{allGoodsPrice}}</view>
+<view class="amount">{{ $t.pay.Total }} X{{allGoodsNumber}} ￥{{allGoodsPrice}}</view>
 
 <van-cell-group wx:if="{{coupons}}" title="{{ $t.coupons.title }}">
 	<picker bindchange="bindChangeCoupon" range="{{coupons}}" range-key="nameExt">
@@ -76,11 +76,11 @@
 </van-cell-group>
 
 <van-radio-group wx:if="{{ peisongType == 'zq' && packaging_fee }}" value="{{ packaging_fee_use }}" bind:change="packaging_fee_Change">
-  <van-cell-group title="保温袋">
-    <van-cell title="需要保温袋" clickable data-name="1" bind:click="packaging_fee_Click">
+  <van-cell-group title="{{ $t.pay.Insulationbag }}">
+    <van-cell title="{{ $t.pay.Needbag }}" clickable data-name="1" bind:click="packaging_fee_Click">
       <van-radio slot="right-icon" name="1" />
     </van-cell>
-    <van-cell title="不需要保温袋" clickable data-name="2" bind:click="packaging_fee_Click">
+    <van-cell title="{{ $t.pay.UNneedbag }}" clickable data-name="2" bind:click="packaging_fee_Click">
       <van-radio slot="right-icon" name="2" />
     </van-cell>
   </van-cell-group>

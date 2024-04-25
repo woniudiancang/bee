@@ -260,5 +260,36 @@ module.exports = {
     freight: 'Freight',
     realAmount: 'Total payable amount',
     ConfirmVerification: 'Confirm Verification',
-  }
+  },
+  pay: {
+    title: '确认订单',
+    choose: 'Choose coupons',
+    inputphoneNO: 'Input phone NO.',
+    select: 'select self pickup/delivery time',
+    address: 'The current address is beyond the delivery range',
+    servicesclosed: 'The dine in and takeout services have been closed',
+    setaddress: 'set delivery address',
+    Receivingaddress: 'Please set the Receiving address',
+    information: 'Unable to obtain user funding information',
+    login: 'Please login first',
+    fetchsuccessful: 'Fetch successful',
+    memberinformation: 'Used to improve member information',
+    Loginsuccessful: 'Login successful',
+    Fullconsumption: 'Full consumption',
+    RMBreduced: 'Yuan can be reduced',
+    reduce: 'Reduce',
+    Mealtime: 'Meal pickup time',
+    Deliverytime: 'Delivery time',
+    Addaddress: 'Add delivery address',
+    Productdetails: 'Product details',
+    Total: 'Total',
+    piecegoods: 'Piece goods',
+    Subtotal: 'Subtotal',
+    Insulationbag: 'Insulation bag',
+    Needbag: 'Need',
+    UNneedbag: 'Unneed',
+
+
+
+}
 }

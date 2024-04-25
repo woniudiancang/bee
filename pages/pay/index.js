@@ -26,7 +26,7 @@ Page({
     pingtuanOpenId: undefined, //拼团的话记录团号
     
     curCoupon: null, // 当前选择使用的优惠券
-    curCouponShowText: '请选择使用优惠券', // 当前选择使用的优惠券
+    curCouponShowText: '', // 当前选择使用的优惠券
     peisongType: '', // 配送方式 kd,zq 分别表示快递/到店自取【默认值到onshow修改，这里修改无效】
     submitLoding: false,
     remark: '',
@@ -115,10 +115,14 @@ Page({
 
   onLoad(e) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.pay.title,
+    })
     let _data = {
       kjId: e.kjId,
       create_order_select_time: wx.getStorageSync('create_order_select_time'),
       packaging_fee: wx.getStorageSync('packaging_fee'),
+      curCouponShowText: this.data.$t.pay.choose
     }
     if (e.orderType) {
       _data.orderType = e.orderType
@@ -157,14 +161,14 @@ Page({
     const mobile = this.data.mobile
     if (this.data.peisongType == 'zq' && !mobile) {
       wx.showToast({
-        title: '请输入手机号码',
+        title: this.data.$t.pay.inputphoneNO,
         icon: 'none'
       })
       return
     }
     if (!this.data.diningTime && this.data.create_order_select_time == '1') {
       wx.showToast({
-        title: '请选择自取/配送时间',
+        title: this.data.$t.pay.select,
         icon: 'none'
       })
       return
@@ -190,7 +194,7 @@ Page({
     } else {
       if (this.data.shopInfo.serviceDistance && this.data.distance && this.data.distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
         wx.showToast({
-          title: '当前地址超出配送范围',
+          title: this.data.$t.pay.address,
           icon: 'none'
         })
         return
@@ -214,7 +218,7 @@ Page({
         wx.showModal({
           confirmText: this.data.$t.common.confirm,
           cancelText: this.data.$t.common.cancel,
-          content: '堂食和外卖服务已关闭',
+          content: this.data.$t.pay.servicesclosed,
           showCancel: false
         })
         return;
@@ -258,7 +262,7 @@ Page({
       if (!that.data.curAddressData) {
         wx.hideLoading();
         wx.showToast({
-          title: '请设置配送地址',
+          title: this.data.$t.pay.setaddress,
           icon: 'none'
         })
         return;
@@ -271,7 +275,7 @@ Page({
       if (!that.data.curAddressData) {
         wx.hideLoading();
         wx.showToast({
-          title: '请设置收货地址',
+          title: this.data.$t.pay.Receivingaddress,
           icon: 'none'
         })
         return;
@@ -320,9 +324,9 @@ Page({
               moneyUnit = '%'
             }
             if (ele.moneyHreshold) {
-              ele.nameExt = ele.name + ' [消费满' + ele.moneyHreshold + '元可减' + ele.money + moneyUnit +']'
+              ele.nameExt = ele.name + + ' ['+ that.data.$t.pay.Fullconsumption +'' + ele.moneyHreshold + that.data.$t.pay.RMBreduced + ele.money + moneyUnit +']'
             } else {
-              ele.nameExt = ele.name + ' [减' + ele.money + moneyUnit + ']'
+              ele.nameExt = ele.name + ' ['+ that.data.$t.pay.Fullconsumption +'' + ele.money + moneyUnit + ']'
             }
           })
         }
@@ -362,7 +366,7 @@ Page({
     const res1 = await WXAPI.userAmount(token)
     if (res1.code != 0) {
       wx.showToast({
-        title: '无法获取用户资金信息',
+        title: this.data.$t.pay.information,
         icon: 'none'
       })
       wx.redirectTo({
@@ -430,7 +434,7 @@ Page({
       console.log('distance', distance);
       if (this.data.shopInfo.serviceDistance && distance > this.data.shopInfo.serviceDistance * 1 && this.data.peisongType == 'kd') {
         wx.showToast({
-          title: '当前地址超出配送范围',
+          title: this.data.$t.pay.address,
           icon: 'none'
         })
       }
@@ -533,14 +537,14 @@ Page({
     })
     if (res.code === 10002) {
       wx.showToast({
-        title: '请先登陆',
+        title: this.data.$t.pay.login,
         icon: 'none'
       })
       return
     }
     if (res.code == 0) {
       wx.showToast({
-        title: '读取成功',
+        title: this.data.$t.pay.fetchsuccessful,
         icon: 'success'
       })
       this.setData({
@@ -582,7 +586,7 @@ Page({
   updateUserInfo(e) {
     wx.getUserProfile({
       lang: 'zh_CN',
-      desc: '用于完善会员资料',
+      desc: this.data.$t.pay.memberinformation,
       success: res => {
         console.log(res);
         this._updateUserInfo(res.userInfo)
@@ -613,7 +617,7 @@ Page({
       return
     }
     wx.showToast({
-      title: '登陆成功',
+      title: this.data.$t.pay.Loginsuccessful,
     })
     this.getUserApiInfo()
   },
