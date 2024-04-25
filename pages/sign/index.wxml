@@ -8,5 +8,5 @@
 />
 <view class="zwqd-box">
    <image src="/images/zw.png" bindtap="sign"></image>
-   <view>点击签到</view>
+   <view>{{ $t.sign.signBtn }}</view>
 </view>

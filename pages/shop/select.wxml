@@ -2,7 +2,7 @@
 	<view class="icon">
 		<van-icon name="search" />
 	</view>
-	<input placeholder="搜索门店" bindinput="searchChange" bindconfirm="search" />
+	<input placeholder="{{ $t.common.search }}" bindinput="searchChange" bindconfirm="search" />
 </view>
 <view class="shops" wx:for="{{shops}}" wx:key="id">
 	<view class="t">
@@ -32,7 +32,7 @@
 		<text>{{ item.linkPhone }}</text>
 	</view>
 
-	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> 选择门店 </button>
+	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> {{ $t.shop.select }} </button>
 </view>
 <!-- <view class="block-btn btn">
   <van-button type="primary" block bind:click="joinApply">商家申请入驻</van-button>

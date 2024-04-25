@@ -7,6 +7,48 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/sign/index",
+          "pathName": "pages/sign/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/select",
+          "pathName": "pages/shop/select",
+          "query": "type=index",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/join-apply",
+          "pathName": "pages/shop/join-apply",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/detail",
+          "pathName": "pages/shop/detail",
+          "query": "id=36",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/score/logs",
+          "pathName": "pages/score/logs",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/queue/index",
+          "pathName": "pages/queue/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/pay/index",
           "pathName": "pages/pay/index",
           "query": "",

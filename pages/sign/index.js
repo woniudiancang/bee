@@ -24,6 +24,7 @@ Page({
     })
   },
   async scoreSignLogs() {
+    const _this = this
     const res = await WXAPI.scoreSignLogs({
       token: wx.getStorageSync('token')
     })
@@ -45,7 +46,7 @@ Page({
             return ele.dateAdd.indexOf(`${year}-${month}-${date}`) == 0
           })
           if (_log) {
-            day.bottomInfo = '已签到'
+            day.bottomInfo = _this.data.$t.sign.signed
           }
           return day;
         }
@@ -56,7 +57,7 @@ Page({
     const res = await WXAPI.scoreSign(wx.getStorageSync('token'))
     if (res.code == 10000) {
       wx.showToast({
-        title: '签到成功',
+        title: this.data.$t.sign.signSuccess,
         icon: 'success'
       })
       this.scoreSignLogs()
@@ -69,7 +70,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '签到成功',
+        title: this.data.$t.sign.signSuccess,
         icon: 'success'
       })
       this.scoreSignLogs()

@@ -1,13 +1,13 @@
-<van-empty wx:if="{{!list}}" description="暂无队列" />
+<van-empty wx:if="{{!list}}" description="{{ $t.common.empty }}" />
 <view class="btn-groups">
-  <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} (共 {{item.numberGet}} 号，当前第 {{item.curNumber}} 号)</van-button>
+  <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} ( {{item.curNumber}} / {{item.numberGet}} )</van-button>
 </view>
-<van-cell-group wx:if="{{ mylist }}" title="我的号子">
+<van-cell-group wx:if="{{ mylist }}" title="{{ $t.queue.myNumber }}">
   <van-cell
     value-class="cell-red"
     wx:for="{{mylist}}" wx:key="id"
     title="{{ item.typeEntity.name }}"
-    label="{{ item.statusStr }} {{ item.waitMinitus ? '预计等待: ' + item.waitMinitus + '分钟' : '' }}"
-    value="{{ item.number }}号" 
+    label="{{ item.statusStr }} {{ item.waitMinitus ? $t.queue.ExpectedWaiting + ': ' + item.waitMinitus + $t.queue.minutes : '' }}"
+    value="{{ item.number }}"
   />
 </van-cell-group>

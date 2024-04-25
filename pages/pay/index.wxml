@@ -1,4 +1,4 @@
-<van-cell icon="location-o" title="{{shopInfo.name}}{{shopInfo.distance ? ' / 距离您' + shopInfo.distance + 'km' : ''}}" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
+<van-cell icon="location-o" title="{{shopInfo.name}}{{shopInfo.distance ? ' ' + shopInfo.distance + 'km' : ''}}" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
 <view class="pay-bar">
 	<view wx:if="{{ shopInfo.openWaimai && shopInfo.openZiqu }}" class="way-bar">
 		<view class="peisong ziqu {{peisongType == 'zq' ? 'active' : ''}}" bindtap="selected" data-pstype="zq">
@@ -35,7 +35,7 @@
 		clearable
 		focus
     placeholder="{{ $t.pay.inputphoneNO }}">
-		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">重新获取</van-button>
+		<van-button slot="button" size="small" type="danger" open-type="getPhoneNumber" bind:getphonenumber="getPhoneNumber">{{ $t.pay.reBind }}</van-button>
   </van-field>
 	<van-cell
     wx:if="{{ create_order_select_time == '1' }}"
@@ -86,19 +86,19 @@
   </van-cell-group>
 </van-radio-group>
 
-<van-cell wx:if="{{ yunPrice }}" title="配送费" value="¥{{ yunPrice }}" value-class="red" />
-<van-cell-group wx:if="{{ peisongfee }}" title="配送费">
+<van-cell wx:if="{{ yunPrice }}" title="{{ $t.pay.DeliveryFee }}" value="¥{{ yunPrice }}" value-class="red" />
+<van-cell-group wx:if="{{ peisongfee }}" title="{{ $t.pay.DeliveryFee }}">
 	<van-cell wx:if="{{ peisongfee.amount1 }}" title="{{ peisongfee.fwf1Name }}" value="¥{{ peisongfee.amount1 }}" value-class="red" />
 	<van-cell wx:if="{{ peisongfee.amount2 }}" title="{{ peisongfee.fwf2Name }}" value="¥{{ peisongfee.amount2 }}" value-class="red" />
 	<van-cell wx:if="{{ peisongfee.amount3 }}" title="{{ peisongfee.fwf3Name }}" value="¥{{ peisongfee.amount3 }}" value-class="red" />
 </van-cell-group>
-<van-field label="备注" value="{{remark}}" clearable input-align="right" placeholder="如需备注请输入" bindblur="remarkChange" />
+<van-field label="{{ $t.pay.remark }}" value="{{remark}}" clearable input-align="right" placeholder="{{ $t.pay.remarkPlaceholder }}" bindblur="remarkChange" />
 <view class="bottom"></view>
 <van-submit-bar
 	wx:if="{{ nick && avatarUrl }}"
 	price="{{ amountReal*100 }}"
   label="{{ $t.PickingUp.total }}"
-	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? shopInfo.serviceAmountMin + '元起送' : $t.order.toPayTap }}"
+	button-text="{{peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin ? ('￥' + shopInfo.serviceAmountMin + $t.pay.qisong) : $t.order.toPayTap }}"
 	bind:submit="goCreateOrder"
 	button-class="pay-btn"
 	disabled="{{(peisongType == 'kd' && amountReal < shopInfo.serviceAmountMin) || submitLoding }}"
@@ -106,7 +106,7 @@
 <van-submit-bar
   wx:else
 	price="{{ amountReal*100 }}"
-	button-text="授权登陆"
+	button-text="{{ $t.pay.login }}"
 	bind:submit="updateUserInfo"
 	button-class="pay-btn"
 />

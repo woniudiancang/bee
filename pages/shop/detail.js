@@ -20,7 +20,6 @@ Page({
       wx.showModal({
         confirmText: this.data.$t.common.confirm,
         cancelText: this.data.$t.common.cancel,
-        title: '出错了',
         content: res.msg,
         showCancel: false
       })

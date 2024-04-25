@@ -8,6 +8,7 @@ module.exports = {
     empty: 'No Data',
     submitSuccess: 'Submitted',
     gotIt: 'Got it',
+    search: 'Search',
   },
   auth: {
     needLogin: 'Please Login First',
@@ -204,7 +205,11 @@ module.exports = {
     ordered: 'Ordered',
   },
   queue: {
-    t: 'Queue'
+    t: 'Queue',
+    success: 'Successfully',
+    myNumber: 'My Number',
+    ExpectedWaiting: 'Expected Waiting',
+    minutes: 'Minutes',
   },
   my: {
     title: 'My',
@@ -288,8 +293,37 @@ module.exports = {
     Insulationbag: 'Insulation bag',
     Needbag: 'Need',
     UNneedbag: 'Unneed',
-
-
-
-}
+    reBind: 'ReBind',
+    DeliveryFee: 'Delivery Fee',
+    remark: 'Remark',
+    remarkPlaceholder: 'If you need a note, please enter it',
+    qisong: ' At least',
+    login: 'Login',
+  },
+  scoreLogs: {
+    title: 'Score Logs',
+  },
+  shop: {
+    characteristic: 'Characteristic',
+    openingHours: 'Business Time',
+    contactUs: 'Contact US',
+    viewMap: 'Open Map',
+    Navigation: 'Navigation',
+    join: 'Merchant Join',
+    name: 'Name',
+    namePlaceholder: 'Your Name',
+    nameRequired: 'Please fill in your name',
+    mobile: 'Mobile',
+    mobilePlaceholder: 'Convenient for us to contact you',
+    mobileRequired: 'Please provide your contact phone number',
+    joinBtn: 'Apply',
+    contentPlaceholder: 'If there is more information, please fill in~',
+    contentRequired: 'Please fill in More information',
+    select: 'Select Shop',
+  },
+  sign: {
+    signed: 'Signed',
+    signSuccess: 'Sign Success',
+    signBtn: 'Sign',
+  }
 }

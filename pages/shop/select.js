@@ -16,6 +16,9 @@ Page({
    */
   onLoad: function (options) {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.shop.select,
+    })
     this.setData({
       type: options.type,
       shop_join_open: wx.getStorageSync('shop_join_open')

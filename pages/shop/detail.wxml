@@ -2,10 +2,10 @@
 	<image class="shopLogo" mode="aspectFill" src="{{shopInfo.pic}}"></image>
   <view class="info">
     <van-cell size="large" icon="shop-collect-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" />
-    <van-cell size="large" icon="hot-o" title="本店特色" label="{{shopInfo.characteristic}}" />
-    <van-cell size="large" icon="clock-o" title="营业时间" value="{{shopInfo.openingHours}}" />
-    <van-cell size="large" icon="phone-o" title="联系我们" value="{{shopInfo.linkPhone}}" is-link bind:click="phoneCall" />
-    <van-cell size="large" icon="location-o" title="查看地图" value="导航到店" is-link bind:click="guideNow" />
+    <van-cell size="large" icon="hot-o" title="{{ $t.shop.characteristic }}" label="{{shopInfo.characteristic}}" />
+    <van-cell size="large" icon="clock-o" title="{{ $t.shop.openingHours }}" value="{{shopInfo.openingHours}}" />
+    <van-cell size="large" icon="phone-o" title="{{ $t.shop.contactUs }}" value="{{shopInfo.linkPhone}}" is-link bind:click="phoneCall" />
+    <van-cell size="large" icon="location-o" title="{{ $t.shop.viewMap }}" value="{{ $t.shop.Navigation }}" is-link bind:click="guideNow" />
   </view>
 	<map id="map" class="maMap" latitude="{{shopInfo.latitude}}" longitude="{{shopInfo.longitude}}" markers="{{markers}}" show-location enable-3D	show-compass show-scale	enable-rotate	enable-traffic />
 </view>

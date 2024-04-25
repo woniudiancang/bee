@@ -10,6 +10,9 @@ Page({
   },
   onShow: function () {
     getApp().initLanguage(this)
+    wx.setNavigationBarTitle({
+      title: this.data.$t.queue.t,
+    })
     AUTH.checkHasLogined().then(isLogin => {
       if (isLogin) {
         this.queuingTypes()
@@ -80,7 +83,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '取号成功'
+        title: this.data.$t.queue.success
       })
       this.queuingMy()
     }
