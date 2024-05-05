@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/goods/list",
+          "pathName": "pages/goods/list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/youhui-pay/index",
           "pathName": "pages/youhui-pay/index",
           "query": "",

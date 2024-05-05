@@ -9,6 +9,7 @@ module.exports = {
     submitSuccess: '提交成功',
     gotIt: '知道了',
     search: '搜索',
+    searchPlaceholder: '输入搜索关键词',
     getCodeError: '获取code失败',
     loginFail: '无法登录',
     authorizeRequired: '需要获得您的授权',
@@ -341,4 +342,13 @@ module.exports = {
     btn: '确认付款',
     youhuiList: '优惠信息',
   },
+  goodsList: {
+    t: '商品列表',
+    sort: {
+      zh: '综合',
+      xp: '新品',
+      xl: '销量',
+      jg: '价格',
+    }
+  }
 }

@@ -9,6 +9,7 @@ module.exports = {
     submitSuccess: 'Submitted',
     gotIt: 'Got it',
     search: 'Search',
+    searchPlaceholder: 'Enter search keywords',
     getCodeError: 'Fetch code Fail',
     loginFail: 'Can\'t Login',
     authorizeRequired: 'Need Authorization',
@@ -341,4 +342,13 @@ module.exports = {
     btn: 'Confirm payment',
     youhuiList: 'Discount information',
   },
+  goodsList: {
+    t: 'Goods List',
+    sort: {
+      zh: 'Default',
+      xp: 'News',
+      xl: 'Sales',
+      jg: 'Price',
+    }
+  }
 }

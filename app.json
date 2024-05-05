@@ -27,7 +27,8 @@
     "pages/queue/index",
     "pages/cart/index",
     "pages/cart/order",
-    "pages/goods-details/index"
+    "pages/goods-details/index",
+    "pages/goods/list"
   ],
   "requiredPrivateInfos": [
     "getLocation",

@@ -1,0 +1,86 @@
+<van-sticky>
+  <view class="header">
+    <view class="search">
+      <input type="text" placeholder="{{ $t.common.searchPlaceholder }}" value="{{name}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
+      <image src="/images/icon/search.svg" bindtap="search"></image>
+    </view>
+    <image class="show-type" src="/images/icon/list{{listType}}.svg" bindtap="changeShowType"></image>
+  </view>
+  <view class="filters">
+    <view class="item {{orderBy==''?'active':''}}" data-val="" bindtap="filter">{{ $t.goodsList.sort.zh }}</view>
+    <view class="item {{orderBy=='addedDown'?'active':''}}" data-val="addedDown" bindtap="filter">{{ $t.goodsList.sort.xp }}</view>
+    <view class="item {{orderBy=='ordersDown'?'active':''}}" data-val="ordersDown" bindtap="filter">{{ $t.goodsList.sort.xl }}</view>
+    <view class="item {{orderBy=='priceUp'?'active':''}}" data-val="priceUp" bindtap="filter">{{ $t.goodsList.sort.jg }}</view>
+  </view>
+</van-sticky>
+<van-empty wx:if="{{ !goods || goods.length == 0 }}" description="{{ $t.common.empty }}" />
+<wxs module="goodsDetailPage">
+module.exports = {
+  url : function(item) {
+    if (item.supplyType == 'cps_jd') {
+      return '/packageCps/pages/goods-details/cps-jd?id=' + item.id
+    } else if (item.supplyType == 'vop_jd') {
+      return '/pages/goods-details/vop?id=' + item.yyId + '&goodsId=' + item.id
+    } else if (item.supplyType == 'cps_pdd') {
+      return '/packageCps/pages/goods-details/cps-pdd?id=' + item.id
+    } else if (item.supplyType == 'cps_taobao') {
+      return '/packageCps/pages/goods-details/cps-taobao?id=' + item.id
+    } else {
+      return '/pages/goods-details/index?id=' + item.id
+    }
+  }
+}
+</wxs>
+<block wx:if="{{listType == 1}}">
+  <view class="list1" wx:for="{{goods}}" wx:key="id">
+    <navigator url="{{ goodsDetailPage.url(item) }}"><image class="img" mode="aspectFill" src="{{item.pic}}"></image></navigator>
+    <view class="goods-info">
+      <view class="title ellipsis"><navigator url="{{ goodsDetailPage.url(item) }}">{{item.name}}</navigator></view>
+      <view wx:if="{{item.characteristic}}" class="characteristic van-multi-ellipsis--l2" style="padding:0;-webkit-line-clamp: 1;">{{item.characteristic}}</view>
+      <view class="price">¥ {{item.minPrice}}<text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥ {{item.originalPrice}}
+        </text></view>
+      <view class="buy-info">
+        <view wx:if="{{ show_seller_number == '1' }}" class="num">{{ $t.goodsDetail.saledNum }}: {{item.numberSells}}</view>
+        <image class="car" src="/images/icon/car.svg" data-id="{{item.id}}" bindtap="addShopCar"></image>
+      </view>
+    </view>
+  </view>
+</block>
+<view wx:if="{{listType == 2}}" class="list2-box">
+  <view class="list2" wx:for="{{goods}}" wx:key="id">
+    <navigator url="{{ goodsDetailPage.url(item) }}"><image class="img" mode="aspectFill" src="{{item.pic}}"></image></navigator>
+    <view class="goods-info">
+      <view class="title van-multi-ellipsis--l2"><navigator url="{{ goodsDetailPage.url(item) }}">{{item.name}}</navigator></view>
+      <view wx:if="{{item.characteristic}}" class="characteristic van-multi-ellipsis--l2" style="padding:0;-webkit-line-clamp: 1;">{{item.characteristic}}</view>
+      <view class="price">¥ {{item.minPrice}}<text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥ {{item.originalPrice}}
+        </text></view>
+      <view class="buy-info">
+        <view wx:if="{{ show_seller_number == '1' }}" class="num">{{ $t.goodsDetail.saledNum }}: {{item.numberSells}}</view>
+        <image class="car" src="/images/icon/car.svg" data-id="{{item.id}}" bindtap="addShopCar"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<block wx:if="{{skuCurGoods}}">
+  <view class="sku-mask"></view>
+  <view class="sku-container">
+    <image class="close" src="/images/icon/close.svg" bindtap="closeSku"></image>
+    <view class="sku" wx:for="{{skuCurGoods.properties}}" wx:key="id">
+      <view class="t">{{item.name}}</view>
+      <view class="items">
+        <text class="{{small.active? 'active' : ''}}" wx:for="{{item.childsCurGoods}}" wx:for-item="small" wx:key="id" data-pid="{{small.propertyId}}" data-id="{{small.id}}" bindtap="skuSelect">{{small.name}}</text>
+      </view>
+    </view>
+    <view class="num">
+      <view class="t">{{ $t.goodsDetail.buyNumber }}</view>
+      <view class="num-box">
+        <text class="a" bindtap="storesJian">-</text>
+        <text class="b">{{skuCurGoods.basicInfo.storesBuy}}</text>
+        <text class="a" bindtap="storesJia">+</text>
+      </view>
+    </view>
+  </view>
+  <view class="sku-btn" bindtap="addCarSku">{{ $t.goodsDetail.addCartBtn }}</view>
+</block>
