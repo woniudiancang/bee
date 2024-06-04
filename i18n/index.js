@@ -6,8 +6,12 @@ function getLanguage() {
   if (Language) {
     return Language
   }
+  const allowLanguage = ['zh_CN', 'en'] // 目前支持的语言包
   const appBaseInfo = wx.getAppBaseInfo()
-  const _language = appBaseInfo.language || 'zh_CN'
+  let _language = appBaseInfo.language || 'zh_CN'
+  if (!allowLanguage.includes(_language)) {
+    _language = 'zh_CN'
+  }
   wx.setStorageSync('Language', _language)
   return _language
 }
