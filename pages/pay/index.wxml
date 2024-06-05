@@ -106,6 +106,7 @@
 <van-submit-bar
   wx:else
 	price="{{ amountReal*100 }}"
+  label="{{ $t.PickingUp.total }}"
 	button-text="{{ $t.pay.login }}"
 	bind:submit="updateUserInfo"
 	button-class="pay-btn"
