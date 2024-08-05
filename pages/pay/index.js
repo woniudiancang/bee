@@ -303,8 +303,8 @@ Page({
       console.log(res.data) 
       if (res.code != 0) {
         wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
+          confirmText: that.data.$t.common.confirm,
+          cancelText: that.data.$t.common.cancel,
           content: res.msg,
           showCancel: false
         })
