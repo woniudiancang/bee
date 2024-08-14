@@ -8,6 +8,7 @@ App({
     this.setTabBarLanguage()
     const $t = i18n.$t()
     WXAPI.init(CONFIG.subDomain)
+    WXAPI.setMerchantId(CONFIG.merchantId)
     const that = this;
     // 检测新版本
     const updateManager = wx.getUpdateManager()

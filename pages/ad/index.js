@@ -149,7 +149,8 @@ Page({
   },   
   // 省市选择器 三栏
   initRegionPicker () {
-    WXAPI.province().then(res => {
+    // https://www.yuque.com/apifm/nu0f75/anab2a
+    WXAPI.provinceV2().then(res => {
       if (res.code === 0) {
         let _pickerRegionRange = []
         _pickerRegionRange.push(res.data)
@@ -177,7 +178,8 @@ Page({
     if (!pObject) {
       return
     }
-    const _cRes = await WXAPI.nextRegion(pObject.id)
+    // https://www.yuque.com/apifm/nu0f75/kfukig
+    const _cRes = await WXAPI.nextRegionV2(pObject.id)
     if (_cRes.code === 0) {
       this.data.pickerRegionRange[1] = _cRes.data
       if (cname) {
@@ -193,7 +195,8 @@ Page({
     if (!cObject) {
       return
     }
-    const _dRes = await WXAPI.nextRegion(cObject.id)
+    // https://www.yuque.com/apifm/nu0f75/kfukig
+    const _dRes = await WXAPI.nextRegionV2(cObject.id)
     if (_dRes.code === 0) {
       this.data.pickerRegionRange[2] = _dRes.data
       if (dname) {
@@ -248,7 +251,8 @@ Page({
     // // 后面的数组全部清空
     // this.data.pickerRegionRange.splice(column+1)
     // 追加后面的一级数组
-    WXAPI.nextRegion(regionObject.id).then(res => {
+    // https://www.yuque.com/apifm/nu0f75/kfukig
+    WXAPI.nextRegionV2(regionObject.id).then(res => {
       if (res.code === 0) {
         this.data.pickerRegionRange[column + 1] = res.data     
       }
@@ -257,7 +261,8 @@ Page({
   },  
   // 
   async provinces(provinceId, cityId, districtId) {
-    const res1 = await WXAPI.province()    
+    // https://www.yuque.com/apifm/nu0f75/anab2a
+    const res1 = await WXAPI.provinceV2()    
     const provinces = res1.data  
     this.setData({
       provinces,
@@ -267,7 +272,8 @@ Page({
     })  
      
     const pid = this.data.provinces[pIndex].id    
-    const res2 = await WXAPI.nextRegion(pid)
+    // https://www.yuque.com/apifm/nu0f75/kfukig
+    const res2 = await WXAPI.nextRegionV2(pid)
     const cities = res2.data  
     this.setData({
       cities,
@@ -277,7 +283,8 @@ Page({
     })
     
     const cid = this.data.cities[cIndex].id
-    const res3 = await WXAPI.nextRegion(cid);
+    // https://www.yuque.com/apifm/nu0f75/kfukig
+    const res3 = await WXAPI.nextRegionV2(cid);
     const areas = res3.data
     this.setData({
       areas,
