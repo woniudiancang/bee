@@ -7,7 +7,7 @@
           <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="userinfo-avatar-img"></image>
         </button> 
         <view class="name-box">
-          <view class="name">{{ $t.my.uid }}:{{ apiUserInfoMap.base.id }}</view>
+          <view class="name" bindtap="copyuid">{{ $t.my.uid }}:{{ apiUserInfoMap.base.id }}</view>
           <view class="name" bindtap="editNick">{{ nick ? nick : $t.my.nickSet }}</view>
           <view wx:if="{{apiUserInfoMap.userLevel}}" class="state" bindtap="govip">{{apiUserInfoMap.userLevel.name}}</view>
           <view wx:else class="state" bindtap="govip">{{ $t.vip.notVIP }}</view>
@@ -49,6 +49,7 @@
   <van-cell icon="service-o" wx:if="{{ customerServiceType == 'QW' }}" title="{{ $t.my.Contact }}" size="large" is-link bind:click="customerService" />
   <van-cell icon="points" title="{{ $t.my.clearStorage }}" size="large" is-link bind:click="clearStorage" />
 	<van-cell icon="records" title="{{ $t.feedback.title }}" is-link url="/pages/my/feedback" />
+	<van-cell icon="manager-o" title="{{ $t.auth.goAdmin }}" is-link bind:tap="goadmin" />
 </view>
 <view class="version">v{{version}}</view>
 

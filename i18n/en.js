@@ -20,6 +20,7 @@ module.exports = {
   },
   auth: {
     needLogin: 'Please Login First',
+    goAdmin: 'Manager',
   },
   date: {
     year: 'Y',

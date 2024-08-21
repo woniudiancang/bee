@@ -20,6 +20,7 @@ module.exports = {
   },
   auth: {
     needLogin: '登陆后才能访问',
+    goAdmin: '管理后台',
   },
   date: {
     year: '年',

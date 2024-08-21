@@ -109,7 +109,7 @@ Page({
   goadmin() {
     wx.navigateToMiniProgram({
       appId: 'wx5e5b0066c8d3f33d',
-      path: 'pages/login/auto?token=' + wx.getStorageSync('token'),
+      path: 'pages/autoLogin?token=' + wx.getStorageSync('token'),
     })
   },
   clearStorage() {
@@ -193,6 +193,11 @@ Page({
       fail: err => {
         console.error(err)
       }
+    })
+  },
+  copyuid() {
+    wx.setClipboardData({
+      data: this.data.apiUserInfoMap.base.id + ''
     })
   },
 })
