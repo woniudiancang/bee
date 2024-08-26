@@ -26,7 +26,7 @@
     <van-cell title="{{$t.cart.Payableamount }}" value="{{ orderInfo.amountReal }}" />
   </van-cell-group>
   <view class="bottom"></view>
-  <van-submit-bar price="{{ orderInfo.amountReal*100 }}" button-text="{{$t.cart.Check }}" bindtap="goPayOrder" />
+  <van-submit-bar label="{{ $t.PickingUp.total }}" price="{{ orderInfo.amountReal*100 }}" button-text="{{ $t.cart.Check }}" bindtap="goPayOrder" />
 </block>
 <view wx:if="{{ paySuccess }}" class="paySuccess">
   <van-icon name="checked" size="260rpx" color="#07c160" />
