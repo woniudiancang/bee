@@ -40,3 +40,12 @@
     <view wx:if="{{orderDetail.orderInfo.status == -1}}">{{ $t.common.cancel }}: {{orderDetail.orderInfo.dateClose}}</view>
   </view>
 </view>
+
+<payment
+  money="{{ money }}"
+  remark="{{ $t.payment.order }} ：{{ orderId }}"
+  nextAction="{{ nextAction }}"
+  show="{{ paymentShow }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

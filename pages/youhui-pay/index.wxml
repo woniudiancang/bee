@@ -27,3 +27,13 @@
   </form>
 
 </view>
+
+
+<payment
+  money="{{ money }}"
+  remark="{{ $t.payment.maidan }} ：{{ money }}"
+  nextAction="{{ nextAction }}"
+  show="{{ paymentShow }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

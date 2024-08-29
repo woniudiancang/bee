@@ -79,6 +79,7 @@
   },
   "usingComponents": {
     "parser":"/components/parser.20200731.min/parser",
+    "payment": "/components/payment/index",
     "van-button": "@vant/weapp/button/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",

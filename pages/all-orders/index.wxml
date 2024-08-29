@@ -32,3 +32,12 @@
 	</view>
 	<view class="safeAreaOldMarginBttom safeAreaNewMarginBttom"></view>
 </view>
+
+<payment
+  money="{{ money }}"
+  remark="{{ $t.payment.order }} ：{{ orderId }}"
+  nextAction="{{ nextAction }}"
+  show="{{ paymentShow }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

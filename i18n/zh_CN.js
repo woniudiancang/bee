@@ -351,5 +351,15 @@ module.exports = {
       xl: '销量',
       jg: '价格',
     }
+  },
+  payment: {
+    order: '支付订单',
+    maidan: '优惠买单',
+    recharge: '在线充值',
+    select: '选择支付方式',
+    wx: '微信支付',
+    alipay: '支付宝支付',
+    alipayQrcodeText: '长按图片保存，然后使用支付宝扫一扫付款',
+    notSupport: '暂不支持该支付方式',
   }
 }

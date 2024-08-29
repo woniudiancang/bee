@@ -1,6 +1,4 @@
-import Dialog from '@vant/weapp/dialog/dialog'
 const WXAPI = require('apifm-wxapi')
-const wxpay = require('../../utils/pay.js')
 const AUTH = require('../../utils/auth')
 const APP = getApp()
 APP.configLoadOK = () => {
@@ -88,7 +86,15 @@ Page({
   goPay(amount, wxpayAmount){
     const _this = this
     if (wxpayAmount > 0) {
-      wxpay.wxpay('paybill', wxpayAmount, 0, "/pages/asset/index", { money: amount});
+      this.setData({
+        paymentShow: true,
+        money: wxpayAmount,
+        nextAction: {
+          type: 4,
+          uid: wx.getStorageSync('uid'),
+          money: amount
+        }
+      })
     } else {
       WXAPI.payBill(wx.getStorageSync('token'), amount).then(function (res) {
         if (res.code == 0) {
@@ -108,5 +114,19 @@ Page({
         }        
       })
     }
+  },
+  paymentOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      paymentShow: false
+    })
+    wx.redirectTo({
+      url: '/pages/asset/index',
+    })
+  },
+  paymentCancel() {
+    this.setData({
+      paymentShow: false
+    })
   },
 })

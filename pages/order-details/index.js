@@ -6,7 +6,6 @@ APP.configLoadOK = () => {
   })
 }
 const wxbarcode = require('wxbarcode')
-const wxpay = require('../../utils/pay.js')
 
 Page({
     data:{
@@ -80,8 +79,30 @@ Page({
         })
       } else {
         // 微信支付
-        wxpay.wxpay('order', needPay, this.data.orderDetail.orderInfo.id, "/pages/all-orders/index");
+        this.setData({
+          paymentShow: true,
+          money: needPay,
+          orderId: this.data.orderDetail.orderInfo.id,
+          nextAction: {
+            type: 0,
+            id: this.data.orderDetail.orderInfo.id
+          }
+        })
       }
+    },
+    paymentOk(e) {
+      console.log(e.detail); // 这里是组件里data的数据
+      this.setData({
+        paymentShow: false
+      })
+      wx.redirectTo({
+        url: '/pages/all-orders/index',
+      })
+    },
+    paymentCancel() {
+      this.setData({
+        paymentShow: false
+      })
     },
     callshop() {
       wx.makePhoneCall({

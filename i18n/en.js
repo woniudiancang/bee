@@ -351,5 +351,15 @@ module.exports = {
       xl: 'Sales',
       jg: 'Price',
     }
+  },
+  payment: {
+    order: 'Pay Order',
+    maidan: 'Check',
+    recharge: 'Recharge',
+    select: 'Select Payment',
+    wx: 'WxPay',
+    alipay: 'Alipay',
+    alipayQrcodeText: 'Long press the picture to save, and then use Alipay to scan',
+    notSupport: 'This payment method is not currently supported',
   }
 }

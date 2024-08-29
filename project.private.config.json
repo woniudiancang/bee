@@ -7,6 +7,41 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/asset/index",
+          "pathName": "pages/asset/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/youhui-pay/index",
+          "pathName": "pages/youhui-pay/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/pay/index",
+          "pathName": "pages/pay/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/order-details/index",
+          "pathName": "pages/order-details/index",
+          "query": "id=4929396",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/cart/order",
+          "pathName": "pages/cart/order",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/cart/order",
           "pathName": "pages/cart/order",
           "query": "",

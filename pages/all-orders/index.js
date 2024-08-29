@@ -1,4 +1,3 @@
-const wxpay = require('../../utils/pay.js')
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
 const APP = getApp()
@@ -95,8 +94,30 @@ Page({
         _this.onShow();
       })
     } else {
-      wxpay.wxpay('order', money, orderId, "/pages/all-orders/index");
+      this.setData({
+        paymentShow: true,
+        orderId,
+        money,
+        nextAction: {
+          type: 0,
+          id: orderId
+        }
+      })
     }
+  },
+  paymentOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      paymentShow: false
+    })
+    wx.redirectTo({
+      url: '/pages/all-orders/index',
+    })
+  },
+  paymentCancel() {
+    this.setData({
+      paymentShow: false
+    })
   },
   onLoad: function(options) {
     getApp().initLanguage(this)

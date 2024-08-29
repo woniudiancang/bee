@@ -1,7 +1,5 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
-const wxpay = require('../../utils/pay.js')
-const CONFIG = require('../../config.js')
 const APP = getApp()
 APP.configLoadOK = () => {
 
@@ -383,8 +381,30 @@ Page({
         url: "/pages/all-orders/index"
       })
     } else {
-      wxpay.wxpay('order', money, res.data.id, "/pages/all-orders/index");
+      this.setData({
+        paymentShow: true,
+        money,
+        orderId: res.data.id,
+        nextAction: {
+          type: 0,
+          id: res.data.id
+        }
+      })
     }
+  },
+  paymentOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      paymentShow: false
+    })
+    wx.redirectTo({
+      url: '/pages/all-orders/index',
+    })
+  },
+  paymentCancel() {
+    this.setData({
+      paymentShow: false
+    })
   },
   async getDistance(curAddressData) {
     // 计算门店与收货地址之间的距离

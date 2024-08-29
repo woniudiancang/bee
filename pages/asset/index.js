@@ -81,47 +81,22 @@ Page({
     this.wxpay(this.data.amount2);
   },
   wxpay(money) {
-    const _this = this
-    const postData = {
-      token: wx.getStorageSync('token'),
-      money: money,
-      payName: "在线充值",
-      remark: "在线充值",
-    }
-    WXAPI.wxpay(postData).then(res => {
-      if (res.code == 0) {
-        // 发起支付
-        wx.requestPayment({
-          timeStamp: res.data.timeStamp,
-          nonceStr: res.data.nonceStr,
-          package: res.data.package,
-          signType: res.data.signType,
-          paySign: res.data.paySign,
-          fail: function (aaa) {
-            console.error(aaa)
-            wx.showToast({
-              title: aaa
-            })
-          },
-          success: function () {
-            // 提示支付成功
-            wx.showToast({
-              title: this.data.$t.asset.success
-            })
-            _this.setData({
-              showRechargePop: false
-            })
-            _this.getUserAmount()
-          }
-        })
-      } else {
-        wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: JSON.stringify(res),
-          showCancel: false
-        })      
-      }
+    this.setData({
+      paymentShow: true,
+      money
     })
-  }
+  },
+  paymentOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      paymentShow: false,
+      showRechargePop: false
+    })
+    this.getUserAmount()
+  },
+  paymentCancel() {
+    this.setData({
+      paymentShow: false
+    })
+  },
 })

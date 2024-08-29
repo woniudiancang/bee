@@ -42,3 +42,11 @@
 <van-cell title="{{ $t.asset.rechargeLogs }}" size="large" is-link url="/pages/asset/recharge-log" />
 <van-cell title="{{ $t.cashLog.title }}" size="large" is-link url="/pages/asset/cash-log" />
 <view class="bottom-blank"></view>
+
+<payment
+  money="{{ money }}"
+  remark="{{ $t.payment.recharge }}"
+  show="{{ paymentShow }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

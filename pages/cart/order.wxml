@@ -32,3 +32,12 @@
   <van-icon name="checked" size="260rpx" color="#07c160" />
   <view class="txt">{{ $t.asset.success }}</view>
 </view>
+
+<payment
+  money="{{ money }}"
+  remark="{{ $t.payment.maidan }}"
+  nextAction="{{ nextAction }}"
+  show="{{ paymentShow }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

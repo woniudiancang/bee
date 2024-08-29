@@ -58,49 +58,25 @@ Page({
       })
       return
     }
-    const token = res.data.token
-    const nextAction = {
-      type: 9,
-      orderId: this.data.orderInfo.id
-    }
-    const postData = {
-      token,
+    this.setData({
+      paymentShow: true,
       money: this.data.orderInfo.amountReal,
-      remark: "堂食买单",
-      nextAction: JSON.stringify(nextAction)
-    }
-    res = await WXAPI.wxpay(postData)
-    if (res.code != 0) {
-      wx.showModal({
-        confirmText: this.data.$t.common.confirm,
-        cancelText: this.data.$t.common.cancel,
-        content: JSON.stringify(res),
-        showCancel: false
-      })
-      return
-    }
-    // 发起支付
-    wx.requestPayment({
-      timeStamp: res.data.timeStamp,
-      nonceStr: res.data.nonceStr,
-      package: res.data.package,
-      signType: res.data.signType,
-      paySign: res.data.paySign,
-      fail: function (aaa) {
-        console.error(aaa)
-        wx.showToast({
-          title: aaa
-        })
-      },
-      success: function () {
-        // 提示支付成功
-        wx.showToast({
-          title: _this.data.$t.asset.success
-        })
-        _this.setData({
-          paySuccess: true
-        })
+      nextAction: {
+        type: 9,
+        id: this.data.orderInfo.id
       }
+    })
+  },
+  paymentOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      paymentShow: false,
+      paySuccess: true
+    })
+  },
+  paymentCancel() {
+    this.setData({
+      paymentShow: false
     })
   },
 })
