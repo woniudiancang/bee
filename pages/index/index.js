@@ -100,9 +100,8 @@ Page({
     this.setData({
       peisongType
     })
-    // 读取最近的门店数据
-    this.categories()    
     this.noticeLastOne()
+    this.getshopInfo()
     this.banners()
   },
   onShow: function(){
@@ -135,12 +134,7 @@ Page({
         shopInfo: shopInfo,
         shopIsOpened: this.checkIsOpened(shopInfo.openingHours)
       })
-      const shop_goods_split = wx.getStorageSync('shop_goods_split')
-      if (shop_goods_split == '1') {
-        // 商品需要区分门店
-        wx.setStorageSync('shopIds', shopInfo.id) // 当前选择的门店
-        this.getGoodsList()
-      }
+      this.categories()
       return
     }
     wx.getLocation({
@@ -152,8 +146,21 @@ Page({
         this.fetchShops(res.latitude, res.longitude, '')
       },      
       fail: (e) => {
+        console.log(e);
         if (e.errMsg.indexOf('fail auth deny') != -1) {
           AUTH.checkAndAuthorize('scope.userLocation')
+        } else if (e.errMsg.indexOf('fail privacy permission is not authorized') != -1) {
+          wx.showModal({
+            confirmText: this.data.$t.common.confirm,
+            cancelText: this.data.$t.common.cancel,
+            content: this.data.$t.common.privacyPermission,
+            showCancel: false,
+            success: () => {
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
+            }
+          })
         } else {
           wx.showModal({
             confirmText: this.data.$t.common.confirm,
@@ -172,22 +179,24 @@ Page({
       nameLike: kw,
       pageSize: 1
     })
-    if (res.code == 0) {
-      res.data.forEach(ele => {
-        ele.distance = ele.distance.toFixed(1) // 距离保留3位小数
+    if (res.code != 0) {
+      wx.showModal({
+        content: this.data.$t.common.empty,
+        confirmText: this.data.$t.common.confirm,
+        cancelText: this.data.$t.common.cancel,
+        showCancel: false
       })
-      this.setData({
-        shopInfo: res.data[0],
-        shopIsOpened: this.checkIsOpened(res.data[0].openingHours)
-      })
-      wx.setStorageSync('shopInfo', res.data[0])
-      const shop_goods_split = wx.getStorageSync('shop_goods_split')
-      if (shop_goods_split == '1') {
-        // 商品需要区分门店
-        wx.setStorageSync('shopIds', res.data[0].id) // 当前选择的门店
-        this.getGoodsList()
-      }
-    } 
+      return
+    }
+    res.data.forEach(ele => {
+      ele.distance = ele.distance.toFixed(1) // 距离保留3位小数
+    })
+    this.setData({
+      shopInfo: res.data[0],
+      shopIsOpened: this.checkIsOpened(res.data[0].openingHours)
+    })
+    wx.setStorageSync('shopInfo', res.data[0])
+    this.categories()
   },
   async _showCouponPop() {
     const a = wx.getStorageSync('has_pop_coupons')
@@ -220,7 +229,17 @@ Page({
   },
   // 获取分类
   async categories() {
-    const res = await WXAPI.goodsCategory()
+    const shopInfo = wx.getStorageSync('shopInfo')
+    const shop_goods_split = wx.getStorageSync('shop_goods_split')
+    let shopId = '0'
+    if (shopInfo) {
+      shopId = '0,' + shopInfo.id
+    }
+    if (shop_goods_split != '1') {
+      shopId = ''
+    }
+    // https://www.yuque.com/apifm/nu0f75/racmle
+    const res = await WXAPI.goodsCategoryV2(shopId)
     if (res.code != 0) {
       wx.showToast({
         title: res.msg,
@@ -233,25 +252,20 @@ Page({
       categories: res.data,
       categorySelected: res.data[0]
     })
-    this.getshopInfo()
-    const shop_goods_split = wx.getStorageSync('shop_goods_split')
-    if (shop_goods_split != '1') {
-      this.getGoodsList()
+    if (shop_goods_split == '1') {
+      wx.setStorageSync('shopIds', res.data[0].id)
+    } else {
+      wx.removeStorageSync('shopIds')
     }
+    this.data.page = 1
+    this.getGoodsList()
   },
   async getGoodsList() {
-    const shop_goods_split = wx.getStorageSync('shop_goods_split')
-    if (shop_goods_split == '1') {
-      // 商品需要区分门店
-      const shopIds = wx.getStorageSync('shopIds') // 当前选择的门店
-      if (!shopIds) {
-        return
-      }
-    }
     wx.showLoading({
       title: '',
     })
-    const res = await WXAPI.goods({
+    // https://www.yuque.com/apifm/nu0f75/wg5t98
+    const res = await WXAPI.goodsv2({
       page: this.data.page,
       categoryId: this.data.categorySelected.id,
       pageSize: 10000
@@ -272,7 +286,7 @@ Page({
       })
       return
     }
-    res.data.forEach(ele => {
+    res.data.result.forEach(ele => {
       if (ele.miaosha) {
         // 秒杀商品，显示倒计时
         const _now = new Date().getTime()
@@ -282,11 +296,11 @@ Page({
     })
     if (this.data.page == 1) {
       this.setData({
-        goods: res.data
+        goods: res.data.result
       })
     } else {
       this.setData({
-        goods: this.data.goods.concat(res.data)
+        goods: this.data.goods.concat(res.data.result)
       })
     }
     this.processBadge()

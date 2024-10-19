@@ -17,6 +17,7 @@ module.exports = {
     upgrade: '新版本已经准备好，是否重启应用？',
     noNetwork: '当前无网络',
     networkDown: '网络已断开',
+    privacyPermission: '未同意用户隐私协议保护协议，暂时无法使用',
   },
   auth: {
     needLogin: '登陆后才能访问',

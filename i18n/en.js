@@ -17,6 +17,7 @@ module.exports = {
     upgrade: 'The new version is ready. Do you want to restart the application?',
     noNetwork: 'Currently no network available',
     networkDown: 'Network disconnected',
+    privacyPermission: 'Not agreeing to the user privacy agreement',
   },
   auth: {
     needLogin: 'Please Login First',
