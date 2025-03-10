@@ -38,9 +38,19 @@ Page({
       if (scene && scene.split(',').length == 3) {
         // 扫码点餐
         const scanDining = {}
-        scene.split(',').forEach(ele => {
-          scanDining[ele.split('=')[0]] = ele.split('=')[1]
-        })
+        if (scene.indexOf('key=') != -1) {
+          // 原来shopId=36,id=111,key=Y6RoIT的参数
+          scene.split(',').forEach(ele => {
+            scanDining[ele.split('=')[0]] = ele.split('=')[1]
+          })
+        } else {
+          // 新的 1007292,1015,zsT1U3 模式
+          const _scene = scene.split(',')
+          scanDining.shopId = _scene[0]
+          scanDining.id = _scene[1]
+          scanDining.key = _scene[2]
+        }
+        
         wx.setStorageSync('scanDining', scanDining)
         _data.scanDining = scanDining
         this.cyTableToken(scanDining.id, scanDining.key)
@@ -253,7 +263,7 @@ Page({
       categorySelected: res.data[0]
     })
     if (shop_goods_split == '1') {
-      wx.setStorageSync('shopIds', res.data[0].id)
+      wx.setStorageSync('shopIds', shopInfo.id)
     } else {
       wx.removeStorageSync('shopIds')
     }
