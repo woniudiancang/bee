@@ -44,7 +44,7 @@
 
 - [小程序在线接口-SDK](https://github.com/gooking/apifm-wxapi)
 
-- [api工厂](https://admin.it120.cc)
+- [api工厂](https://admin.s2m.cc)
 
 - [FMUI-轻松活泼-icon](https://www.iconfont.cn/collections/detail?spm=a313x.7781069.0.da5a778a4&cid=17041)
 
@@ -77,7 +77,7 @@ https://mp.weixin.qq.com/
 你需要设置小程序的合法域名，否则开发工具上运行正常，手机访问的时候将看不到数据
 - [设置合法服务器域名](https://www.yuque.com/apifm/doc/tvpou9)
 ## 注册开通后台账号
-https://admin.it120.cc/
+https://admin.s2m.cc/
 免费注册开通新后台后登录，登录后的首页，请记下你的专属域名，后面会用到
 左侧菜单 “工厂设置” --> “数据克隆” --> “将别人的数据克隆给我”
 对方商户ID填写 27
@@ -196,7 +196,7 @@ APPID 务必要改成你自己的小程序的 APPID
 
     - 登录你的小程序商户后台（https://mp.weixin.qq.com）左侧菜单 “开发” --> “开发设置” 中的 appid
     - 点击你的小程序开发工具 右上角 的“详情” --> “基本信息” 中的 appid
-    - 登录你的 api工厂 后台（https://admin.it120.cc），左侧菜单微信设置中的 appid
+    - 登录你的 api工厂 后台（https://admin.s2m.cc），左侧菜单平台设置，微信小程序中的 appid
 
 ## 获取手机号码失败，提示没权限
 
