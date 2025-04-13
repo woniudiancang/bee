@@ -43,7 +43,6 @@ Page({
     }
   },
   async goPayOrder() {
-    const _this = this
     // token 需要使用买单这个用户的token，而不是当前餐桌的token
     const code = await AUTH.wxaCode()
     let res = await WXAPI.authorize({
@@ -58,6 +57,7 @@ Page({
       })
       return
     }
+    wx.setStorageSync('payToken', res.data.token) // 支付用户的token
     this.setData({
       paymentShow: true,
       money: this.data.orderInfo.amountReal,

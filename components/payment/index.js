@@ -60,8 +60,12 @@ Component({
       });
     },
     async submit() {
+      let token = wx.getStorageSync('payToken')
+      if (!token) {
+        token = wx.getStorageSync('token')
+      }
       const postData = {
-        token: wx.getStorageSync('token'),
+        token,
         money: this.data.money,
         remark: this.data.remark,
       }
