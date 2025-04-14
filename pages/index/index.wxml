@@ -239,4 +239,8 @@
     <van-tabbar-item icon="shopping-cart-o">{{ $t.cart.title }}</van-tabbar-item>
     <van-tabbar-item icon="bill-o">{{ $t.index.ordered }}</van-tabbar-item>
   </van-tabbar>
+  <view class="float-btn float-kf" bind:tap="waimai">
+    <van-icon name="logistics" color="#e64340" size="52rpx"/>
+    <text>外卖</text>
+  </view>
 </block>

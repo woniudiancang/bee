@@ -1,3 +1,6 @@
+page {
+  padding-bottom: 64rpx;
+}
 .bottom {
   height: 120rpx;
 }

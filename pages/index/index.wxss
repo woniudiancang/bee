@@ -380,3 +380,20 @@ page {
   color: #ed6a0c;
   padding: 8rpx 0;
 }
+.float-btn {
+  position: fixed;
+  right: 32rpx;
+  bottom: 400rpx;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 8rpx;
+  width: 100rpx;
+  height: 100rpx;
+  font-size: 24rpx;
+  color: #e64340;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

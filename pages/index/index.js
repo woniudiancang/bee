@@ -1069,4 +1069,11 @@ Page({
   changeLang() {
     getApp().changeLang(this)
   },
+  waimai() {
+    wx.clearStorageSync()
+    wx.showTabBar()
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
+  },
 })

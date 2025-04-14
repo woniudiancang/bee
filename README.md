@@ -233,6 +233,14 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhone
 
 请填写 `pages/all-orders/index`
 
+## 小程序订单发货的地址怎么填
+
+小程序订单管理 -> 订单信息录入 -> 小程序商品订单详情path
+
+`pages/order-details/index?payOrderNo=${商品订单号}`
+
+直接一模一样复制上面的这个填进去就行
+
 ## 微信支付MA授权(appid和mch_id不匹配)
 
 [微信支付MA授权(appid和mch_id不匹配)](https://www.yuque.com/apifm/doc/zrui8q)
