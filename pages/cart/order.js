@@ -62,8 +62,9 @@ Page({
       paymentShow: true,
       money: this.data.orderInfo.amountReal,
       nextAction: {
+        // https://www.yuque.com/apifm/doc/aetmlb#8tiFW
         type: 9,
-        id: this.data.orderInfo.id
+        orderId: this.data.orderInfo.id
       }
     })
   },

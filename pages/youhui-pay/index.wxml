@@ -9,7 +9,7 @@
 			  <input class='describe' placeholder='{{ $t.youhuipay.askAmount }}' name="amount" type="digit"></input>
 		  </view>
 		  <view class="blank"></view>
-		  <button class="c-btn" formType="submit">{{ $t.youhuipay.btn }}</button>
+		  <button type="primary" formType="submit">{{ $t.youhuipay.btn }}</button>
 
 		  <view class="youhui-pay">{{ $t.youhuipay.youhuiList }}</view>
       

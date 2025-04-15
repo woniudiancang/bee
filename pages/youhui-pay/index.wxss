@@ -3,9 +3,10 @@ page{
 }
 .youhui-pay-bar{
   width: 700rpx;
-  border-radius: 10rpx;
   background-color: #ffffff;
-  margin:50rpx 25rpx ;
+  margin:32rpx 25rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
 }
 .youhui-pay-bar .shop-bar{
   display: flex;
@@ -96,16 +97,12 @@ page{
 .charge-detail{
   width: 180rpx;
   height: 110rpx;
-  border: 1rpx solid #e64340;
+  border: 1rpx solid #1aad19;
+  color: #1aad19;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin:0 10rpx;
-}
-/*  */
-.c-btn{
-  background: #e64340;
-  font-size: 30rpx;
-  color: white;
+  border-radius: 16rpx;
 }

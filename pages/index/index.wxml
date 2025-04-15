@@ -241,6 +241,6 @@
   </van-tabbar>
   <view class="float-btn float-kf" bind:tap="waimai">
     <van-icon name="logistics" color="#e64340" size="52rpx"/>
-    <text>外卖</text>
+    <text>{{ $t.index.Delivery }}</text>
   </view>
 </block>
