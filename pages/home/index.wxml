@@ -5,9 +5,9 @@
 </swiper>
 <view class="user-info-box">
   <view class="l" bind:tap="huiyuan">
-    <image class="touxiang" src="/images/who.png" mode="aspectFill"></image>
+    <image class="touxiang" src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/who.png' }}" mode="aspectFill"></image>
     <view class="info">
-      <view class="nick">Gooking</view>
+      <view class="nick">{{ nick ? nick : $t.my.nickSet }}</view>
       <van-tag type="warning" round>{{ $t.home.huiyuan }}</van-tag>
     </view>
   </view>

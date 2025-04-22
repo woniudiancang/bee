@@ -8,7 +8,23 @@ Page({
     this.banners()
   },
   onShow() {
-
+    this.getUserApiInfo()
+  },
+  async getUserApiInfo() {
+    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
+    if (res.code == 0) {
+      const _data = {}
+      _data.apiUserInfoMap = res.data
+      _data.nick = res.data.base.nick
+      if (this.data.order_hx_uids && this.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
+        _data.canHX = true // 具有扫码核销的权限
+      }
+      const admin_uids = wx.getStorageSync('admin_uids')
+      if (admin_uids && admin_uids.indexOf(res.data.base.id) != -1) {
+        _data.isAdmin = true
+      }
+      this.setData(_data)
+    }
   },
   async banners() {
     // https://www.yuque.com/apifm/nu0f75/ms21ki
