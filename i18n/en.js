@@ -213,6 +213,7 @@ module.exports = {
     order: 'Ordering',
     PickingUp: 'Picking Up',
     ordered: 'Ordered',
+    home: 'Home',
   },
   queue: {
     t: 'Queue',
@@ -362,5 +363,14 @@ module.exports = {
     alipay: 'Alipay',
     alipayQrcodeText: 'Long press the picture to save, and then use Alipay to scan',
     notSupport: 'This payment method is not currently supported',
+  },
+  home: {
+    huiyuan: 'VIP0',
+    zq: 'PICK UP',
+    ps: 'Delivery',
+    sc: 'Food',
+    lpk: 'Gift Card',
+    tg: 'Group Buy',
+    bh: 'Stores',
   }
 }

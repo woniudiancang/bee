@@ -1,0 +1,88 @@
+.swiper1 {
+  width: 100vw;
+  height: 100vw;
+}
+.swiper1 image {
+  width: 100%;
+  height: 100%;
+}
+.user-info-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 32rpx;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.user-info-box .l {
+  display: flex;
+  align-items: center;
+}
+.user-info-box .l .touxiang {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+.user-info-box .l .info {
+  margin-left: 16rpx;
+}
+.user-info-box .l .info .nick {
+  font-weight: bold;
+}
+.user-info-box .r {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+}
+.user-info-box .language {
+  margin-right: 24rpx;
+}
+.user-info-box .language .language-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+.pick-type-box {
+  display: flex;
+  margin-top: 48rpx;
+  padding-right: 32rpx;
+}
+.pick-type-box .item {
+  margin-left: 32rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  border: 1rpx solid #ff4d7c;
+}
+.pick-type-box .item image {
+  width: 88rpx;
+  height: 88rpx;
+}
+.pick-type-box .item view {
+  margin-left: 24rpx;
+}
+.category-box {
+  display: flex;
+  margin-top: 88rpx;
+}
+.category-box .item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.category-box .item image {
+  width: 64rpx;
+  height: 64rpx;
+}
+.category-box .item view {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+}
+.about-us {
+  margin-top: 88rpx;
+  font-size: 36rpx;
+  text-align: center;
+  text-decoration: underline;
+}

@@ -23,6 +23,13 @@ function setTabBarLanguage(){
   const $t = this.$t()
   wx.setTabBarItem({
     index: 0,
+    pagePath: "pages/home/index",
+    iconPath: "images/nav/home-off.png",
+    selectedIconPath: "images/nav/home-on.png",
+    text: $t.index.home
+  })
+  wx.setTabBarItem({
+    index: 1,
     pagePath: "pages/index/index",
     iconPath: "images/nav/index-off.png",
     selectedIconPath: "images/nav/index-on.png",
@@ -30,7 +37,7 @@ function setTabBarLanguage(){
   })
 
   wx.setTabBarItem({
-    index: 1,
+    index: 2,
     pagePath: "pages/queue/index",
     iconPath: "images/nav/qh-off.png",
     selectedIconPath: "images/nav/qh-on.png",
@@ -38,7 +45,7 @@ function setTabBarLanguage(){
   })
 
   wx.setTabBarItem({
-    index: 2,
+    index: 3,
     pagePath: "pages/order-details/doing",
     iconPath: "images/nav/qc-off.png",
     selectedIconPath: "images/nav/qc-on.png",
@@ -46,7 +53,7 @@ function setTabBarLanguage(){
   })
 
   wx.setTabBarItem({
-    index: 3,
+    index: 4,
     pagePath: "pages/my/index",
     iconPath: "images/nav/my-off.png",
     selectedIconPath: "images/nav/my-on.png",

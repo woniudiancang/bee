@@ -115,6 +115,12 @@ Page({
     this.banners()
   },
   onShow: function(){
+    const peisongType = wx.getStorageSync('peisongType')
+    if (peisongType) {
+      this.setData({
+        peisongType
+      })
+    }
     this.shippingCarInfo()
     const refreshIndex = wx.getStorageSync('refreshIndex')
     if (refreshIndex) {
@@ -232,10 +238,7 @@ Page({
     this.setData({
       peisongType
     })
-    wx.setStorage({
-      data: peisongType,
-      key: 'peisongType',
-    })
+    wx.setStorageSync('peisongType', peisongType)
   },
   // 获取分类
   async categories() {
@@ -822,7 +825,10 @@ Page({
     })
   },
   async banners() {
-    const res = await WXAPI.banners()
+    // https://www.yuque.com/apifm/nu0f75/ms21ki
+    const res = await WXAPI.banners({
+      type: 'diancang'
+    })
     if (res.code == 0) {
       this.setData({
         banners: res.data

@@ -1,0 +1,50 @@
+<swiper wx:if="{{banners}}" class="swiper1" indicator-dots indicator-color="#ffffff" autoplay circular>
+  <swiper-item wx:for="{{banners}}" wx:key="id">
+    <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+  </swiper-item>
+</swiper>
+<view class="user-info-box">
+  <view class="l" bind:tap="huiyuan">
+    <image class="touxiang" src="/images/who.png" mode="aspectFill"></image>
+    <view class="info">
+      <view class="nick">Gooking</view>
+      <van-tag type="warning" round>{{ $t.home.huiyuan }}</van-tag>
+    </view>
+  </view>
+  <view class="r">
+    <view wx:if="{{ language }}" class="language">
+      <image class="language-icon" src="/images/lang/{{language}}.png" mode="aspectFill" bind:tap="changeLang"></image>
+    </view>
+    <view bind:tap="coupon">{{ $t.coupons.title }}<van-icon name="arrow" /></view>
+  </view>
+</view>
+<view class="pick-type-box">
+  <!-- https://www.iconfont.cn/collections/detail?spm=a313x.search_index.0.da5a778a4.203f3a816FujOp&cid=42791 -->
+  <view class="item" data-type="zq" bind:tap="changePeisongType">
+    <image src="/images/zq.png"></image>
+    <view>{{ $t.home.zq }}</view>
+  </view>
+  <view class="item" data-type="kd" bind:tap="changePeisongType">
+    <image src="/images/ps.png"></image>
+    <view>{{ $t.home.ps }}</view>
+  </view>
+</view>
+<view class="category-box">
+  <view class="item" bind:tap="touming">
+    <image src="/images/sc.png"></image>
+    <view>{{ $t.home.sc }}</view>
+  </view>
+  <view class="item">
+    <image src="/images/lp.png"></image>
+    <view>{{ $t.home.lpk }}</view>
+  </view>
+  <view class="item">
+    <image src="/images/tg.png"></image>
+    <view>{{ $t.home.tg }}</view>
+  </view>
+  <view class="item">
+    <image src="/images/bh.png"></image>
+    <view>{{ $t.home.bh }}</view>
+  </view>
+</view>
+<view class="about-us" bind:tap="about">TEA WORK</view>

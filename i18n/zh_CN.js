@@ -213,6 +213,7 @@ module.exports = {
     order: '点餐',
     PickingUp: '取餐',
     ordered: '已点',
+    home: '首页',
   },
   queue: {
     t: '取号',
@@ -362,5 +363,14 @@ module.exports = {
     alipay: '支付宝支付',
     alipayQrcodeText: '长按图片保存，然后使用支付宝扫一扫付款',
     notSupport: '暂不支持该支付方式',
+  },
+  home: {
+    huiyuan: '普通会员',
+    zq: '到店自取',
+    ps: '骑手配送',
+    sc: '食材透明',
+    lpk: '礼品好卡',
+    tg: '超值团购',
+    bh: '精选百货',
   }
 }

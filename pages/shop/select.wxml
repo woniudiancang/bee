@@ -34,6 +34,6 @@
 
 	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> {{ $t.shop.select }} </button>
 </view>
-<!-- <view class="block-btn btn">
+<view class="block-btn btn">
   <van-button type="primary" block bind:click="joinApply">商家申请入驻</van-button>
-</view> -->
+</view>

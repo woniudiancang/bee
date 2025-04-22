@@ -7,11 +7,12 @@ Page({
   data: {
 
   },
-  onLoad: function (options) {
+  onLoad (e) {
+    this.data.key = e.key || 'about'
     this.cmsPage()
   },
   async cmsPage() {
-    const res = await WXAPI.cmsPage('about')
+    const res = await WXAPI.cmsPage(this.data.key)
     if (res.code == 0) {
       this.setData({
         cmsPage: res.data
