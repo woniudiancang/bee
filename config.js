@@ -1,6 +1,6 @@
 module.exports = {
   version: "25.04.23",
-  note: '优化读取用户信息的逻辑，统一处理',
+  note: '编辑用户资料使用V2接口',
   subDomain: "beeorder", // 根据教程 https://www.it120.cc/help/qr6l4m.html 查看并设置你自己的 subDomain
   merchantId: 27, // 商户ID，可在后台工厂设置-->商户信息查看
   customerServiceType: 'QW' // 客服类型，QW为企业微信，需要在后台系统参数配置企业ID和客服URL，否则为小程序的默认客服
