@@ -76,14 +76,22 @@ App({
       } else {
         AUTH.checkHasLogined().then(isLogined => {
           if (!isLogined) {
-            AUTH.authorize()
+            AUTH.authorize().then(() => {
+              this.getUserApiInfo()
+            })
+          } else {
+            this.getUserApiInfo()
           }
         })
       }
     } else {
       AUTH.checkHasLogined().then(isLogined => {
         if (!isLogined) {
-          AUTH.authorize()
+          AUTH.authorize().then(() => {
+            this.getUserApiInfo()
+          })
+        } else {
+          this.getUserApiInfo()
         }
       })
     }
@@ -163,6 +171,21 @@ App({
   },
   setTabBarLanguage() {
     i18n.setTabBarLanguage()
+  },
+  async getUserApiInfo() {
+    const token = wx.getStorageSync('token')
+    if (!token) {
+      return null
+    }
+    // https://www.yuque.com/apifm/nu0f75/zgf8pu
+    const res = await WXAPI.userDetail(token)
+    if (res.code == 0) {
+      this.globalData.apiUserInfoMap = res.data
+      if (this.getUserDetailOK) {
+        this.getUserDetailOK(res.data)
+      }
+      return res.data
+    }
   },
   globalData: {
     isConnected: true

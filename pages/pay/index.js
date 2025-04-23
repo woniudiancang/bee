@@ -129,8 +129,23 @@ Page({
       _data.pingtuanOpenId = e.pingtuanOpenId
     }
     this.setData(_data)
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
+    getApp().getUserDetailOK = (apiUserInfoMap) => {
+      this.processGotUserDetail(apiUserInfoMap)
+    }
     this._peisonFeeList()
+  },
+  async processGotUserDetail(apiUserInfoMap) {
+    if (!apiUserInfoMap) {
+      return
+    }
+    this.setData({
+      nick: apiUserInfoMap.base.nick,
+      avatarUrl: apiUserInfoMap.base.avatarUrl,
+      mobile: apiUserInfoMap.base.mobile
+    })
   },
   selected(e){
     const peisongType = e.currentTarget.dataset.pstype
@@ -577,16 +592,6 @@ Page({
       })
     }
   },
-  async getUserApiInfo() {
-    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
-    if (res.code == 0) {
-      this.setData({
-        nick: res.data.base.nick,
-        avatarUrl: res.data.base.avatarUrl,
-        mobile: res.data.base.mobile
-      })
-    }
-  },
   diningTimeShow() {
     this.setData({
       diningTimeShow: true
@@ -639,7 +644,9 @@ Page({
     wx.showToast({
       title: this.data.$t.pay.Loginsuccessful,
     })
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
   },
   async _peisonFeeList() {
     // https://www.yuque.com/apifm/nu0f75/nx465k

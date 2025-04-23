@@ -5,26 +5,24 @@ Page({
   },
   onLoad(e) {
     getApp().initLanguage(this)
+    getApp().getUserDetailOK = (apiUserInfoMap) => {
+      this.processGotUserDetail(apiUserInfoMap)
+    }
     this.banners()
   },
   onShow() {
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
   },
-  async getUserApiInfo() {
-    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
-    if (res.code == 0) {
-      const _data = {}
-      _data.apiUserInfoMap = res.data
-      _data.nick = res.data.base.nick
-      if (this.data.order_hx_uids && this.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
-        _data.canHX = true // 具有扫码核销的权限
-      }
-      const admin_uids = wx.getStorageSync('admin_uids')
-      if (admin_uids && admin_uids.indexOf(res.data.base.id) != -1) {
-        _data.isAdmin = true
-      }
-      this.setData(_data)
+  async processGotUserDetail(apiUserInfoMap) {
+    if (!apiUserInfoMap) {
+      return
     }
+    this.setData({
+      apiUserInfoMap,
+      nick: apiUserInfoMap.base.nick
+    })
   },
   async banners() {
     // https://www.yuque.com/apifm/nu0f75/ms21ki

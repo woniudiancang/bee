@@ -16,46 +16,42 @@ Page({
     nick: undefined,
   },
   onLoad() {
-    const order_hx_uids = wx.getStorageSync('order_hx_uids')
-    this.setData({
-      myBg: wx.getStorageSync('myBg'),
-      version: CONFIG.version,
-      order_hx_uids,
-      customerServiceType: CONFIG.customerServiceType
-    })
-  },
-  onShow() {
     getApp().initLanguage(this)
     wx.setNavigationBarTitle({
       title: this.data.$t.my.title,
     })
-    AUTH.checkHasLogined().then(isLogined => {
-      if (isLogined) {
-        this.getUserApiInfo()
-        this.getUserAmount()
-        this.couponStatistics()
-      } else {
-        AUTH.authorize().then(res => {
-          AUTH.bindSeller()
-        })
-      }
+    this.setData({
+      myBg: wx.getStorageSync('myBg'),
+      version: CONFIG.version,
+      customerServiceType: CONFIG.customerServiceType
+    })
+    getApp().getUserDetailOK = (apiUserInfoMap) => {
+      this.processGotUserDetail(apiUserInfoMap)
+    }
+  },
+  onShow() {
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
     })
   },
-  async getUserApiInfo() {
-    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
-    if (res.code == 0) {
-      const _data = {}
-      _data.apiUserInfoMap = res.data
-      _data.nick = res.data.base.nick
-      if (this.data.order_hx_uids && this.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
-        _data.canHX = true // 具有扫码核销的权限
-      }
-      const admin_uids = wx.getStorageSync('admin_uids')
-      if (admin_uids && admin_uids.indexOf(res.data.base.id) != -1) {
-        _data.isAdmin = true
-      }
-      this.setData(_data)
+  async processGotUserDetail(apiUserInfoMap) {
+    if (!apiUserInfoMap) {
+      return
     }
+    const order_hx_uids = wx.getStorageSync('order_hx_uids')
+    const _data = {}
+    _data.apiUserInfoMap = apiUserInfoMap
+    _data.nick = apiUserInfoMap.base.nick
+    if (order_hx_uids && order_hx_uids.indexOf(apiUserInfoMap.base.id) != -1) {
+      _data.canHX = true // 具有扫码核销的权限
+    }
+    const admin_uids = wx.getStorageSync('admin_uids')
+    if (admin_uids && admin_uids.indexOf(apiUserInfoMap.base.id) != -1) {
+      _data.isAdmin = true
+    }
+    this.setData(_data)
+    this.getUserAmount()
+    this.couponStatistics()
   },
   async couponStatistics() {
     const res = await WXAPI.couponStatistics(wx.getStorageSync('token'))
@@ -151,7 +147,9 @@ Page({
     wx.showToast({
       title: this.data.$t.common.submitSuccess,
     })
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
   },
   async onChooseAvatar(e) {
     console.log(e);
@@ -178,7 +176,9 @@ Page({
     wx.showToast({
       title: this.data.$t.common.submitSuccess,
     })
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
   },
   goUserCode() {
     wx.navigateTo({

@@ -1,5 +1,4 @@
 const WXAPI = require('apifm-wxapi')
-const AUTH = require('../../utils/auth')
 const APP = getApp()
 APP.configLoadOK = () => {
   
@@ -15,25 +14,26 @@ Page({
       title: this.data.$t.vip.title,
     })
     this.userLevelList()
-    this.userAmount()
-    this.getUserApiInfo()
+    getApp().getUserApiInfo().then(apiUserInfoMap => {
+      this.processGotUserDetail(apiUserInfoMap)
+    })
+    getApp().getUserDetailOK = (apiUserInfoMap) => {
+      this.processGotUserDetail(apiUserInfoMap)
+    }
   },
   onShow: function () {
-    AUTH.checkHasLogined().then(isLogined => {
-      if (!isLogined) {
-        wx.showModal({
-          confirmText: this.data.$t.common.confirm,
-          cancelText: this.data.$t.common.cancel,
-          content: this.data.$t.auth.needLogin,
-          showCancel: false,
-          success: () => {
-            wx.navigateBack()
-          }
-        })
-      }
+  },
+  async processGotUserDetail(apiUserInfoMap) {
+    if (!apiUserInfoMap) {
+      return
+    }
+    this.setData({
+      apiUserInfoMap
     })
+    this.userAmount()
   },
   async userAmount() {
+    // https://www.yuque.com/apifm/nu0f75/wrqkcb
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
@@ -41,15 +41,8 @@ Page({
       });
     }
   },
-  async getUserApiInfo() {
-    const res = await WXAPI.userDetail(wx.getStorageSync('token'))
-    if (res.code == 0) {
-      this.setData({
-        apiUserInfoMap: res.data
-      });
-    }
-  },
   async userLevelList() {
+    // https://www.yuque.com/apifm/nu0f75/fsh4gu
     const res = await WXAPI.userLevelList()
     if (res.code == 0) {
       this.setData({
