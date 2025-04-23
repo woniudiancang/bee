@@ -17,6 +17,9 @@
         <van-cell wx:if="{{ alipayOpenMod == '1' }}" icon="https://dcdn.it120.cc/2024/08/29/b6fdcdd9-bb24-46fd-b066-1a41c0ea8047.png" title="{{ $t.payment.alipay }}" clickable data-name="alipay" bind:click="payTypeClick">
           <van-radio slot="right-icon" name="alipay" />
         </van-cell>
+        <!-- <van-cell wx:if="{{ useCard }}" icon="https://dcdn.it120.cc/2024/08/29/b6fdcdd9-bb24-46fd-b066-1a41c0ea8047.png" title="{{ $t.payment.alipay }}" clickable data-name="alipay" bind:click="payTypeClick">
+          <van-radio slot="right-icon" name="alipay" />
+        </van-cell> -->
       </van-cell-group>
     </van-radio-group>
     <block wx:if="{{ alipayQrcode }}">

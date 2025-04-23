@@ -1,0 +1,15 @@
+<view class="from">
+  <view class="title">{{ $t.card.excharge }}</view>
+  <van-field
+    model:value="{{ number }}"
+    size="large"
+    placeholder="{{ $t.card.pleaseInputNumber }}"
+  />
+  <view class="btn">
+    <van-button type="primary" size="large" block bind:tap="submit">{{ $t.coupons.change }}</van-button>
+  </view>
+  <view class="xieyi">
+    <van-icon name="passed" size="32rpx" color="{{ agree ? '#07c160' : '#333333' }}" bind:tap="_agree" />
+    <view bind:tap="xieyi">{{ $t.card.xieyi }}</view>
+  </view>
+</view>

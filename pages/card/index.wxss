@@ -1,0 +1,76 @@
+.swiper1 {
+  margin-top: 16rpx;
+  width: 100vw;
+  height: 75vw;
+}
+.swiper1 image {
+  width: 100%;
+  height: 100%;
+}
+.card-list {
+  margin: 0 32rpx 32rpx 32rpx;
+  padding-bottom: 64rpx;
+}
+.card-list .item {
+  margin-top: 32rpx;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 32rpx;
+  overflow: hidden;
+}
+.card-list .item .pic {
+  position: relative;
+}
+.card-list .item .pic .fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 16rpx 32rpx;
+  text-align: right;
+}
+.card-list .item .pic image {
+  width: 100%;
+  height: 0;
+}
+.price-box {
+  padding: 0 32rpx 32rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-list .item .price {
+  color: #e64340;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.card-list .item .price text {
+  color: #333;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+.card-list .item .t {
+  font-weight: bold;
+  font-size: 28rpx;
+  padding: 32rpx;
+}
+.card-list .item .price {
+  color: #e64340;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.card-list .item .price text {
+  color: #333;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+.card-list .item .price2 {
+  color: #ffffff;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.card-list .item .price2 text {
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: normal;
+}

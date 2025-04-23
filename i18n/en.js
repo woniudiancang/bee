@@ -372,5 +372,17 @@ module.exports = {
     lpk: 'Gift Card',
     tg: 'Group Buy',
     bh: 'Stores',
+  },
+  card: {
+    title: 'Gift Card',
+    buy: 'Buy Card',
+    my: 'My Card',
+    empty: 'No Card Sale',
+    buy2: 'BUY',
+    excharge: 'Exchange Card',
+    times: 'CUP',
+    logs: 'Consumption Details',
+    pleaseInputNumber: 'Please enter the redemption code',
+    xieyi: 'Agree to the Gift Card Usage Agreement',
   }
 }

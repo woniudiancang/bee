@@ -34,7 +34,7 @@
     <image src="/images/sc.png"></image>
     <view>{{ $t.home.sc }}</view>
   </view>
-  <view class="item">
+  <view class="item" bind:tap="card">
     <image src="/images/lp.png"></image>
     <view>{{ $t.home.lpk }}</view>
   </view>

@@ -1,0 +1,28 @@
+page {
+  background: rgb(235, 234, 234);
+}
+.from {
+  margin: 88rpx 32rpx;
+  background: #fff;
+  padding: 32rpx;
+  padding-bottom: 88rpx;
+  border-radius: 32rpx;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.title {
+  text-align: center;
+  font-weight: bold;
+  padding: 48rpx;
+}
+.btn {
+  margin-top: 64rpx;
+}
+.xieyi {
+  margin-top: 32rpx;
+  display: flex;
+  font-size: 26rpx;
+  justify-content: center;
+}
+.xieyi view {
+  margin-left: 8rpx;
+}

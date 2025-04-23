@@ -1,0 +1,52 @@
+<van-sticky>
+  <van-tabs active="{{ active }}" bind:change="tabChange">
+    <van-tab title="{{ $t.card.buy }}"></van-tab>
+    <van-tab title="{{ $t.card.my }}"></van-tab>
+  </van-tabs>
+</van-sticky>
+<view wx:if="{{ active == 0 }}">
+  <swiper wx:if="{{ banners }}" class="swiper1" indicator-dots indicator-color="#ffffff" autoplay circular>
+    <swiper-item wx:for="{{ banners }}" wx:key="id">
+      <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+    </swiper-item>
+  </swiper>
+  <view class="card-list">
+    <van-empty wx:if="{{ !cardList }}" description="{{ $t.card.empty }}" />
+    <view class="item" wx:for="{{ cardList }}" wx:key="id">
+      <view class="pic">
+        <image src="{{ item.pic }}" mode="widthFix"></image>
+      </view>
+      <view class="t">{{ item.name }}</view>
+      <view class="price-box">
+        <view class="price"><text>￥</text>{{ item.price }}</view>
+        <van-button type="primary" size="small" round data-item="{{ item }}" bind:tap="buy">{{ $t.card.buy2 }}</van-button>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{ active == 1 }}">
+  <view class="card-list">
+    <van-cell icon="gift-card-o" title="{{ $t.card.excharge }}" is-link url="/pages/card/exchange" />
+    <van-empty wx:if="{{ !cardMyList }}" description="{{ $t.card.empty }}" />
+    <view class="item" wx:for="{{ cardMyList }}" wx:key="id">
+      <view class="pic">
+        <image src="{{ item.cardInfo.pic }}" mode="widthFix"></image>
+        <view class="fixed">
+          <view wx:if="{{ item.type == 0 }}" class="price2">{{ item.amount }}<text>{{ $t.card.times }}</text></view>
+          <view wx:if="{{ item.type == 1 }}" class="price2"><text>￥</text>{{ item.amount }}</view>
+        </view>
+      </view>
+      <van-cell title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
+    </view>
+  </view>
+</view>
+
+<payment
+  money="{{ money }}"
+  remark="{{ remark }}"
+  nextAction="{{ nextAction }}"
+  show="{{ paymentShow }}"
+  useCard="{{ false }}"
+  bind:cancel="paymentCancel"
+  bind:ok="paymentOk"
+/>

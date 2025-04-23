@@ -92,4 +92,9 @@ Page({
       url: '/pages/about/index?key=toumingshicai',
     })
   },
+  card() {
+    wx.navigateTo({
+      url: '/pages/card/index',
+    })
+  },
 })

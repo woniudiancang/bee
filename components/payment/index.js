@@ -13,6 +13,10 @@ Component({
     nextAction: Object,
     extData: Object,
     show: Boolean,
+    useCard: {
+      type: Boolean,
+      value: true
+    }
   },
 
   /**

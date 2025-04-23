@@ -372,5 +372,17 @@ module.exports = {
     lpk: '礼品好卡',
     tg: '超值团购',
     bh: '精选百货',
+  },
+  card: {
+    title: '礼品卡',
+    buy: '购买礼品卡',
+    my: '我的礼品卡',
+    empty: '暂无礼品卡',
+    buy2: '立即购买',
+    excharge: '兑换礼品卡',
+    times: '杯',
+    logs: '消费明细',
+    pleaseInputNumber: '请输入兑换码',
+    xieyi: '同意《礼品卡使用协议》',
   }
 }

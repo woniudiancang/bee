@@ -29,7 +29,10 @@
     "pages/cart/index",
     "pages/cart/order",
     "pages/goods-details/index",
-    "pages/goods/list"
+    "pages/goods/list",
+    "pages/card/index",
+    "pages/card/logs",
+    "pages/card/exchange"
   ],
   "requiredPrivateInfos": [
     "getLocation",
@@ -122,7 +125,8 @@
     "van-count-down": "@vant/weapp/count-down/index",
     "van-progress": "@vant/weapp/progress/index",
     "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index"
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-sticky": "@vant/weapp/sticky/index"
   },
   "sitemapLocation": "sitemap.json"
 }
