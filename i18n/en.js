@@ -389,5 +389,9 @@ module.exports = {
     cardShareClose: 'Cancel Send',
     shareplaceholder: 'Please have a cup of milk tea~',
     sending: 'Sending',
+    receiveEmpty: 'The current gift card does not exist or has been claimed',
+    friend: 'Friend',
+    cardShareFetch: 'Accept Your Heart',
+    fetchSuccess: 'The gift card has been deposited into the card bag',
   }
 }

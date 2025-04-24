@@ -1,0 +1,63 @@
+page {
+  background: rgb(235, 234, 234);
+}
+.from {
+  margin: 88rpx 32rpx;
+  background: #fff;
+  padding: 32rpx;
+  padding-bottom: 88rpx;
+  border-radius: 32rpx;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.user-box {
+  display: flex;
+  align-items: center;
+}
+.user-box .avatarUrl {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.user-box .r {
+  margin-left: 32rpx;
+}
+.user-box .r .t1 {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.user-box .r .t2 {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+}
+.remark {
+  border: 1rpx dashed #999999 !important;
+  border-radius: 16rpx;
+  margin-top: 64rpx;
+  padding: 32rpx;
+  font-style: italic;
+  font-size: 28rpx;
+}
+.pic {
+  margin-top: 64rpx;
+  width: 100%;
+  height: 0;
+}
+.title {
+  text-align: center;
+  font-weight: bold;
+  padding: 48rpx;
+}
+.btn {
+  margin-top: 64rpx;
+}
+.price {
+  text-align: center;
+  color: #e64340;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.price text {
+  color: #333;
+  font-size: 24rpx;
+  font-weight: normal;
+}

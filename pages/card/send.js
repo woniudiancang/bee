@@ -27,7 +27,8 @@ Page({
     // https://www.yuque.com/apifm/nu0f75/xevcthfroio6xnc0
     const res = await WXAPI.cardShareOpen({
       token: wx.getStorageSync('token'),
-      id: this.data.cardUser.id
+      id: this.data.cardUser.id,
+      remark: this.data.remark,
     })
     wx.hideLoading()
     if (res.code == 0) {
@@ -37,10 +38,29 @@ Page({
     }
   },
   onShareAppMessage(e) {
+    const promise = new Promise(resolve => {
+      WXAPI.cardShareOpen({
+        token: wx.getStorageSync('token'),
+        id: this.data.cardUser.id,
+        remark: this.data.remark,
+      }).then( res => {
+        if (res.code == 0) {
+          this.setData({
+            shareToken: res.data
+          })
+          resolve({
+            title: this.data.remark,
+            path: '/pages/card/receive?inviter_id=' + (wx.getStorageSync('uid') || '') + '&id='+ this.data.cardUser.id +'&shareToken=' + this.data.shareToken,
+            imageUrl: this.data.cardUser.cardInfo.pic,
+          })
+        }
+      })
+    })
     return {
       title: this.data.remark,
-      path: '/pages/card/index?inviter_id=' + (wx.getStorageSync('uid') || ''),
-      imageUrl: this.data.cardUser.cardInfo.pic
+      path: '/pages/card/receive?inviter_id=' + (wx.getStorageSync('uid') || '') + '&id='+ this.data.cardUser.id +'&shareToken=' + this.data.shareToken,
+      imageUrl: this.data.cardUser.cardInfo.pic,
+      promise
     }
   },
 })

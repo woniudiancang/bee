@@ -389,5 +389,9 @@ module.exports = {
     cardShareClose: '取消赠送',
     shareplaceholder: '请你喝杯奶茶~',
     sending: '赠送中',
+    receiveEmpty: '当前礼品卡不存在或已被领取',
+    friend: '好友',
+    cardShareFetch: '收下心意',
+    fetchSuccess: '礼品卡已存入卡包',
   }
 }

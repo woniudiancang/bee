@@ -33,7 +33,8 @@
     "pages/card/index",
     "pages/card/logs",
     "pages/card/exchange",
-    "pages/card/send"
+    "pages/card/send",
+    "pages/card/receive"
   ],
   "requiredPrivateInfos": [
     "getLocation",

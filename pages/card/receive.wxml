@@ -1,0 +1,17 @@
+<view class="from">
+  <view class="user-box">
+    <image class="avatarUrl" src="{{ user.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
+    <view class="r">
+      <view class="t1">{{ user.nick || $t.card.friend }}</view>
+      <view class="t2">{{ $t.card.shareplaceholder }}</view>
+    </view>
+  </view>
+  <view class="remark">{{ cardInfo.shareContent || $t.card.shareplaceholder }}</view>
+  <image class="pic" src="{{ cardInfo.pic }}" mode="widthFix"></image>
+  <view class="title">{{ cardInfo.name }}</view>
+  <view wx:if="{{ cardUser.type == 0 }}" class="price">{{ cardUser.amount }}<text>{{ $t.card.times }}</text></view>
+  <view wx:if="{{ cardUser.type == 1 }}" class="price"><text>￥</text>{{ cardUser.amount }}</view>
+  <view class="btn">
+    <van-button type="primary" size="large" block round bind:click="submit">{{ $t.card.cardShareFetch }}</van-button>
+  </view>
+</view>
