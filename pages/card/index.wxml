@@ -46,7 +46,14 @@
         <view class="name">{{ item.cardInfo.name }}</view>
         <van-button type="danger" size="small" round data-item="{{ item }}" bind:tap="cardShareClose">{{ $t.card.cardShareClose }}</van-button>
       </view>
-      <van-cell wx:else title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
+      <view wx:else>
+        <van-cell title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
+        <view wx:if="{{ item.fromUser }}" class="fromUser">
+          <text class="l1">送礼人：</text>
+          <image class="l2" src="{{ item.fromUser.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
+          <text class="l3">{{ item.fromUser.nick || '微信用户' }}</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>

@@ -101,3 +101,18 @@
 .send-friend .name {
   font-size: 28rpx;
 }
+.fromUser {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.fromUser .l2 {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+}
+.fromUser .l3 {
+  margin-left: 8rpx;
+}
