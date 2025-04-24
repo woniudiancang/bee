@@ -5,7 +5,7 @@ Page({
   onLoad (e) {
     getApp().initLanguage(this)
     wx.setNavigationBarTitle({
-      title: this.data.$t.card.cardShareOpen,
+      title: this.data.$t.card.shareplaceholder,
     })
     this.setData({
       id: e.id,

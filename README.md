@@ -184,6 +184,13 @@ APPID 务必要改成你自己的小程序的 APPID
 2. 页面中可以直接显示语言包中的内容: `{{ $t.test.name }}`;
 3. 语言内容，直接修改 `i18n` 文件夹中对应的语言的文件即可；
 
+## 打印机配置自动出票
+
+1. [打印机配置教程](https://www.it120.cc/help/ggrun8.html)
+2. [打印机模板变量详细说明](https://www.it120.cc/help/wtviya.html)
+3. 小票机模板： [小票机模版①](https://www.it120.cc/help/xc2hk2q4yrop12ll.html) [小票机模版②](https://www.it120.cc/help/taan6w2wvt6d00mg.html) [小票机模版③](https://www.it120.cc/help/vn7l4p2m28x7x30h.html)
+3. 杯贴机模板： [杯贴机模版①](https://www.it120.cc/help/nl0frezogy8uunet.html) [杯贴机模版②](https://www.it120.cc/help/mlcqigcmz1ggydw2.html) 
+
 # 常见问题
 
 ## 无法登陆 / 无法获取 openid
