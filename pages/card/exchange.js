@@ -27,6 +27,13 @@ Page({
       })
       return
     }
+    if (!this.data.agree) {
+      wx.showToast({
+        title: this.data.$t.card.xieyi0,
+        icon: 'none'
+      })
+      return
+    }
     wx.showLoading({
       title: '',
     })

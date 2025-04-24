@@ -28,6 +28,23 @@
   background-color: rgba(0, 0, 0, 0.6);
   padding: 16rpx 32rpx;
   text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sending {
+  position: absolute;
+  top: 48rpx;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 16rpx 32rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 32rpx 0 0 32rpx;
+}
+.dateEnd {
+  color: #ffffff;
+  font-size: 24rpx;
 }
 .card-list .item .pic image {
   width: 100%;
@@ -73,4 +90,14 @@
   color: #ffffff;
   font-size: 24rpx;
   font-weight: normal;
+}
+.send-friend {
+  padding: 16rpx 32rpx;
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.send-friend .name {
+  font-size: 28rpx;
 }

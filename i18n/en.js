@@ -384,5 +384,10 @@ module.exports = {
     logs: 'Consumption Details',
     pleaseInputNumber: 'Please enter the redemption code',
     xieyi: 'Agree to the Gift Card Usage Agreement',
+    xieyi0: 'Please Read And Agree to the Gift Card Usage Agreement',
+    cardShareOpen: 'Send Friend',
+    cardShareClose: 'Cancel Send',
+    shareplaceholder: 'Please have a cup of milk tea~',
+    sending: 'Sending',
   }
 }

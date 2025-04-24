@@ -116,4 +116,34 @@ Page({
       paymentShow: false
     })
   },
+  sendUser(e) {
+    const item = e.currentTarget.dataset.item
+    wx.setStorageSync('sendCard', item)
+    wx.navigateTo({
+      url: '/pages/card/send',
+    })
+  },
+  async cardShareClose(e) {
+    const item = e.currentTarget.dataset.item
+    wx.showLoading({
+      title: '',
+    })
+    // https://www.yuque.com/apifm/nu0f75/cz1urg3208qiu5um
+    const res = await WXAPI.cardShareClose({
+      token: wx.getStorageSync('token'),
+      id: item.id
+    })
+    wx.hideLoading()
+    if (res.code == 0) {
+      this.setData({
+        active: 1
+      })
+      this.cardMyList()
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+    }
+  },
 })

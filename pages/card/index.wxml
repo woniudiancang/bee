@@ -32,11 +32,21 @@
       <view class="pic">
         <image src="{{ item.cardInfo.pic }}" mode="widthFix"></image>
         <view class="fixed">
+          <view class="dateEnd">{{ $t.coupons.expire }}: {{ item.dateEnd }}</view>
           <view wx:if="{{ item.type == 0 }}" class="price2">{{ item.amount }}<text>{{ $t.card.times }}</text></view>
           <view wx:if="{{ item.type == 1 }}" class="price2"><text>￥</text>{{ item.amount }}</view>
         </view>
+        <view wx:if="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="sending">{{ $t.card.sending }}</view>
       </view>
-      <van-cell title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
+      <view wx:if="{{ !item.isActive && !item.fromUid && !item.shareToken }}" class="send-friend">
+        <view class="name">{{ item.cardInfo.name }}</view>
+        <van-button type="primary" size="small" round data-item="{{ item }}" bind:tap="sendUser">{{ $t.card.cardShareOpen }}</van-button>
+      </view>
+      <view wx:elif="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="send-friend">
+        <view class="name">{{ item.cardInfo.name }}</view>
+        <van-button type="danger" size="small" round data-item="{{ item }}" bind:tap="cardShareClose">{{ $t.card.cardShareClose }}</van-button>
+      </view>
+      <van-cell wx:else title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
     </view>
   </view>
 </view>

@@ -32,7 +32,8 @@
     "pages/goods/list",
     "pages/card/index",
     "pages/card/logs",
-    "pages/card/exchange"
+    "pages/card/exchange",
+    "pages/card/send"
   ],
   "requiredPrivateInfos": [
     "getLocation",

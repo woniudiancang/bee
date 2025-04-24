@@ -384,5 +384,10 @@ module.exports = {
     logs: '消费明细',
     pleaseInputNumber: '请输入兑换码',
     xieyi: '同意《礼品卡使用协议》',
+    xieyi0: '请先阅读并同意《礼品卡使用协议》',
+    cardShareOpen: '送给好友',
+    cardShareClose: '取消赠送',
+    shareplaceholder: '请你喝杯奶茶~',
+    sending: '赠送中',
   }
 }

@@ -1,0 +1,17 @@
+<view class="from">
+  <image class="pic" src="{{ cardUser.cardInfo.pic }}" mode="widthFix"></image>
+  <view class="title">{{ cardUser.cardInfo.name }}</view>
+  <view wx:if="{{ cardUser.type == 0 }}" class="price">{{ cardUser.amount }}<text>{{ $t.card.times }}</text></view>
+  <view wx:if="{{ cardUser.type == 1 }}" class="price"><text>￥</text>{{ cardUser.amount }}</view>
+  <van-field
+    model:value="{{ remark }}"
+    size="large"
+    type="textarea"
+    autosize="{{ autosize }}"
+    input-class="remark"
+    placeholder="{{ $t.card.shareplaceholder }}"
+  />
+  <view class="btn">
+    <van-button type="primary" size="large" block round open-type="share">{{ $t.card.cardShareOpen }}</van-button>
+  </view>
+</view>
