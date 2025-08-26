@@ -27,17 +27,6 @@
 | :------: | :------: | :------: | :------: | :------: |
 | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/aca7a7fd-72c9-4d89-a903-d82e6b8b8f83.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/77f16752-656f-4218-99df-c82c5db1921a.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/e3be04c4-9c0f-41c8-9482-b645699d1df4.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/352c7e84-56ec-4961-9e7d-cc4e752cf154.png" width="200px"> | <img src="https://dcdn.it120.cc/cuser/27/2023/01/04/78adb196-231d-41b7-be8d-51febc022bac.png" width="200px"> |
 
-
-# QQ交流群
-
-| 交流群3（709136251）| 交流群4（276780260）|
-| :------: | :------: |
-| <img src="https://dcdn.it120.cc/2021/09/13/751cb675-265e-4be1-8f2e-f26935f693d7.png" width="200px">| <img src="https://dcdn.it120.cc/2022/12/20/5e4d6d5b-1361-476d-912f-ee740f036ec6.jpeg" width="150px">| 
-
-| 交流群1（已满）（926321567） | 交流群2（已满）（671428068） |
-| :------: | :------: |
-| <img src="https://dcdn.it120.cc/2020/07/27/e3d09fd2-ace0-4cf4-9d71-e0454591ff54.png" width="200px">| <img src="https://dcdn.it120.cc/2020/12/27/b709cceb-befc-405b-8c5a-c8f9e90a1a5b.png" width="150px">|
-
 # 本项目使用了下面的组件，在此鸣谢
 
 - [vant-UI库](https://youzan.github.io/vant-weapp/)
