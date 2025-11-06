@@ -1,41 +1,98 @@
-<van-field
-  label="{{ $t.booking.name }}"
-  placeholder="{{ $t.booking.namePlaceholder }}"
-  size="large"
-  focus
-  clearable
-  model:value="{{ name }}"
-/>
-<van-field
-  type="number"
-  label="{{ $t.booking.mobile }}"
-  placeholder="{{ $t.booking.mobilePlaceholder }}"
-  size="large"
-  clearable
-  model:value="{{ mobile }}"
-/>
-<van-field
-  label="{{ $t.booking.time }}"
-  placeholder="{{ $t.booking.timePlaceholder }}"
-  size="large"
-  readonly
-  value="{{ time }}"
-  is-link
-  bindtap="showDatetimePop"
-/>
-<van-divider contentPosition="center">
-  {{ $t.booking.person }}
-</van-divider>
-<view class="persion-num">
-  <view wx:for="{{persionNum[language]}}" wx:key="item" class="item {{persionNumIndex == index ? 'active' : ''}}" data-idx="{{index}}" bindtap="changePersionNum">
-    {{ item }}
-    <van-icon wx:if="{{persionNumIndex == index}}" custom-class="icon" name="success" />
+<view class="booking-container">
+  <!-- 顶部装饰区域 -->
+  <view class="header-banner">
+    <view class="banner-bg"></view>
+    <view class="banner-content">
+      <view class="banner-icon">🥤</view>
+      <view class="banner-title">在线订座</view>
+      <view class="banner-subtitle">为您预留美好时光</view>
+    </view>
+  </view>
+
+  <!-- 表单卡片区域 -->
+  <view class="form-card">
+    <view class="section-title">
+      <view class="title-icon">👤</view>
+      <text class="title-text">预订信息</text>
+    </view>
+    
+    <!-- 姓名输入 -->
+    <view class="input-group">
+      <view class="input-label">
+        <text class="label-text">{{ $t.booking.name }}</text>
+        <text class="label-required">*</text>
+      </view>
+      <van-field
+        placeholder="{{ $t.booking.namePlaceholder }}"
+        clearable
+        focus
+        custom-class="custom-field"
+        model:value="{{ name }}"
+      />
+    </view>
+
+    <!-- 手机号输入 -->
+    <view class="input-group">
+      <view class="input-label">
+        <text class="label-text">{{ $t.booking.mobile }}</text>
+        <text class="label-required">*</text>
+      </view>
+      <van-field
+        type="number"
+        placeholder="{{ $t.booking.mobilePlaceholder }}"
+        clearable
+        custom-class="custom-field"
+        model:value="{{ mobile }}"
+      />
+    </view>
+
+    <!-- 时间选择 -->
+    <view class="input-group">
+      <view class="input-label">
+        <text class="label-text">{{ $t.booking.time }}</text>
+        <text class="label-required">*</text>
+      </view>
+      <van-field
+        placeholder="{{ $t.booking.timePlaceholder }}"
+        readonly
+        value="{{ time }}"
+        is-link
+        custom-class="custom-field"
+        bindtap="showDatetimePop"
+      />
+    </view>
+  </view>
+
+  <!-- 人数选择卡片 -->
+  <view class="form-card person-card">
+    <view class="section-title">
+      <view class="title-icon">👥</view>
+      <text class="title-text">{{ $t.booking.person }}</text>
+    </view>
+    
+    <view class="persion-num">
+      <view wx:for="{{persionNum[language]}}" wx:key="item" 
+            class="person-item {{persionNumIndex == index ? 'active' : ''}}" 
+            data-idx="{{index}}" 
+            bindtap="changePersionNum">
+        <view class="person-icon">{{persionNumIndex == index ? '✓' : '👥'}}</view>
+        <view class="person-text">{{ item }}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-container">
+    <view class="btn">
+      <van-button type="primary" block bind:click="submit" custom-class="submit-btn">
+        <text class="btn-text">{{ $t.booking.title }}</text>
+      </van-button>
+    </view>
+    <view class="profile">{{ $t.booking.tip }}</view>
   </view>
 </view>
-<view class="btn">
-  <van-button type="primary" block bind:click="submit">{{ $t.booking.title }}</van-button>
-</view>
-<view class="profile">{{ $t.booking.tip }}</view>
+
+<!-- 时间选择弹窗 -->
 
 
 <van-popup

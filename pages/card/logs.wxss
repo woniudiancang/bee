@@ -1,1 +1,363 @@
 /* pages/card/logs.wxss */
+page {
+  background: linear-gradient(180deg, #F5F0EB 0%, #FDFBF9 100%);
+  min-height: 100vh;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* ========== 顶部装饰 ========== */
+.header-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 280rpx;
+  background: linear-gradient(135deg, #D4B5A0 0%, #A0826D 100%);
+  overflow: hidden;
+  z-index: 0;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.circle-1 {
+  width: 300rpx;
+  height: 300rpx;
+  top: -100rpx;
+  right: -50rpx;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle-2 {
+  width: 200rpx;
+  height: 200rpx;
+  bottom: -80rpx;
+  left: -40rpx;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.decoration-wave {
+  position: absolute;
+  bottom: -2rpx;
+  left: 0;
+  right: 0;
+  height: 60rpx;
+  background: #F5F0EB;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20rpx) scale(1.05);
+  }
+}
+
+/* ========== 卡片概览区域 ========== */
+.card-overview {
+  position: relative;
+  z-index: 1;
+  padding: 40rpx 32rpx 32rpx;
+}
+
+.overview-content {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10rpx);
+  border-radius: 24rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 8rpx 32rpx rgba(160, 130, 109, 0.12);
+}
+
+.overview-icon {
+  font-size: 68rpx;
+  margin-right: 24rpx;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8rpx);
+  }
+}
+
+.overview-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #3D2F26;
+  line-height: 1.3;
+  margin-bottom: 8rpx;
+}
+
+.overview-subtitle {
+  font-size: 22rpx;
+  color: #A0826D;
+  letter-spacing: 1rpx;
+  text-transform: uppercase;
+}
+
+/* ========== 空状态 ========== */
+.empty-container {
+  position: relative;
+  z-index: 1;
+  margin: 120rpx 32rpx;
+  padding: 100rpx 40rpx 80rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.04);
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.8;
+  animation: swing 3s ease-in-out infinite;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.empty-text {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+.empty-tips {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 1.6;
+  padding: 0 20rpx;
+}
+
+/* ========== 消费记录列表 ========== */
+.records-container {
+  position: relative;
+  z-index: 1;
+  padding: 0 32rpx;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60rpx;
+  margin-bottom: 32rpx;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 22rpx;
+  top: 60rpx;
+  bottom: -32rpx;
+  width: 2rpx;
+  background: linear-gradient(180deg, #D4B5A0 0%, rgba(212, 181, 160, 0.3) 100%);
+}
+
+/* ========== 时间轴点 ========== */
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 24rpx;
+  width: 46rpx;
+  height: 46rpx;
+  background: linear-gradient(135deg, #D4B5A0, #A0826D);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(160, 130, 109, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4rpx 12rpx rgba(160, 130, 109, 0.3);
+  }
+  50% {
+    box-shadow: 0 4rpx 20rpx rgba(160, 130, 109, 0.5);
+  }
+}
+
+.dot-inner {
+  width: 16rpx;
+  height: 16rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* ========== 记录卡片 ========== */
+.record-card {
+  position: relative;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.record-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #D4B5A0, #A0826D);
+}
+
+/* ========== 卡片头部 ========== */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.type-badge {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #FFF5EE, #F5EBE0);
+  padding: 12rpx 20rpx;
+  border-radius: 40rpx;
+  border: 1rpx solid rgba(160, 130, 109, 0.15);
+}
+
+.badge-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.badge-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #A0826D;
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* ========== 卡片主体 ========== */
+.card-body {
+  background: linear-gradient(135deg, #FDFBF9 0%, #F9F6F3 100%);
+  border-radius: 16rpx;
+  padding: 28rpx 24rpx;
+}
+
+.amount-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.amount-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.amount-value {
+  display: flex;
+  align-items: baseline;
+}
+
+.amount-symbol {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FF6B6B;
+  margin-right: 4rpx;
+}
+
+.amount-number {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #FF6B6B;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, 
+    rgba(160, 130, 109, 0) 0%, 
+    rgba(160, 130, 109, 0.2) 50%, 
+    rgba(160, 130, 109, 0) 100%
+  );
+  margin: 24rpx 0;
+}
+
+.balance-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.balance-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.balance-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #52C41A;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* ========== 卡片装饰 ========== */
+.card-decoration {
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx dashed rgba(160, 130, 109, 0.2);
+}
+
+.deco-line {
+  height: 6rpx;
+  background: linear-gradient(90deg, 
+    #D4B5A0 0%, 
+    #A0826D 50%, 
+    #D4B5A0 100%
+  );
+  border-radius: 3rpx;
+  opacity: 0.3;
+}
+
+/* ========== 底部空间 ========== */
+.footer-space {
+  height: 60rpx;
+}

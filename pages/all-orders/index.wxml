@@ -1,38 +1,94 @@
 <view class="container">
+	<!-- 空状态设计 -->
 	<view wx:if="{{apiOk && !orderList}}" class="no-order">
+		<view class="empty-icon">☕</view>
 		<view class="content-1">{{ $t.order.empty.t1 }}</view>
 		<view class="content-2">{{ $t.order.empty.t2 }}</view>
-		<view class="to-index-btn" bindtap="toIndexPage">{{ $t.order.empty.btn }}</view>
+		<view class="to-index-btn" bindtap="toIndexPage">
+			<text class="btn-text">{{ $t.order.empty.btn }}</text>
+		</view>
 	</view>
 
+	<!-- 订单列表 -->
 	<view wx:if="{{orderList}}" class="order-list">
 		<view class="a-order" wx:for="{{orderList}}" wx:key="index">
-			<navigator url="/pages/order-details/index?id={{item.id}}" class="weui-cell weui-cell_access" hover-class="none">
-				<van-cell title="{{item.shopNameZt}}" value="{{item.statusStr}}" is-link />
+			<!-- 订单头部：店铺名称 + 订单状态 -->
+			<navigator url="/pages/order-details/index?id={{item.id}}" hover-class="order-hover">
+				<view class="order-header">
+					<view class="shop-info">
+						<text class="shop-icon">🏪</text>
+						<text class="shop-name">{{item.shopNameZt}}</text>
+					</view>
+					<view class="order-status {{item.status == 0 ? 'status-pending' : item.status == -1 ? 'status-cancel' : 'status-success'}}">
+						<text class="status-text">{{item.statusStr}}</text>
+						<text class="arrow">›</text>
+					</view>
+				</view>
 			</navigator>
-			<scroll-view class="goods-img-container" scroll-x="true">
-				<view class="img-box" wx:for="{{goodsMap[item.id]}}" wx:key="index">
-					<image mode="aspectFill" src="{{item.pic}}" class="goods-img"></image>
+
+			<!-- 商品图片横向滚动 -->
+			<scroll-view class="goods-scroll" scroll-x="true" show-scrollbar="{{false}}">
+				<view class="goods-container">
+					<view class="goods-item" wx:for="{{goodsMap[item.id]}}" wx:key="index" wx:for-item="goods">
+						<image mode="aspectFill" src="{{goods.pic}}" class="goods-img"></image>
+						<view class="goods-badge">{{index + 1}}</view>
+					</view>
 				</view>
 			</scroll-view>
-			<view class="order-info-box">
-				<view class="l">
-					<view>{{ $t.order.dateAdd }}：{{item.dateAdd}}</view>
-					<view>{{ $t.order.orderNumber }}：{{item.orderNumber}}</view>
+
+			<!-- 订单信息区域 -->
+			<view class="order-detail">
+				<view class="detail-row">
+					<view class="detail-label">
+						<text class="label-icon">📅</text>
+						<text>{{ $t.order.dateAdd }}</text>
+					</view>
+					<view class="detail-value">{{item.dateAdd}}</view>
 				</view>
-				<view class="r"><text>¥</text>{{item.amountReal}}</view>
+				<view class="detail-row">
+					<view class="detail-label">
+						<text class="label-icon">🔖</text>
+						<text>{{ $t.order.orderNumber }}</text>
+					</view>
+					<view class="detail-value">{{item.orderNumber}}</view>
+				</view>
 			</view>
-			<view class="price-box">
-				<van-button wx:if="{{item.status > 0}}" type="primary" plain hairline size="small" bind:click="callShop" data-shopid="{{item.shopIdZt}}">{{ $t.order.callShop }}</van-button>
-				<van-button wx:if="{{item.status== -1}}" type="danger" plain hairline size="small" bind:click="deleteOrder" data-id="{{item.id}}">{{ $t.order.deleteOrder }}</van-button>
-				<van-button custom-class="btn" wx:if="{{item.status== 0}}" type="warning" plain hairline size="small" bind:click="cancelOrderTap" data-id="{{item.id}}">{{ $t.order.cancelOrder }}</van-button>
-				<van-button wx:if="{{item.status== 0}}" type="primary" plain hairline size="small" bind:click="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">{{ $t.order.toPayTap }}</van-button>
+
+			<!-- 价格和操作区域 -->
+			<view class="order-footer">
+				<view class="price-area">
+					<text class="price-label">实付金额</text>
+					<view class="price-value">
+						<text class="currency">¥</text>
+						<text class="amount">{{item.amountReal}}</text>
+					</view>
+				</view>
+				<view class="action-btns">
+					<view wx:if="{{item.status > 0}}" class="order-btn btn-secondary" bindtap="callShop" data-shopid="{{item.shopIdZt}}">
+						<text class="btn-icon">📞</text>
+						<text>{{ $t.order.callShop }}</text>
+					</view>
+					<view wx:if="{{item.status== -1}}" class="order-btn btn-danger" bindtap="deleteOrder" data-id="{{item.id}}">
+						<text class="btn-icon">🗑</text>
+						<text>{{ $t.order.deleteOrder }}</text>
+					</view>
+					<view wx:if="{{item.status== 0}}" class="order-btn btn-cancel" bindtap="cancelOrderTap" data-id="{{item.id}}">
+						<text>{{ $t.order.cancelOrder }}</text>
+					</view>
+					<view wx:if="{{item.status== 0}}" class="order-btn btn-primary" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">
+						<text class="btn-icon">💳</text>
+						<text>{{ $t.order.toPayTap }}</text>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
+	
+	<!-- 底部安全区域 -->
 	<view class="safeAreaOldMarginBttom safeAreaNewMarginBttom"></view>
 </view>
 
+<!-- 支付组件 -->
 <payment
   money="{{ money }}"
   remark="{{ $t.payment.order }} ：{{ orderId }}"

@@ -1,2 +1,42 @@
-<van-cell wx:for="{{scoreLogs}}" wx:key="id" title="{{item.typeStr}}" label="{{item.dateAdd}}" value="€{{item.score}}" />
-<van-empty wx:if="{{!scoreLogs}}" description="{{ $t.common.empty }}" />
+<view class="score-logs-container">
+  <!-- 顶部装饰背景 -->
+  <view class="header-decoration">
+    <view class="wave-bg"></view>
+  </view>
+
+  <!-- 积分记录列表 -->
+  <view class="logs-content">
+    <block wx:if="{{scoreLogs && scoreLogs.length > 0}}">
+      <view class="logs-list">
+        <view class="log-item" wx:for="{{scoreLogs}}" wx:key="id">
+          <view class="log-card">
+            <view class="log-left">
+              <!-- 图标区域 -->
+              <view class="icon-wrapper {{item.score > 0 ? 'icon-add' : 'icon-minus'}}">
+                <text class="icon-text">{{item.score > 0 ? '+' : '-'}}</text>
+              </view>
+              <!-- 信息区域 -->
+              <view class="info-wrapper">
+                <view class="type-text">{{item.typeStr}}</view>
+                <view class="date-text">{{item.dateAdd}}</view>
+              </view>
+            </view>
+            <view class="log-right">
+              <view class="score-value {{item.score > 0 ? 'score-add' : 'score-minus'}}">
+                {{item.score > 0 ? '+' : ''}}{{item.score}}
+              </view>
+              <view class="score-label">积分</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!scoreLogs || scoreLogs.length == 0}}">
+      <view class="empty-icon">📝</view>
+      <view class="empty-text">暂无积分记录</view>
+      <view class="empty-desc">快去购买奶茶赚取积分吧</view>
+    </view>
+  </view>
+</view>

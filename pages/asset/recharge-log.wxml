@@ -1,2 +1,70 @@
-<van-cell wx:for="{{payLogs}}" wx:key="id" title="{{item.payGateStr}}" label="{{item.dateUpdate}}" value="¥{{item.money}}" />
-<van-empty wx:if="{{!payLogs}}" description="{{ $t.common.empty }}" />
+<view class="recharge-log-container">
+  <!-- 顶部装饰区域 -->
+  <view class="header-decoration">
+    <view class="bubble-decoration bubble-1"></view>
+    <view class="bubble-decoration bubble-2"></view>
+    <view class="bubble-decoration bubble-3"></view>
+    <view class="bubble-decoration bubble-4"></view>
+  </view>
+
+  <!-- 顶部统计卡片 -->
+  <view class="summary-card" wx:if="{{payLogs && payLogs.length > 0}}">
+    <view class="summary-icon">🎉</view>
+    <view class="summary-text">
+      <text class="summary-title">累计充值</text>
+      <text class="summary-count">{{payLogs.length}} 次</text>
+    </view>
+  </view>
+
+  <!-- 充值记录列表 -->
+  <view class="recharge-list" wx:if="{{payLogs && payLogs.length > 0}}">
+    <view class="list-title">
+      <text class="title-text">充值记录</text>
+      <view class="title-line"></view>
+    </view>
+
+    <view class="recharge-item" wx:for="{{payLogs}}" wx:key="id">
+      <view class="recharge-card">
+        <!-- 充值图标背景 -->
+        <view class="card-bg-icon">💳</view>
+        
+        <view class="card-content">
+          <!-- 左侧信息 -->
+          <view class="recharge-left">
+            <view class="icon-circle">
+              <text class="recharge-icon">💰</text>
+            </view>
+            <view class="recharge-info">
+              <text class="payment-method">{{item.payGateStr}}</text>
+              <text class="recharge-time">{{item.dateUpdate}}</text>
+            </view>
+          </view>
+          
+          <!-- 右侧金额 -->
+          <view class="recharge-right">
+            <view class="amount-wrapper">
+              <text class="amount-symbol">¥</text>
+              <text class="amount-value">{{item.money}}</text>
+            </view>
+            <view class="success-badge">
+              <text class="badge-text">成功</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 底部装饰线 -->
+        <view class="card-bottom-line"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!payLogs || payLogs.length == 0}}">
+    <view class="empty-animation">
+      <view class="empty-cup">🧋</view>
+      <view class="empty-shine"></view>
+    </view>
+    <text class="empty-title">{{ $t.common.empty || '暂无充值记录' }}</text>
+    <text class="empty-desc">快去充值享受更多优惠吧~</text>
+  </view>
+</view>

@@ -1,11 +1,78 @@
 <view class="container">
-	<image class="shopLogo" mode="aspectFill" src="{{shopInfo.pic}}"></image>
-  <view class="info">
-    <van-cell size="large" icon="shop-collect-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" />
-    <van-cell size="large" icon="hot-o" title="{{ $t.shop.characteristic }}" label="{{shopInfo.characteristic}}" />
-    <van-cell size="large" icon="clock-o" title="{{ $t.shop.openingHours }}" value="{{shopInfo.openingHours}}" />
-    <van-cell size="large" icon="phone-o" title="{{ $t.shop.contactUs }}" value="{{shopInfo.linkPhone}}" is-link bind:click="phoneCall" />
-    <van-cell size="large" icon="location-o" title="{{ $t.shop.viewMap }}" value="{{ $t.shop.Navigation }}" is-link bind:click="guideNow" />
+  <!-- 顶部图片区域 -->
+  <view class="header-section">
+    <image class="shop-cover" mode="aspectFill" src="{{shopInfo.pic}}"></image>
+    <view class="cover-overlay"></view>
   </view>
-	<map id="map" class="maMap" latitude="{{shopInfo.latitude}}" longitude="{{shopInfo.longitude}}" markers="{{markers}}" show-location enable-3D	show-compass show-scale	enable-rotate	enable-traffic />
+
+  <!-- 门店信息卡片 -->
+  <view class="shop-card">
+    <view class="shop-title-area">
+      <view class="shop-name">{{shopInfo.name}}</view>
+      <view class="shop-tag" wx:if="{{shopInfo.characteristic}}">
+        <text class="tag-icon">✨</text>
+        <text class="tag-text">{{shopInfo.characteristic}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作按钮 -->
+  <view class="action-buttons">
+    <view class="action-btn" bind:tap="phoneCall">
+      <view class="btn-icon phone-icon">📞</view>
+      <view class="btn-text">{{ $t.shop.contactUs || '联系电话' }}</view>
+      <view class="btn-sub-text">{{shopInfo.linkPhone}}</view>
+    </view>
+    <view class="action-divider"></view>
+    <view class="action-btn" bind:tap="guideNow">
+      <view class="btn-icon nav-icon">🧭</view>
+      <view class="btn-text">{{ $t.shop.Navigation || '到店导航' }}</view>
+      <view class="btn-sub-text">{{ $t.shop.viewMap || '查看地图' }}</view>
+    </view>
+  </view>
+
+  <!-- 详细信息区域 -->
+  <view class="detail-section">
+    <view class="detail-title">门店信息</view>
+    
+    <view class="info-item">
+      <view class="info-label">
+        <text class="label-icon">🕐</text>
+        <text>{{ $t.shop.openingHours || '营业时间' }}</text>
+      </view>
+      <view class="info-value">{{shopInfo.openingHours}}</view>
+    </view>
+
+    <view class="info-item">
+      <view class="info-label">
+        <text class="label-icon">📍</text>
+        <text>{{ $t.shop.address || '门店地址' }}</text>
+      </view>
+      <view class="info-value">{{shopInfo.address}}</view>
+    </view>
+  </view>
+
+  <!-- 地图区域 -->
+  <view class="map-section">
+    <view class="map-header">
+      <text class="map-title">📌 门店位置</text>
+      <text class="map-tip" bind:tap="guideNow">点击导航 →</text>
+    </view>
+    <map 
+      id="map" 
+      class="map-container" 
+      latitude="{{shopInfo.latitude}}" 
+      longitude="{{shopInfo.longitude}}" 
+      markers="{{markers}}" 
+      show-location 
+      enable-3D
+      show-compass 
+      show-scale
+      enable-rotate
+      enable-traffic 
+    />
+  </view>
+
+  <!-- 底部安全距离 -->
+  <view class="safe-bottom"></view>
 </view>

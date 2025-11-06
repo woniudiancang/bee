@@ -1,181 +1,523 @@
-.userinfo, .uploader, .tunnel {  
-  /* height: 140rpx; */
-  width: 100%;    
-  border-left: none;
-  border-right: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  transition: all 300ms ease;
+/* 页面容器 */
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5E6 0%, #FFFFFF 50%);
+  padding-bottom: 40rpx;
 }
 
-.userinfo {
-  padding-left: 120rpx;
+/* ==================== 顶部区域 ==================== */
+.header-section {
+  position: relative;
+  width: 100%;
+  height: 280rpx;
+  overflow: hidden;
+}
+
+.header-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(20rpx);
+  opacity: 0.9;
+  z-index: 9;
+}
+
+.header-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(245, 222, 179, 0.9) 0%, 
+    rgba(210, 180, 140, 0.85) 50%,
+    rgba(139, 115, 85, 0.8) 100%
+  );
+}
+
+/* ==================== 用户信息卡片 ==================== */
+.user-card {
+  position: absolute;
+  bottom: 32rpx;
+  left: 32rpx;
+  right: 32rpx;
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 8rpx 32rpx rgba(139, 115, 85, 0.15);
+  z-index: 10;
+}
+
+.user-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 头像区域 */
+.avatar-section {
+  position: relative;
+  margin-right: 24rpx;
+}
+
+.avatar-btn {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 6rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(139, 115, 85, 0.2);
+}
+
+.avatar-ring {
+  position: absolute;
+  top: -6rpx;
+  left: -6rpx;
+  width: 152rpx;
+  height: 152rpx;
+  border-radius: 50%;
+  border: 3rpx solid transparent;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 3rpx;
+  animation: rotate 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 用户详情 */
+.user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uid-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.uid-label {
+  font-size: 24rpx;
+  color: #999999;
+  margin-right: 8rpx;
+}
+
+.uid-value {
+  font-size: 24rpx;
+  color: #666666;
+  font-family: 'Courier New', monospace;
+}
+
+.vip-badge {
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-radius: 20rpx;
+  align-self: flex-start;
+}
+
+.vip-text {
+  font-size: 22rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+
+/* 二维码区域 */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 16rpx;
+}
+
+.qr-icon-wrapper {
+  width: 72rpx;
+  height: 72rpx;
+  background: linear-gradient(135deg, #FFF5E6 0%, #FFE4B5 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+  box-shadow: 0 4rpx 12rpx rgba(139, 115, 85, 0.15);
+}
+
+.qr-text {
+  font-size: 22rpx;
+  color: #8B7355;
+  font-weight: 500;
+}
+
+/* ==================== 资产卡片区域 ==================== */
+.assets-section {
+  margin: 96rpx 32rpx 32rpx;
+  display: flex;
+  gap: 20rpx;
+  justify-content: space-between;
+}
+
+.asset-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.asset-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.asset-card:active::before {
+  opacity: 1;
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, #8B7355 0%, #A0826D 100%);
+  box-shadow: 0 8rpx 24rpx rgba(139, 115, 85, 0.3);
+}
+
+.highlight-card .asset-label,
+.highlight-card .asset-value,
+.highlight-card .asset-value-large {
+  color: #FFFFFF !important;
+}
+
+.asset-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.coupon-icon {
+  background: linear-gradient(135deg, #FFE4B5 0%, #FFD7A3 100%);
+}
+
+.balance-icon {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.score-icon {
+  background: linear-gradient(135deg, #FFF8DC 0%, #FFEAA7 100%);
+}
+
+.asset-value {
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+  font-family: 'DIN Alternate', 'Helvetica Neue', sans-serif;
+}
+
+.asset-value-large {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8rpx;
+}
+
+.currency {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-right: 4rpx;
+}
+
+.amount {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: 'DIN Alternate', 'Helvetica Neue', sans-serif;
+}
+
+.asset-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* ==================== 功能菜单区域 ==================== */
+.menu-section {
+  padding: 0 32rpx;
+}
+
+.menu-group {
+  margin-bottom: 32rpx;
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-left: 8rpx;
+}
+
+.title-dot {
+  width: 8rpx;
+  height: 28rpx;
+  background: linear-gradient(180deg, #8B7355 0%, #A0826D 100%);
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+
+.menu-title text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+/* 网格菜单 */
+.menu-grid {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.menu-item {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 32rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.menu-item navigator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.menu-item:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 20rpx rgba(139, 115, 85, 0.15);
+}
+
+.menu-icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.scan-icon {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  color: #2196F3;
+}
+
+.sign-icon {
+  background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+  color: #E91E63;
+}
+
+.booking-icon {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  color: #9C27B0;
+}
+
+.pay-icon {
+  background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+  color: #FFA000;
+}
+
+.menu-text {
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 列表菜单 */
+.menu-list {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.menu-list navigator {
+  display: block;
+}
+
+.menu-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 28rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+  transition: background 0.3s ease;
+}
+
+.menu-list-item:last-child {
+  border-bottom: none;
+}
+
+.menu-list-item:active {
+  background: #FAFAFA;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.list-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.vip-icon {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+  color: #FFA000;
+}
+
+.order-icon {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  color: #4CAF50;
+}
+
+.address-icon {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  color: #2196F3;
+}
+
+.about-icon {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+  color: #9C27B0;
+}
+
+.service-icon {
+  background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+  color: #009688;
+}
+
+.feedback-icon {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  color: #FF9800;
+}
+
+.clear-icon {
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+  color: #F44336;
+}
+
+.admin-icon {
+  background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+  color: #757575;
+}
+
+.list-text {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+/* ==================== 版本信息 ==================== */
+.version-text {
+  text-align: center;
+  margin-top: 48rpx;
+  padding-bottom: 32rpx;
+  color: #BDBDBD;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+/* ==================== 兼容旧样式 ==================== */
+.userinfo, .uploader, .tunnel {
+  display: none;
 }
 
 .userinfo-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  background-size: cover;
-  background-color: white;
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
 }
+
+.userinfo-avatar::after {
+  border: none;
+}
+
 .userinfo-avatar-img {
-  width: 120rpx;
-  height: 120rpx;
-  margin-left: -28rpx;
+  display: none;
 }
 
 .userinfo-nickname {
-  width: 400rpx;
-  height: 100rpx;
-  font-size: 24rpx;
-  color: #007aff;
-  background-color: white;
-  background-size: cover;
-  text-align: left;  
-  margin-left: 10px;
+  display: none;
 }
 
 .userinfo-nickname::after {
   border: none;
-}
-
-.userinfo-nickname-wrapper {
-  flex: 1;
-}
-
-/*  */
-.my-bar{
-  width: 100%;
-  position: relative;
-}
-.my-bar .background{
-  width: 100vw;
-  height: 350rpx; 
-}
-.my-box{
-  position: absolute;
-  width: 100vw;
-  top: 64rpx;
-  left: 0;
-}
-.login-btn {
-  width: 400rpx;
-  margin: auto;
-  margin-top: 32rpx;
-}
-.my-box .head-bar{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 32rpx;
-}
-.head-bar-left {
-  display: flex;
-  align-items: center;
-}
-.my-box .head-bar .head{
-  height: 120rpx;
-  width: 120rpx;
-  border-radius: 50%;
-}
-.my-box .head-bar .name-box{
-  width: 400rpx;
-  height: 100rpx;
-  margin: 20rpx;
-  font-size: 30rpx;
-}
-.my-box .head-bar .name-box .state{
-  height: 40rpx;
-  width: 100rpx;
-  background-color: #999;
-  margin-top: 5rpx;
-  font-size: 25rpx;
-  color: #ffffff;
-  text-align: center;
-  line-height: 40rpx;
-  border-radius: 20rpx;
-}
-.user-code {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.user-code .txt {
-  font-size: 24rpx;
-  color: #333;
-}
-
-.coupon-box{
-  display: flex;
-  justify-content: center;
-  margin-top:32rpx ;
-}
-.coupon-box .coupon{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.coupon-box .coupon .title1{
-  font-size: 25rpx;
-}
-.coupon-box .coupon .num{
-  font-size: 42rpx;
-}
-.coupon-box .balance-box{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 88rpx;
-}
-.coupon-box .balance-box .amount-box{
-  display: flex;
-  align-items: flex-end;
-}
-.coupon-box .balance-box .amount{
-  font-size: 25rpx;
-}
-.coupon-box .balance-box .amount-box .amount1{
-  font-size: 26rpx;
-  margin-right: 5rpx;
-}
-.coupon-box .balance-box .amount-box .amount2{
-  font-size: 42rpx;
-}
-.my-bar1{
-  padding-top: 32rpx;
-}
-.my-bar1 .box{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 50rpx ;
-}
-.my-bar1 .box .box-0{
-  display: flex;
-  align-items: center;
-}
-.my-bar1 .box .box-0 .icon{
-  width: 60rpx;
-  height: 60rpx;
-}
-.my-bar1 .box .box-0 .title{
-  font-size: 28rpx;
-  margin-left: 20rpx;
-}
-
-.my-bar1 .box .go{
-  height: 45rpx;
-  width: 45rpx;
-
-}
-.version {
-  text-align: center;
-  margin: 64rpx;
-  color: #666;
-  font-size: 26rpx;
 }

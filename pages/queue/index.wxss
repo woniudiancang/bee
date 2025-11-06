@@ -1,12 +1,309 @@
-.btn-groups {
-  padding-top: 168rpx;
-  padding-bottom: 64rpx;
-  width: 600rpx;
-  margin: auto;
+/* 页面容器 */
+.queue-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5F0 0%, #FFF9F6 50%, #FFFFFF 100%);
+  padding-bottom: 40rpx;
 }
-.btn-groups .btn {
-  margin: 32rpx 0;
+
+/* 头部区域 */
+.header-section {
+  position: relative;
+  padding: 60rpx 0 80rpx;
+  text-align: center;
+  overflow: hidden;
 }
-.cell-red {
-  color: #e64340 !important;
+
+.header-decoration {
+  position: absolute;
+  top: -100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400rpx;
+  height: 400rpx;
+  background: radial-gradient(circle, rgba(199, 147, 115, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.header-title {
+  position: relative;
+  z-index: 1;
+}
+
+.title-main {
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #4A3428;
+  letter-spacing: 4rpx;
+  margin-bottom: 8rpx;
+}
+
+.title-sub {
+  font-size: 24rpx;
+  color: #C79373;
+  letter-spacing: 6rpx;
+  font-weight: 300;
+}
+
+/* 内容区域 */
+.queue-content {
+  padding: 0 32rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 120rpx 0;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 分区标题 */
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32rpx;
+  padding-left: 8rpx;
+}
+
+.title-dot {
+  width: 8rpx;
+  height: 32rpx;
+  background: linear-gradient(180deg, #C79373 0%, #D4A574 100%);
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+
+.section-title text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #4A3428;
+}
+
+/* 取号卡片区域 */
+.queue-cards {
+  margin-bottom: 60rpx;
+}
+
+.card-item {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(199, 147, 115, 0.12);
+  transition: all 0.3s ease;
+}
+
+.card-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(199, 147, 115, 0.2);
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 28rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.card-icon {
+  font-size: 64rpx;
+  margin-right: 24rpx;
+  filter: grayscale(0.2);
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #4A3428;
+  margin-bottom: 8rpx;
+}
+
+.card-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.card-right {
+  text-align: right;
+  padding-left: 24rpx;
+}
+
+.queue-number {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  margin-bottom: 8rpx;
+}
+
+.current-num {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #C79373;
+  line-height: 1;
+}
+
+.total-num {
+  font-size: 28rpx;
+  color: #999;
+  margin-left: 4rpx;
+}
+
+.queue-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.card-shine {
+  position: absolute;
+  top: 0;
+  right: -100rpx;
+  width: 200rpx;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.card-item:active .card-shine {
+  right: 100%;
+  opacity: 1;
+}
+
+/* 我的号码区域 */
+.my-queue-section {
+  margin-top: 60rpx;
+}
+
+.my-queue-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.my-queue-card {
+  position: relative;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F6 100%);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(199, 147, 115, 0.15);
+  border: 2rpx solid rgba(199, 147, 115, 0.1);
+}
+
+.my-card-bg-decoration {
+  position: absolute;
+  top: -40rpx;
+  right: -40rpx;
+  width: 160rpx;
+  height: 160rpx;
+  background: radial-gradient(circle, rgba(199, 147, 115, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.my-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.my-card-type {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #4A3428;
+}
+
+.my-card-number {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #C79373;
+  font-family: 'DIN Alternate', -apple-system, sans-serif;
+}
+
+.my-card-status {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  background: linear-gradient(135deg, #FFE8DC 0%, #FFD4C4 100%);
+  color: #C79373;
+  font-size: 24rpx;
+  font-weight: 500;
+  border-radius: 32rpx;
+}
+
+.wait-time {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.wait-icon {
+  margin-right: 8rpx;
+  font-size: 28rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 320px) {
+  .title-main {
+    font-size: 48rpx;
+  }
+  
+  .card-name {
+    font-size: 28rpx;
+  }
+  
+  .current-num {
+    font-size: 42rpx;
+  }
+}
+
+/* 过渡动画 */
+.card-item,
+.my-queue-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

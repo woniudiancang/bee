@@ -1,13 +1,72 @@
-<van-empty wx:if="{{!list}}" description="{{ $t.common.empty }}" />
-<view class="btn-groups">
-  <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} ( {{item.curNumber}} / {{item.numberGet}} )</van-button>
+<view class="queue-container">
+  <!-- 头部装饰区域 -->
+  <view class="header-section">
+    <view class="header-decoration"></view>
+    <view class="header-title">
+      <view class="title-main">智能取号</view>
+      <view class="title-sub">SMART QUEUE</view>
+    </view>
+  </view>
+
+  <!-- 取号区域 -->
+  <view class="queue-content">
+    <!-- 空状态 -->
+    <view wx:if="{{!list}}" class="empty-state">
+      <view class="empty-icon">🍵</view>
+      <view class="empty-text">{{ $t.common.empty }}</view>
+    </view>
+
+    <!-- 取号卡片列表 -->
+    <view wx:else class="queue-cards">
+      <view class="section-title">
+        <view class="title-dot"></view>
+        <text>选择取号类型</text>
+      </view>
+      
+      <view class="card-item" wx:for="{{list}}" wx:key="id" bindtap="queuingGet" data-index="{{ index }}">
+        <view class="card-content">
+          <view class="card-left">
+            <view class="card-icon">☕</view>
+            <view class="card-info">
+              <view class="card-name">{{ item.name }}</view>
+              <view class="card-desc">点击立即取号</view>
+            </view>
+          </view>
+          <view class="card-right">
+            <view class="queue-number">
+              <view class="current-num">{{ item.curNumber }}</view>
+              <view class="total-num">/ {{ item.numberGet }}</view>
+            </view>
+            <view class="queue-label">当前排队</view>
+          </view>
+        </view>
+        <view class="card-shine"></view>
+      </view>
+    </view>
+
+    <!-- 我的号码区域 -->
+    <view wx:if="{{ mylist && mylist.length > 0 }}" class="my-queue-section">
+      <view class="section-title">
+        <view class="title-dot"></view>
+        <text>{{ $t.queue.myNumber }}</text>
+      </view>
+      
+      <view class="my-queue-cards">
+        <view class="my-queue-card" wx:for="{{mylist}}" wx:key="id">
+          <view class="my-card-header">
+            <view class="my-card-type">{{ item.typeEntity.name }}</view>
+            <view class="my-card-number">{{ item.number }}</view>
+          </view>
+          <view class="my-card-status">
+            <view class="status-tag">{{ item.statusStr }}</view>
+            <view wx:if="{{ item.waitMinitus }}" class="wait-time">
+              <text class="wait-icon">⏱</text>
+              <text>{{ $t.queue.ExpectedWaiting }}: {{ item.waitMinitus }}{{ $t.queue.minutes }}</text>
+            </view>
+          </view>
+          <view class="my-card-bg-decoration"></view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
-<van-cell-group wx:if="{{ mylist }}" title="{{ $t.queue.myNumber }}">
-  <van-cell
-    value-class="cell-red"
-    wx:for="{{mylist}}" wx:key="id"
-    title="{{ item.typeEntity.name }}"
-    label="{{ item.statusStr }} {{ item.waitMinitus ? $t.queue.ExpectedWaiting + ': ' + item.waitMinitus + $t.queue.minutes : '' }}"
-    value="{{ item.number }}"
-  />
-</van-cell-group>

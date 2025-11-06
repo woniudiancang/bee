@@ -1,39 +1,88 @@
-<view class="search">
-	<view class="icon">
-		<van-icon name="search" />
-	</view>
-	<input placeholder="{{ $t.common.search }}" bindinput="searchChange" bindconfirm="search" />
-</view>
-<view class="shops" wx:for="{{shops}}" wx:key="id">
-	<view class="t">
-		<view class="name">
-			<van-icon name="shop-o" />
-			<text style="color:#333">{{ item.name }}</text>
-		</view>
-		<view wx:if="{{index == 0}}" class="distance">{{ item.distance }}<text>km</text></view>
-    
-		<view wx:if="{{index > 0}}" class="distance-black" bindtap="goShop" data-idx="{{ index }}">
-			<text class="d">{{ item.distance }}</text>
-			<text class="u">km</text>
-			<van-icon name="arrow" />
-		</view>
-	</view>
+<view class="page-container">
+  <!-- 顶部搜索区域 -->
+  <view class="search-wrapper">
+    <view class="search-box">
+      <view class="search-icon">
+        <van-icon name="search" size="32rpx" />
+      </view>
+      <input 
+        class="search-input" 
+        placeholder="{{ $t.common.search }}" 
+        placeholder-class="search-placeholder"
+        bindinput="searchChange" 
+        bindconfirm="search" 
+      />
+    </view>
+  </view>
 
-	<view class="p">
-		<van-icon name="location-o" color="#666" />
-		<text>{{ item.address }}</text>
-	</view>
-	<view class="p">
-		<van-icon name="clock-o" color="#666" />
-		<text>{{ item.openingHours }}</text>
-	</view>
-	<view class="p">
-		<van-icon name="phone-o" color="#666" />
-		<text>{{ item.linkPhone }}</text>
-	</view>
+  <!-- 门店列表 -->
+  <view class="shop-list">
+    <view class="shop-card {{ index == 0 ? 'shop-card-nearest' : '' }}" wx:for="{{shops}}" wx:key="id">
+      <!-- 当前门店标签 -->
+      <!-- <view wx:if="{{index == 0}}" class="nearest-badge">
+        <text class="badge-text">当前门店</text>
+      </view> -->
 
-	<button wx:if="{{index == 0}}" class="goHotel" type="default" bindtap="goShop" data-idx="{{ index }}"> {{ $t.shop.select }} </button>
-</view>
-<view class="block-btn btn">
-  <van-button type="primary" block bind:click="joinApply">商家申请入驻</van-button>
+      <!-- 门店头部 -->
+      <view class="shop-header">
+        <view class="shop-title">
+          <view class="shop-icon">
+            <van-icon name="shop-o" size="36rpx" color="#8B4513" />
+          </view>
+          <text class="shop-name">{{ item.name }}</text>
+        </view>
+        <view class="distance-wrapper">
+          <text class="distance-num">{{ item.distance }}</text>
+          <text class="distance-unit">km</text>
+        </view>
+      </view>
+
+      <!-- 门店信息 -->
+      <view class="shop-info">
+        <view class="info-item">
+          <view class="info-icon">
+            <van-icon name="location-o" size="28rpx" color="#A0826D" />
+          </view>
+          <text class="info-text">{{ item.address }}</text>
+        </view>
+        
+        <view class="info-item">
+          <view class="info-icon">
+            <van-icon name="clock-o" size="28rpx" color="#A0826D" />
+          </view>
+          <text class="info-text">{{ item.openingHours }}</text>
+        </view>
+        
+        <view class="info-item">
+          <view class="info-icon">
+            <van-icon name="phone-o" size="28rpx" color="#A0826D" />
+          </view>
+          <text class="info-text">{{ item.linkPhone }}</text>
+        </view>
+      </view>
+
+      <!-- 选择按钮 -->
+      <view wx:if="{{index == 0}}" class="select-btn-wrapper">
+        <button class="select-btn select-btn-primary" bindtap="goShop" data-idx="{{ index }}">
+          {{ $t.shop.select }}
+        </button>
+      </view>
+
+      <!-- 切换按钮 -->
+      <view wx:if="{{index > 0}}" class="switch-btn-wrapper">
+        <button class="select-btn select-btn-secondary" bindtap="goShop" data-idx="{{ index }}">
+          切换至该门店
+          <van-icon name="arrow" size="28rpx" />
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部申请入驻 -->
+  <view class="footer-btn">
+    <button class="apply-btn" bindtap="joinApply">
+      <van-icon name="add-o" size="32rpx" />
+      <text>商家申请入驻</text>
+    </button>
+  </view>
 </view>

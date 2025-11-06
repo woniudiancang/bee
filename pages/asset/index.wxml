@@ -1,46 +1,135 @@
-<view class="balance">
-  <view class="t">{{ $t.order.balance }}</view>
-  <view class="amount"><text>¥</text>{{balance}}</view>
-</view>
-<van-divider contentPosition="center">{{ $t.asset.recharge }}</van-divider>
-<view class="persion-num">
-  <view wx:for="{{rechargeSendRules}}" wx:key="id" class="item {{ruleSelIndex == index ? 'active' : ''}}" data-idx="{{index}}" bindtap="changePersionNum">
-    <view class="a"><text>{{ $t.asset.confine }}¥</text>{{item.confine}}</view>
-    <view class="b"><text>{{ $t.asset.send }}¥</text>{{item.send}}</view>
-    <van-icon wx:if="{{ruleSelIndex == index}}" custom-class="icon" name="success" />
+<!-- 页面容器 -->
+<view class="wallet-container">
+  
+  <!-- 余额卡片 -->
+  <view class="balance-card">
+    <view class="balance-header">
+      <view class="balance-icon">💰</view>
+      <view class="balance-label">{{ $t.order.balance }}</view>
+    </view>
+    <view class="balance-amount">
+      <text class="currency">¥</text>
+      <text class="amount-num">{{balance}}</text>
+    </view>
+    <view class="balance-decoration">
+      <view class="circle circle-1"></view>
+      <view class="circle circle-2"></view>
+      <view class="circle circle-3"></view>
+    </view>
   </view>
-  <view class="item {{ruleSelIndex == -1 ? 'active' : ''}}" data-idx="-1" bindtap="changePersionNum">
-    <view class="a">{{ $t.asset.other }}</view>
-    <van-icon wx:if="{{ruleSelIndex == -1}}" custom-class="icon" name="success" />
+
+  <!-- 充值区域 -->
+  <view class="recharge-section">
+    <view class="section-title">
+      <view class="title-icon">🎁</view>
+      <view class="title-text">{{ $t.asset.recharge }}</view>
+      <view class="title-line"></view>
+    </view>
+
+    <!-- 充值套餐 -->
+    <view class="recharge-plans">
+      <view 
+        wx:for="{{rechargeSendRules}}" 
+        wx:key="id" 
+        class="plan-card {{ruleSelIndex == index ? 'plan-active' : ''}}" 
+        data-idx="{{index}}" 
+        bindtap="changePersionNum">
+        <view class="plan-badge" wx:if="{{item.send > 0}}">送¥{{item.send}}</view>
+        <view class="plan-amount">
+          <text class="plan-currency">¥</text>
+          <text class="plan-number">{{item.confine}}</text>
+        </view>
+        <view class="plan-label">{{ $t.asset.confine }}</view>
+        <view class="plan-check" wx:if="{{ruleSelIndex == index}}">
+          <van-icon name="success" color="#fff" size="16px" />
+        </view>
+        <view class="plan-shine" wx:if="{{ruleSelIndex == index}}"></view>
+      </view>
+
+      <!-- 自定义金额 -->
+      <view 
+        class="plan-card plan-custom {{ruleSelIndex == -1 ? 'plan-active' : ''}}" 
+        data-idx="-1" 
+        bindtap="changePersionNum">
+        <view class="custom-icon">✏️</view>
+        <view class="custom-text">{{ $t.asset.other }}</view>
+        <view class="plan-check" wx:if="{{ruleSelIndex == -1}}">
+          <van-icon name="success" color="#fff" size="16px" />
+        </view>
+        <view class="plan-shine" wx:if="{{ruleSelIndex == -1}}"></view>
+      </view>
+    </view>
+
+    <!-- 确认按钮 -->
+    <view class="action-btn">
+      <view class="submit-btn" bind:tap="submit1">
+        <text>{{ $t.asset.confirmBtn }}</text>
+      </view>
+    </view>
   </view>
-</view>
-<view class="btn">
-  <van-button type="primary" block bind:click="submit1">{{ $t.asset.confirmBtn }}</van-button>
+
+  <!-- 功能入口 -->
+  <view class="function-section">
+    <view class="section-title">
+      <view class="title-icon">📋</view>
+      <view class="title-text">账户记录</view>
+      <view class="title-line"></view>
+    </view>
+
+    <view class="function-list">
+      <navigator url="/pages/asset/recharge-log" class="function-item" hover-class="function-item-hover">
+        <view class="function-icon-box recharge-icon">
+          <text class="function-emoji">💳</text>
+        </view>
+        <view class="function-content">
+          <view class="function-title">{{ $t.asset.rechargeLogs }}</view>
+          <view class="function-desc">查看充值明细</view>
+        </view>
+        <van-icon name="arrow" color="#bbb" />
+      </navigator>
+
+      <navigator url="/pages/asset/cash-log" class="function-item" hover-class="function-item-hover">
+        <view class="function-icon-box cash-icon">
+          <text class="function-emoji">💸</text>
+        </view>
+        <view class="function-content">
+          <view class="function-title">{{ $t.cashLog.title }}</view>
+          <view class="function-desc">查看提现记录</view>
+        </view>
+        <van-icon name="arrow" color="#bbb" />
+      </navigator>
+    </view>
+  </view>
+
 </view>
 
-
+<!-- 自定义金额弹窗 -->
 <van-popup
   show="{{ showRechargePop }}"
   position="bottom"
+  round
   closeable
-  bind:close="onClose">
-  <view class="pop-blank"></view>
-  <van-field
-    label="{{ $t.asset.amount }}"
-    size="large"
-    type="digit"
-    clearable
-    model:value="{{ amount2 }}"
-    placeholder="{{ $t.asset.amountPlaceholder }}"
-    bind:change="onChange"
-  />
-  <view class="btn">
-    <van-button type="primary" block bind:click="submit2">{{ $t.asset.confirmBtn }}</van-button>
+  bind:close="onClose"
+  custom-class="custom-popup">
+  <view class="popup-content">
+    <view class="popup-title">自定义充值金额</view>
+    <van-field
+      label="{{ $t.asset.amount }}"
+      size="large"
+      type="digit"
+      clearable
+      model:value="{{ amount2 }}"
+      placeholder="{{ $t.asset.amountPlaceholder }}"
+      bind:change="onChange"
+      input-align="right"
+    />
+    <view class="popup-btn">
+      <view class="submit-btn" bind:tap="submit2">
+        <text>{{ $t.asset.confirmBtn }}</text>
+      </view>
+    </view>
   </view>
 </van-popup>
-
-<van-cell title="{{ $t.asset.rechargeLogs }}" size="large" is-link url="/pages/asset/recharge-log" />
-<van-cell title="{{ $t.cashLog.title }}" size="large" is-link url="/pages/asset/cash-log" />
 <view class="bottom-blank"></view>
 
 <payment

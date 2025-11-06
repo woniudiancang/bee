@@ -1,0 +1,10 @@
+<svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 取餐图标 - 外卖袋（选中） -->
+  <path d="M24 28L20 64H61L57 28H24Z" fill="#e64340" stroke="#e64340" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 32V26C32 21.58 35.58 18 40 18H41C45.42 18 49 21.58 49 26V32" stroke="#e64340" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 38H51" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="40.5" cy="50" r="5" stroke="#fff" stroke-width="2"/>
+  <path d="M38 50L40 52L43 49" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+

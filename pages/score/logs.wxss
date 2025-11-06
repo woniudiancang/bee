@@ -1,1 +1,260 @@
 /* pages/score/logs.wxss */
+
+page {
+  background: linear-gradient(180deg, #FFF5E6 0%, #FFFFFF 35%);
+  min-height: 100vh;
+}
+
+.score-logs-container {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* 顶部装饰背景 */
+.header-decoration {
+  width: 100%;
+  height: 240rpx;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FFB84D 0%, #FF9A4D 100%);
+}
+
+.wave-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -2rpx;
+  left: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+}
+
+.wave-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 120rpx;
+  bottom: 0;
+  left: -50%;
+  background: #FFFFFF;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+/* 内容区域 */
+.logs-content {
+  width: 100%;
+  padding: 0 30rpx;
+  margin-top: -60rpx;
+  position: relative;
+  z-index: 10;
+}
+
+/* 列表容器 */
+.logs-list {
+  width: 100%;
+}
+
+/* 单条记录 */
+.log-item {
+  width: 100%;
+  margin-bottom: 24rpx;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.log-card {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 154, 77, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.log-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rpx;
+  height: 100%;
+  background: linear-gradient(180deg, #FFB84D 0%, #FF9A4D 100%);
+}
+
+.log-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 12rpx rgba(255, 154, 77, 0.12);
+}
+
+/* 左侧内容 */
+.log-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.icon-wrapper {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.icon-add {
+  background: linear-gradient(135deg, #FFF3E6 0%, #FFE8CC 100%);
+}
+
+.icon-add::before {
+  background: #FFB84D;
+}
+
+.icon-minus {
+  background: linear-gradient(135deg, #F5F5F5 0%, #ECECEC 100%);
+}
+
+.icon-minus::before {
+  background: #999999;
+}
+
+.icon-text {
+  font-size: 48rpx;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.icon-add .icon-text {
+  color: #FFB84D;
+}
+
+.icon-minus .icon-text {
+  color: #999999;
+}
+
+.info-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.type-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.5rpx;
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 0.5rpx;
+}
+
+/* 右侧积分 */
+.log-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+.score-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  margin-bottom: 4rpx;
+  font-family: 'DIN Alternate', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 1rpx;
+}
+
+.score-add {
+  color: #FFB84D;
+}
+
+.score-minus {
+  color: #999999;
+}
+
+.score-label {
+  font-size: 22rpx;
+  color: #CCCCCC;
+  letter-spacing: 1rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 160rpx 60rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 154, 77, 0.06);
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10rpx);
+  }
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666666;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  letter-spacing: 1rpx;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999999;
+  letter-spacing: 0.5rpx;
+}

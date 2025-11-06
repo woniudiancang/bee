@@ -1,2 +1,42 @@
-<van-cell wx:for="{{cashLogsV2}}" wx:key="id" title="{{item.typeStr}}" label="{{item.dateAdd}}" value="¥{{item.amount}}" />
-<van-empty wx:if="{{!cashLogsV2}}" description="{{ $t.common.empty }}" />
+<view class="cash-log-container">
+  <!-- 顶部装饰区域 -->
+  <view class="header-decoration">
+    <view class="circle-decoration circle-1"></view>
+    <view class="circle-decoration circle-2"></view>
+    <view class="circle-decoration circle-3"></view>
+  </view>
+
+  <!-- 资金明细列表 -->
+  <view class="cash-log-list" wx:if="{{cashLogsV2 && cashLogsV2.length > 0}}">
+    <view class="log-item" wx:for="{{cashLogsV2}}" wx:key="id">
+      <view class="log-card">
+        <view class="log-content">
+          <!-- 左侧图标和信息 -->
+          <view class="log-left">
+            <view class="icon-wrapper {{item.amount >= 0 ? 'income' : 'expense'}}">
+              <text class="icon">{{item.amount >= 0 ? '+' : '-'}}</text>
+            </view>
+            <view class="log-info">
+              <text class="log-type">{{item.typeStr}}</text>
+              <text class="log-date">{{item.dateAdd}}</text>
+            </view>
+          </view>
+          
+          <!-- 右侧金额 -->
+          <view class="log-right">
+            <text class="amount {{item.amount >= 0 ? 'income' : 'expense'}}">
+              {{item.amount >= 0 ? '+' : ''}}¥{{item.amount}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!cashLogsV2 || cashLogsV2.length == 0}}">
+    <view class="empty-icon">💰</view>
+    <text class="empty-text">{{ $t.common.empty || '暂无资金明细' }}</text>
+    <text class="empty-tips">您的每一笔收支都会记录在这里哦~</text>
+  </view>
+</view>

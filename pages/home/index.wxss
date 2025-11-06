@@ -1,88 +1,298 @@
-.swiper1 {
-  width: 100vw;
-  height: 100vw;
+/* 全局容器 */
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fef8f4 0%, #fff5ed 100%);
+  padding-bottom: 60rpx;
 }
-.swiper1 image {
+
+/* ==================== 轮播图区域 ==================== */
+.banner-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-swiper {
+  width: 100%;
+  height: 420rpx;
+  border-radius: 0 0 48rpx 48rpx;
+  overflow: hidden;
+}
+
+.banner-image {
   width: 100%;
   height: 100%;
 }
-.user-info-box {
+
+/* ==================== 用户信息卡片 ==================== */
+.user-card {
+  margin: -40rpx 32rpx 0;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #ffffff 0%, #fff9f6 100%);
+  border-radius: 28rpx;
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 157, 0.12);
   display: flex;
   justify-content: space-between;
-  padding: 32rpx;
   align-items: center;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
+  z-index: 10;
 }
-.user-info-box .l {
+
+.user-main {
   display: flex;
   align-items: center;
+  flex: 1;
 }
-.user-info-box .l .touxiang {
-  width: 88rpx;
-  height: 88rpx;
+
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 4rpx solid #ffe8f0;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.2);
+}
+
+.user-info {
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.user-nick {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 1rpx;
+}
+
+.user-member {
+  display: flex;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.language-btn {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.language-icon {
+  width: 36rpx;
+  height: 36rpx;
   border-radius: 50%;
 }
-.user-info-box .l .info {
-  margin-left: 16rpx;
-}
-.user-info-box .l .info .nick {
-  font-weight: bold;
-}
-.user-info-box .r {
-  font-size: 30rpx;
+
+.coupon-btn {
   display: flex;
   align-items: center;
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 26rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 157, 0.3);
+  transition: all 0.3s;
 }
-.user-info-box .language {
-  margin-right: 24rpx;
+
+.coupon-btn text {
+  margin-right: 4rpx;
 }
-.user-info-box .language .language-icon {
+
+/* ==================== 配送方式区域 ==================== */
+.delivery-section {
+  margin: 40rpx 32rpx 0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+  padding-left: 12rpx;
+  border-left: 6rpx solid #ff6b9d;
+}
+
+.delivery-types {
+  display: flex;
+  gap: 24rpx;
+}
+
+.delivery-card {
+  flex: 1;
+  background: linear-gradient(135deg, #fff 0%, #fffbf8 100%);
+  border-radius: 24rpx;
+  padding: 36rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 6rpx 24rpx rgba(255, 141, 107, 0.08);
+  border: 2rpx solid #ffe8f0;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.delivery-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #ff6b9d 0%, #ff8fab 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.delivery-card:active::before {
+  transform: scaleX(1);
+}
+
+.delivery-card:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 12rpx 32rpx rgba(255, 141, 107, 0.16);
+}
+
+.delivery-icon-wrapper {
+  width: 96rpx;
+  height: 96rpx;
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe8f0 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.delivery-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.delivery-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.delivery-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* ==================== 功能入口区域 ==================== */
+.features-section {
+  margin: 48rpx 32rpx 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24rpx;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 12rpx;
+  background: linear-gradient(135deg, #fff 0%, #fffbf8 100%);
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 141, 107, 0.06);
+  transition: all 0.3s;
+}
+
+.feature-item:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(255, 141, 107, 0.12);
+}
+
+.feature-icon-box {
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #fff5f0 0%, #ffebe8 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.feature-icon {
   width: 48rpx;
   height: 48rpx;
 }
-.pick-type-box {
-  display: flex;
-  margin-top: 48rpx;
-  padding-right: 32rpx;
-}
-.pick-type-box .item {
-  margin-left: 32rpx;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  border-radius: 24rpx;
-  padding: 32rpx;
-  border: 1rpx solid #ff4d7c;
-}
-.pick-type-box .item image {
-  width: 88rpx;
-  height: 88rpx;
-}
-.pick-type-box .item view {
-  margin-left: 24rpx;
-}
-.category-box {
-  display: flex;
-  margin-top: 88rpx;
-}
-.category-box .item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.category-box .item image {
-  width: 64rpx;
-  height: 64rpx;
-}
-.category-box .item view {
-  margin-top: 16rpx;
-  font-size: 26rpx;
-}
-.about-us {
-  margin-top: 88rpx;
-  font-size: 36rpx;
+
+.feature-name {
+  font-size: 24rpx;
+  color: #666;
   text-align: center;
-  text-decoration: underline;
+  line-height: 1.4;
+}
+
+/* ==================== 品牌底部 ==================== */
+.brand-footer {
+  margin-top: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+  padding: 0 64rpx;
+}
+
+.brand-line {
+  flex: 1;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent 0%, #e8d5c8 50%, transparent 100%);
+}
+
+.brand-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #a67c52;
+  letter-spacing: 4rpx;
+  font-family: 'Georgia', serif;
+}
+
+/* ==================== 响应式优化 ==================== */
+@media (min-width: 375px) {
+  .banner-swiper {
+    height: 460rpx;
+  }
+}
+
+@media (min-width: 414px) {
+  .banner-swiper {
+    height: 500rpx;
+  }
+}
+
+/* ==================== 动画效果 ==================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-card,
+.delivery-section,
+.features-section {
+  animation: fadeInUp 0.6s ease-out;
 }

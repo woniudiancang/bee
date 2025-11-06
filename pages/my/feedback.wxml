@@ -1,33 +1,111 @@
-<van-field
-  label="{{ $t.feedback.name }}"
-  placeholder="{{ $t.feedback.namePlaceholder }}"
-  model:value="{{ name }}"
-  clearable
-/>
-<van-field
-  label="{{ $t.feedback.mobile }}"
-  placeholder="{{ $t.feedback.mobilePlaceholder }}"
-  type="number"
-  model:value="{{ mobile }}"
-  clearable
-/>
-<view style="margin-top:16rpx;padding-left:32rpx;">
-  <van-uploader
-    accept="media"
-    multiple
-    upload-text="{{ $t.feedback.imageOrVideo }}"
-    image-fit="aspectFill"
-    file-list="{{ picsList }}"
-    bind:after-read="afterPicRead"
-    bind:delete="afterPicDel"
-  />
-</view>
-<van-field
-  model:value="{{ content }}"
-  placeholder="{{ $t.feedback.contentPlaceholder }}"
-  type="textarea"
-  autosize="{{ autosize }}"
-/>
-<view class="block-btn btn">
-  <van-button type="primary" block bind:click="bindSave">{{ $t.feedback.btn }}</van-button>
+<view class="feedback-container">
+  <!-- 顶部装饰波浪 -->
+  <view class="header-wave"></view>
+  
+  <!-- 页面标题区域 -->
+  <view class="feedback-header">
+    <view class="header-icon">💭</view>
+    <view class="header-title">听听您的心声</view>
+    <view class="header-subtitle">您的每一条建议都是我们前进的动力</view>
+  </view>
+
+  <!-- 表单卡片 -->
+  <view class="feedback-card">
+    <!-- 姓名输入 -->
+    <view class="input-section">
+      <view class="input-label">
+        <view class="label-icon">👤</view>
+        <view class="label-text">{{ $t.feedback.name }}</view>
+      </view>
+      <van-field
+        placeholder="{{ $t.feedback.namePlaceholder }}"
+        model:value="{{ name }}"
+        clearable
+        border="{{ false }}"
+        custom-class="custom-field"
+      />
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider"></view>
+
+    <!-- 手机号输入 -->
+    <view class="input-section">
+      <view class="input-label">
+        <view class="label-icon">📱</view>
+        <view class="label-text">{{ $t.feedback.mobile }}</view>
+      </view>
+      <van-field
+        placeholder="{{ $t.feedback.mobilePlaceholder }}"
+        type="number"
+        model:value="{{ mobile }}"
+        clearable
+        border="{{ false }}"
+        custom-class="custom-field"
+      />
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider"></view>
+
+    <!-- 反馈内容 -->
+    <view class="input-section content-section">
+      <view class="input-label">
+        <view class="label-icon">✍️</view>
+        <view class="label-text">反馈内容</view>
+      </view>
+      <van-field
+        model:value="{{ content }}"
+        placeholder="{{ $t.feedback.contentPlaceholder }}"
+        type="textarea"
+        autosize="{{ autosize }}"
+        border="{{ false }}"
+        custom-class="custom-textarea"
+      />
+    </view>
+
+    <!-- 图片上传区域 -->
+    <view class="upload-section">
+      <view class="input-label">
+        <view class="label-icon">📷</view>
+        <view class="label-text">{{ $t.feedback.imageOrVideo }}</view>
+        <view class="label-tip">(选填)</view>
+      </view>
+      <view class="uploader-wrapper">
+        <van-uploader
+          accept="media"
+          multiple
+          max-count="6"
+          image-fit="aspectFill"
+          file-list="{{ picsList }}"
+          bind:after-read="afterPicRead"
+          bind:delete="afterPicDel"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 温馨提示卡片 -->
+  <view class="tips-card">
+    <view class="tips-icon">💡</view>
+    <view class="tips-content">
+      <view class="tips-title">温馨提示</view>
+      <view class="tips-text">我们会认真对待每一条反馈，并在24小时内给予回复</view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-wrapper">
+    <view class="submit-btn" bind:tap="bindSave">
+      <view class="btn-text">提交反馈</view>
+      <view class="btn-icon">→</view>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="footer-decoration">
+    <view class="decoration-circle circle-1"></view>
+    <view class="decoration-circle circle-2"></view>
+    <view class="decoration-circle circle-3"></view>
+  </view>
 </view>

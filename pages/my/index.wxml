@@ -1,58 +1,223 @@
-<view class="my-bar">
-	<image mode='aspectFill' class='background' src='{{myBg}}'></image>	
-	<view class="my-box">
-		<view class="head-bar">
-      <view class="head-bar-left">
-        <button class="userinfo-avatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="userinfo-avatar-img"></image>
-        </button> 
-        <view class="name-box">
-          <view class="name" bindtap="copyuid">{{ $t.my.uid }}:{{ apiUserInfoMap.base.id }}</view>
-          <view class="name" bindtap="editNick">{{ nick ? nick : $t.my.nickSet }}</view>
-          <view wx:if="{{apiUserInfoMap.userLevel}}" class="state" bindtap="govip">{{apiUserInfoMap.userLevel.name}}</view>
-          <view wx:else class="state" bindtap="govip">{{ $t.vip.notVIP }}</view>
+<view class="page-container">
+  <!-- 顶部背景区域 -->
+  <view class="header-section">
+    <image mode='aspectFill' class='header-bg' src='{{myBg}}'></image>
+    <view class="header-gradient"></view>
+    
+    <!-- 用户信息卡片 -->
+    <view class="user-card">
+      <view class="user-info-row">
+        <view class="avatar-section">
+          <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <image src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/default.png' }}" mode="aspectFill" class="avatar-img"></image>
+          </button>
+          <view class="avatar-ring"></view>
+        </view>
+        
+        <view class="user-details">
+          <view class="nickname" bindtap="editNick">
+            {{ nick ? nick : $t.my.nickSet }}
+          </view>
+          <view class="uid-row" bindtap="copyuid">
+            <text class="uid-label">{{ $t.my.uid }}</text>
+            <text class="uid-value">{{ apiUserInfoMap.base.id }}</text>
+          </view>
+          <view class="vip-badge" bindtap="govip">
+            <text wx:if="{{apiUserInfoMap.userLevel}}" class="vip-text">{{apiUserInfoMap.userLevel.name}}</text>
+            <text wx:else class="vip-text">{{ $t.vip.notVIP }}</text>
+          </view>
+        </view>
+        
+        <view class="qr-section" bindtap="goUserCode">
+          <view class="qr-icon-wrapper">
+            <van-icon name="qr" size="48rpx" color="#8B7355" />
+          </view>
+          <view class="qr-text">{{ $t.my.userCode }}</view>
         </view>
       </view>
-      <view class="user-code" bindtap="goUserCode">
-        <van-icon name="qr" size="64rpx" />
-        <view class="txt">{{ $t.my.userCode }}</view>
-      </view>
-		</view>
-		<view wx:if="{{apiUserInfoMap}}" class="coupon-box">
-			<view class="coupon" bindtap="goCoupons">
-				<view class="num">{{couponStatistics.canUse}}</view>
-				<view class="title1">{{ $t.coupons.title }}</view>
-			</view>
-			<view class="balance-box" bindtap="goBalance">
-				<view class="amount-box">
-					<view class="amount1">¥</view>
-					<view class="amount2">{{balance}}</view>
-				</view>
-				<view class="amount">{{ $t.order.balance }}</view>
-			</view>
-			<view class="coupon" bindtap="goScorelog">
-				<view class="num">{{score}}</view>
-				<view class="title1">{{ $t.my.score }}</view>
-			</view>
-		</view>
-	</view>
-</view>
-<view class="my-bar1">
-	<van-cell icon="sign" title="{{ $t.my.signDaily }}" size="large" is-link url="/pages/sign/index" />
-	<van-cell wx:if="{{canHX}}" icon="qr" title="{{ $t.my.scanHx }}" size="large" is-link bind:click="scanOrderCode" />
-	<van-cell icon="medal-o" title="{{ $t.vip.title }}" size="large" is-link url="/pages/member-center/index" />
-	<van-cell icon="clock-o" title="{{ $t.booking.title }}" size="large" is-link url="/pages/booking/index" />
-	<van-cell icon="gold-coin-o" title="{{ $t.my.youhuimaidan }}" size="large" is-link url="/pages/youhui-pay/index" />
-	<van-cell icon="orders-o" title="{{ $t.order.title }}" size="large" is-link url="/pages/all-orders/index" />
-	<van-cell icon="location-o" title="{{ $t.ad_index.title }}" size="large" is-link url="/pages/ad/index" />
-	<van-cell icon="info-o" title="{{ $t.my.aboutUs }}" size="large" is-link url="/pages/about/index" />
-  <van-cell icon="service-o" wx:if="{{ customerServiceType == 'QW' }}" title="{{ $t.my.Contact }}" size="large" is-link bind:click="customerService" />
-  <van-cell icon="points" title="{{ $t.my.clearStorage }}" size="large" is-link bind:click="clearStorage" />
-	<van-cell icon="records" title="{{ $t.feedback.title }}" is-link url="/pages/my/feedback" />
-	<van-cell icon="manager-o" title="{{ $t.auth.goAdmin }}" is-link bind:tap="goadmin" />
-</view>
-<view class="version">v{{version}}</view>
+    </view>
+  </view>
 
+  <!-- 资产卡片区域 -->
+  <view wx:if="{{apiUserInfoMap}}" class="assets-section">
+    <view class="asset-card" bindtap="goCoupons">
+      <view class="asset-icon coupon-icon">
+        <van-icon name="coupon-o" size="48rpx" color="#FF9800" />
+      </view>
+      <view class="asset-value">{{couponStatistics.canUse}}</view>
+      <view class="asset-label">{{ $t.coupons.title }}</view>
+    </view>
+    
+    <view class="asset-card highlight-card" bindtap="goBalance">
+      <view class="asset-icon balance-icon">
+        <van-icon name="balance-o" size="48rpx" color="#F5DEB3" />
+      </view>
+      <view class="asset-value-large">
+        <text class="currency">¥</text>
+        <text class="amount">{{balance}}</text>
+      </view>
+      <view class="asset-label">{{ $t.order.balance }}</view>
+    </view>
+    
+    <view class="asset-card" bindtap="goScorelog">
+      <view class="asset-icon score-icon">
+        <van-icon name="gold-coin-o" size="48rpx" color="#FFD700" />
+      </view>
+      <view class="asset-value">{{score}}</view>
+      <view class="asset-label">{{ $t.my.score }}</view>
+    </view>
+  </view>
+
+  <!-- 功能菜单区域 -->
+  <view class="menu-section">
+    <!-- 常用功能 -->
+    <view class="menu-group">
+      <view class="menu-title">
+        <view class="title-dot"></view>
+        <text>常用功能</text>
+      </view>
+      <view class="menu-grid">
+        <view class="menu-item" bindtap="scanOrderCode" wx:if="{{canHX}}">
+          <view class="menu-icon-wrapper scan-icon">
+            <van-icon name="scan" size="44rpx" />
+          </view>
+          <text class="menu-text">{{ $t.my.scanHx }}</text>
+        </view>
+        <view class="menu-item" url="/pages/sign/index">
+          <navigator url="/pages/sign/index" hover-class="none">
+            <view class="menu-icon-wrapper sign-icon">
+              <van-icon name="calendar-o" size="44rpx" />
+            </view>
+            <text class="menu-text">{{ $t.my.signDaily }}</text>
+          </navigator>
+        </view>
+        <view class="menu-item">
+          <navigator url="/pages/booking/index" hover-class="none">
+            <view class="menu-icon-wrapper booking-icon">
+              <van-icon name="clock-o" size="44rpx" />
+            </view>
+            <text class="menu-text">{{ $t.booking.title }}</text>
+          </navigator>
+        </view>
+        <view class="menu-item">
+          <navigator url="/pages/youhui-pay/index" hover-class="none">
+            <view class="menu-icon-wrapper pay-icon">
+              <van-icon name="gold-coin-o" size="44rpx" />
+            </view>
+            <text class="menu-text">{{ $t.my.youhuimaidan }}</text>
+          </navigator>
+        </view>
+      </view>
+    </view>
+
+    <!-- 我的服务 -->
+    <view class="menu-group">
+      <view class="menu-title">
+        <view class="title-dot"></view>
+        <text>我的服务</text>
+      </view>
+      <view class="menu-list">
+        <navigator url="/pages/member-center/index" hover-class="none">
+          <view class="menu-list-item">
+            <view class="item-left">
+              <view class="list-icon vip-icon">
+                <van-icon name="gem-o" size="40rpx" />
+              </view>
+              <text class="list-text">{{ $t.vip.title }}</text>
+            </view>
+            <van-icon name="arrow" size="32rpx" color="#999" />
+          </view>
+        </navigator>
+        <navigator url="/pages/all-orders/index" hover-class="none">
+          <view class="menu-list-item">
+            <view class="item-left">
+              <view class="list-icon order-icon">
+                <van-icon name="orders-o" size="40rpx" />
+              </view>
+              <text class="list-text">{{ $t.order.title }}</text>
+            </view>
+            <van-icon name="arrow" size="32rpx" color="#999" />
+          </view>
+        </navigator>
+        <navigator url="/pages/ad/index" hover-class="none">
+          <view class="menu-list-item">
+            <view class="item-left">
+              <view class="list-icon address-icon">
+                <van-icon name="location-o" size="40rpx" />
+              </view>
+              <text class="list-text">{{ $t.ad_index.title }}</text>
+            </view>
+            <van-icon name="arrow" size="32rpx" color="#999" />
+          </view>
+        </navigator>
+      </view>
+    </view>
+
+    <!-- 其他设置 -->
+    <view class="menu-group">
+      <view class="menu-title">
+        <view class="title-dot"></view>
+        <text>其他设置</text>
+      </view>
+      <view class="menu-list">
+        <navigator url="/pages/about/index" hover-class="none">
+          <view class="menu-list-item">
+            <view class="item-left">
+              <view class="list-icon about-icon">
+                <van-icon name="info-o" size="40rpx" />
+              </view>
+              <text class="list-text">{{ $t.my.aboutUs }}</text>
+            </view>
+            <van-icon name="arrow" size="32rpx" color="#999" />
+          </view>
+        </navigator>
+        <view class="menu-list-item" wx:if="{{ customerServiceType == 'QW' }}" bindtap="customerService">
+          <view class="item-left">
+            <view class="list-icon service-icon">
+              <van-icon name="service-o" size="40rpx" />
+            </view>
+            <text class="list-text">{{ $t.my.Contact }}</text>
+          </view>
+          <van-icon name="arrow" size="32rpx" color="#999" />
+        </view>
+        <navigator url="/pages/my/feedback" hover-class="none">
+          <view class="menu-list-item">
+            <view class="item-left">
+              <view class="list-icon feedback-icon">
+                <van-icon name="chat-o" size="40rpx" />
+              </view>
+              <text class="list-text">{{ $t.feedback.title }}</text>
+            </view>
+            <van-icon name="arrow" size="32rpx" color="#999" />
+          </view>
+        </navigator>
+        <view class="menu-list-item" bindtap="clearStorage">
+          <view class="item-left">
+            <view class="list-icon clear-icon">
+              <van-icon name="delete-o" size="40rpx" />
+            </view>
+            <text class="list-text">{{ $t.my.clearStorage }}</text>
+          </view>
+          <van-icon name="arrow" size="32rpx" color="#999" />
+        </view>
+        <view class="menu-list-item" bindtap="goadmin">
+          <view class="item-left">
+            <view class="list-icon admin-icon">
+              <van-icon name="manager-o" size="40rpx" />
+            </view>
+            <text class="list-text">{{ $t.auth.goAdmin }}</text>
+          </view>
+          <van-icon name="arrow" size="32rpx" color="#999" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-text">v{{version}}</view>
+</view>
+
+<!-- 编辑昵称弹窗 -->
 <van-dialog
   use-slot
   title="{{ $t.my.nickEdit }}"

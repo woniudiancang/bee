@@ -1,3 +1,320 @@
-.btn {
+/* 页面整体容器 */
+page {
+  background: linear-gradient(135deg, #FFF5E6 0%, #FFE4D6 50%, #FFD4C4 100%);
+  min-height: 100vh;
+}
+
+.feedback-container {
+  min-height: 100vh;
+  padding: 0 30rpx 60rpx;
+  position: relative;
+}
+
+/* 顶部装饰波浪 */
+.header-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180rpx;
+  background: linear-gradient(135deg, #D4A574 0%, #C49563 100%);
+  border-radius: 0 0 50% 50%;
+  opacity: 0.15;
+}
+
+/* 页面头部 */
+.feedback-header {
+  padding-top: 60rpx;
+  padding-bottom: 40rpx;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.header-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
+}
+
+.header-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #8B5A3C;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+
+.header-subtitle {
+  font-size: 24rpx;
+  color: #A67C52;
+  opacity: 0.9;
+}
+
+/* 表单卡片 */
+.feedback-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF5 100%);
+  border-radius: 32rpx;
+  padding: 40rpx 32rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 12rpx 48rpx rgba(212, 165, 116, 0.15),
+              0 4rpx 16rpx rgba(196, 149, 99, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-card::before {
+  content: '';
+  position: absolute;
+  top: -50rpx;
+  right: -50rpx;
+  width: 200rpx;
+  height: 200rpx;
+  background: linear-gradient(135deg, #FFE4D6 0%, #FFD4C4 100%);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* 输入区域 */
+.input-section {
+  margin-bottom: 32rpx;
+  position: relative;
+}
+
+.input-section:last-child {
+  margin-bottom: 0;
+}
+
+.input-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-left: 8rpx;
+}
+
+.label-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.label-text {
+  font-size: 28rpx;
+  color: #8B5A3C;
+  font-weight: 600;
+}
+
+.label-tip {
+  font-size: 22rpx;
+  color: #C49563;
+  margin-left: 8rpx;
+}
+
+/* 自定义输入框样式 */
+.custom-field {
+  background: #FFF9F0 !important;
+  border-radius: 16rpx !important;
+  padding: 24rpx 20rpx !important;
+  font-size: 28rpx !important;
+  color: #333 !important;
+  border: 2rpx solid #FFE4D6 !important;
+  transition: all 0.3s ease;
+}
+
+.custom-field:focus {
+  border-color: #D4A574 !important;
+  box-shadow: 0 0 0 4rpx rgba(212, 165, 116, 0.1) !important;
+}
+
+.custom-textarea {
+  background: #FFF9F0 !important;
+  border-radius: 16rpx !important;
+  padding: 24rpx 20rpx !important;
+  font-size: 28rpx !important;
+  color: #333 !important;
+  min-height: 200rpx !important;
+  border: 2rpx solid #FFE4D6 !important;
+  transition: all 0.3s ease;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent 0%, #FFE4D6 50%, transparent 100%);
+  margin: 32rpx 0;
+}
+
+/* 内容区域 */
+.content-section {
+  margin-bottom: 32rpx;
+}
+
+/* 上传区域 */
+.upload-section {
   margin-top: 32rpx;
+}
+
+.uploader-wrapper {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background: #FFF9F0;
+  border-radius: 16rpx;
+  border: 2rpx dashed #FFE4D6;
+}
+
+/* 温馨提示卡片 */
+.tips-card {
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5E6 100%);
+  border-radius: 24rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 40rpx;
+  display: flex;
+  align-items: flex-start;
+  border-left: 6rpx solid #D4A574;
+  box-shadow: 0 8rpx 24rpx rgba(212, 165, 116, 0.08);
+}
+
+.tips-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.tips-content {
+  flex: 1;
+}
+
+.tips-title {
+  font-size: 26rpx;
+  color: #8B5A3C;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.tips-text {
+  font-size: 22rpx;
+  color: #A67C52;
+  line-height: 1.6;
+}
+
+/* 提交按钮 */
+.submit-wrapper {
+  padding: 20rpx 0;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #D4A574 0%, #C49563 100%);
+  border-radius: 50rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16rpx 48rpx rgba(212, 165, 116, 0.35),
+              0 8rpx 24rpx rgba(196, 149, 99, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 24rpx rgba(212, 165, 116, 0.25);
+}
+
+.btn-text {
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  margin-right: 12rpx;
+}
+
+.btn-icon {
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  animation: arrow-move 1.5s infinite;
+}
+
+@keyframes arrow-move {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8rpx); }
+}
+
+/* 底部装饰 */
+.footer-decoration {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12rpx;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.decoration-circle {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #D4A574;
+  opacity: 0.3;
+}
+
+.circle-1 { animation: pulse 2s infinite 0s; }
+.circle-2 { animation: pulse 2s infinite 0.3s; }
+.circle-3 { animation: pulse 2s infinite 0.6s; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.5); opacity: 0.6; }
+}
+
+/* 覆盖 vant 组件样式 */
+.van-field__control {
+  color: #333 !important;
+}
+
+.van-field__placeholder {
+  color: #C49563 !important;
+}
+
+.van-uploader__upload {
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5E6 100%) !important;
+  border: 2rpx dashed #D4A574 !important;
+  border-radius: 16rpx !important;
+}
+
+.van-uploader__preview-image {
+  border-radius: 16rpx !important;
+}
+
+.van-uploader__upload-icon {
+  color: #D4A574 !important;
+}
+
+.van-uploader__upload-text {
+  color: #A67C52 !important;
+  font-size: 22rpx !important;
 }

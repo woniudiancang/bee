@@ -1,6 +1,7 @@
 <view class="container">
+  <!-- 商品图片区域 -->
   <view class="swiper-container" id="swiper-container">
-    <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff"
+    <swiper class="swiper_box" indicator-dots="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#D4A574"
       autoplay="{{!goodsDetail.basicInfo.videoId}}" circular>
       <swiper-item wx:if="{{goodsDetail.basicInfo.videoId}}">
         <video src="{{videoMp4Src}}" autoplay="true" loop="true" style='width:100%;height:100%;'></video>
@@ -10,22 +11,35 @@
       </swiper-item>
     </swiper>
   </view>
-  <view class="goods-info">
-    <view class="goods-info-top-container">
-      <view class="goods-profile">
-        <view class="p"><text>¥</text> {{selectSizePrice}}</view>
-        <view wx:if="{{goodsDetail.basicInfo.originalPrice && goodsDetail.basicInfo.originalPrice > 0}}"
-          class="goods-price" style='color:#aaa;text-decoration:line-through;padding: 15rpx 0rpx 0rpx 15rpx;'>
-          <text>¥</text> {{selectSizeOPrice}}
-        </view>
+  
+  <!-- 商品信息卡片 -->
+  <view class="goods-info-card">
+    <view class="price-section">
+      <view class="current-price">
+        <text class="currency">¥</text>
+        <text class="price-num">{{selectSizePrice}}</text>
+      </view>
+      <view wx:if="{{goodsDetail.basicInfo.originalPrice && goodsDetail.basicInfo.originalPrice > 0}}"
+        class="original-price">
+        <text>¥{{selectSizeOPrice}}</text>
       </view>
     </view>
+    
     <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
-    <view class="characteristic">{{goodsDetail.basicInfo.characteristic}}</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">{{ $t.goodsDetail.commission1 }}
-      {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission2 }}</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">{{ $t.goodsDetail.commission1 }}
-      {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission3 }}</view>
+    
+    <view wx:if="{{goodsDetail.basicInfo.characteristic}}" class="characteristic-tag">
+      <text class="tag-icon">✦</text>
+      <text class="tag-text">{{goodsDetail.basicInfo.characteristic}}</text>
+    </view>
+    
+    <view class="commission-tip" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">
+      <text class="tip-icon">💰</text>
+      {{ $t.goodsDetail.commission1 }} {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission2 }}
+    </view>
+    <view class="commission-tip" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">
+      <text class="tip-icon">💰</text>
+      {{ $t.goodsDetail.commission1 }} {{goodsDetail.basicInfo.commission}} {{ $t.goodsDetail.commission3 }}
+    </view>
   </view>
   <van-cell-group wx:if="{{curGoodsKanjia}}" title="{{ $t.goodsDetail.kanJiaSetting }}">
     <van-cell title="{{ $t.goodsDetail.limit }}" value="{{curGoodsKanjia.number}}" />
@@ -54,45 +68,69 @@
     <van-cell title="{{ $t.goodsDetail.status }}" value="{{curKanjiaprogress.kanjiaInfo .statusStr}}" />
     <van-cell title="{{ $t.goodsDetail.joinTime }}" value="{{curKanjiaprogress.kanjiaInfo .dateAdd}}" />
   </view>
-  <van-cell wx:if="{{hasMoreSelect && goodsDetailSkuShowType==0}}" custom-class="vw100 goods-property-container"
-    border="{{false}}" is-link bind:click="bindGuiGeTap">
-    <view slot="title">
-      {{ $t.common.select }}:
-      <block wx:for="{{goodsDetail.properties}}" wx:key="id"> {{item.name}}</block>
-      <block wx:for="{{goodsAddition}}" wx:key="id"> {{item.name}}</block>
+  
+  <!-- 规格选择卡片 -->
+  <view wx:if="{{hasMoreSelect && goodsDetailSkuShowType==0}}" class="spec-select-card" bind:tap="bindGuiGeTap">
+    <view class="spec-title">{{ $t.common.select }}</view>
+    <view class="spec-content">
+      <block wx:for="{{goodsDetail.properties}}" wx:key="id">
+        <text class="spec-tag">{{item.name}}</text>
+      </block>
+      <block wx:for="{{goodsAddition}}" wx:key="id">
+        <text class="spec-tag">{{item.name}}</text>
+      </block>
     </view>
-  </van-cell>
-  <view class="size-label-box2" wx:if="{{goodsDetailSkuShowType==1}}">
-    <view class="label-title">{{ $t.goodsDetail.noSelectSku }}</view>
-    <view class="size-label-box">
+    <view class="spec-arrow">›</view>
+  </view>
+  
+  <!-- 展开式规格选择 -->
+  <view class="spec-select-expanded" wx:if="{{goodsDetailSkuShowType==1}}">
+    <view class="section-header">
+      <view class="header-line"></view>
+      <view class="header-text">{{ $t.goodsDetail.noSelectSku }}</view>
+      <view class="header-line"></view>
+    </view>
+    
+    <view class="spec-options-wrapper">
       <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-        <view class="label">{{property.name}}</view>
-        <view class="label-item-box">
-          <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
-            bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
-            {{item.name}}
+        <view class="spec-group">
+          <view class="spec-label">{{property.name}}</view>
+          <view class="spec-items">
+            <view class="spec-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
+              bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+              {{item.name}}
+            </view>
           </view>
         </view>
       </block>
     </view>
-    <van-cell title="{{ $t.goodsDetail.buyNumber }}">
-      <view>
-        <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
-      </view>
-    </van-cell>
-  </view>
-  <view wx:if="{{shopSubdetail}}" class="shop-container">
-    <image mode="aspectFill" src="{{shopSubdetail.info.pic}}"></image>
-    <view class="info">
-      <view class="title">{{shopSubdetail.info.name}}</view>
-      <view class="address">{{shopSubdetail.info.address}}</view>
+    
+    <view class="quantity-selector">
+      <view class="quantity-label">{{ $t.goodsDetail.buyNumber }}</view>
+      <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" 
+        button-size="36rpx" />
     </view>
   </view>
-  <view class="goods-des-info" id="goods-des-info">
-    <view class="label-title">
-      <view class="left">{{ $t.goodsDetail.title }}</view>
+  
+  <!-- 店铺信息卡片 -->
+  <view wx:if="{{shopSubdetail}}" class="shop-info-card">
+    <view class="shop-badge">
+      <image mode="aspectFill" src="{{shopSubdetail.info.pic}}" class="shop-avatar"></image>
     </view>
-    <view class="goods-text">
+    <view class="shop-details">
+      <view class="shop-name">{{shopSubdetail.info.name}}</view>
+      <view class="shop-address">📍 {{shopSubdetail.info.address}}</view>
+    </view>
+  </view>
+  
+  <!-- 商品详情卡片 -->
+  <view class="goods-detail-card" id="goods-des-info">
+    <view class="detail-header">
+      <view class="header-decorator"></view>
+      <view class="header-title">{{ $t.goodsDetail.title }}</view>
+      <view class="header-decorator"></view>
+    </view>
+    <view class="detail-content">
       <parser html="{{goodsDetail.content}}" />
     </view>
   </view>
@@ -143,44 +181,74 @@
 </view>
 
 <van-popup show="{{ !hideShopPopup }}" round closeable position="bottom"
-  custom-style="padding-top:48rpx;max-height: 80%;" bind:close="closePopupTap">
-  <van-card centered price="{{ selectSizePrice }}"
-    origin-price="{{ selectSizePrice != selectSizePrice ? selectSizeOPrice : '' }}"
-    title="{{ goodsDetail.basicInfo.name }}" thumb="{{ skuGoodsPic }}" />
-  <view class="size-label-box">
+  custom-style="padding-top:48rpx;max-height: 80%;border-radius: 32rpx 32rpx 0 0;" bind:close="closePopupTap">
+  
+  <!-- 弹窗商品信息 -->
+  <view class="popup-goods-card">
+    <image class="popup-goods-image" src="{{ skuGoodsPic }}" mode="aspectFill"></image>
+    <view class="popup-goods-info">
+      <view class="popup-goods-name">{{ goodsDetail.basicInfo.name }}</view>
+      <view class="popup-price-row">
+        <text class="popup-current-price">¥{{ selectSizePrice }}</text>
+        <text wx:if="{{ selectSizePrice != selectSizeOPrice }}" class="popup-original-price">¥{{ selectSizeOPrice }}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 规格选择区域 -->
+  <view class="popup-spec-area">
     <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-      <view class="label">{{property.name}}</view>
-      <view class="label-item-box">
-        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
-          bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
-          {{item.name}}
+      <view class="popup-spec-group">
+        <view class="popup-spec-label">{{property.name}}</view>
+        <view class="popup-spec-items">
+          <view class="popup-spec-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id"
+            bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+            {{item.name}}
+          </view>
         </view>
       </view>
     </block>
+    
     <block wx:for="{{goodsAddition}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-      <view class="label">{{property.name}}</view>
-      <view class="label-item-box">
-        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id"
-          bindtap="labelItemTap2" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
-          {{item.name}}
+      <view class="popup-spec-group">
+        <view class="popup-spec-label">{{property.name}}</view>
+        <view class="popup-spec-items">
+          <view class="popup-spec-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id"
+            bindtap="labelItemTap2" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+            {{item.name}}
+          </view>
         </view>
       </view>
     </block>
+    
     <block wx:for="{{goodsTimesSchedule}}" wx:for-item="property" wx:key="id">
-      <view class="label">{{property.day}}</view>
-      <view class="label-item-box">
-        <view class="label-item {{item.active ? 'active' : '' }}" wx:for-index="index2" wx:for="{{property.items}}" wx:key="id"
-          bindtap="skuClick3" data-idx1="{{index}}" data-idx2="{{index2}}">
-          {{item.name}}
+      <view class="popup-spec-group">
+        <view class="popup-spec-label">{{property.day}}</view>
+        <view class="popup-spec-items">
+          <view class="popup-spec-item {{item.active ? 'active' : '' }}" wx:for-index="index2" wx:for="{{property.items}}" wx:key="id"
+            bindtap="skuClick3" data-idx1="{{index}}" data-idx2="{{index2}}">
+            {{item.name}}
+          </view>
         </view>
       </view>
     </block>
   </view>
-  <van-cell wx:if="{{ !(curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid) }}" title="{{ $t.goodsDetail.buyNumber }}">
-    <view>
-      <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
+  
+  <!-- 数量选择 -->
+  <view wx:if="{{ !(curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid) }}" class="popup-quantity">
+    <view class="popup-quantity-label">{{ $t.goodsDetail.buyNumber }}</view>
+    <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" 
+      button-size="40rpx" />
+  </view>
+  
+  <!-- 确认按钮 -->
+  <view class="popup-action-area">
+    <view wx:if="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" 
+      class="popup-confirm-btn premium" bindtap="addShopCar">
+      ¥{{curKanjiaprogress.kanjiaInfo.curPrice}} {{ $t.goodsDetail.buy }}
     </view>
-  </van-cell>
-  <van-button wx:if="{{ curKanjiaprogress && curKanjiaprogress.kanjiaInfo.uid == curuid }}" bindtap="addShopCar" type="danger" block>￥{{curKanjiaprogress.kanjiaInfo.curPrice}} {{ $t.goodsDetail.buy }}</van-button>
-  <van-button wx:else bindtap="addShopCar" type="danger" block>{{ $t.goodsDetail.addCartBtn }}</van-button>
+    <view wx:else class="popup-confirm-btn premium" bindtap="addShopCar">
+      {{ $t.goodsDetail.addCartBtn }}
+    </view>
+  </view>
 </van-popup>

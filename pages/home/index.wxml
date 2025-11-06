@@ -1,50 +1,91 @@
-<swiper wx:if="{{banners}}" class="swiper1" indicator-dots indicator-color="#ffffff" autoplay circular>
-  <swiper-item wx:for="{{banners}}" wx:key="id">
-    <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
-  </swiper-item>
-</swiper>
-<view class="user-info-box">
-  <view class="l" bind:tap="huiyuan">
-    <image class="touxiang" src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/who.png' }}" mode="aspectFill"></image>
-    <view class="info">
-      <view class="nick">{{ nick ? nick : $t.my.nickSet }}</view>
-      <van-tag type="warning" round>{{ $t.home.huiyuan }}</van-tag>
+<view class="home-container">
+  <!-- 轮播图区域 -->
+  <view class="banner-section">
+    <swiper wx:if="{{banners}}" class="banner-swiper" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ff6b9d" autoplay circular>
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image class="banner-image" mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-main" bind:tap="huiyuan">
+      <image class="user-avatar" src="{{ apiUserInfoMap.base.avatarUrl ? apiUserInfoMap.base.avatarUrl : '/images/who.png' }}" mode="aspectFill"></image>
+      <view class="user-info">
+        <view class="user-nick">{{ nick ? nick : $t.my.nickSet }}</view>
+        <view class="user-member">
+          <van-tag type="warning" round size="medium">{{ $t.home.huiyuan }}</van-tag>
+        </view>
+      </view>
+    </view>
+    <view class="user-actions">
+      <view wx:if="{{ language }}" class="language-btn" bind:tap="changeLang">
+        <image class="language-icon" src="/images/lang/{{language}}.png" mode="aspectFill"></image>
+      </view>
+      <view class="coupon-btn" bind:tap="coupon">
+        <text>{{ $t.coupons.title }}</text>
+        <van-icon name="arrow" />
+      </view>
     </view>
   </view>
-  <view class="r">
-    <view wx:if="{{ language }}" class="language">
-      <image class="language-icon" src="/images/lang/{{language}}.png" mode="aspectFill" bind:tap="changeLang"></image>
+
+  <!-- 配送方式选择 -->
+  <view class="delivery-section">
+    <view class="section-title">配送方式</view>
+    <view class="delivery-types">
+      <view class="delivery-card" data-type="zq" bind:tap="changePeisongType">
+        <view class="delivery-icon-wrapper">
+          <image class="delivery-icon" src="/images/zq.png"></image>
+        </view>
+        <view class="delivery-text">{{ $t.home.zq }}</view>
+        <view class="delivery-desc">到店自取</view>
+      </view>
+      <view class="delivery-card" data-type="kd" bind:tap="changePeisongType">
+        <view class="delivery-icon-wrapper">
+          <image class="delivery-icon" src="/images/ps.png"></image>
+        </view>
+        <view class="delivery-text">{{ $t.home.ps }}</view>
+        <view class="delivery-desc">外卖配送</view>
+      </view>
     </view>
-    <view bind:tap="coupon">{{ $t.coupons.title }}<van-icon name="arrow" /></view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="features-section">
+    <view class="section-title">更多服务</view>
+    <view class="features-grid">
+      <view class="feature-item" bind:tap="touming">
+        <view class="feature-icon-box">
+          <image class="feature-icon" src="/images/sc.png"></image>
+        </view>
+        <view class="feature-name">{{ $t.home.sc }}</view>
+      </view>
+      <view class="feature-item" bind:tap="card">
+        <view class="feature-icon-box">
+          <image class="feature-icon" src="/images/lp.png"></image>
+        </view>
+        <view class="feature-name">{{ $t.home.lpk }}</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon-box">
+          <image class="feature-icon" src="/images/tg.png"></image>
+        </view>
+        <view class="feature-name">{{ $t.home.tg }}</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon-box">
+          <image class="feature-icon" src="/images/bh.png"></image>
+        </view>
+        <view class="feature-name">{{ $t.home.bh }}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 品牌底部 -->
+  <view class="brand-footer" bind:tap="about">
+    <view class="brand-line"></view>
+    <view class="brand-name">TEA WORK</view>
+    <view class="brand-line"></view>
   </view>
 </view>
-<view class="pick-type-box">
-  <!-- https://www.iconfont.cn/collections/detail?spm=a313x.search_index.0.da5a778a4.203f3a816FujOp&cid=42791 -->
-  <view class="item" data-type="zq" bind:tap="changePeisongType">
-    <image src="/images/zq.png"></image>
-    <view>{{ $t.home.zq }}</view>
-  </view>
-  <view class="item" data-type="kd" bind:tap="changePeisongType">
-    <image src="/images/ps.png"></image>
-    <view>{{ $t.home.ps }}</view>
-  </view>
-</view>
-<view class="category-box">
-  <view class="item" bind:tap="touming">
-    <image src="/images/sc.png"></image>
-    <view>{{ $t.home.sc }}</view>
-  </view>
-  <view class="item" bind:tap="card">
-    <image src="/images/lp.png"></image>
-    <view>{{ $t.home.lpk }}</view>
-  </view>
-  <view class="item">
-    <image src="/images/tg.png"></image>
-    <view>{{ $t.home.tg }}</view>
-  </view>
-  <view class="item">
-    <image src="/images/bh.png"></image>
-    <view>{{ $t.home.bh }}</view>
-  </view>
-</view>
-<view class="about-us" bind:tap="about">TEA WORK</view>

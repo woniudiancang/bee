@@ -1,108 +1,314 @@
-page{
-  background-color:#e7e7e7;
+page {
+  background: linear-gradient(180deg, #f8f4f0 0%, #fff5eb 100%);
+  min-height: 100vh;
+  padding-bottom: 40rpx;
 }
-.youhui-pay-bar{
-  width: 700rpx;
-  background-color: #ffffff;
-  margin:32rpx 25rpx;
+
+/* 页面容器 */
+.page-container {
+  padding: 30rpx 25rpx;
+}
+
+/* 店铺信息卡片 */
+.shop-card {
+  background: #ffffff;
   border-radius: 24rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(210, 180, 140, 0.12);
+}
+
+.shop-cell {
+  background: linear-gradient(135deg, #fff 0%, #fefcf9 100%);
+}
+
+/* 金额输入卡片 */
+.amount-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fffaf5 100%);
+  border-radius: 32rpx;
+  padding: 50rpx 40rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 40rpx rgba(210, 180, 140, 0.15);
+  position: relative;
   overflow: hidden;
 }
-.youhui-pay-bar .shop-bar{
+
+.amount-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50rpx;
+  width: 400rpx;
+  height: 400rpx;
+  background: radial-gradient(circle, rgba(255, 200, 124, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.amount-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.header-icon {
+  font-size: 48rpx;
+  margin-right: 16rpx;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #8b6f47;
+  letter-spacing: 1rpx;
+}
+
+/* 金额输入区域 */
+.amount-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+  border-radius: 24rpx;
+  padding: 40rpx 50rpx;
+  margin-bottom: 40rpx;
+  border: 3rpx solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.amount-input-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24rpx;
+  padding: 3rpx;
+  background: linear-gradient(135deg, #d4a574 0%, #e8c8a0 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.3;
+}
+
+.currency-symbol {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #c9935b;
+  margin-right: 20rpx;
+}
+
+.amount-input {
+  flex: 1;
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #2c2416;
+  text-align: left;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.input-placeholder {
+  color: #d4b896;
+  font-weight: 400;
+  font-size: 48rpx;
+}
+
+/* 支付按钮 */
+.pay-button-wrapper {
+  position: relative;
+}
+
+.pay-button {
+  width: 100%;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background: linear-gradient(135deg, #d4a574 0%, #c9935b 100%);
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(201, 147, 91, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pay-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.pay-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(201, 147, 91, 0.4);
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.button-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+
+.button-icon {
+  font-size: 40rpx;
+  color: #ffffff;
+  margin-left: 12rpx;
+  font-weight: bold;
+}
+
+/* 优惠规则卡片 */
+.discount-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf7 100%);
+  border-radius: 32rpx;
+  padding: 40rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 40rpx rgba(210, 180, 140, 0.15);
+}
+
+.discount-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f7f7f7;
-  padding:30rpx 40rpx 30rpx 20rpx ;
-}
-.youhui-pay-bar .shop-bar .shop-name-box .shop-name{
-  font-size:28rpx;
-  font-weight: 600;
-}
-.youhui-pay-bar .shop-bar .shop-name-box .ad{
-  font-size:24rpx;
-  margin-top: 15rpx;
-}
-.youhui-pay-bar .shop-bar .logo{
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-}
-.youhui-pay-bar .amount-pay-bar{
-  padding: 35rpx 30rpx;
-}
-.youhui-pay-bar .amount-pay-bar .title{
-  font-size: 28rpx;
-  color:#acacac;
-}
-.youhui-pay-bar .amount-pay-bar .amount{
-  display: flex;
-  align-items: center;
-  margin-top: 30rpx;
-}
-.youhui-pay-bar .amount-pay-bar .amount .units{
-  font-size: 45rpx;
-  font-weight: 800;
-  margin-left: 20rpx;
-}
-.youhui-pay-bar .amount-pay-bar .amount .describe{
-  font-size: 35rpx;
-  margin-left: 30rpx; 
-}
-.youhui-pay-bar .amount-pay-bar .blank{
-  height: 2rpx;
-  width: 640rpx;
-  background-color: #f7f7f7;
-  margin-top: 20rpx;
-  margin-bottom: 30rpx;
-}
-.youhui-pay-bar .amount-pay-bar .pay{
-  font-size: 30rpx;
-  border-radius: 5rpx;
-}
-.youhui-pay-bar .amount-pay-bar .pay-1{
-  font-size: 30rpx;
-  border-radius: 5rpx;
-  
+  margin-bottom: 32rpx;
 }
 
-.youhui-pay-bar .amount-pay-bar .youhui-pay{
-  font-size: 28rpx;
-  color:#acacac;
-  margin-top:70rpx ;
-}
-.youhui-pay-bar .amount-pay-bar .content{
+.header-left {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 20rpx;
-  /* width: 180rpx;
-  height: 110rpx; */
-  color: #e64340;
-  font-size: 26rpx;
+}
+
+.discount-icon {
+  font-size: 44rpx;
+  margin-right: 16rpx;
+}
+
+.discount-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #8b6f47;
+  letter-spacing: 1rpx;
+}
+
+.discount-badge {
+  background: linear-gradient(135deg, #ff9a62 0%, #ff7f50 100%);
+  color: #ffffff;
+  font-size: 22rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
   font-weight: 500;
-  /* border-style:solid ;
-  border-width: 0.5rpx; */
+  box-shadow: 0 4rpx 12rpx rgba(255, 127, 80, 0.3);
+  animation: shake 3s ease-in-out infinite;
 }
-.charge-rule-wrap{
-  width: 100%;
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3rpx); }
+  75% { transform: translateX(3rpx); }
+}
+
+/* 优惠列表 */
+.discount-list {
   display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  justify-content: left;
-  align-items: center;
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 20rpx;
 }
-.charge-detail{
-  width: 180rpx;
-  height: 110rpx;
-  border: 1rpx solid #1aad19;
-  color: #1aad19;
+
+.discount-item {
+  flex: 0 0 calc(50% - 10rpx);
+  background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+  border-radius: 20rpx;
+  padding: 28rpx 20rpx;
+  position: relative;
+  overflow: hidden;
+  border: 2rpx solid #f5e6d3;
+  box-shadow: 0 4rpx 16rpx rgba(210, 180, 140, 0.1);
+}
+
+.discount-item::before {
+  content: '';
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: radial-gradient(circle, rgba(255, 200, 124, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.discount-item-top {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin:0 10rpx;
-  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.discount-amount {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #d4a574;
+  line-height: 1.2;
+  letter-spacing: -1rpx;
+}
+
+.discount-label {
+  font-size: 24rpx;
+  color: #a88560;
+  font-weight: 500;
+  margin-top: 4rpx;
+}
+
+.discount-divider {
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #e8d5c4, transparent);
+  margin: 16rpx 0;
+}
+
+.discount-item-bottom {
+  text-align: center;
+}
+
+.discount-rule {
+  font-size: 26rpx;
+  color: #8b6f47;
+  font-weight: 500;
+}
+
+/* 温馨提示卡片 */
+.tips-card {
+  background: linear-gradient(135deg, #fffbf7 0%, #fff9f0 100%);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  border: 2rpx solid #f5e6d3;
+  box-shadow: 0 4rpx 16rpx rgba(210, 180, 140, 0.08);
+}
+
+.tips-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.tips-text {
+  font-size: 26rpx;
+  color: #a88560;
+  line-height: 1.6;
+  flex: 1;
 }

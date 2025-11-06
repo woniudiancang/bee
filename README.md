@@ -57,6 +57,7 @@
 - [面包店风格小程序](https://github.com/gooking/bread)  / [码云镜像](https://gitee.com/javazj/bread) / [GitCode镜像](https://gitcode.com/gooking2/bread)
 - [朋友圈发圈素材小程序](https://github.com/gooking/moments)  / [码云镜像](https://gitee.com/javazj/moments) / [GitCode镜像](https://gitcode.com/gooking2/moments)
 - [小红书企业微展](https://github.com/gooking/xhs-qiyeweizan)  / [码云镜像](https://gitee.com/javazj/xhs-qiyeweizan) / [GitCode镜像](https://gitcode.com/gooking2/xhs-qiyeweizan)
+- [旧物回收、废品回收](https://github.com/gooking/recycle)  / [码云镜像](https://gitee.com/javazj/recycle) / [GitCode镜像](https://gitcode.com/gooking2/recycle)
 
 # 使用教程
 
@@ -245,3 +246,8 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhone
 ## 使用国际化多语言，切换语言后底部菜单显示不对
 
 `/i18n/index.js` 文件里面的菜单内容估计忘记修改了
+
+## 商家入驻申请页面
+
+1. app.json 中，添加一个页面路径： `pages/shop/join-apply`
+2. pages/shop/select 页面最下面的入口代码放开

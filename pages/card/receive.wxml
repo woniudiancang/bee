@@ -1,17 +1,83 @@
-<view class="from">
-  <view class="user-box">
-    <image class="avatarUrl" src="{{ user.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
-    <view class="r">
-      <view class="t1">{{ user.nick || $t.card.friend }}</view>
-      <view class="t2">{{ $t.card.shareplaceholder }}</view>
+<view class="page-container">
+  <!-- 顶部装饰波浪 -->
+  <view class="wave-decoration"></view>
+  
+  <!-- 主卡片容器 -->
+  <view class="main-card">
+    <!-- 礼物图标装饰 -->
+    <view class="gift-icon">🎁</view>
+    
+    <!-- 赠送人信息 -->
+    <view class="sender-section">
+      <view class="sender-avatar-wrapper">
+        <image class="sender-avatar" src="{{ user.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
+        <view class="avatar-border"></view>
+      </view>
+      <view class="sender-info">
+        <view class="sender-name">{{ user.nick || $t.card.friend }}</view>
+        <view class="sender-label">{{ $t.card.shareplaceholder }}</view>
+      </view>
+    </view>
+
+    <!-- 祝福留言 -->
+    <view class="blessing-card" wx:if="{{ cardInfo.shareContent }}">
+      <view class="blessing-icon">💌</view>
+      <view class="blessing-text">{{ cardInfo.shareContent }}</view>
+      <view class="blessing-quote-left">"</view>
+      <view class="blessing-quote-right">"</view>
+    </view>
+
+    <!-- 礼品卡展示区 -->
+    <view class="gift-card-display">
+      <view class="card-glow"></view>
+      <view class="card-wrapper">
+        <image class="card-image" src="{{ cardInfo.pic }}" mode="aspectFill"></image>
+        <view class="card-shine"></view>
+      </view>
+      
+      <!-- 卡片信息 -->
+      <view class="card-info-section">
+        <view class="card-title">{{ cardInfo.name }}</view>
+        <view class="card-divider"></view>
+        <view class="card-amount-wrapper">
+          <view wx:if="{{ cardUser.type == 0 }}" class="card-amount">
+            <text class="amount-number">{{ cardUser.amount }}</text>
+            <text class="amount-unit">{{ $t.card.times }}</text>
+          </view>
+          <view wx:if="{{ cardUser.type == 1 }}" class="card-amount">
+            <text class="amount-symbol">¥</text>
+            <text class="amount-number">{{ cardUser.amount }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 装饰元素 -->
+    <view class="sparkle sparkle-1">✨</view>
+    <view class="sparkle sparkle-2">✨</view>
+    <view class="sparkle sparkle-3">✨</view>
+
+    <!-- 领取按钮 -->
+    <view class="receive-button-wrapper">
+      <view class="button-glow"></view>
+      <van-button 
+        type="primary" 
+        size="large" 
+        block 
+        round 
+        bind:click="submit" 
+        class="receive-button">
+        {{ $t.card.cardShareFetch }}
+      </van-button>
+    </view>
+
+    <!-- 温馨提示 -->
+    <view class="warm-tips">
+      <text class="tips-icon">☕</text>
+      <text class="tips-text">领取后可在"我的"-"礼品卡"中查看</text>
     </view>
   </view>
-  <view class="remark">{{ cardInfo.shareContent || $t.card.shareplaceholder }}</view>
-  <image class="pic" src="{{ cardInfo.pic }}" mode="widthFix"></image>
-  <view class="title">{{ cardInfo.name }}</view>
-  <view wx:if="{{ cardUser.type == 0 }}" class="price">{{ cardUser.amount }}<text>{{ $t.card.times }}</text></view>
-  <view wx:if="{{ cardUser.type == 1 }}" class="price"><text>￥</text>{{ cardUser.amount }}</view>
-  <view class="btn">
-    <van-button type="primary" size="large" block round bind:click="submit">{{ $t.card.cardShareFetch }}</van-button>
-  </view>
+
+  <!-- 底部装饰 -->
+  <view class="bottom-decoration"></view>
 </view>

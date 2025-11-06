@@ -1,31 +1,77 @@
-<view class="youhui-pay-bar">
-	<van-cell icon="location-o" title="{{shopInfo.name}}" label="{{shopInfo.address}}" is-link url="/pages/shop/select?type=pay" />
+<view class="page-container">
+  <!-- 店铺信息卡片 -->
+  <view class="shop-card">
+    <van-cell 
+      icon="location-o" 
+      title="{{shopInfo.name}}" 
+      label="{{shopInfo.address}}" 
+      is-link 
+      url="/pages/shop/select?type=pay" 
+      custom-class="shop-cell"
+    />
+  </view>
 
   <form bindsubmit="bindSave" report-submit="true">
-	  <view class="amount-pay-bar">
-		  <view class="title">{{ $t.cart.Consumptionamount }}</view>
-		  <view class="amount">
-			  <view class="units">¥</view>
-			  <input class='describe' placeholder='{{ $t.youhuipay.askAmount }}' name="amount" type="digit"></input>
-		  </view>
-		  <view class="blank"></view>
-		  <button type="primary" formType="submit">{{ $t.youhuipay.btn }}</button>
-
-		  <view class="youhui-pay">{{ $t.youhuipay.youhuiList }}</view>
+    <!-- 金额输入卡片 -->
+    <view class="amount-card">
+      <view class="amount-header">
+        <view class="header-icon">💰</view>
+        <view class="header-title">{{ $t.cart.Consumptionamount }}</view>
+      </view>
       
-		  <view class="content">
-			  <block wx:if='{{rechargeSendRules}}'>
-				  <view class="charge-rule-wrap">
-					  <view wx:for='{{rechargeSendRules}}' wx:key="index" wx:for-item="item" class="charge-detail">
-						  <text>{{ $t.pay.Fullconsumption }} ￥{{item.consume}} </text>
-						  <text>{{ $t.pay.reduce }} ￥{{item.discounts}}</text>
-					  </view>
-				  </view>
-			  </block>
-		  </view>
-	  </view>
+      <view class="amount-input-wrapper">
+        <view class="currency-symbol">¥</view>
+        <input 
+          class='amount-input' 
+          placeholder='{{ $t.youhuipay.askAmount }}' 
+          name="amount" 
+          type="digit"
+          placeholder-class="input-placeholder"
+        ></input>
+      </view>
+
+      <view class="pay-button-wrapper">
+        <button class="pay-button" formType="submit">
+          <view class="button-content">
+            <text class="button-text">{{ $t.youhuipay.btn }}</text>
+            <text class="button-icon">→</text>
+          </view>
+        </button>
+      </view>
+    </view>
+
+    <!-- 优惠规则卡片 -->
+    <view class="discount-card" wx:if="{{rechargeSendRules && rechargeSendRules.length > 0}}">
+      <view class="discount-header">
+        <view class="header-left">
+          <view class="discount-icon">🎁</view>
+          <view class="discount-title">{{ $t.youhuipay.youhuiList }}</view>
+        </view>
+        <view class="discount-badge">限时优惠</view>
+      </view>
+
+      <view class="discount-list">
+        <block wx:for='{{rechargeSendRules}}' wx:key="index" wx:for-item="item">
+          <view class="discount-item">
+            <view class="discount-item-top">
+              <view class="discount-amount">¥{{item.discounts}}</view>
+              <view class="discount-label">优惠</view>
+            </view>
+            <view class="discount-divider"></view>
+            <view class="discount-item-bottom">
+              <text class="discount-rule">满¥{{item.consume}}可用</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
   </form>
 
+  <!-- 温馨提示 -->
+  <view class="tips-card">
+    <view class="tips-icon">💡</view>
+    <view class="tips-text">消费满额即可享受相应优惠，余额不足将使用微信支付</view>
+  </view>
 </view>
 
 

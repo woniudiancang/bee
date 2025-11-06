@@ -1,19 +1,291 @@
-.empty-box{
+/* 页面容器 */
+.cart-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
+  padding-bottom: 20rpx;
+}
+
+/* ==================== 空状态样式 ==================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 0;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.empty-tip {
+  font-size: 26rpx;
+  color: #bbb;
+}
+
+/* ==================== 顶部操作栏 ==================== */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0ebe5;
+}
+
+.cart-title {
   display: flex;
   align-items: center;
-  padding-top: 15rpx;
-  padding-left: 20rpx;
-  padding-bottom: 15rpx;
-  background-color: #eeeeee;
+  gap: 12rpx;
 }
-.empty-box .empty-0{
-  height:30rpx;
-  width: 30rpx;
+
+.title-icon {
+  font-size: 36rpx;
 }
-.empty-box .empty-1{
-  font-size:25rpx ;
-  margin-left: 10rpx;
+
+.title-text {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
 }
-.bottom {
-  height: 120rpx;
+
+.item-count {
+  background: linear-gradient(135deg, #d4a574 0%, #c89860 100%);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 500;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+  background: #f8f6f3;
+  font-size: 26rpx;
+  color: #999;
+  transition: all 0.3s;
+}
+
+/* ==================== 商品列表 ==================== */
+.goods-list {
+  padding: 0 24rpx;
+}
+
+.goods-item {
+  margin-bottom: 24rpx;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.item-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  display: flex;
+  gap: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(212, 165, 116, 0.08);
+  transition: all 0.3s;
+}
+
+/* 商品图片 */
+.item-image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe5 100%);
+}
+
+.goods-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 商品信息 */
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 规格标签 */
+.goods-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.spec-tag {
+  background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe5 100%);
+  color: #8b7355;
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid #e8dfd5;
+  font-weight: 500;
+}
+
+.addition-tag {
+  background: linear-gradient(135deg, #fef5e7 0%, #fdecd0 100%);
+  color: #d4a574;
+  border-color: #f9e5c8;
+}
+
+/* 价格和数量 */
+.item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goods-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+  color: #d4a574;
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+
+.price-num {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #d4a574;
+  font-family: 'DIN Alternate', 'Arial', sans-serif;
+}
+
+.goods-stepper {
+  transform: scale(0.95);
+}
+
+/* ==================== 底部占位 ==================== */
+.bottom-placeholder {
+  height: 180rpx;
+}
+
+/* ==================== 底部结算栏 ==================== */
+.submit-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.08);
+  z-index: 999;
+  padding: env(safe-area-inset-bottom);
+}
+
+.bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+}
+
+.total-info {
+  flex: 1;
+}
+
+.total-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.total-price {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 4rpx;
+}
+
+.currency {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+
+.amount {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #333;
+  font-family: 'DIN Alternate', 'Arial', sans-serif;
+}
+
+.total-tip {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #d4a574 0%, #c89860 100%);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 24rpx 60rpx;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  box-shadow: 0 8rpx 24rpx rgba(212, 165, 116, 0.3);
+  transition: all 0.3s;
+}
+
+.submit-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4rpx 12rpx rgba(212, 165, 116, 0.3);
+}
+
+/* ==================== Vant组件自定义样式 ==================== */
+.van-stepper {
+  --stepper-background-color: #f8f6f3;
+  --stepper-button-icon-color: #d4a574;
+  --stepper-button-disabled-color: #e8dfd5;
+  --stepper-button-disabled-icon-color: #ccc;
+  --stepper-input-text-color: #333;
+  --stepper-input-font-size: 28rpx;
 }

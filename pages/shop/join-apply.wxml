@@ -1,33 +1,132 @@
-<van-field
-  label="{{ $t.shop.name }}"
-  model:value="{{ name }}"
-  placeholder="{{ $t.shop.namePlaceholder }}"
-  clearable
-/>
-<van-field
-  label="{{ $t.shop.mobile }}"
-  type="number"
-  model:value="{{ mobile }}"
-  placeholder="{{ $t.shop.mobilePlaceholder }}"
-  clearable
-/>
-<view style="margin-top:16rpx;padding-left:32rpx;">
-  <van-uploader
-    accept="media"
-    multiple
-    upload-text="{{ $t.feedback.imageOrVideo }}"
-    image-fit="aspectFill"
-    file-list="{{ picsList }}"
-    bind:after-read="afterPicRead"
-    bind:delete="afterPicDel"
-  />
-</view>
-<van-field
-  model:value="{{ content }}"
-  placeholder="{{ $t.shop.contentPlaceholder }}"
-  type="textarea"
-  autosize="{{ autosize }}"
-/>
-<view class="block-btn btn">
-  <van-button type="primary" block bind:click="bindSave">{{ $t.shop.joinBtn }}</van-button>
+<view class="join-apply-container">
+  <!-- 顶部装饰背景 -->
+  <view class="header-decoration">
+    <view class="bubble bubble-1"></view>
+    <view class="bubble bubble-2"></view>
+    <view class="bubble bubble-3"></view>
+  </view>
+
+  <!-- 欢迎标题区域 -->
+  <view class="welcome-section">
+    <view class="icon-wrapper">
+      <text class="icon">🍵</text>
+    </view>
+    <view class="welcome-title">商家入驻申请</view>
+    <view class="welcome-subtitle">加入我们，开启您的甜蜜事业</view>
+  </view>
+
+  <!-- 表单卡片 -->
+  <view class="form-card">
+    <!-- 基本信息板块 -->
+    <view class="form-section">
+      <view class="section-title">
+        <view class="title-line"></view>
+        <text class="title-text">基本信息</text>
+        <view class="title-line"></view>
+      </view>
+      
+      <view class="field-item">
+        <view class="field-label">
+          <text class="label-icon">👤</text>
+          <text class="label-text">{{ $t.shop.name }}</text>
+          <text class="required-mark">*</text>
+        </view>
+        <van-field
+          model:value="{{ name }}"
+          placeholder="{{ $t.shop.namePlaceholder }}"
+          clearable
+          border="{{ false }}"
+          custom-style="padding: 20rpx 0; background: #f8f8f8; border-radius: 16rpx; padding-left: 24rpx;"
+        />
+      </view>
+
+      <view class="field-item">
+        <view class="field-label">
+          <text class="label-icon">📱</text>
+          <text class="label-text">{{ $t.shop.mobile }}</text>
+          <text class="required-mark">*</text>
+        </view>
+        <van-field
+          type="number"
+          model:value="{{ mobile }}"
+          placeholder="{{ $t.shop.mobilePlaceholder }}"
+          clearable
+          border="{{ false }}"
+          custom-style="padding: 20rpx 0; background: #f8f8f8; border-radius: 16rpx; padding-left: 24rpx;"
+        />
+      </view>
+    </view>
+
+    <!-- 店铺资料板块 -->
+    <view class="form-section">
+      <view class="section-title">
+        <view class="title-line"></view>
+        <text class="title-text">店铺资料</text>
+        <view class="title-line"></view>
+      </view>
+
+      <view class="field-item">
+        <view class="field-label">
+          <text class="label-icon">📸</text>
+          <text class="label-text">店铺照片</text>
+          <text class="field-tip">（营业执照、店铺照片等）</text>
+        </view>
+        <view class="uploader-wrapper">
+          <van-uploader
+            accept="media"
+            multiple
+            upload-text="{{ $t.feedback.imageOrVideo }}"
+            image-fit="aspectFill"
+            file-list="{{ picsList }}"
+            bind:after-read="afterPicRead"
+            bind:delete="afterPicDel"
+            max-count="9"
+          />
+        </view>
+      </view>
+
+      <view class="field-item">
+        <view class="field-label">
+          <text class="label-icon">✍️</text>
+          <text class="label-text">申请说明</text>
+          <text class="required-mark">*</text>
+        </view>
+        <view class="textarea-wrapper">
+          <van-field
+            model:value="{{ content }}"
+            placeholder="{{ $t.shop.contentPlaceholder }}"
+            type="textarea"
+            autosize="{{ autosize }}"
+            border="{{ false }}"
+            custom-style="background: #f8f8f8; border-radius: 16rpx; padding: 24rpx;"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class="tips-section">
+      <view class="tips-title">💡 温馨提示</view>
+      <view class="tips-item">• 请确保提供的信息真实有效</view>
+      <view class="tips-item">• 我们将在1-3个工作日内审核您的申请</view>
+      <view class="tips-item">• 审核结果将通过短信或站内消息通知</view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <van-button 
+      type="primary" 
+      block 
+      bind:click="bindSave"
+      custom-class="submit-button"
+    >
+      {{ $t.shop.joinBtn }}
+    </van-button>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="footer-decoration">
+    <text class="footer-text">期待与您携手共创美好未来</text>
+  </view>
 </view>

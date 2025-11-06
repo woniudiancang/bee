@@ -1,39 +1,397 @@
+/* 页面整体背景 - 奶茶渐变 */
 page {
-  background: rgb(235, 234, 234);
+  background: linear-gradient(180deg, 
+    #F5E6D3 0%, 
+    #E8D4C0 50%, 
+    #DCC5B0 100%);
+  min-height: 100vh;
 }
-.from {
-  margin: 88rpx 32rpx;
-  background: #fff;
-  padding: 32rpx;
-  padding-bottom: 88rpx;
-  border-radius: 32rpx;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+/* 页面容器 */
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 40rpx 32rpx 60rpx;
 }
-.pic {
-  width: 100%;
-  height: 0;
+
+/* ========== 顶部装饰 ========== */
+.top-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400rpx;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
-.title {
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: linear-gradient(135deg, #8B6F47 0%, #A0826D 100%);
+}
+
+.deco-circle-1 {
+  width: 400rpx;
+  height: 400rpx;
+  top: -200rpx;
+  right: -100rpx;
+}
+
+.deco-circle-2 {
+  width: 300rpx;
+  height: 300rpx;
+  top: 100rpx;
+  left: -150rpx;
+}
+
+/* ========== 礼品卡容器 ========== */
+.gift-card-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== 标题区域 ========== */
+.header-section {
   text-align: center;
-  font-weight: bold;
-  padding: 48rpx;
+  margin-bottom: 48rpx;
+  animation: fadeInDown 0.6s ease-out;
 }
-.btn {
-  margin-top: 64rpx;
+
+.header-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+  animation: bounce 2s infinite;
 }
-.price {
-  text-align: center;
-  color: #e64340;
+
+.header-title {
   font-size: 48rpx;
-  font-weight: bold;
+  font-weight: 700;
+  color: #5D4037;
+  margin-bottom: 12rpx;
+  letter-spacing: 2rpx;
 }
-.price text {
-  color: #333;
-  font-size: 24rpx;
-  font-weight: normal;
+
+.header-subtitle {
+  font-size: 26rpx;
+  color: #8D6E63;
+  letter-spacing: 1rpx;
 }
-.remark {
-  border: 1rpx dashed #999999 !important;
-  padding: 32rpx !important;
+
+/* ========== 礼品卡主体 ========== */
+.gift-card {
+  position: relative;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 
+    0 20rpx 60rpx rgba(141, 110, 99, 0.15),
+    0 8rpx 20rpx rgba(141, 110, 99, 0.1);
+  margin-bottom: 40rpx;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* 卡片光泽效果 */
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 卡片背景图案 */
+.card-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(139, 111, 71, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(160, 130, 109, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 3;
+  padding: 40rpx;
+}
+
+/* 卡片图片区域 */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(141, 110, 99, 0.12);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(93, 64, 55, 0.05) 100%
+  );
+}
+
+/* 卡片信息 */
+.card-info {
+  text-align: center;
+}
+
+.card-name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #4E342E;
+  margin-bottom: 24rpx;
+  letter-spacing: 1rpx;
+  line-height: 1.5;
+}
+
+.card-value {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.value-container {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  background: linear-gradient(135deg, #8B6F47 0%, #A0826D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 16rpx 40rpx;
+  border-radius: 60rpx;
+  background-color: rgba(139, 111, 71, 0.08);
+  background-image: none;
+}
+
+.value-symbol {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #8B6F47;
+  margin-right: 8rpx;
+}
+
+.value-number {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #8B6F47;
+  line-height: 1;
+}
+
+.value-unit {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #A0826D;
+  margin-left: 8rpx;
+}
+
+/* ========== 留言区域 ========== */
+.message-section {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(141, 110, 99, 0.08);
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.message-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.label-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.label-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #5D4037;
+  letter-spacing: 1rpx;
+}
+
+.message-input-wrapper {
+  background: #FFF8F0;
   border-radius: 16rpx;
+  padding: 8rpx;
+  border: 2rpx solid #F5E6D3;
+  transition: all 0.3s ease;
+}
+
+.message-input-wrapper:focus-within {
+  border-color: #A0826D;
+  box-shadow: 0 0 0 4rpx rgba(160, 130, 109, 0.1);
+}
+
+.message-input {
+  background: transparent !important;
+  padding: 20rpx !important;
+  font-size: 28rpx !important;
+  color: #4E342E !important;
+  line-height: 1.6 !important;
+  min-height: 160rpx !important;
+}
+
+/* ========== 分享按钮 ========== */
+.share-button-wrapper {
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.share-button {
+  background: linear-gradient(135deg, #8B6F47 0%, #A0826D 100%) !important;
+  border: none !important;
+  box-shadow: 
+    0 12rpx 40rpx rgba(139, 111, 71, 0.3),
+    0 4rpx 12rpx rgba(139, 111, 71, 0.2) !important;
+  height: 96rpx !important;
+  transition: all 0.3s ease;
+}
+
+.share-button:active {
+  transform: translateY(4rpx);
+  box-shadow: 
+    0 8rpx 24rpx rgba(139, 111, 71, 0.2),
+    0 2rpx 8rpx rgba(139, 111, 71, 0.15) !important;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+}
+
+.button-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.button-text {
+  color: #FFFFFF;
+}
+
+/* ========== 底部装饰 ========== */
+.bottom-decoration {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  animation: wave 12s linear infinite;
+}
+
+.wave-1 {
+  background-image: linear-gradient(to right, transparent 50%, rgba(139, 111, 71, 0.05) 50%);
+  background-size: 400rpx 100%;
+  animation-duration: 15s;
+}
+
+.wave-2 {
+  background-image: linear-gradient(to right, transparent 50%, rgba(160, 130, 109, 0.03) 50%);
+  background-size: 600rpx 100%;
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+
+/* ========== 动画定义 ========== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20rpx);
+  }
+  60% {
+    transform: translateY(-10rpx);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

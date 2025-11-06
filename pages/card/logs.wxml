@@ -1,2 +1,73 @@
-<van-empty wx:if="{{ !list }}" description="暂无消费记录" />
-<van-cell wx:for="{{ list }}" wx:key="id" title="{{ item.typeStr }}" value="{{ item.amount }} (余额:{{ item.balance }})" label="{{ item.dateAdd }}" />
+<view class="page-container">
+  <!-- 顶部装饰背景 -->
+  <view class="header-decoration">
+    <view class="decoration-circle circle-1"></view>
+    <view class="decoration-circle circle-2"></view>
+    <view class="decoration-wave"></view>
+  </view>
+
+  <!-- 卡片概览区域 -->
+  <view class="card-overview">
+    <view class="overview-content">
+      <view class="overview-icon">☕</view>
+      <view class="overview-text">
+        <text class="overview-title">消费记录</text>
+        <text class="overview-subtitle">Card Consumption Record</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{ !list }}" class="empty-container">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无消费记录</view>
+    <view class="empty-tips">使用礼品卡消费后，记录会显示在这里哦～</view>
+  </view>
+
+  <!-- 消费记录列表 -->
+  <view wx:else class="records-container">
+    <view class="timeline-item" wx:for="{{ list }}" wx:key="id">
+      <!-- 时间轴点 -->
+      <view class="timeline-dot">
+        <view class="dot-inner"></view>
+      </view>
+      
+      <!-- 记录卡片 -->
+      <view class="record-card">
+        <view class="card-header">
+          <view class="type-badge">
+            <text class="badge-icon">💳</text>
+            <text class="badge-text">{{ item.typeStr }}</text>
+          </view>
+          <view class="date-text">{{ item.dateAdd }}</view>
+        </view>
+        
+        <view class="card-body">
+          <view class="amount-section">
+            <view class="amount-label">消费金额</view>
+            <view class="amount-value">
+              <text class="amount-symbol">-</text>
+              <text class="amount-number">{{ item.amount }}</text>
+            </view>
+          </view>
+          
+          <view class="divider"></view>
+          
+          <view class="balance-section">
+            <view class="balance-item">
+              <text class="balance-label">剩余余额</text>
+              <text class="balance-value">{{ item.balance }}</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="card-decoration">
+          <view class="deco-line"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="footer-space"></view>
+</view>

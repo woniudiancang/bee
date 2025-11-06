@@ -1,80 +1,218 @@
-.container{
+/* 页面容器 */
+.container {
   width: 100vw;
-  min-height: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF8F0 0%, #FFFFFF 100%);
+}
+
+/* 顶部图片区域 */
+.header-section {
+  position: relative;
+  width: 100%;
+  height: 500rpx;
+  overflow: hidden;
+}
+
+.shop-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150rpx;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 100%);
+}
+
+/* 门店信息卡片 */
+.shop-card {
+  position: relative;
+  margin: -80rpx 30rpx 24rpx;
+  padding: 40rpx 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(210, 180, 140, 0.15);
+}
+
+.shop-title-area {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 20rpx;
+}
+
+.shop-name {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #3D2817;
+  line-height: 56rpx;
+  letter-spacing: 1rpx;
+}
+
+.shop-tag {
+  display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #FFE8D1 0%, #FFD4A8 100%);
+  border-radius: 50rpx;
+  gap: 8rpx;
 }
-.shopLogo{
-  width: 100%;
-  height: 286rpx;
+
+.tag-icon {
+  font-size: 24rpx;
 }
-.space{
-  width: 100%;
-  height: 20rpx;
-  background: gainsboro;
+
+.tag-text {
+  font-size: 24rpx;
+  color: #8B5A2B;
+  font-weight: 500;
 }
-.shopInfo{  
-  width: 92%;
-  height: 120rpx;
+
+/* 快捷操作按钮 */
+.action-buttons {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin: 0 30rpx 24rpx;
+  padding: 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(210, 180, 140, 0.15);
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 0;
+  transition: all 0.3s;
 }
-.point{
-  width: 50rpx;
-  height: 50rpx;  
+
+.action-btn:active {
+  opacity: 0.7;
+  transform: scale(0.95);
 }
-.address{
-  width: 620rpx;
-  margin-left: 20rpx;
+
+.btn-icon {
+  font-size: 48rpx;
+  margin-bottom: 8rpx;
 }
-.tel{
-  width: 50rpx;
-  height: 50rpx;
-  margin-left: 20rpx;
+
+.btn-text {
+  font-size: 28rpx;
+  color: #3D2817;
+  font-weight: 500;
 }
-.shopNote{
-  width: 92%;
-  height: 180rpx;
-  justify-content: center;
-  align-items: center;
+
+.btn-sub-text {
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 4rpx;
+  max-width: 240rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.title{
-  height: 60rpx;
-  line-height: 60rpx;
-  color: orangered;
-}
-.shopNote text{
-  width: 100%;  
-  height: auto;
-  text-align: justify;
-  text-align-last: left;
-  color: gray;
-}
-.map{
-  width: 100%;
-}
-.mapHead{
-  width: 100%;
+
+.action-divider {
+  width: 2rpx;
   height: 100rpx;
+  background: linear-gradient(to bottom, rgba(210, 180, 140, 0) 0%, rgba(210, 180, 140, 0.3) 50%, rgba(210, 180, 140, 0) 100%);
+}
+
+/* 详细信息区域 */
+.detail-section {
+  margin: 0 30rpx 24rpx;
+  padding: 40rpx 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(210, 180, 140, 0.15);
+}
+
+.detail-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3D2817;
+  margin-bottom: 32rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+
+.info-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 16rpx;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F8F8F8;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 26rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.label-icon {
+  font-size: 28rpx;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 44rpx;
+  padding-left: 40rpx;
+}
+
+/* 地图区域 */
+.map-section {
+  margin: 0 30rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(210, 180, 140, 0.15);
+}
+
+.map-header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1rpx solid gainsboro;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFFFFF 100%);
 }
-.mapHead image{
-  margin: 0 30rpx;
-  width: 50rpx;
-  height: 50rpx;
+
+.map-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3D2817;
 }
-.maMap{
+
+.map-tip {
+  font-size: 24rpx;
+  color: #D2691E;
+  font-weight: 500;
+  padding: 8rpx 16rpx;
+  background: rgba(255, 228, 196, 0.5);
+  border-radius: 20rpx;
+}
+
+.map-container {
   width: 100%;
-  height: 600rpx;
+  height: 500rpx;
+  border-top: 1rpx solid #F5F5F5;
 }
-.info {
-  width: 100vw;
+
+/* 底部安全距离 */
+.safe-bottom {
+  height: 40rpx;
 }

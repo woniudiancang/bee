@@ -1,0 +1,11 @@
+<svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 点餐图标 - 奶茶杯 -->
+  <path d="M28 20C28 18.34 29.34 17 31 17H50C51.66 17 53 18.34 53 20V22H28V20Z" stroke="#6e6d6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 22L33 60C33.17 62.28 35.09 64 37.38 64H43.62C45.91 64 47.83 62.28 48 60L51 22H30Z" stroke="#6e6d6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="40.5" cy="35" r="3" fill="#6e6d6b"/>
+  <circle cx="40.5" cy="44" r="2" fill="#6e6d6b"/>
+  <circle cx="40.5" cy="52" r="2" fill="#6e6d6b"/>
+  <path d="M53 30H56C58.76 30 61 32.24 61 35C61 37.76 58.76 40 56 40H53" stroke="#6e6d6b" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
+

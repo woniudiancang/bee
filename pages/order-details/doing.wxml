@@ -1,33 +1,114 @@
 <view wx:if="{{apiOk && !orderList}}" class="no-order">
+  <view class="empty-icon">🥤</view>
   <view class="content-1">{{ $t.order.empty.t1 }}</view>
   <view class="content-2">{{ $t.order.empty.t2 }}</view>
   <view class="to-index-btn" bindtap="toIndexPage">{{ $t.order.empty.btn }}</view>
 </view>
-<swiper class="swiper" indicator-dots circular bindchange="bindchange">
+
+<swiper class="swiper" indicator-dots="{{orderList && orderList.length > 1}}" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#fff" circular bindchange="bindchange">
   <swiper-item wx:for="{{orderList}}" wx:for-item="order" wx:key="id">
     <scroll-view scroll-y class="scroll-view">
-      <view class="container">      
-        <view wx:if="{{!order.isNeedLogistics}}" class="status">
-          <view class="txt">{{ $t.PickingUp.qudanhao }}</view>
-          <view class="qucanghao">{{order.qudanhao}}</view>
-          <view class="hexiaoma">
-            <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+      <view class="page-container">
+        
+        <!-- 取单号卡片 -->
+        <view wx:if="{{!order.isNeedLogistics}}" class="pickup-card">
+          <view class="card-header">
+            <view class="header-icon">📋</view>
+            <view class="header-title">{{ $t.PickingUp.qudanhao }}</view>
+          </view>
+          <view class="pickup-number-wrapper">
+            <view class="pickup-number">{{order.qudanhao}}</view>
+            <view class="pickup-tips">请向店员出示取餐码</view>
+          </view>
+          <view class="qrcode-wrapper">
+            <view class="qrcode-container">
+              <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+              <view class="qrcode-corners">
+                <view class="corner corner-tl"></view>
+                <view class="corner corner-tr"></view>
+                <view class="corner corner-bl"></view>
+                <view class="corner corner-br"></view>
+              </view>
+            </view>
+            <view class="qrcode-label">核销二维码</view>
           </view>
         </view>
-        <view wx:if="{{order.isNeedLogistics}}" class="status">
-          <van-icon name="logistics" size="88rpx" color="orange" />
-          <view class="txt">{{ $t.PickingUp.Deliverying }}</view>
-          <view class="hexiaoma">
-            <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+
+        <!-- 配送卡片 -->
+        <view wx:if="{{order.isNeedLogistics}}" class="pickup-card delivery-card">
+          <view class="card-header">
+            <view class="header-icon">🚚</view>
+            <view class="header-title">{{ $t.PickingUp.Deliverying }}</view>
+          </view>
+          <view class="qrcode-wrapper delivery-qrcode">
+            <view class="qrcode-container">
+              <canvas class="hx-canvas" canvas-id="qrcode_{{index}}" />
+              <view class="qrcode-corners">
+                <view class="corner corner-tl"></view>
+                <view class="corner corner-tr"></view>
+                <view class="corner corner-bl"></view>
+                <view class="corner corner-br"></view>
+              </view>
+            </view>
+            <view class="qrcode-label">配送核销码</view>
           </view>
         </view>
-        <van-divider dashed />
-        <van-cell wx:if="{{logisticsMap[order.id]}}" title="{{logisticsMap[order.id].linkMan}} / {{logisticsMap[order.id].mobile}}" label="{{logisticsMap[order.id].provinceStr}}{{logisticsMap[order.id].cityStr}}{{logisticsMap[order.id].areaStr}}{{logisticsMap[order.id].address}}" />
-        <van-cell wx:for="{{goodsMap[order.id]}}" wx:for-item="goods" wx:key="id" title="{{goods.goodsName}} / x{{goods.number}}" label="{{goods.property}}" value="¥{{goods.amount}}" value-class="call-value" />
-        <van-cell title="{{ $t.PickingUp.total }}" value="¥{{order.amountReal}}" value-class="call-value" />
-        <view class="times">
-          <view>{{ $t.order.dateAdd }}: {{order.dateAdd}}</view>
+
+        <!-- 配送地址卡片 -->
+        <view wx:if="{{logisticsMap[order.id]}}" class="info-card address-card">
+          <view class="card-section-title">
+            <view class="title-icon">📍</view>
+            <text>配送信息</text>
+          </view>
+          <view class="address-content">
+            <view class="address-contact">
+              <text class="contact-name">{{logisticsMap[order.id].linkMan}}</text>
+              <text class="contact-phone">{{logisticsMap[order.id].mobile}}</text>
+            </view>
+            <view class="address-detail">{{logisticsMap[order.id].provinceStr}}{{logisticsMap[order.id].cityStr}}{{logisticsMap[order.id].areaStr}}{{logisticsMap[order.id].address}}</view>
+          </view>
         </view>
+
+        <!-- 订单详情卡片 -->
+        <view class="info-card order-card">
+          <view class="card-section-title">
+            <view class="title-icon">📝</view>
+            <text>订单明细</text>
+          </view>
+          
+          <view class="goods-list">
+            <view wx:for="{{goodsMap[order.id]}}" wx:for-item="goods" wx:key="id" class="goods-item">
+              <view class="goods-main">
+                <view class="goods-name">{{goods.goodsName}}</view>
+                <view class="goods-specs" wx:if="{{goods.property}}">{{goods.property}}</view>
+              </view>
+              <view class="goods-right">
+                <view class="goods-quantity">x{{goods.number}}</view>
+                <view class="goods-price">¥{{goods.amount}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="divider-line"></view>
+          
+          <view class="total-row">
+            <view class="total-label">{{ $t.PickingUp.total }}</view>
+            <view class="total-amount">¥{{order.amountReal}}</view>
+          </view>
+
+          <view class="order-time">
+            <text class="time-icon">🕐</text>
+            <text>{{ $t.order.dateAdd }}: {{order.dateAdd}}</text>
+          </view>
+        </view>
+
+        <!-- 底部装饰 -->
+        <view class="bottom-decoration">
+          <view class="decoration-line"></view>
+          <view class="decoration-text">享受每一口美好</view>
+          <view class="decoration-line"></view>
+        </view>
+
       </view>
     </scroll-view>
   </swiper-item>

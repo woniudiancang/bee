@@ -1,63 +1,369 @@
+/* 页面整体样式 - 奶茶店温馨渐变背景 */
 page {
-  background: rgb(235, 234, 234);
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #f8d7da 100%);
+  min-height: 100vh;
+  padding-bottom: 40rpx;
 }
-.from {
-  margin: 88rpx 32rpx;
-  background: #fff;
-  padding: 32rpx;
-  padding-bottom: 88rpx;
-  border-radius: 32rpx;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+/* 页面容器 */
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
-.user-box {
+
+/* 顶部波浪装饰 */
+.wave-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  border-radius: 0 0 50% 50%;
+  z-index: 0;
+}
+
+/* 主卡片容器 */
+.main-card {
+  position: relative;
+  margin: 40rpx 32rpx;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf7 100%);
+  padding: 48rpx 32rpx 56rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(252, 182, 159, 0.3),
+              0 8rpx 20rpx rgba(255, 236, 210, 0.2);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* 礼物图标装饰 */
+.gift-icon {
+  position: absolute;
+  top: -20rpx;
+  right: 40rpx;
+  font-size: 80rpx;
+  animation: float 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10rpx) rotate(5deg); }
+}
+
+/* 赠送人信息区域 */
+.sender-section {
   display: flex;
   align-items: center;
+  padding: 20rpx 0;
+  margin-bottom: 32rpx;
 }
-.user-box .avatarUrl {
-  width: 100rpx;
-  height: 100rpx;
+
+.sender-avatar-wrapper {
+  position: relative;
+  margin-right: 24rpx;
+}
+
+.sender-avatar {
+  width: 120rpx;
+  height: 120rpx;
   border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 8rpx 20rpx rgba(252, 182, 159, 0.3);
 }
-.user-box .r {
-  margin-left: 32rpx;
+
+.avatar-border {
+  position: absolute;
+  top: -6rpx;
+  left: -6rpx;
+  right: -6rpx;
+  bottom: -6rpx;
+  border-radius: 50%;
+  border: 2rpx solid transparent;
+  background: linear-gradient(135deg, #fcb69f, #ffecd2);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2rpx;
 }
-.user-box .r .t1 {
-  font-size: 32rpx;
+
+.sender-info {
+  flex: 1;
+}
+
+.sender-name {
+  font-size: 36rpx;
   font-weight: bold;
+  color: #5c3317;
+  margin-bottom: 8rpx;
+  letter-spacing: 1rpx;
 }
-.user-box .r .t2 {
-  margin-top: 8rpx;
-  font-size: 28rpx;
+
+.sender-label {
+  font-size: 26rpx;
+  color: #a67c52;
+  opacity: 0.8;
 }
-.remark {
-  border: 1rpx dashed #999999 !important;
-  border-radius: 16rpx;
-  margin-top: 64rpx;
-  padding: 32rpx;
-  font-style: italic;
-  font-size: 28rpx;
+
+/* 祝福留言卡片 */
+.blessing-card {
+  position: relative;
+  background: linear-gradient(135deg, #fff9f3 0%, #ffe8d6 100%);
+  border-radius: 24rpx;
+  padding: 32rpx 40rpx;
+  margin: 32rpx 0 40rpx;
+  border: 2rpx dashed rgba(166, 124, 82, 0.3);
+  box-shadow: 0 4rpx 12rpx rgba(252, 182, 159, 0.15);
 }
-.pic {
-  margin-top: 64rpx;
-  width: 100%;
-  height: 0;
-}
-.title {
-  text-align: center;
-  font-weight: bold;
-  padding: 48rpx;
-}
-.btn {
-  margin-top: 64rpx;
-}
-.price {
-  text-align: center;
-  color: #e64340;
+
+.blessing-icon {
+  position: absolute;
+  top: -16rpx;
+  left: 24rpx;
   font-size: 48rpx;
+  background: #fff;
+  padding: 0 8rpx;
+}
+
+.blessing-text {
+  font-size: 28rpx;
+  line-height: 48rpx;
+  color: #5c3317;
+  font-style: italic;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.blessing-quote-left,
+.blessing-quote-right {
+  position: absolute;
+  font-size: 80rpx;
+  color: rgba(252, 182, 159, 0.2);
+  font-family: Georgia, serif;
   font-weight: bold;
 }
-.price text {
-  color: #333;
+
+.blessing-quote-left {
+  top: 10rpx;
+  left: 10rpx;
+}
+
+.blessing-quote-right {
+  bottom: -20rpx;
+  right: 10rpx;
+}
+
+/* 礼品卡展示区 */
+.gift-card-display {
+  position: relative;
+  margin: 48rpx 0;
+}
+
+.card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400rpx;
+  height: 400rpx;
+  background: radial-gradient(circle, rgba(252, 182, 159, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 40rpx rgba(92, 51, 23, 0.15);
+  background: #fff;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+}
+
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 70%);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* 卡片信息区 */
+.card-info-section {
+  margin-top: 36rpx;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 38rpx;
+  font-weight: bold;
+  color: #5c3317;
+  margin-bottom: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+.card-divider {
+  width: 100rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, transparent, #fcb69f, transparent);
+  margin: 20rpx auto;
+  border-radius: 2rpx;
+}
+
+.card-amount-wrapper {
+  margin-top: 24rpx;
+}
+
+.card-amount {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 16rpx 40rpx;
+  background: linear-gradient(135deg, #fff3e6 0%, #ffe8cc 100%);
+  border-radius: 60rpx;
+  box-shadow: 0 4rpx 16rpx rgba(252, 182, 159, 0.2);
+}
+
+.amount-symbol {
+  font-size: 32rpx;
+  color: #d4744f;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+
+.amount-number {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #d4744f;
+  line-height: 1;
+}
+
+.amount-unit {
+  font-size: 28rpx;
+  color: #a67c52;
+  margin-left: 8rpx;
+  font-weight: 500;
+}
+
+/* 闪光装饰元素 */
+.sparkle {
+  position: absolute;
+  font-size: 48rpx;
+  opacity: 0.6;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 25%;
+  right: 15%;
+  animation-delay: 0.7s;
+}
+
+.sparkle-3 {
+  bottom: 35%;
+  left: 15%;
+  animation-delay: 1.4s;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+/* 领取按钮区域 */
+.receive-button-wrapper {
+  position: relative;
+  margin-top: 56rpx;
+  margin-bottom: 32rpx;
+}
+
+.button-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100rpx;
+  background: radial-gradient(ellipse, rgba(252, 182, 159, 0.4) 0%, transparent 70%);
+  filter: blur(20rpx);
+}
+
+.receive-button {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #fcb69f 0%, #f8997f 100%) !important;
+  border: none !important;
+  box-shadow: 0 8rpx 24rpx rgba(248, 153, 127, 0.4),
+              0 4rpx 8rpx rgba(252, 182, 159, 0.3) !important;
+  font-size: 32rpx !important;
+  font-weight: bold !important;
+  letter-spacing: 4rpx !important;
+  transition: all 0.3s ease;
+}
+
+.receive-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(248, 153, 127, 0.3) !important;
+}
+
+/* 温馨提示 */
+.warm-tips {
+  text-align: center;
   font-size: 24rpx;
-  font-weight: normal;
+  color: #a67c52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  margin-top: 16rpx;
+}
+
+.tips-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+
+.tips-text {
+  line-height: 1.6;
+}
+
+/* 底部装饰 */
+.bottom-decoration {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  border-radius: 50% 50% 0 0;
+  pointer-events: none;
+  z-index: 0;
 }

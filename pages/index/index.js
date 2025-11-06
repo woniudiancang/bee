@@ -92,6 +92,9 @@ Page({
       this.setData({
         mallName
       })
+      wx.setNavigationBarTitle({
+        title: mallName
+      })
     }
     APP.configLoadOK = () => {
       const mallName = wx.getStorageSync('mallName')

@@ -1,8 +1,80 @@
+<view class="member-code-page">
+  <!-- 顶部装饰 -->
+  <view class="top-decoration">
+    <view class="decoration-circle circle-1"></view>
+    <view class="decoration-circle circle-2"></view>
+    <view class="decoration-circle circle-3"></view>
+  </view>
 
-<view class="title">{{ userCode }}</view>
-<canvas class="user-code-bar" canvas-id="barcode" />
-<canvas class="user-code" canvas-id="qrcode" />
-<van-grid column-num="2" icon-size="64rpx" square>
-  <van-grid-item icon="balance-o" text="{{ $t.order.balance }} {{ balance }}" icon-color="#e64340" text-class="amount-c" />
-  <van-grid-item icon="points" text="{{ $t.my.score }} {{ score }}" icon-color="#e64340" text-class="amount-c" />
-</van-grid>
+  <!-- 会员信息卡片 -->
+  <view class="member-card">
+    <view class="card-header">
+      <view class="member-badge">
+        <text class="badge-icon">👑</text>
+        <text class="badge-text">会员专属</text>
+      </view>
+    </view>
+    
+    <!-- 会员码编号 -->
+    <view class="code-number">
+      <text class="code-label">会员编号</text>
+      <text class="code-value">{{ userCode }}</text>
+    </view>
+
+    <!-- 二维码区域 -->
+    <view class="qrcode-container">
+      <view class="qrcode-wrapper">
+        <canvas class="user-code" canvas-id="qrcode" />
+        <view class="qrcode-corners">
+          <view class="corner corner-tl"></view>
+          <view class="corner corner-tr"></view>
+          <view class="corner corner-bl"></view>
+          <view class="corner corner-br"></view>
+        </view>
+      </view>
+      <text class="qrcode-tip">向商家出示此码享受会员优惠</text>
+    </view>
+
+    <!-- 条形码区域 -->
+    <view class="barcode-container">
+      <canvas class="user-code-bar" canvas-id="barcode" />
+    </view>
+  </view>
+
+  <!-- 账户信息卡片 -->
+  <view class="account-info">
+    <view class="info-item">
+      <view class="info-icon-wrapper balance-icon">
+        <text class="info-icon">💰</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">{{ $t.order.balance }}</text>
+        <text class="info-value">¥{{ balance }}</text>
+      </view>
+    </view>
+    
+    <view class="info-divider"></view>
+    
+    <view class="info-item">
+      <view class="info-icon-wrapper score-icon">
+        <text class="info-icon">⭐</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">{{ $t.my.score }}</text>
+        <text class="info-value">{{ score }}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="bottom-tips">
+    <view class="tip-item">
+      <text class="tip-dot">•</text>
+      <text class="tip-text">每次消费可累积积分</text>
+    </view>
+    <view class="tip-item">
+      <text class="tip-dot">•</text>
+      <text class="tip-text">积分可兑换精美礼品</text>
+    </view>
+  </view>
+</view>

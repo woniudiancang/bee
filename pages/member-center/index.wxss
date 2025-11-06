@@ -1,94 +1,302 @@
-.my-box{
-  background-color: #d3aa79;
-  margin-top: 30rpx;
-  margin-left: 25rpx;
-  padding-top: 30rpx;
-  padding-bottom: 60rpx;
-  width:700rpx;
-  border-radius: 8rpx;
-}
-.my-box .head-bar{
-  display: flex;
-  margin-left: 30rpx;
-  align-items: center;
-}
-.my-box .head-bar .head{
-  height: 120rpx;
-  width: 120rpx;
-  border-radius: 50%;
-}
-.my-box .head-bar .name-box{
-  margin-left: 20rpx;
-  font-size: 30rpx;
-  color: #ffffff;
-  
-}
-.my-box .head-bar .name-box .name{
-  color: #ffffff;
-  font-weight: 600;
-  
-}
-.my-box .head-bar .name-box .content{
-  margin-top: 10rpx;
-  font-size: 28rpx;
-  color: #ffffff;
-}
-.my-box .state{
-  font-size: 50rpx;
-  color: #ffffff;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 50rpx;
-}
-.my-box .state-0{
-  font-size: 28rpx;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 20rpx;
-}
-.system{
-  font-size:38rpx;
-  margin-top: 80rpx;
-  margin-bottom: 40rpx;
-  text-align: center;
-}
-.title-box{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 25rpx;
-  width: 700rpx;
-  height: 80rpx;
-  background-color: #d3aa79;
-  text-align: center;
-  line-height: 80rpx;
-  color: #ffffff;
-}
-.title1, .title2, .title3{
-  width: 233rpx;
-  text-align: center;
-  line-height: 80rpx;
-  border-style: solid;
-  border-color: #f5f5f5;
-  border-width: thin;
-}
-.title-box-0{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 25rpx;
-  width: 700rpx;
-  height: 80rpx;
-  text-align: center;
-  line-height: 80rpx;
-}
-.title-box-0:nth-child(2n+1){
-  background-color: #f7f7f7;
-}
-.remark{
-  text-align: center;
-  margin-top: 30rpx;
-  font-size: 25rpx;
-  color: #666;
-  margin-bottom: 64rpx;
+/* 页面容器 */
+.member-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5EB 0%, #FFFFFF 100%);
+  padding-bottom: 40rpx;
 }
 
+/* 顶部装饰波浪 */
+.top-wave {
+  height: 120rpx;
+  background: linear-gradient(135deg, #E8C4A0 0%, #D4A574 100%);
+  border-radius: 0 0 50% 50%;
+  position: relative;
+}
+
+/* 会员卡片 */
+.member-card {
+  margin: -60rpx 30rpx 0;
+  background: linear-gradient(135deg, #E8C4A0 0%, #D4A574 50%, #C89968 100%);
+  border-radius: 24rpx;
+  padding: 40rpx 30rpx;
+  box-shadow: 0 16rpx 40rpx rgba(212, 165, 116, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片背景装饰 */
+.card-bg-decoration {
+  position: absolute;
+  top: -50rpx;
+  right: -50rpx;
+  width: 300rpx;
+  height: 300rpx;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 用户信息区域 */
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+/* 头像盒子 */
+.avatar-box {
+  position: relative;
+  margin-right: 24rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar-ring {
+  position: absolute;
+  top: -6rpx;
+  left: -6rpx;
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+}
+
+/* 用户详情 */
+.user-detail {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 12rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-consumption {
+  display: flex;
+  align-items: baseline;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.consumption-label {
+  margin-right: 8rpx;
+}
+
+.consumption-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFF;
+}
+
+/* 会员等级盒子 */
+.member-level-box {
+  text-align: center;
+  padding-top: 30rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10rpx);
+  padding: 16rpx 40rpx;
+  border-radius: 50rpx;
+  margin-bottom: 16rpx;
+}
+
+.level-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.level-name {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.level-normal {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.level-tip {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* 权益说明区域 */
+.benefits-section {
+  margin: 40rpx 30rpx;
+}
+
+/* 区域标题 */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.header-line {
+  width: 80rpx;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent 0%, #D4A574 100%);
+}
+
+.header-line:last-child {
+  background: linear-gradient(90deg, #D4A574 0%, transparent 100%);
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #8B5A3C;
+  margin: 0 20rpx;
+  position: relative;
+}
+
+/* 表头 */
+.benefits-table-header {
+  display: flex;
+  background: linear-gradient(135deg, #D4A574 0%, #C89968 100%);
+  border-radius: 16rpx 16rpx 0 0;
+  padding: 24rpx 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(212, 165, 116, 0.2);
+}
+
+.table-header-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* 等级卡片列表 */
+.level-cards {
+  background: #FFFFFF;
+  border-radius: 0 0 16rpx 16rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+}
+
+.level-card-item {
+  position: relative;
+  border-bottom: 1rpx solid #F5F5F5;
+  overflow: hidden;
+}
+
+.level-card-item:last-child {
+  border-bottom: none;
+}
+
+.level-card-item:nth-child(odd) {
+  background: linear-gradient(90deg, #FFFBF7 0%, #FFFFFF 100%);
+}
+
+/* 等级卡片背景装饰 */
+.level-card-bg {
+  position: absolute;
+  right: -20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120rpx;
+  height: 120rpx;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.level-info {
+  display: flex;
+  padding: 32rpx 20rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.level-col {
+  flex: 1;
+  text-align: center;
+}
+
+.level-col-highlight {
+  position: relative;
+}
+
+.level-col-highlight::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 140rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+  border-radius: 12rpx;
+  z-index: -1;
+}
+
+.level-label {
+  font-size: 22rpx;
+  color: #999999;
+  margin-bottom: 8rpx;
+}
+
+.level-value {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.level-name-text {
+  color: #8B5A3C;
+  font-weight: 700;
+}
+
+.discount-text {
+  font-size: 36rpx;
+  color: #FF9800;
+  font-weight: 700;
+}
+
+/* 底部说明 */
+.footer-remark {
+  margin: 40rpx 30rpx;
+  padding: 24rpx 30rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  border-left: 6rpx solid #D4A574;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: flex-start;
+}
+
+.remark-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  line-height: 1;
+}
+
+.remark-text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 1.8;
+}
 

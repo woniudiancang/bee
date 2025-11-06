@@ -33,14 +33,20 @@ module.exports = {
 </wxs>
 <block wx:if="{{listType == 1}}">
   <view class="list1" wx:for="{{goods}}" wx:key="id">
-    <navigator url="{{ goodsDetailPage.url(item) }}"><image class="img" mode="aspectFill" src="{{item.pic}}"></image></navigator>
+    <navigator url="{{ goodsDetailPage.url(item) }}">
+      <image class="img" mode="aspectFill" src="{{item.pic}}"></image>
+    </navigator>
     <view class="goods-info">
-      <view class="title ellipsis"><navigator url="{{ goodsDetailPage.url(item) }}">{{item.name}}</navigator></view>
+      <navigator url="{{ goodsDetailPage.url(item) }}">
+        <view class="title ellipsis">{{item.name}}</view>
+      </navigator>
       <view wx:if="{{item.characteristic}}" class="characteristic van-multi-ellipsis--l2" style="padding:0;-webkit-line-clamp: 1;">{{item.characteristic}}</view>
-      <view class="price">¥ {{item.minPrice}}<text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥ {{item.originalPrice}}
-        </text></view>
+      <view class="price">
+        <text class="price-symbol">¥</text>{{item.minPrice}}
+        <text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥{{item.originalPrice}}</text>
+      </view>
       <view class="buy-info">
-        <view wx:if="{{ show_seller_number == '1' }}" class="num">{{ $t.goodsDetail.saledNum }}: {{item.numberSells}}</view>
+        <view wx:if="{{ show_seller_number == '1' }}" class="num">已售 {{item.numberSells}}</view>
         <image class="car" src="/images/icon/car.svg" data-id="{{item.id}}" bindtap="addShopCar"></image>
       </view>
     </view>
@@ -48,14 +54,20 @@ module.exports = {
 </block>
 <view wx:if="{{listType == 2}}" class="list2-box">
   <view class="list2" wx:for="{{goods}}" wx:key="id">
-    <navigator url="{{ goodsDetailPage.url(item) }}"><image class="img" mode="aspectFill" src="{{item.pic}}"></image></navigator>
+    <navigator url="{{ goodsDetailPage.url(item) }}">
+      <image class="img" mode="aspectFill" src="{{item.pic}}"></image>
+    </navigator>
     <view class="goods-info">
-      <view class="title van-multi-ellipsis--l2"><navigator url="{{ goodsDetailPage.url(item) }}">{{item.name}}</navigator></view>
+      <navigator url="{{ goodsDetailPage.url(item) }}">
+        <view class="title van-multi-ellipsis--l2">{{item.name}}</view>
+      </navigator>
       <view wx:if="{{item.characteristic}}" class="characteristic van-multi-ellipsis--l2" style="padding:0;-webkit-line-clamp: 1;">{{item.characteristic}}</view>
-      <view class="price">¥ {{item.minPrice}}<text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥ {{item.originalPrice}}
-        </text></view>
+      <view class="price">
+        <text class="price-symbol">¥</text>{{item.minPrice}}
+        <text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="originalPrice">¥{{item.originalPrice}}</text>
+      </view>
       <view class="buy-info">
-        <view wx:if="{{ show_seller_number == '1' }}" class="num">{{ $t.goodsDetail.saledNum }}: {{item.numberSells}}</view>
+        <view wx:if="{{ show_seller_number == '1' }}" class="num">已售 {{item.numberSells}}</view>
         <image class="car" src="/images/icon/car.svg" data-id="{{item.id}}" bindtap="addShopCar"></image>
       </view>
     </view>

@@ -1,15 +1,60 @@
-<view class="from">
-  <view class="title">{{ $t.card.excharge }}</view>
-  <van-field
-    model:value="{{ number }}"
-    size="large"
-    placeholder="{{ $t.card.pleaseInputNumber }}"
-  />
-  <view class="btn">
-    <van-button type="primary" size="large" block bind:tap="submit">{{ $t.coupons.change }}</van-button>
+<view class="exchange-container">
+  <!-- 顶部装饰区域 -->
+  <view class="header-section">
+    <view class="decoration-circle circle-1"></view>
+    <view class="decoration-circle circle-2"></view>
+    <view class="card-icon">
+      <view class="icon-wrapper">🎁</view>
+    </view>
+    <view class="title">{{ $t.card.excharge }}</view>
+    <view class="subtitle">请输入您的礼品卡兑换码</view>
   </view>
-  <view class="xieyi">
-    <van-icon name="passed" size="32rpx" color="{{ agree ? '#07c160' : '#333333' }}" bind:tap="_agree" />
-    <view bind:tap="xieyi">{{ $t.card.xieyi }}</view>
+
+  <!-- 主内容卡片 -->
+  <view class="content-card">
+    <!-- 输入区域 -->
+    <view class="input-section">
+      <view class="input-label">
+        <view class="label-icon">🔖</view>
+        <text>兑换码</text>
+      </view>
+      <view class="input-wrapper">
+        <van-field
+          model:value="{{ number }}"
+          placeholder="{{ $t.card.pleaseInputNumber }}"
+          placeholder-style="color: #C8B8A8"
+          border="{{ false }}"
+          custom-style="background: #F9F6F2; border-radius: 16rpx; padding: 28rpx 32rpx; font-size: 32rpx;"
+        />
+      </view>
+      <view class="input-tips">请输入完整的礼品卡兑换码</view>
+    </view>
+
+    <!-- 协议勾选 -->
+    <view class="agreement-section">
+      <view class="agreement-checkbox" bind:tap="_agree">
+        <view class="checkbox {{ agree ? 'checked' : '' }}">
+          <van-icon wx:if="{{ agree }}" name="success" size="28rpx" color="#fff" />
+        </view>
+        <text class="agreement-text">我已阅读并同意</text>
+        <text class="agreement-link" bind:tap="xieyi">{{ $t.card.xieyi }}</text>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-section">
+      <view class="submit-btn" bind:tap="submit">
+        <text>立即兑换</text>
+        <view class="btn-shine"></view>
+      </view>
+    </view>
+
+    <!-- 温馨提示 -->
+    <view class="tips-section">
+      <view class="tips-title">💡 温馨提示</view>
+      <view class="tips-item">• 每个兑换码仅可使用一次</view>
+      <view class="tips-item">• 兑换成功后将自动存入您的账户</view>
+      <view class="tips-item">• 如有疑问请联系客服咨询</view>
+    </view>
   </view>
 </view>

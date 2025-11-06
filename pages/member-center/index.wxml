@@ -1,24 +1,79 @@
-<view class="my-box">
-  <view class="head-bar">
-    <image mode='aspectFill' class='head' src='{{apiUserInfoMap.base.avatarUrl}}'></image>
-    <view class="name-box">
-      <view class="name">{{apiUserInfoMap.base.nick}}</view>
-      <view class="content">{{ $t.vip.consumption }} ￥{{totleConsumed}}</view>
+<view class="member-container">
+  <!-- 顶部装饰波浪 -->
+  <view class="top-wave"></view>
+  
+  <!-- 会员卡片 -->
+  <view class="member-card">
+    <view class="card-bg-decoration"></view>
+    <view class="card-content">
+      <view class="user-info">
+        <view class="avatar-box">
+          <image mode='aspectFill' class='avatar' src='{{apiUserInfoMap.base.avatarUrl}}'></image>
+          <view class="avatar-ring"></view>
+        </view>
+        <view class="user-detail">
+          <view class="user-name">{{apiUserInfoMap.base.nick}}</view>
+          <view class="user-consumption">
+            <text class="consumption-label">{{ $t.vip.consumption }}</text>
+            <text class="consumption-value">￥{{totleConsumed}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="member-level-box">
+        <view wx:if="{{apiUserInfoMap.userLevel}}" class="level-badge">
+          <text class="level-icon">👑</text>
+          <text class="level-name">{{apiUserInfoMap.userLevel.name}}</text>
+        </view>
+        <view wx:else class="level-badge level-normal">
+          <text class="level-icon">✨</text>
+          <text class="level-name">{{ $t.vip.notVIP }}</text>
+        </view>
+        <view class="level-tip">{{ $t.vip.tip }}</view>
+      </view>
     </view>
   </view>
-  <view wx:if="{{apiUserInfoMap.userLevel}}" class="state">{{apiUserInfoMap.userLevel.name}}</view>
-  <view wx:else class="state">{{ $t.vip.notVIP }}</view>
-  <view class="state-0">{{ $t.vip.tip }}</view>
+
+  <!-- 会员权益说明 -->
+  <view class="benefits-section">
+    <view class="section-header">
+      <view class="header-line"></view>
+      <view class="section-title">{{ $t.vip.growth }}</view>
+      <view class="header-line"></view>
+    </view>
+
+    <!-- 表头 -->
+    <view class="benefits-table-header">
+      <view class="table-header-item">{{ $t.vip.growthName }}</view>
+      <view class="table-header-item">{{ $t.vip.growthDiscount }}</view>
+      <view class="table-header-item">{{ $t.vip.growthConsumption }}</view>
+    </view>
+
+    <!-- 等级列表卡片 -->
+    <view class="level-cards">
+      <view wx:for="{{levelList}}" wx:key="id" class="level-card-item">
+        <view class="level-card-bg"></view>
+        <view class="level-info">
+          <view class="level-col">
+            <view class="level-label">等级</view>
+            <view class="level-value level-name-text">{{item.name}}</view>
+          </view>
+          <view class="level-col level-col-highlight">
+            <view class="level-label">折扣</view>
+            <view class="level-value discount-text">{{item.rebate}}</view>
+          </view>
+          <view class="level-col">
+            <view class="level-label">消费额</view>
+            <view class="level-value">￥{{item.upgradeAmount}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer-remark">
+    <view class="remark-icon">ℹ️</view>
+    <view class="remark-text">{{ $t.vip.profile }}</view>
+  </view>
 </view>
-<view class="system">{{ $t.vip.growth }}</view>
-<view class="title-box">
-  <view class="title1">{{ $t.vip.growthName }}</view>
-  <view class="title2">{{ $t.vip.growthDiscount }}</view>
-  <view class="title3">{{ $t.vip.growthConsumption }}</view>
-</view>
-<view wx:for="{{levelList}}" wx:key="id" class="title-box-0">
-  <view class="title1">{{item.name}}</view>
-  <view class="title2">{{item.rebate}}</view>
-  <view class="title3">{{item.upgradeAmount}}</view>
-</view>
-<view class="remark">{{ $t.vip.profile }}</view>

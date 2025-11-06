@@ -1,304 +1,576 @@
- page {
-   background-color: #f5f5f5;
-   position: relative;
-   padding-bottom: 64rpx;
- }
-
- .pay-bar {
-   background-color: #ffffff;
-   width: 100%;
- }
-
- .pay-bar .pay-box {
-   height: 80rpx;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
- }
-
- .pay-bar .pay-box .shop {
-   margin-left: 32rpx;
- }
-
- .pay-bar .pay-box .shop .name {
-   font-size: 32rpx;
-   font-weight: 600;
- }
-
- .pay-bar .pay-box .shop .ad {
-   font-size: 24rpx;
-   margin-top: 16rpx;
- }
-
- .pay-bar .pay-box .icon {
-   margin-right: 32rpx;
- }
-
- .way-bar {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   padding: 10rpx 32rpx 12rpx 32rpx;
- }
-
- .way-bar .ziqu {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100rpx;
-   width: 315rpx;
-   
-   border-radius: 5rpx;
- }
- .ziqu.active {
-  background-color: #e64340;
-  color: #ffffff;
- }
-
- .way-bar .ziqu .ziqu-1 {
-   margin-left: 10rpx;
- }
-
- .way-bar .peisong {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100rpx;
-   width: 315rpx;
-   border-style: solid;
-   border-width: thin;
-   border-color: #cccccc;
-   border-radius: 5rpx;
- }
-
- .way-bar .peisong .icon {
-   height: 40rpx;
-   width: 40rpx;
- }
-
- .way-bar .peisong .peisong-1 {
-   margin-left: 10rpx;
- }
-
- .tel-bar {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 22rpx 32rpx;
- }
-
- .tel-bar .title {
-   font-size: 28rpx;
-   text-align: center;
-
- }
-
- .tel-bar .num-box {
-   display: flex;
-   align-items: center;
- }
-
- .tel-bar .num-box .num {
-   font-size: 25rpx;
- }
-
- .goods-title {
-   font-size: 28rpx;
-   font-weight: bold;
-   background-color: #ffffff;
-   padding: 32rpx;
- }
-
- .detail {
-   background-color: #ffffff;
-   padding: 8rpx 32rpx;
- }
-
- .detail .detail-1 {
-   font-size: 28rpx;
- }
-
- .detail .detail-2 {
-   font-size: 25rpx;
- }
-
- .detail .num {
-   font-size: 28rpx;
-   text-align: center;
- }
-
- .detail .price {
-   font-size: 28rpx;
-   /* text-align: center; */
-   text-align: right;
- }
-
- .amount {
-   text-align: right;
-   padding-right: 32rpx;
-   background-color: #ffffff;
-   font-size: 28rpx;
-   padding-bottom: 32rpx;
-   padding-top: 32rpx;
- }
-
- .coupon-bar {
-   background-color: #ffffff;
-   margin-top: 10rpx;
-   padding: 32rpx;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
- }
-
- .coupon-bar .coupon-title {
-   font-size: 28rpx;
- }
-
- .coupon-bar .coupon-box {
-   display: flex;
-   align-items: center;
-   font-size: 28rpx;
- }
-
- .coupon-bar .coupon-box .num {
-   margin-right: 10rpx;
- }
-
- .pay-btn {
-   background-color: #e64340 !important;
-   border-style: none !important;
-
- }
-
- /*  */
- .shops {
-   width: 100%;
-
- }
-
- .shops-container {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   margin: 32rpx;
-   font-size: 26rpx;
- }
-
- .shops-container .l {
-   display: flex;
-   align-items: center;
- }
-
- .shops-container .l text {
-   color: gray;
-   margin-left: 16rpx;
- }
-
- .shops-container .l image {
-   width: 30rpx;
-   height: 30rpx;
- }
-
- .shops-container .r {
-   display: flex;
-   align-items: center;
- }
-
- .shops-container .r text {
-
-   color: gray;
- }
-
- .shops-container .r image {
-   width: 40rpx;
-   height: 40rpx;
- }
-
- .shop-name {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 0 32rpx;
-   /* margin-top: 32rpx; */
- }
-
- .shop-name .name {
-   font-size: 48rpx;
-   /* color: #cd0074; */
-   /* color: gray; */
-   /* color: orangered; */
-   /* margin-left: 30rpx; */
- }
-
- .shop-name-r text {
-   font-size: 30rpx;
-   /* color: orangered; */
-   color: #00cc00;
-   line-height: 76rpx;
- }
- /* 地址 */
- .address-box {
-  width: 100vw;
-  margin: 20rpx 0;
+page {
+  background: linear-gradient(180deg, #FFF8F0 0%, #F5F5F5 100%);
+  min-height: 100vh;
+  padding-bottom: 140rpx;
 }
 
-.add-address {
-  width: 100vw;
+/* ========== 店铺信息卡片 ========== */
+.shop-card {
+  margin: 24rpx 24rpx 20rpx;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFAF5 100%);
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.shop-header {
   display: flex;
   align-items: center;
-  padding-left: 32rpx;
-}
-.add-address image {
-  width: 40rpx;
-  height: 40rpx;
-}
-.add-address view {
-  margin-left: 16rpx;
-  font-size: 28rpx;
-  color: #000;
-  padding: 40rpx 0;
+  padding: 32rpx;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
 }
 
-.show-address {
-  width: 750rpx;
-  box-sizing: border-box;
-  padding: 0 32rpx;
+.shop-icon {
+  width: 88rpx;
+  height: 88rpx;
+  background: linear-gradient(135deg, #F5E6D3 0%, #E8D4B8 100%);
+  border-radius: 50%;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(139, 90, 60, 0.15);
+}
+
+.shop-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.shop-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2C2C2C;
+  margin-bottom: 12rpx;
+  display: flex;
   align-items: center;
 }
 
-.show-address .name-tel {
-  font-size: 28rpx;
-  color: #000;
-  padding: 30rpx 0 20rpx 0;
-}
-
-.show-address .addr-text {
+.distance {
   font-size: 24rpx;
-  color: #888;
-  padding-bottom: 34rpx;
-  line-height: 36rpx;
+  color: #D4A574;
+  font-weight: 500;
+  margin-left: 12rpx;
+  background: rgba(212, 165, 116, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
 }
-.show-address .next {
-  width: 40rpx;
-  height: 40rpx;
+
+.shop-address {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+.arrow-icon {
+  margin-left: 16rpx;
+}
+
+/* ========== 配送方式卡片 ========== */
+.delivery-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2C2C2C;
+  margin-bottom: 24rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.card-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 32rpx;
+  background: linear-gradient(180deg, #D4A574 0%, #C99960 100%);
+  border-radius: 4rpx;
+}
+
+.delivery-options {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 8rpx;
+}
+
+.delivery-option {
+  flex: 1;
+  height: 140rpx;
+  background: #FAFAFA;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.delivery-option.active {
+  background: linear-gradient(135deg, #D4A574 0%, #C99960 100%);
+  border-color: #D4A574;
+  box-shadow: 0 8rpx 24rpx rgba(212, 165, 116, 0.3);
+  transform: translateY(-4rpx);
+}
+
+.option-icon {
+  margin-bottom: 12rpx;
+}
+
+.option-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #666;
+}
+
+.delivery-option.active .option-text {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 分割线 */
+.section-divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.06) 50%, 
+    rgba(0, 0, 0, 0) 100%
+  );
+  margin: 32rpx 0 24rpx;
+}
+
+/* 地址部分 */
+.address-section {
+  margin-top: 8rpx;
+}
+
+.address-content {
+  min-height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+
+.add-address-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #FFFAF5 0%, #FFF5EB 100%);
+  border-radius: 16rpx;
+  border: 2rpx dashed #D4A574;
+}
+
+.add-text {
+  font-size: 28rpx;
+  color: #D4A574;
+  margin-left: 12rpx;
+  font-weight: 500;
+}
+
+.address-detail {
+  padding: 16rpx 0;
+}
+
+.address-left {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.address-icon {
+  margin-right: 16rpx;
+  margin-top: 4rpx;
+}
+
+.address-info {
+  flex: 1;
+}
+
+.contact-info {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.address-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.address-right {
+  margin-left: 16rpx;
+}
+
+/* 手机号部分 */
+.phone-section {
+  margin-top: 8rpx;
+}
+
+/* 时间选择 */
+.time-section {
+  margin-top: 8rpx;
+}
+
+.time-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+}
+
+.time-label {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #2C2C2C;
+  font-weight: 500;
+}
+
+.time-label text {
+  margin-left: 12rpx;
+}
+
+.time-value {
+  display: flex;
+  align-items: center;
+}
+
+.time-value text {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.time-value .selected {
+  color: #D4A574;
+  font-weight: 600;
+}
+
+.time-value .placeholder {
+  color: #999;
+}
+
+/* ========== 商品清单卡片 ========== */
+.goods-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.goods-card .card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32rpx;
+}
+
+.title-decoration {
+  width: 80rpx;
+  height: 6rpx;
+  background: linear-gradient(90deg, #D4A574 0%, transparent 100%);
+  border-radius: 3rpx;
+}
+
+.goods-list {
+  margin-bottom: 24rpx;
+}
+
+.goods-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.goods-item:last-child {
+  border-bottom: none;
+}
+
+.goods-main {
+  display: flex;
+  align-items: flex-start;
+}
+
+.goods-info {
+  flex: 1;
+  min-width: 0;
+  margin-right: 16rpx;
+}
+
+.goods-name {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.goods-name.quehuo {
+  text-decoration: line-through;
+  color: #BBB;
+}
+
+.goods-specs {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.6;
+}
+
+.goods-quantity {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 32rpx;
+  min-width: 60rpx;
+  text-align: center;
+}
+
+.goods-price {
+  font-size: 32rpx;
+  color: #D4A574;
+  font-weight: 600;
+  min-width: 100rpx;
+  text-align: right;
+}
+
+.goods-total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 24rpx 0 8rpx;
+  border-top: 1rpx solid #F5F5F5;
+}
+
+.total-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 16rpx;
+}
+
+.total-quantity {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 32rpx;
+}
+
+.total-price {
+  font-size: 36rpx;
+  color: #D4A574;
+  font-weight: 700;
+}
+
+/* ========== 优惠券卡片 ========== */
+.coupon-card {
+  margin: 0 24rpx 20rpx;
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFFFFF 100%);
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(212, 165, 116, 0.1);
+}
+
+.coupon-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx;
+}
+
+.coupon-left {
+  display: flex;
+  align-items: center;
+}
+
+.coupon-label {
+  font-size: 28rpx;
+  color: #2C2C2C;
+  font-weight: 500;
+  margin-left: 12rpx;
+}
+
+.coupon-right {
+  display: flex;
+  align-items: center;
+}
+
+.coupon-value {
+  font-size: 26rpx;
+  color: #D4A574;
+  font-weight: 600;
+  margin-right: 8rpx;
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========== 保温袋卡片 ========== */
+.bag-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.bag-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.bag-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 24rpx;
+  background: #FAFAFA;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.bag-text {
+  font-size: 28rpx;
+  color: #2C2C2C;
+}
+
+/* ========== 费用明细卡片 ========== */
+.fee-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.fee-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.fee-item:last-child {
+  border-bottom: none;
+}
+
+.fee-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.fee-value {
+  font-size: 32rpx;
+  color: #D4A574;
+  font-weight: 600;
+}
+
+/* ========== 备注卡片 ========== */
+.remark-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.remark-container {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+}
+
+.remark-icon {
+  margin-right: 12rpx;
+}
+
+/* ========== 底部提交栏 ========== */
 .bottom {
   height: 120rpx;
 }
-.goods-label {
-  font-size: 24rpx;
-  margin-top: 8rpx;
-  color: #666;
+
+.pay-btn {
+  background: linear-gradient(135deg, #D4A574 0%, #C99960 100%) !important;
+  border: none !important;
+  border-radius: 40rpx !important;
+  font-weight: 600 !important;
+  font-size: 32rpx !important;
+  box-shadow: 0 8rpx 24rpx rgba(212, 165, 116, 0.3) !important;
 }
+
+/* ========== 自定义按钮样式 ========== */
+.phone-btn {
+  background: linear-gradient(135deg, #D4A574 0%, #C99960 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 500 !important;
+  padding: 0 24rpx !important;
+  height: 56rpx !important;
+  line-height: 56rpx !important;
+}
+
+/* ========== 通用样式 ========== */
 .red {
-  color: #e64340 !important;
-  font-size: 32rpx;
+  color: #D4A574 !important;
 }
+
 .quehuo {
-  text-decoration:line-through;
-  color: #bbb;
+  text-decoration: line-through;
+  color: #BBB;
+}
+
+/* ========== 动画效果 ========== */
+.shop-card,
+.delivery-card,
+.goods-card,
+.coupon-card,
+.bag-card,
+.fee-card,
+.remark-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== 响应式优化 ========== */
+@media (max-width: 375px) {
+  .shop-name {
+    font-size: 30rpx;
+  }
+  
+  .card-title {
+    font-size: 30rpx;
+  }
+  
+  .goods-name {
+    font-size: 28rpx;
+  }
 }

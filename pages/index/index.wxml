@@ -1,9 +1,8 @@
-<view class="custom-navigation" style="width: {{ menuButtonBoundingClientRect.left }}px;height: {{ menuButtonBoundingClientRect.height + menuButtonBoundingClientRect.top }}px;padding-top: {{ menuButtonBoundingClientRect.top }}px;line-height: {{ menuButtonBoundingClientRect.height }}px;">
-  <view wx:if="{{ language }}" class="language">
-    <image class="language-icon" src="/images/lang/{{language}}.png" mode="aspectFill" bind:tap="changeLang"></image>
-  </view>
-  <view class="mallName">{{ mallName }}</view>
+<!-- 语言切换悬浮按钮 -->
+<view wx:if="{{ language }}" class="float-lang-btn" bind:tap="changeLang">
+  <image class="lang-icon" src="/images/lang/{{language}}.png" mode="aspectFill"></image>
 </view>
+
 <view wx:if="{{noticeLastOne}}" class="notice">
   <van-notice-bar
     mode="link"
@@ -107,45 +106,47 @@
   close-icon="close"
   position="bottom"
   bind:close="hideGoodsDetailPOP">
-  <image wx:if="{{ showGoodsDetailPOP }}" mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}'></image>
-  <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
-  <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
-    <view class="title">{{item.name}}</view>
-    <view class="box-1">
-      <view wx:for="{{item.childsCurGoods}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.selected?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick">{{small.name}}</view>
+  <scroll-view scroll-y="true" class="goods-detail-scroll">
+    <image wx:if="{{ showGoodsDetailPOP }}" mode='aspectFill' class='photos-00' src='{{curGoodsMap.basicInfo.pic}}'></image>
+    <view class="title-name">{{curGoodsMap.basicInfo.name}}</view>  
+    <view wx:for="{{curGoodsMap.properties}}" wx:key="id" class="content-1">
+      <view class="title">{{item.name}}</view>
+      <view class="box-1">
+        <view wx:for="{{item.childsCurGoods}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.selected?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick">{{small.name}}</view>
+      </view>
     </view>
-  </view>
-  <view wx:for="{{goodsAddition}}" wx:key="id" class="content-1">
-    <view class="title">{{item.name}}</view>
-    <view class="box-1">
-      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick2">{{small.name}}</view>
+    <view wx:for="{{goodsAddition}}" wx:key="id" class="content-1">
+      <view class="title">{{item.name}}</view>
+      <view class="box-1">
+        <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick2">{{small.name}}</view>
+      </view>
     </view>
-  </view>
-  <view wx:for="{{goodsTimesSchedule}}" wx:key="id" class="content-1">
-    <view class="title">{{item.day}}</view>
-    <view class="box-1">
-      <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick3">{{small.name}}</view>
+    <view wx:for="{{goodsTimesSchedule}}" wx:key="id" class="content-1">
+      <view class="title">{{item.day}}</view>
+      <view class="box-1">
+        <view wx:for="{{item.items}}" wx:key="id" wx:for-item="small" wx:for-index="index2" class="title-1 {{small.active?'active':''}}" data-idx1="{{index}}" data-idx2="{{index2}}" bindtap="skuClick3">{{small.name}}</view>
+      </view>
     </view>
-  </view>
 
-  <view wx:if="{{curGoodsMap.content}}" class="introduce">
-    <view class="title">{{ $t.goodsDetail.title }}</view>
-    <view class="content">
-      <parser html="{{curGoodsMap.content}}" />
+    <view wx:if="{{curGoodsMap.content}}" class="introduce">
+      <view class="title">{{ $t.goodsDetail.title }}</view>
+      <view class="content">
+        <parser html="{{curGoodsMap.content}}" />
+      </view>
     </view>
-  </view>
 
-  <view class="blank"></view>
-  <view class="add-bar">
-    <view class="add-box">
-      <view class="price"><text>¥</text>{{curGoodsMap.price}}</view>
-      <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" max="{{ buyNumMax }}" bind:change="goodsStepChange"/>
+    <view class="blank"></view>
+    <view class="add-bar">
+      <view class="add-box">
+        <view class="price"><text>¥</text>{{curGoodsMap.price}}</view>
+        <van-stepper value="{{ curGoodsMap.number }}" min="{{curGoodsMap.basicInfo.minBuyNumber}}" max="{{ buyNumMax }}" bind:change="goodsStepChange"/>
+      </view>
+      <view class="add-cart">
+        <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">{{ $t.index.pingtuan }}</van-button>
+        <van-button wx:else block color="#e64340" bind:click="addCart2">{{ $t.goodsDetail.addCartBtn }}</van-button>
+      </view>
     </view>
-    <view class="add-cart">
-      <van-button wx:if="{{lijipingtuanbuy}}" block color="#e64340" bind:click="pingtuanbuy">{{ $t.index.pingtuan }}</van-button>
-      <van-button wx:else block color="#e64340" bind:click="addCart2">{{ $t.goodsDetail.addCartBtn }}</van-button>
-    </view>
-  </view>
+  </scroll-view>
 </van-popup> 
 
 <van-popup

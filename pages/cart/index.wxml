@@ -1,28 +1,92 @@
-<van-empty wx:if="{{ !shippingCarInfo }}" description="{{ $t.cart.empty }}" />
-<block wx:else>
-  <view class="empty-box" bindtap="clearCart">
-    <van-icon name="delete" />
-    <view class="empty-1">{{ $t.cart.clear }}</view>
+<view class="cart-container">
+  <!-- 空状态 -->
+  <view wx:if="{{ !shippingCarInfo }}" class="empty-state">
+    <view class="empty-icon">🛒</view>
+    <view class="empty-text">{{ $t.cart.empty }}</view>
+    <view class="empty-tip">去添加您喜欢的饮品吧</view>
   </view>
-  <van-card
-  wx:for="{{shippingCarInfo.items}}" wx:key="key"
-    price="{{ item.price }}"
-    title="{{ item.name }}"
-    thumb="{{ item.pic }}"
-    centered
-  >
-    <view slot="desc">
-      <block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">
-        {{option.optionName}}:{{option.optionValueName}}
-      </block>
-      <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">
-        {{option.pname}}:{{option.name}}
-      </block>
+
+  <!-- 购物车内容 -->
+  <block wx:else>
+    <!-- 顶部操作栏 -->
+    <view class="cart-header">
+      <view class="cart-title">
+        <view class="title-icon">☕</view>
+        <view class="title-text">购物袋</view>
+        <view class="item-count">{{shippingCarInfo.number}}件</view>
+      </view>
+      <view class="clear-btn" bindtap="clearCart">
+        <van-icon name="delete-o" size="16px" color="#999" />
+        <text>{{ $t.cart.clear }}</text>
+      </view>
     </view>
-    <view slot="num" style="text-align:right;">
-      <van-stepper value="{{ item.number }}" min="0" async-change disable-input data-idx="{{index}}" bind:change="cartStepChange" />
+
+    <!-- 商品列表 -->
+    <view class="goods-list">
+      <view class="goods-item" wx:for="{{shippingCarInfo.items}}" wx:key="key">
+        <view class="item-card">
+          <!-- 商品图片 -->
+          <view class="item-image">
+            <image src="{{ item.pic }}" mode="aspectFill" class="goods-img" />
+          </view>
+          
+          <!-- 商品信息 -->
+          <view class="item-info">
+            <view class="goods-name">{{ item.name }}</view>
+            
+            <!-- 规格信息 -->
+            <view class="goods-specs">
+              <block wx:for="{{item.sku}}" wx:for-item="option" wx:key="index">
+                <view class="spec-tag">{{option.optionValueName}}</view>
+              </block>
+              <block wx:for="{{item.additions}}" wx:for-item="option" wx:key="index">
+                <view class="spec-tag addition-tag">+{{option.name}}</view>
+              </block>
+            </view>
+            
+            <!-- 价格和数量 -->
+            <view class="item-bottom">
+              <view class="goods-price">
+                <text class="price-symbol">¥</text>
+                <text class="price-num">{{ item.price }}</text>
+              </view>
+              <view class="goods-stepper">
+                <van-stepper 
+                  value="{{ item.number }}" 
+                  min="0" 
+                  async-change 
+                  disable-input 
+                  data-idx="{{index}}" 
+                  bind:change="cartStepChange"
+                  button-size="28px"
+                  theme="round"
+                />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
-  </van-card>
-  <view class="bottom"></view>
-  <van-submit-bar price="{{ shippingCarInfo.price*100 }}" label="{{ shippingCarInfo.number }}{{ $t.cart.num }} " button-text="{{ $t.cart.btn }}" bindtap="goCreateOrder" />
-</block>
+
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+
+    <!-- 底部结算栏 -->
+    <view class="submit-bar">
+      <view class="bar-content">
+        <view class="total-info">
+          <view class="total-label">合计</view>
+          <view class="total-price">
+            <text class="currency">¥</text>
+            <text class="amount">{{ shippingCarInfo.price }}</text>
+          </view>
+          <view class="total-tip">共{{shippingCarInfo.number}}{{ $t.cart.num }}</view>
+        </view>
+        <view class="submit-btn" bindtap="goCreateOrder">
+          <text>{{ $t.cart.btn }}</text>
+          <van-icon name="arrow" color="#fff" size="16px" />
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

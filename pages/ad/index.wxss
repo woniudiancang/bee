@@ -1,160 +1,273 @@
-page{
-  background-color: #e7e7e7;
+/* 页面整体背景 - 温馨的奶茶色调 */
+page {
+  background: linear-gradient(135deg, #FFF5E4 0%, #FFE8CC 100%);
+  min-height: 100vh;
 } 
-/* page{
-  background-color: #ffffff;
-} */
-.content-1{
-  font-size:30rpx;
+
+/* ========== 空地址状态 ========== */
+.content-1 {
+  font-size: 32rpx;
   text-align: center;
-  margin-top: 200rpx;
-  color: #9e9e9e;
+  margin-top: 240rpx;
+  color: #A0826D;
+  font-weight: 500;
+  letter-spacing: 2rpx;
 }
-.content-2{
-  font-size:30rpx;
+
+.content-2 {
+  font-size: 28rpx;
   text-align: center;
+  margin-top: 24rpx;
+  color: #C9A88E;
+  letter-spacing: 1rpx;
+} 
+
+.button {
+  width: 400rpx !important;
+  height: 100rpx !important;
+  margin-top: 180rpx;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 32rpx !important;
+  font-weight: 500;
+  border-radius: 50rpx !important;
+  box-shadow: 0 8rpx 24rpx rgba(230, 144, 115, 0.25);
+  background: linear-gradient(135deg, #FF9F7F 0%, #E68873 100%) !important;
+  display: block;
+}
+
+/* ========== 地址列表容器 ========== */
+.container {
+  background: transparent;
+  padding-bottom: 140rpx;
+  min-height: 100vh;
+}
+
+.address-list {
+  width: 100%;
+  background-color: transparent;
   margin-top: 20rpx;
-  color: #9e9e9e;
-} 
-.button{
-  width: 330rpx;
-  height:100rpx !important;
-  margin-top: 150rpx;
-  margin-left: 225rpx;
-  font-size: 50rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+/* 地址卡片 - 高级卡片设计 */
+.address-list .a-address {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36rpx 32rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF7 100%);
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(160, 130, 109, 0.08);
+  border: 2rpx solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 卡片左侧装饰条 */
+.address-list .a-address::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 60%;
+  background: linear-gradient(180deg, #FF9F7F 0%, #E68873 100%);
+  border-radius: 0 6rpx 6rpx 0;
+}
+
+.a-address .left-text {
+  flex: 1;
+  padding-left: 24rpx;
+  box-sizing: border-box;
+}
+
+.a-address .left-text .name-tel {
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
   font-weight: 600;
-} 
-.baocun{
+  color: #5C4A42;
+  letter-spacing: 1rpx;
+}
+
+.a-address .left-text .address-box {
+  font-size: 26rpx;
+  color: #A0826D;
+  line-height: 40rpx;
+  letter-spacing: 0.5rpx;
+}
+
+/* 编辑和删除图标样式 */
+.right-edit {
+  margin-left: 24rpx;
+  padding: 12rpx;
+  border-radius: 50%;
+  background: rgba(255, 159, 127, 0.1);
+  color: #E68873 !important;
+  transition: all 0.3s ease;
+}
+
+/* ========== 底部添加按钮 ========== */
+.bottom-box {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  font-size: 30rpx;
+  color: #5C4A42;
+  height: 112rpx;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 247, 0.98) 100%);
+  backdrop-filter: blur(20rpx);
+  line-height: 112rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  border-top: 2rpx solid rgba(255, 159, 127, 0.15);
+  box-shadow: 0 -4rpx 24rpx rgba(160, 130, 109, 0.08);
+  z-index: 100;
+}
+
+.bottom-box .add-btn {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+
+.bottom-box .add-btn view {
+  margin-left: 16rpx;
+  color: #E68873;
+}
+
+/* ========== 地址编辑表单 ========== */
+.addressEdit {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32rpx 30rpx;
+  padding-bottom: 160rpx;
+  box-sizing: border-box;
+}
+
+/* 优化 van-field 和 van-cell 的背景 */
+.addressEdit ::deep .van-cell {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF7 100%) !important;
+  border-radius: 16rpx !important;
+  margin-bottom: 20rpx !important;
+  box-shadow: 0 4rpx 16rpx rgba(160, 130, 109, 0.06) !important;
+  border: 2rpx solid rgba(255, 255, 255, 0.8) !important;
+  overflow: hidden;
+}
+
+.addressEdit ::deep .van-field__label {
+  color: #7D6A5E !important;
+  font-weight: 500;
+}
+
+.addressEdit ::deep .van-field__input,
+.addressEdit ::deep .van-field__value {
+  color: #5C4A42 !important;
+}
+
+.addressEdit ::deep .van-cell__value {
+  color: #A0826D !important;
+}
+
+/* 保存按钮 - 奶茶店主题渐变 */
+.save-btn {
+  margin-top: 80rpx;
+  height: 96rpx;
+  width: 100%;
+  font-size: 32rpx;
+  line-height: 96rpx;
+  color: white;
+  background: linear-gradient(135deg, #FF9F7F 0%, #E68873 100%);
+  border-radius: 48rpx;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(230, 136, 115, 0.3);
+  font-weight: 600;
+  letter-spacing: 4rpx;
+  transition: all 0.3s ease;
+}
+
+.save-btn::after {
+  border: none;
+}
+
+/* 取消按钮 */
+.cancel-btn {
+  margin-top: 24rpx;
+  height: 96rpx;
+  width: 100%;
+  font-size: 30rpx;
+  line-height: 96rpx;
+  color: #7D6A5E;
+  background: #FFFFFF;
+  border-radius: 48rpx;
+  border: 2rpx solid rgba(125, 106, 94, 0.2);
+  box-shadow: 0 4rpx 16rpx rgba(160, 130, 109, 0.08);
+  font-weight: 500;
+  letter-spacing: 2rpx;
+}
+
+.cancel-btn::after {
+  border: none;
+}
+
+/* ========== 其他样式 ========== */
+.label {
+  padding-right: 30rpx;
+  color: #7D6A5E;
+  font-weight: 500;
+}
+
+.region-box {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF7 100%);
+  padding: 0 32rpx;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(160, 130, 109, 0.06);
+}
+
+.row-wrap {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF7 100%);
+  padding: 0 32rpx;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(160, 130, 109, 0.06);
+}
+
+.baocun {
   width: 550rpx;
   margin-left: 100rpx;
   margin-right: 100rpx;
   margin-top: 80rpx;
   font-size: 50rpx;
 }
-.quxiao{
-  width:550rpx;
+
+.quxiao {
+  width: 550rpx;
   margin-left: 100rpx;
   margin-top: 50rpx;
-  font-size: 45rpx ;
-  color: #000000 !important;
-
-}
-
-.container {
-  background-color: #f2f2f2;
-}
-
-.address-list {
-  width: 100%;
-  background-color: #fff;
-  margin-top: 20rpx;
-  padding-bottom: 20rpx;
-}
-
-.address-list .a-address {
-  width: 720rpx;
-  margin-left: 30rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30rpx 0;
-  border-bottom: 1rpx solid #eee;
-}
-
-.a-address .left-text {
-  width: 610rpx;
-  box-sizing: border-box;
-}
-
-.a-address .left-text .name-tel {
-  margin-bottom: 20rpx;
-}
-
-.a-address .left-text .address-box {
-  font-size: 24rpx;
-  color: #888;
-  line-height: 36rpx;
-}
-.bottom-box {
-  position: fixed;
-  width: 100vw;
-  bottom: 0;
-  font-size: 28rpx;
-  color: #333;
-  border-top: 1rpx solid #eee;
-  height: 100rpx;
-  background: #fff;
-  line-height: 100rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 16rpx;
-}
-.bottom-box .next {
-  margin-right: 32rpx;
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.bottom-box .add-btn {
-  display: flex;
-  align-items: center;
-}
-.bottom-box .add-btn image {
-  width: 40rpx;
-  height: 40rpx;
-}
-.bottom-box .add-btn view {
-  margin-left: 16rpx;
-}
-/*  */
-.label{
-  padding-right: 30rpx;
-}
-/*  */
-.addressEdit{
-  width: 100%;
-  height: 100vw;
-}
-.region-box{
-  background: white;
-  padding: 0 32rpx;
-  height: 100rpx;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 30rpx;
-}
-.save-btn{
-  margin-top: 60rpx;
-  height: 90rpx;
-  width: 650rpx;
-  font-size: 30rpx;
-  line-height: 90rpx;
-  color: white;
-  background: #e64340;
-
-}
-.cancel-btn{
-  margin-top: 30rpx;
-  height: 90rpx;
-  width: 650rpx;
-  font-size: 30rpx;
-  line-height: 90rpx;
-}
-.row-wrap{
-  background: white;
-  padding: 0 32rpx;
-  height: 100rpx;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  align-items: center;
-  font-size: 30rpx;
-}
-.right-edit {
-  margin-right: 32rpx;
+  font-size: 45rpx;
+  color: #7D6A5E !important;
 }

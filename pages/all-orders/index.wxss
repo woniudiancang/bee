@@ -1,173 +1,411 @@
+/* ===========================================
+   奶茶店订单管理页面 - 高端设计风格
+   =========================================== */
 
-.content-1{
-  font-size:30rpx;
-  text-align: center;
-  margin-top: 100rpx;
-  color: #9e9e9e;
-}
-.content-2{
-  font-size:30rpx;
-  text-align: center;
-  margin-top: 20rpx;
-  color: #9e9e9e;
-}
-.button{
-  width: 300rpx;
-  height:50rpx !important;
-  margin-top: 50rpx;
-  margin-left: 225rpx;
-}  
-
-.container{
+/* 页面容器 - 奶茶店温暖渐变背景 */
+.container {
   width: 100%;
-  background-color: #F2f2f2;
-}
-.status-box{
-  width:100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-}
-.status-box .status-label{
-  width: 150rpx;
-  height: 100%;
-  text-align: center;
-  font-size:28rpx;
-  color:#353535;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF9F5 0%, #FFF3EC 50%, #FFEEE5 100%);
+  padding: 24rpx 0;
   box-sizing: border-box;
-  position: relative;
 }
-.status-box .status-label.active{
-  color:#e64340;
-  border-bottom: 6rpx solid #e64340;
-}
-.no-order{ 
-  margin-top: 200rpx;
-  background-color: #FFF;
+
+/* ===========================================
+   空状态设计 - 精致优雅
+   =========================================== */
+.no-order {
+  margin: 160rpx auto 0;
+  padding: 100rpx 60rpx;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFAF7 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.no-order-img{
-  width: 81rpx;
-  height: 96rpx;
-  margin-bottom: 31rpx;
-}
-.no-order .text{
-  font-size:28rpx;
-  color:#999999;
-  text-align: center
-}
-.order-list{
-  width: 100%;
-}
-.order-list .a-order{
-  width: 100%;
-  background-color: #fff;
-  margin-top: 20rpx;
-}
-.a-order  .goods-info,
-.goods-img-container{
-  width: 720rpx;
-  margin-left: 30rpx;
-  border-top: 1rpx solid #eee;
-  padding: 30rpx 0;
-  display: flex;
-  align-items: center;
-}
-.goods-price {
-font-size:26rpx;
-width:720rpx;
-text-align: right;
-margin-bottom:30rpx;
-}
-.goods-price .p {
-font-size:36rpx;
-color:#e64340;
-}
-.goods-info .img-box{
-  width: 120rpx;
-  height: 120rpx;
+  border-radius: 40rpx;
+  width: 660rpx;
+  box-shadow: 0 16rpx 48rpx rgba(207, 142, 99, 0.12),
+              0 4rpx 16rpx rgba(207, 142, 99, 0.08);
+  position: relative;
   overflow: hidden;
-  margin-right: 30rpx;
-  background-color: #f7f7f7;
 }
-.goods-info .img-box .goods-img,
-.goods-img-container .img-box .goods-img{
-  width: 120rpx;
-  height: 120rpx;
+
+.no-order::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, #E8B899 0%, #CF8E63 50%, #E8B899 100%);
 }
-.goods-info  .goods-des{
-  font-size:26rpx;
-  color:#000000;
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.85;
+  animation: float 3s ease-in-out infinite;
 }
-.goods-img-container{
-  height: 180rpx;
-  box-sizing: border-box;
-  white-space: nowrap;
+
+@keyframes float {
+  0%, 100% { transform: translateY(0rpx); }
+  50% { transform: translateY(-12rpx); }
 }
-.goods-img-container .img-box{
-  width: 120rpx;
-  height: 120rpx;
-  overflow: hidden;
-  margin-right: 20rpx;
-  background-color: #f7f7f7;
-  display: inline-block;
+
+.content-1 {
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+  color: #8B6F47;
+  margin-bottom: 20rpx;
+  letter-spacing: 2rpx;
 }
-.price-box{
-  width: 720rpx;
-  display: flex;
-  flex-direction:row-reverse;
-  padding-bottom: 30rpx;
-  margin-top: 32rpx;
-}
-.price-box .btn{
-  margin-left: 20rpx;
-}
-.remark {
-color:#e64340;
-margin-bottom: 20rpx;
-}
-/*  */
-.toOrder-btn{
-  margin-top: 30rpx;
-  width: 200rpx;
-  height: 80rpx;
-  background: #d3aa79;
-  font-size: 30rpx;
-  color: white;
+
+.content-2 {
+  font-size: 28rpx;
+  text-align: center;
+  color: #B8977D;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
 }
 
 .to-index-btn {
-  color: #fff;
-  background: #e64340;
-  border-radius: 6px;
-  width: 290rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
-  font-size: 28rpx;
-  margin-top: 30rpx;
+  margin-top: 56rpx;
+  background: linear-gradient(135deg, #E8B899 0%, #CF8E63 100%);
+  border-radius: 56rpx;
+  width: 360rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 32rpx rgba(207, 142, 99, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.order-info-box {
+
+.to-index-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 8rpx 24rpx rgba(207, 142, 99, 0.25);
+}
+
+.btn-text {
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 3rpx;
+}
+
+/* ===========================================
+   订单列表容器
+   =========================================== */
+.order-list {
+  width: 100%;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+/* ===========================================
+   订单卡片 - 高端精致设计
+   =========================================== */
+.a-order {
+  width: 100%;
+  background: #FFFFFF;
+  margin-bottom: 32rpx;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(139, 111, 71, 0.1),
+              0 2rpx 8rpx rgba(139, 111, 71, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.a-order::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, #E8B899 0%, #CF8E63 30%, #E8B899 70%, #CF8E63 100%);
+  z-index: 10;
+}
+
+.order-hover {
+  opacity: 0.95;
+}
+
+/* 订单头部 */
+.order-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 32rpx 32rpx 24rpx;
+  background: linear-gradient(180deg, #FFFBF8 0%, #FFFFFF 100%);
+  border-bottom: 2rpx solid #F8F1EB;
 }
-.order-info-box .l {
-  margin-left: 24rpx;
-  color: #666;
-  font-size: 24rpx;
+
+.shop-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
-.order-info-box .r {
-  margin-right: 24rpx;
-  color: #e64340;
-  font-size: 58rpx;
+
+.shop-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
 }
-.order-info-box .r text {
+
+.shop-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #5A4A3A;
+  letter-spacing: 1rpx;
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  border-radius: 28rpx;
   font-size: 26rpx;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE8CC 100%);
+  color: #FF9800;
+}
+
+.status-cancel {
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+  color: #E53935;
+}
+
+.status-success {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  color: #43A047;
+}
+
+.status-text {
+  margin-right: 6rpx;
+}
+
+.arrow {
+  font-size: 32rpx;
+  font-weight: 300;
+}
+
+/* ===========================================
+   商品图片滚动区域
+   =========================================== */
+.goods-scroll {
+  width: 100%;
+  padding: 32rpx 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.goods-container {
+  padding: 0 24rpx;
+  display: inline-flex;
+  gap: 20rpx;
+}
+
+.goods-item {
+  width: 160rpx;
+  height: 160rpx;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.goods-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, #FFF5F0 0%, #FFEBE0 100%);
+  box-shadow: 0 4rpx 16rpx rgba(207, 142, 99, 0.15);
+  border: 3rpx solid #FFFFFF;
+}
+
+.goods-badge {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: linear-gradient(135deg, #E8B899 0%, #CF8E63 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(207, 142, 99, 0.4);
+  border: 3rpx solid #FFFFFF;
+}
+
+/* ===========================================
+   订单详情信息
+   =========================================== */
+.order-detail {
+  padding: 24rpx 32rpx;
+  background: linear-gradient(180deg, #FFFBF8 0%, #FFFFFF 100%);
+  border-top: 2rpx solid #F8F1EB;
+  border-bottom: 2rpx solid #F8F1EB;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #8B7355;
+  font-weight: 400;
+}
+
+.label-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.detail-value {
+  font-size: 24rpx;
+  color: #A08875;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+/* ===========================================
+   价格和操作区域
+   =========================================== */
+.order-footer {
+  padding: 28rpx 32rpx;
+  background: #FFFFFF;
+}
+
+.price-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx dashed #F0E6DB;
+}
+
+.price-label {
+  font-size: 28rpx;
+  color: #8B7355;
+  font-weight: 500;
+}
+
+.price-value {
+  display: flex;
+  align-items: baseline;
+}
+
+.currency {
+  font-size: 32rpx;
+  color: #CF8E63;
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+
+.amount {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #CF8E63;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  letter-spacing: -1rpx;
+}
+
+/* 操作按钮组 */
+.action-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  flex-wrap: wrap;
+}
+
+.order-btn {
+  padding: 16rpx 32rpx;
+  border-radius: 48rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2rpx solid transparent;
+  letter-spacing: 1rpx;
+  min-width: 140rpx;
+}
+
+.order-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-icon {
+  margin-right: 6rpx;
+  font-size: 28rpx;
+}
+
+/* 主要按钮 - 渐变奶茶色 */
+.btn-primary {
+  background: linear-gradient(135deg, #E8B899 0%, #CF8E63 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6rpx 20rpx rgba(207, 142, 99, 0.35);
+}
+
+.btn-primary:active {
+  box-shadow: 0 4rpx 12rpx rgba(207, 142, 99, 0.3);
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  background: #FFFFFF;
+  color: #8B7355;
+  border-color: #E0D3C5;
+}
+
+.btn-secondary:active {
+  background: #FFF9F5;
+}
+
+/* 取消按钮 */
+.btn-cancel {
+  background: #FFFFFF;
+  color: #999;
+  border-color: #E5E5E5;
+}
+
+.btn-cancel:active {
+  background: #F8F8F8;
+}
+
+/* 危险按钮 */
+.btn-danger {
+  background: linear-gradient(135deg, #FFE5E5 0%, #FFD5D5 100%);
+  color: #E53935;
+  border-color: #FFB8B8;
+}
+
+.btn-danger:active {
+  background: linear-gradient(135deg, #FFD5D5 0%, #FFC5C5 100%);
+}
+
+/* ===========================================
+   底部安全区域
+   =========================================== */
+.safeAreaOldMarginBttom,
+.safeAreaNewMarginBttom {
+  height: 40rpx;
 }

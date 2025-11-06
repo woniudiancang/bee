@@ -1,17 +1,89 @@
-<view class="from">
-  <image class="pic" src="{{ cardUser.cardInfo.pic }}" mode="widthFix"></image>
-  <view class="title">{{ cardUser.cardInfo.name }}</view>
-  <view wx:if="{{ cardUser.type == 0 }}" class="price">{{ cardUser.amount }}<text>{{ $t.card.times }}</text></view>
-  <view wx:if="{{ cardUser.type == 1 }}" class="price"><text>￥</text>{{ cardUser.amount }}</view>
-  <van-field
-    model:value="{{ remark }}"
-    size="large"
-    type="textarea"
-    autosize="{{ autosize }}"
-    input-class="remark"
-    placeholder="{{ $t.card.shareplaceholder }}"
-  />
-  <view class="btn">
-    <van-button type="primary" size="large" block round open-type="share">{{ $t.card.cardShareOpen }}</van-button>
+<view class="page-container">
+  <!-- 顶部装饰 -->
+  <view class="top-decoration">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+
+  <!-- 礼品卡容器 -->
+  <view class="gift-card-wrapper">
+    <!-- 标题区域 -->
+    <view class="header-section">
+      <view class="header-icon">🎁</view>
+      <view class="header-title">赠送礼品卡</view>
+      <view class="header-subtitle">传递心意，分享美好时光</view>
+    </view>
+
+    <!-- 礼品卡主体 -->
+    <view class="gift-card">
+      <view class="card-shine"></view>
+      <view class="card-bg-pattern"></view>
+      
+      <view class="card-content">
+        <!-- 卡片图片 -->
+        <view class="card-image-wrapper">
+          <image class="card-image" src="{{ cardUser.cardInfo.pic }}" mode="aspectFill"></image>
+          <view class="card-image-overlay"></view>
+        </view>
+
+        <!-- 卡片信息 -->
+        <view class="card-info">
+          <view class="card-name">{{ cardUser.cardInfo.name }}</view>
+          
+          <!-- 金额/次数展示 -->
+          <view class="card-value">
+            <view wx:if="{{ cardUser.type == 0 }}" class="value-container">
+              <text class="value-number">{{ cardUser.amount }}</text>
+              <text class="value-unit">{{ $t.card.times }}</text>
+            </view>
+            <view wx:if="{{ cardUser.type == 1 }}" class="value-container">
+              <text class="value-symbol">¥</text>
+              <text class="value-number">{{ cardUser.amount }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 留言区域 -->
+    <view class="message-section">
+      <view class="message-label">
+        <view class="label-icon">💌</view>
+        <view class="label-text">赠送留言</view>
+      </view>
+      <view class="message-input-wrapper">
+        <van-field
+          model:value="{{ remark }}"
+          type="textarea"
+          autosize="{{ autosize }}"
+          input-class="message-input"
+          placeholder="{{ $t.card.shareplaceholder }}"
+          border="{{ false }}"
+        />
+      </view>
+    </view>
+
+    <!-- 分享按钮 -->
+    <view class="share-button-wrapper">
+      <van-button 
+        type="primary" 
+        size="large" 
+        block 
+        round 
+        open-type="share"
+        custom-class="share-button"
+      >
+        <view class="button-content">
+          <text class="button-icon">✨</text>
+          <text class="button-text">{{ $t.card.cardShareOpen }}</text>
+        </view>
+      </van-button>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="bottom-decoration">
+    <view class="wave wave-1"></view>
+    <view class="wave wave-2"></view>
   </view>
 </view>

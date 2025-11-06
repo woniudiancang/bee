@@ -1,3 +1,297 @@
-.btn {
-  margin-top: 32rpx;
+/* 整体容器 */
+.join-apply-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFF5E6 0%, #FFE4D6 50%, #FFF8F0 100%);
+  padding-bottom: 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部装饰背景 */
+.header-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400rpx;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bubble-1 {
+  width: 120rpx;
+  height: 120rpx;
+  top: 50rpx;
+  left: 30rpx;
+  animation-delay: 0s;
+}
+
+.bubble-2 {
+  width: 180rpx;
+  height: 180rpx;
+  top: 150rpx;
+  right: 40rpx;
+  animation-delay: 2s;
+}
+
+.bubble-3 {
+  width: 90rpx;
+  height: 90rpx;
+  top: 280rpx;
+  left: 50%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-30rpx) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* 欢迎标题区域 */
+.welcome-section {
+  position: relative;
+  z-index: 10;
+  padding: 60rpx 0 50rpx;
+  text-align: center;
+}
+
+.icon-wrapper {
+  margin-bottom: 24rpx;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.icon {
+  font-size: 100rpx;
+  display: inline-block;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10rpx);
+  }
+}
+
+.welcome-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #5D3A1A;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+
+.welcome-subtitle {
+  font-size: 26rpx;
+  color: #8B6F47;
+  opacity: 0.9;
+}
+
+/* 表单卡片 */
+.form-card {
+  position: relative;
+  z-index: 10;
+  margin: 0 30rpx;
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 40rpx 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(93, 58, 26, 0.08);
+}
+
+/* 表单板块 */
+.form-section {
+  margin-bottom: 50rpx;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+/* 板块标题 */
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40rpx;
+  gap: 20rpx;
+}
+
+.title-line {
+  flex: 1;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #D4A574, transparent);
+  max-width: 120rpx;
+}
+
+.title-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #5D3A1A;
+  white-space: nowrap;
+}
+
+/* 表单项 */
+.field-item {
+  margin-bottom: 32rpx;
+}
+
+.field-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 字段标签 */
+.field-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding-left: 8rpx;
+}
+
+.label-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.label-text {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.required-mark {
+  color: #FF6B6B;
+  margin-left: 6rpx;
+  font-size: 28rpx;
+}
+
+.field-tip {
+  font-size: 22rpx;
+  color: #999999;
+  margin-left: 8rpx;
+}
+
+/* 上传组件包装 */
+.uploader-wrapper {
+  padding: 20rpx;
+  background: #FAFAFA;
+  border-radius: 16rpx;
+  border: 2rpx dashed #E0E0E0;
+}
+
+/* 文本域包装 */
+.textarea-wrapper {
+  margin-top: 8rpx;
+}
+
+/* 提示信息板块 */
+.tips-section {
+  margin-top: 40rpx;
+  padding: 30rpx;
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5E6 100%);
+  border-radius: 20rpx;
+  border-left: 6rpx solid #D4A574;
+}
+
+.tips-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #5D3A1A;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tips-item {
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 40rpx;
+  margin-bottom: 8rpx;
+  padding-left: 8rpx;
+}
+
+.tips-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 提交按钮区域 */
+.submit-section {
+  position: relative;
+  z-index: 10;
+  margin: 50rpx 30rpx 30rpx;
+}
+
+.submit-button {
+  height: 96rpx !important;
+  border-radius: 48rpx !important;
+  background: linear-gradient(135deg, #D4A574 0%, #A67C52 100%) !important;
+  box-shadow: 0 8rpx 24rpx rgba(164, 124, 82, 0.3) !important;
+  font-size: 32rpx !important;
+  font-weight: 600 !important;
+  letter-spacing: 4rpx !important;
+}
+
+/* 底部装饰 */
+.footer-decoration {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: #8B6F47;
+  opacity: 0.7;
+}
+
+/* Vant 组件样式覆盖 */
+.van-field__control {
+  color: #333333;
+  font-size: 28rpx;
+}
+
+.van-field__placeholder {
+  color: #BBBBBB;
+  font-size: 26rpx;
+}
+
+/* 上传组件美化 */
+.van-uploader__upload {
+  background: #FFFFFF !important;
+  border: 2rpx dashed #D4A574 !important;
+  border-radius: 12rpx !important;
+}
+
+.van-uploader__upload-text {
+  color: #8B6F47 !important;
+  font-size: 24rpx !important;
+}
+
+.van-uploader__preview-image {
+  border-radius: 12rpx !important;
+}
+
+/* 响应式优化 */
+@media (max-width: 375px) {
+  .welcome-title {
+    font-size: 44rpx;
+  }
+  
+  .form-card {
+    padding: 36rpx 24rpx;
+  }
 }

@@ -1,57 +1,118 @@
-<van-sticky>
-  <van-tabs active="{{ active }}" bind:change="tabChange">
-    <van-tab title="{{ $t.card.buy }}"></van-tab>
-    <van-tab title="{{ $t.card.my }}"></van-tab>
-  </van-tabs>
-</van-sticky>
-<view wx:if="{{ active == 0 }}">
-  <swiper wx:if="{{ banners }}" class="swiper1" indicator-dots indicator-color="#ffffff" autoplay circular>
-    <swiper-item wx:for="{{ banners }}" wx:key="id">
-      <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
-    </swiper-item>
-  </swiper>
-  <view class="card-list">
-    <van-empty wx:if="{{ !cardList }}" description="{{ $t.card.empty }}" />
-    <view class="item" wx:for="{{ cardList }}" wx:key="id">
-      <view class="pic">
-        <image src="{{ item.pic }}" mode="widthFix"></image>
-      </view>
-      <view class="t">{{ item.name }}</view>
-      <view class="price-box">
-        <view class="price"><text>￥</text>{{ item.price }}</view>
-        <van-button type="primary" size="small" round data-item="{{ item }}" bind:tap="buy">{{ $t.card.buy2 }}</van-button>
+<view class="page-container">
+  <!-- 顶部装饰背景 -->
+  <view class="page-header-bg"></view>
+  
+  <van-sticky>
+    <view class="custom-tabs-wrapper">
+      <van-tabs active="{{ active }}" bind:change="tabChange" color="#A0826D" title-active-color="#A0826D" title-inactive-color="#999">
+        <van-tab title="{{ $t.card.buy }}"></van-tab>
+        <van-tab title="{{ $t.card.my }}"></van-tab>
+      </van-tabs>
+    </view>
+  </van-sticky>
+
+  <view wx:if="{{ active == 0 }}" class="tab-content">
+    <!-- 轮播图 -->
+    <view wx:if="{{ banners }}" class="banner-section">
+      <swiper class="swiper-banner" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay circular>
+        <swiper-item wx:for="{{ banners }}" wx:key="id">
+          <view class="banner-wrapper">
+            <image class="banner-image" mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 礼品卡列表 -->
+    <view class="card-list">
+      <van-empty wx:if="{{ !cardList }}" description="{{ $t.card.empty }}" />
+      <view class="gift-card-item" wx:for="{{ cardList }}" wx:key="id">
+        <view class="card-container">
+          <view class="card-image-wrapper">
+            <image class="card-image" src="{{ item.pic }}" mode="aspectFill"></image>
+            <view class="card-shine"></view>
+          </view>
+          <view class="card-content">
+            <view class="card-title">{{ item.name }}</view>
+            <view class="card-footer">
+              <view class="price-area">
+                <text class="price-symbol">¥</text>
+                <text class="price-value">{{ item.price }}</text>
+              </view>
+              <view class="buy-btn" data-item="{{ item }}" bindtap="buy">
+                <text>{{ $t.card.buy2 }}</text>
+              </view>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>
-</view>
-<view wx:if="{{ active == 1 }}">
-  <view class="card-list">
-    <van-cell icon="gift-card-o" title="{{ $t.card.excharge }}" is-link url="/pages/card/exchange" />
-    <van-empty wx:if="{{ !cardMyList }}" description="{{ $t.card.empty }}" />
-    <view class="item" wx:for="{{ cardMyList }}" wx:key="id">
-      <view class="pic">
-        <image src="{{ item.cardInfo.pic }}" mode="widthFix"></image>
-        <view class="fixed">
-          <view class="dateEnd">{{ $t.coupons.expire }}: {{ item.dateEnd }}</view>
-          <view wx:if="{{ item.type == 0 }}" class="price2">{{ item.amount }}<text>{{ $t.card.times }}</text></view>
-          <view wx:if="{{ item.type == 1 }}" class="price2"><text>￥</text>{{ item.amount }}</view>
+  <view wx:if="{{ active == 1 }}" class="tab-content">
+    <view class="my-card-list">
+      <!-- 兑换卡券入口 -->
+      <navigator url="/pages/card/exchange" hover-class="none">
+        <view class="exchange-entry">
+          <view class="exchange-icon">🎁</view>
+          <view class="exchange-info">
+            <view class="exchange-title">{{ $t.card.excharge }}</view>
+            <view class="exchange-desc">输入兑换码领取礼品卡</view>
+          </view>
+          <view class="exchange-arrow">→</view>
         </view>
-        <view wx:if="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="sending">{{ $t.card.sending }}</view>
-      </view>
-      <view wx:if="{{ !item.isActive && !item.fromUid && !item.shareToken }}" class="send-friend">
-        <view class="name">{{ item.cardInfo.name }}</view>
-        <van-button type="primary" size="small" round data-item="{{ item }}" bind:tap="sendUser">{{ $t.card.cardShareOpen }}</van-button>
-      </view>
-      <view wx:elif="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="send-friend">
-        <view class="name">{{ item.cardInfo.name }}</view>
-        <van-button type="danger" size="small" round data-item="{{ item }}" bind:tap="cardShareClose">{{ $t.card.cardShareClose }}</van-button>
-      </view>
-      <view wx:else>
-        <van-cell title="{{ item.cardInfo.name }}" value="{{ $t.card.logs }}" is-link url="/pages/card/logs?cardId={{ item.id }}" />
-        <view wx:if="{{ item.fromUser }}" class="fromUser">
-          <text class="l1">送礼人：</text>
-          <image class="l2" src="{{ item.fromUser.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
-          <text class="l3">{{ item.fromUser.nick || '微信用户' }}</text>
+      </navigator>
+
+      <van-empty wx:if="{{ !cardMyList }}" description="{{ $t.card.empty }}" />
+      
+      <view class="my-gift-card" wx:for="{{ cardMyList }}" wx:key="id">
+        <view class="my-card-wrapper">
+          <view class="my-card-image-box">
+            <image class="my-card-image" src="{{ item.cardInfo.pic }}" mode="aspectFill"></image>
+            <view class="card-overlay">
+              <view class="card-amount-box">
+                <view class="expire-date">{{ $t.coupons.expire }}: {{ item.dateEnd }}</view>
+                <view class="card-amount">
+                  <text wx:if="{{ item.type == 0 }}">{{ item.amount }}</text>
+                  <text wx:if="{{ item.type == 1 }}">¥{{ item.amount }}</text>
+                  <text class="unit" wx:if="{{ item.type == 0 }}">{{ $t.card.times }}</text>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="card-status-tag">
+              {{ $t.card.sending }}
+            </view>
+          </view>
+          
+          <view class="my-card-info">
+            <view class="card-name">{{ item.cardInfo.name }}</view>
+            
+            <!-- 未激活且未分享 - 显示分享按钮 -->
+            <view wx:if="{{ !item.isActive && !item.fromUid && !item.shareToken }}" class="card-actions">
+              <view class="action-btn primary" data-item="{{ item }}" bindtap="sendUser">
+                <text>{{ $t.card.cardShareOpen }}</text>
+              </view>
+            </view>
+            
+            <!-- 未激活且已分享 - 显示取消分享按钮 -->
+            <view wx:elif="{{ !item.isActive && !item.fromUid && item.shareToken }}" class="card-actions">
+              <view class="action-btn danger" data-item="{{ item }}" bindtap="cardShareClose">
+                <text>{{ $t.card.cardShareClose }}</text>
+              </view>
+            </view>
+            
+            <!-- 已激活 - 显示使用记录入口 -->
+            <view wx:else class="card-actions">
+              <navigator url="/pages/card/logs?cardId={{ item.id }}" hover-class="none">
+                <view class="action-btn outline">
+                  <text>{{ $t.card.logs }}</text>
+                </view>
+              </navigator>
+              <view wx:if="{{ item.fromUser }}" class="gift-from">
+                <image class="from-avatar" src="{{ item.fromUser.avatarUrl || '/images/who.png' }}" mode="aspectFill"></image>
+                <text class="from-name">{{ item.fromUser.nick || '微信用户' }}送出</text>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
     </view>

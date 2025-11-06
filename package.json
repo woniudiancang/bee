@@ -20,5 +20,8 @@
     "@vant/weapp": "^1.6.9",
     "apifm-wxapi": "^3.38.0",
     "wxbarcode": "^1.0.2"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4"
   }
 }

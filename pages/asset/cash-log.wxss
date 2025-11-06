@@ -1,1 +1,209 @@
 /* pages/asset/cash-log.wxss */
+
+page {
+  background: linear-gradient(180deg, #FFF5E6 0%, #FFFBF5 100%);
+  min-height: 100vh;
+}
+
+.cash-log-container {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+  position: relative;
+}
+
+/* 顶部装饰 */
+.header-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300rpx;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.circle-decoration {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.circle-1 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, #FFD4A3 0%, #FFA87D 100%);
+  top: -200rpx;
+  right: -100rpx;
+}
+
+.circle-2 {
+  width: 200rpx;
+  height: 200rpx;
+  background: linear-gradient(135deg, #FFC4A3 0%, #FF9A7D 100%);
+  top: 50rpx;
+  left: -50rpx;
+}
+
+.circle-3 {
+  width: 150rpx;
+  height: 150rpx;
+  background: linear-gradient(135deg, #FFE4C4 0%, #FFDAB9 100%);
+  top: 180rpx;
+  right: 80rpx;
+}
+
+/* 明细列表 */
+.cash-log-list {
+  padding: 32rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.log-item {
+  margin-bottom: 24rpx;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.log-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(255, 164, 125, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.log-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 12rpx rgba(255, 164, 125, 0.12);
+}
+
+.log-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx;
+}
+
+/* 左侧内容 */
+.log-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.icon-wrapper {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.icon-wrapper.income {
+  background: linear-gradient(135deg, #FFE8D6 0%, #FFD4BB 100%);
+}
+
+.icon-wrapper.expense {
+  background: linear-gradient(135deg, #E8E8E8 0%, #D4D4D4 100%);
+}
+
+.icon-wrapper .icon {
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.icon-wrapper.income .icon {
+  color: #FF8A50;
+}
+
+.icon-wrapper.expense .icon {
+  color: #999999;
+}
+
+.log-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.log-type {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.log-date {
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 1.5;
+}
+
+/* 右侧金额 */
+.log-right {
+  margin-left: 24rpx;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-size: 36rpx;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.amount.income {
+  color: #FF8A50;
+}
+
+.amount.expense {
+  color: #666666;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 60rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999999;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.empty-tips {
+  font-size: 26rpx;
+  color: #CCCCCC;
+  text-align: center;
+  line-height: 1.6;
+}
