@@ -16,6 +16,13 @@ Page({
     lijipingtuanbuy: false,
     pingtuan_open_id: undefined,
     menuButtonBoundingClientRect: wx.getMenuButtonBoundingClientRect(),
+
+    // 连续滚动模式相关数据
+    isContinuousMode: true, // 是否启用连续滚动模式
+    categoryIndex: 0, // 当前激活的分类索引
+    goodsByCategory: [], // 按分类分组的商品数据，用于跟踪每个分类的商品范围
+    scrollTop: 0, // 当前滚动位置
+    currentCategoryIndex: 0, // 当前滚动到的分类索引
   },  
   onLoad: function (e) {
     getApp().initLanguage(this)
@@ -266,7 +273,10 @@ Page({
     this.setData({
       page: 1,
       categories: res.data,
-      categorySelected: res.data[0]
+      categorySelected: res.data[0],
+      categoryIndex: 0,
+      currentCategoryIndex: 0, // 初始化为第一个分类
+      goodsByCategory: []
     })
     if (shop_goods_split == '1') {
       wx.setStorageSync('shopIds', shopInfo.id)
@@ -277,6 +287,18 @@ Page({
     this.getGoodsList()
   },
   async getGoodsList() {
+    if (!this.data.isContinuousMode) {
+      // 原有的单分类模式
+      this._getGoodsListSingleCategory()
+      return
+    }
+
+    // 连续滚动模式
+    await this._getGoodsListContinuous()
+  },
+
+  // 原有的单分类商品加载逻辑
+  async _getGoodsListSingleCategory() {
     wx.showLoading({
       title: '',
     })
@@ -321,19 +343,257 @@ Page({
     }
     this.processBadge()
   },
-  _onReachBottom() {
-    this.data.page++
-    this.getGoodsList()
+
+  // 连续滚动模式的商品加载逻辑
+  async _getGoodsListContinuous() {
+    wx.showLoading({
+      title: '',
+    })
+
+    const categories = this.data.categories
+    const categoryIndex = this.data.categoryIndex
+    let allGoods = this.data.goods || []
+    let goodsByCategory = this.data.goodsByCategory || []
+
+    // 如果是首次加载，重置数据
+    if (this.data.page == 1) {
+      allGoods = []
+      goodsByCategory = []
+    }
+
+    // 循环加载所有分类的商品
+    for (let i = categoryIndex; i < categories.length; i++) {
+      const category = categories[i]
+      const res = await WXAPI.goodsv2({
+        page: 1, // 每个分类都从第一页开始
+        categoryId: category.id,
+        pageSize: 10000
+      })
+
+      if (res.code == 0 && res.data.result && res.data.result.length > 0) {
+        // 处理秒杀商品倒计时
+        res.data.result.forEach(ele => {
+          if (ele.miaosha) {
+            const _now = new Date().getTime()
+            ele.dateStartInt = new Date(ele.dateStart.replace(/-/g, '/')).getTime() - _now
+            ele.dateEndInt = new Date(ele.dateEnd.replace(/-/g, '/')).getTime() - _now
+          }
+        })
+
+        // 记录该分类的商品范围
+        const startIndex = allGoods.length
+        const endIndex = startIndex + res.data.result.length - 1
+        goodsByCategory.push({
+          categoryId: category.id,
+          categoryName: category.name,
+          startIndex: startIndex,
+          endIndex: endIndex,
+          goodsCount: res.data.result.length
+        })
+
+        // 添加到总商品列表
+        allGoods = allGoods.concat(res.data.result)
+
+        // 如果加载到足够商品，停止加载更多分类
+        if (allGoods.length >= 50) { // 限制初始加载数量
+          break
+        }
+      }
+    }
+
+    wx.hideLoading()
+
+    this.setData({
+      goods: allGoods,
+      goodsByCategory: goodsByCategory,
+      categoryIndex: Math.min(categoryIndex + 1, categories.length - 1),
+      currentCategoryIndex: 0 // 初始化第一个分类为激活状态
+    })
+
+    console.log('商品数据加载完成，分类数据:', goodsByCategory)
+    this.processBadge()
   },
+  _onReachBottom() {
+    if (!this.data.isContinuousMode) {
+      // 原有的单分类模式
+      this.data.page++
+      this.getGoodsList()
+      return
+    }
+
+    // 连续滚动模式：继续加载更多分类的商品
+    this._loadMoreCategories()
+  },
+
+  // 连续滚动模式下加载更多分类的商品
+  async _loadMoreCategories() {
+    const categories = this.data.categories
+    const categoryIndex = this.data.categoryIndex
+    let allGoods = this.data.goods || []
+    let goodsByCategory = this.data.goodsByCategory || []
+
+    // 如果已经加载完所有分类，不再加载
+    if (categoryIndex >= categories.length) {
+      return
+    }
+
+    wx.showLoading({
+      title: '',
+    })
+
+    // 从当前分类索引开始继续加载
+    for (let i = categoryIndex; i < categories.length; i++) {
+      const category = categories[i]
+      const res = await WXAPI.goodsv2({
+        page: 1,
+        categoryId: category.id,
+        pageSize: 10000
+      })
+
+      if (res.code == 0 && res.data.result && res.data.result.length > 0) {
+        // 处理秒杀商品倒计时
+        res.data.result.forEach(ele => {
+          if (ele.miaosha) {
+            const _now = new Date().getTime()
+            ele.dateStartInt = new Date(ele.dateStart.replace(/-/g, '/')).getTime() - _now
+            ele.dateEndInt = new Date(ele.dateEnd.replace(/-/g, '/')).getTime() - _now
+          }
+        })
+
+        // 记录该分类的商品范围
+        const startIndex = allGoods.length
+        const endIndex = startIndex + res.data.result.length - 1
+        goodsByCategory.push({
+          categoryId: category.id,
+          categoryName: category.name,
+          startIndex: startIndex,
+          endIndex: endIndex,
+          goodsCount: res.data.result.length
+        })
+
+        // 添加到总商品列表
+        allGoods = allGoods.concat(res.data.result)
+
+        // 每次只加载一个分类，避免一次性加载太多
+        break
+      }
+    }
+
+    wx.hideLoading()
+
+    this.setData({
+      goods: allGoods,
+      goodsByCategory: goodsByCategory,
+      categoryIndex: Math.min(categoryIndex + 1, categories.length)
+      // 注意：不在这里设置currentCategoryIndex，以避免影响滚动时的选中状态
+    })
+
+    this.processBadge()
+  },
+
+  // 滚动事件监听
+  onScroll(e) {
+    if (!this.data.isContinuousMode) {
+      return
+    }
+
+    const scrollTop = e.detail.scrollTop
+    this.setData({
+      scrollTop: scrollTop
+    })
+
+    // 计算当前滚动到的分类
+    this._calculateCurrentCategory(scrollTop)
+  },
+
+  // 计算当前滚动位置对应的分类
+  _calculateCurrentCategory(scrollTop) {
+    const goodsByCategory = this.data.goodsByCategory
+    if (!goodsByCategory || goodsByCategory.length === 0) {
+      console.log('goodsByCategory为空，无法计算分类')
+      return
+    }
+
+    // 更准确的估算值（rpx转px，微信小程序中1rpx = 0.5px在大多数设备上）
+    const itemHeight = 200 // 每个商品卡片约200px高度（包括间距）
+    const headerHeight = 200 // banner等头部高度约200px
+
+    // 计算当前可见区域的商品索引
+    const visibleStartIndex = Math.max(0, Math.floor((scrollTop - headerHeight) / itemHeight))
+
+    console.log('计算分类 - 滚动位置:', scrollTop, '可见商品索引:', visibleStartIndex, '分类数据:', goodsByCategory)
+
+    // 找到对应的分类
+    let currentCategoryIndex = 0
+    for (let i = 0; i < goodsByCategory.length; i++) {
+      const category = goodsByCategory[i]
+      if (visibleStartIndex >= category.startIndex && visibleStartIndex <= category.endIndex) {
+        currentCategoryIndex = i
+        console.log('找到匹配分类:', i, category)
+        break
+      }
+    }
+
+    // 如果滚动到了最后，设置最后一个分类为激活状态
+    if (visibleStartIndex >= goodsByCategory[goodsByCategory.length - 1].endIndex) {
+      currentCategoryIndex = goodsByCategory.length - 1
+      console.log('滚动到最后，设置最后一个分类:', currentCategoryIndex)
+    }
+
+    console.log('最终激活分类:', currentCategoryIndex, '当前值:', this.data.currentCategoryIndex)
+
+    // 更新当前分类索引
+    if (currentCategoryIndex !== this.data.currentCategoryIndex) {
+      console.log('更新激活分类:', currentCategoryIndex)
+      this.setData({
+        currentCategoryIndex: currentCategoryIndex
+      })
+    }
+  },
+
   categoryClick(e) {
     const index = e.currentTarget.dataset.idx
-    const categorySelected = this.data.categories[index]
+
+    if (!this.data.isContinuousMode) {
+      // 原有的单分类模式
+      const categorySelected = this.data.categories[index]
+      this.setData({
+        page: 1,
+        categorySelected,
+        scrolltop: 0
+      })
+      this.getGoodsList()
+      return
+    }
+
+    // 连续滚动模式：滚动到对应分类的第一个商品
+    this._scrollToCategory(index)
+  },
+
+  // 滚动到指定分类的第一个商品
+  _scrollToCategory(categoryIndex) {
+    const goodsByCategory = this.data.goodsByCategory
+    if (!goodsByCategory || goodsByCategory.length <= categoryIndex) {
+      return
+    }
+
+    const category = goodsByCategory[categoryIndex]
+    if (!category) {
+      return
+    }
+
+    // 估算滚动位置：商品索引 * 商品高度 + 头部高度
+    const itemHeight = 200 // 与_calculateCurrentCategory中的估算值保持一致
+    const headerHeight = 200 // banner等头部高度
+    const scrollTop = category.startIndex * itemHeight + headerHeight
+
     this.setData({
-      page: 1,
-      categorySelected,
-      scrolltop: 0
+      scrollTop: scrollTop,
+      currentCategoryIndex: categoryIndex
     })
-    this.getGoodsList()
+
+    // 使用scroll-view的滚动方法
+    // 注意：需要在wxml中为scroll-view添加scroll-top属性绑定
   },
   async shippingCarInfo() {
     const res = await WXAPI.shippingCarInfo(wx.getStorageSync('token'))

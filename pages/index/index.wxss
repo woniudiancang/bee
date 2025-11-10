@@ -649,29 +649,7 @@ page {
   box-shadow: 0 4rpx 12rpx rgba(255, 107, 107, 0.3);
 }
 
-/* Van-sidebar 分类侧边栏样式覆盖 */
-.van-sidebar {
-  background: transparent !important;
-}
-.van-sidebar-item {
-  background: transparent !important;
-  font-size: 28rpx !important;
-  color: #666666 !important;
-  font-weight: 500 !important;
-  padding: 32rpx 16rpx !important;
-  border-left: 4rpx solid transparent !important;
-  transition: all 0.3s ease !important;
-}
-.van-sidebar-item--select {
-  background: linear-gradient(90deg, rgba(192, 154, 107, 0.15) 0%, rgba(192, 154, 107, 0.05) 100%) !important;
-  color: #C09A6B !important;
-  font-weight: 700 !important;
-  border-left: 4rpx solid #C09A6B !important;
-  font-size: 30rpx !important;
-}
-.van-sidebar-item__text {
-  font-size: inherit !important;
-}
+
 
 /* Van-button 按钮样式覆盖 */
 .van-button--round {

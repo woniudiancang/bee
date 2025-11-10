@@ -32,16 +32,17 @@
 </view>
 <view class="box1">
   <view class="box-1">
-    <van-sidebar>
+    <van-sidebar activeKey="{{ currentCategoryIndex }}">
       <van-sidebar-item
         wx:for="{{categories}}" wx:key="id"
         title="{{item.name}}"
         badge="{{ item.badge ? item.badge : '' }}"
+        active="{{index === currentCategoryIndex}}"
         data-idx="{{index}}" bind:click="categoryClick"
       />
     </van-sidebar>
   </view>
-  <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrolltop}}" bindscrolltolower="_onReachBottom">
+  <scroll-view class="box-2" scroll-y="true" scroll-top="{{scrollTop}}" bindscrolltolower="_onReachBottom" bindscroll="onScroll">
     <swiper wx:if="{{banners}}" class="swiper1" indicator-dots="true" autoplay circular>
       <swiper-item wx:for="{{banners}}" wx:key="id">
         <image  mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
