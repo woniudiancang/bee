@@ -47,6 +47,8 @@ Page({
       return options;
     },
     packaging_fee_use: '1', // 自提需要包装费
+    tihuodianOpen: false, // 是否开启提货点，后台系统开关参数控制
+    selectedPickPointId: null, // 选择的提货点ID
   },
   diningTimeChange(a) {
     const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
@@ -80,6 +82,7 @@ Page({
       shopInfo,
       peisongType
     })
+    this._pickPoints()
     AUTH.checkHasLogined().then(isLogined => {
       this.setData({
         wxlogin: isLogined
@@ -120,7 +123,8 @@ Page({
       kjId: e.kjId,
       create_order_select_time: wx.getStorageSync('create_order_select_time'),
       packaging_fee: wx.getStorageSync('packaging_fee'),
-      curCouponShowText: this.data.$t.pay.choose
+      curCouponShowText: this.data.$t.pay.choose,
+      tihuodianOpen: wx.getStorageSync('tihuodianOpen'),
     }
     if (e.orderType) {
       _data.orderType = e.orderType
@@ -225,6 +229,17 @@ Page({
       remark: remark,
       peisongType: that.data.peisongType,
       isCanHx: true
+    }
+    if (e && that.data.peisongType == 'zq' && that.data.tihuodianOpen == '1') {
+      // 开启了自提点的功能
+      if (!that.data.selectedPickPointId) {
+        wx.showToast({
+          title: '请选择提货点',
+          icon: 'none'
+        })
+        return
+      }
+      postData.pickPointId = that.data.selectedPickPointId
     }
     if (this.data.shopInfo) {
       if (!this.data.shopInfo.openWaimai && !this.data.shopInfo.openZiqu) {
@@ -558,6 +573,13 @@ Page({
     })
     this.createOrder()
   },
+  // 选择提货点
+  selectPickPoint: function (e) {
+    const pickPointId = e.currentTarget.dataset.id;
+    this.setData({
+      selectedPickPointId: pickPointId
+    })
+  },
   async getPhoneNumber(e) {
     if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
       wx.showToast({
@@ -668,5 +690,16 @@ Page({
       packaging_fee_use: name,
     })
     this.createOrder()
+  },
+  async _pickPoints() {
+    // 获取提货点列表 https://www.yuque.com/apifm/nu0f75/hm3exv
+    const res = await WXAPI.pickPoints({
+      shopIds: '0,' + this.data.shopInfo.id
+    })
+    if (res.code == 0) {
+      this.setData({
+        pickPoints: res.data.result
+      })
+    }
   },
 })

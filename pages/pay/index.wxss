@@ -560,17 +560,89 @@ page {
   }
 }
 
+/* ========== 提货点选择 ========== */
+.pickpoint-section {
+  margin-top: 8rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #2C2C2C;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+  padding-left: 4rpx;
+}
+
+.pickpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.pickpoint-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 20rpx;
+  background: #FAFAFA;
+  border-radius: 16rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+}
+
+.pickpoint-item.active {
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5EB 100%);
+  border-color: #D4A574;
+  box-shadow: 0 4rpx 16rpx rgba(212, 165, 116, 0.2);
+}
+
+.pickpoint-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pickpoint-name {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pickpoint-address {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pickpoint-radio {
+  margin-left: 16rpx;
+}
+
 /* ========== 响应式优化 ========== */
 @media (max-width: 375px) {
   .shop-name {
     font-size: 30rpx;
   }
-  
+
   .card-title {
     font-size: 30rpx;
   }
-  
+
   .goods-name {
     font-size: 28rpx;
+  }
+
+  .pickpoint-name {
+    font-size: 28rpx;
+  }
+
+  .pickpoint-address {
+    font-size: 24rpx;
   }
 }

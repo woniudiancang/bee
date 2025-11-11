@@ -73,6 +73,23 @@
     </van-field>
   </view>
 
+  <!-- 提货点选择 -->
+  <view class="pickpoint-section" wx:if="{{peisongType == 'zq' && tihuodianOpen == 1 && pickPoints && pickPoints.length > 0}}">
+    <view class="section-divider"></view>
+    <view class="section-title">选择提货点</view>
+    <view class="pickpoint-list">
+      <view class="pickpoint-item {{selectedPickPointId == item.id ? 'active' : ''}}" wx:for="{{pickPoints}}" wx:key="id" bindtap="selectPickPoint" data-id="{{item.id}}">
+        <view class="pickpoint-info">
+          <view class="pickpoint-name">{{item.name}}</view>
+          <view class="pickpoint-address">{{item.address}}</view>
+        </view>
+        <view class="pickpoint-radio">
+          <van-radio name="{{item.id}}" checked-color="#D4A574" checked="{{selectedPickPointId == item.id}}" />
+        </view>
+      </view>
+    </view>
+  </view>
+
   <!-- 配送时间 -->
   <view class="time-section" wx:if="{{ create_order_select_time == '1' }}">
     <view class="section-divider"></view>
