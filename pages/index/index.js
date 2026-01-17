@@ -498,9 +498,9 @@ Page({
     }
 
     const scrollTop = e.detail.scrollTop
-    this.setData({
-      scrollTop: scrollTop
-    })
+    // this.setData({
+    //   scrollTop: scrollTop
+    // })
 
     // 计算当前滚动到的分类
     this._calculateCurrentCategory(scrollTop)

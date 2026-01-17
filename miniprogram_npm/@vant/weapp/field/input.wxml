@@ -1,4 +1,6 @@
+<wxs src="../wxs/utils.wxs" module="utils" />
 <input
+  id="{{ name }}"
   class="{{ utils.bem('field__control', [inputAlign, { disabled, error }]) }} input-class"
   type="{{ type }}"
   focus="{{ focus }}"
@@ -17,6 +19,7 @@
   adjust-position="{{ adjustPosition }}"
   selection-end="{{ selectionEnd }}"
   selection-start="{{ selectionStart }}"
+  always-embed="{{ alwaysEmbed }}"
   password="{{ password || type === 'password' }}"
   bindinput="onInput"
   bindtap="onClickInput"
@@ -24,4 +27,5 @@
   bindfocus="onFocus"
   bindconfirm="onConfirm"
   bindkeyboardheightchange="onKeyboardHeightChange"
+  bindnicknamereview="onBindNicknameReview"
 />

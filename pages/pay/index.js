@@ -54,8 +54,8 @@ Page({
     const selectedHour = a.detail.getColumnValue(0).replace('点', '') * 1
     if (selectedHour == new Date().getHours()) {
       let minMinute = new Date().getMinutes()
-      if (minMinute % 10 !== 0) {
-        minMinute = minMinute / 10 + 1
+      if (minMinute % 10 != 0) {
+        minMinute = Math.round(minMinute / 10 + 1);
       }
       this.setData({
         minMinute

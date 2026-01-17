@@ -1,7 +1,7 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 <wxs src="./index.wxs" module="computed" />
 
-<view class="van-dropdown-menu van-dropdown-menu--top-bottom">
+<view class="van-dropdown-menu van-dropdown-menu--top-bottom custom-class">
   <view
     wx:for="{{ itemListData }}"
     wx:key="index"
@@ -10,7 +10,7 @@
     bind:tap="onTitleTap"
   >
     <view
-      class="{{ item.titleClass }} {{ utils.bem('dropdown-menu__title', { active: item.showPopup, down: item.showPopup === (direction === 'down') }) }}"
+      class="{{ item.titleClass }} {{ utils.bem('dropdown-menu__title', { active: item.showPopup, down: item.showPopup === (direction === 'down') }) }} title-class"
       style="{{ item.showPopup ? 'color:' + activeColor : '' }}"
     >
       <view class="van-ellipsis">

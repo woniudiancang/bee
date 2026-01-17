@@ -21,17 +21,21 @@
       disabled="{{ disabled }}"
       readonly="{{ readonly }}"
       clearable="{{ clearable }}"
+      clear-trigger="{{ clearTrigger }}"
+      clear-icon="{{ clearIcon }}"
       maxlength="{{ maxlength }}"
       input-align="{{ inputAlign }}"
       input-class="input-class"
       placeholder="{{ placeholder }}"
       placeholder-style="{{ placeholderStyle }}"
+      cursor-spacing="{{ cursorSpacing }}"
       custom-style="padding: 5px 10px 5px 0; background-color: transparent;"
       bind:blur="onBlur"
       bind:focus="onFocus"
       bind:change="onChange"
       bind:confirm="onSearch"
       bind:clear="onClear"
+      bind:click-input="onClickInput"
     >
       <slot wx:if="{{ useLeftIconSlot }}" name="left-icon" slot="left-icon" />
       <slot wx:if="{{ useRightIconSlot }}" name="right-icon" slot="right-icon" />
@@ -45,6 +49,6 @@
     hover-stay-time="70"
   >
     <slot wx:if="{{ useActionSlot }}" name="action" />
-    <view wx:else bind:tap="onCancel" class="cancel-class">{{ actionText }}</view>
+    <view wx:else bind:tap="onCancel" class="van-search__action-button cancel-class">{{ actionText }}</view>
   </view>
 </view>

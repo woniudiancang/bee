@@ -19,7 +19,7 @@
   <view class="bar-class van-submit-bar__bar">
     <slot />
     <view wx:if="{{ hasPrice }}" class="van-submit-bar__text">
-      <text>{{ label || $t.PickingUp.total + '：' }}</text>
+      <text>{{ label || '合计：' }}</text>
       <text class="van-submit-bar__price price-class">
         <text class="van-submit-bar__currency">{{ currency }} </text>
         <text class="van-submit-bar__price-integer">{{ integerStr }}</text><text>{{decimalStr}}</text>

@@ -5,11 +5,13 @@
   z-index="{{ zIndex }}"
   overlay="{{ overlay }}"
   transition="{{ transition }}"
-  custom-class="van-dialog van-dialog--{{ theme }} {{ className }}"
+  custom-class="van-dialog van-dialog--{{ theme }}{{ className }} custom-class"
   custom-style="width: {{ utils.addUnit(width) }};{{ customStyle }}"
   overlay-style="{{ overlayStyle }}"
   close-on-click-overlay="{{ closeOnClickOverlay }}"
+  root-portal="{{ rootPortal }}"
   bind:close="onClickOverlay"
+  bind:after-leave="onAfterLeave"
 >
   <view
     wx:if="{{ title || useTitleSlot  }}"
@@ -33,7 +35,7 @@
       size="large"
       loading="{{ loading.cancel }}"
       class="van-dialog__button van-hairline--right"
-      custom-class="van-dialog__cancel"
+      custom-class="van-dialog__cancel cancle-button-class"
       custom-style="color: {{ cancelButtonColor }}"
       bind:click="onCancel"
     >
@@ -44,9 +46,9 @@
       size="large"
       class="van-dialog__button"
       loading="{{ loading.confirm }}"
-      custom-class="van-dialog__confirm"
+      custom-class="van-dialog__confirm confirm-button-class"
       custom-style="color: {{ confirmButtonColor }}"
-
+      button-id="{{ confirmButtonId }}"
       open-type="{{ confirmButtonOpenType }}"
       lang="{{ lang }}"
       business-id="{{ businessId }}"
@@ -56,7 +58,8 @@
       send-message-img="{{ sendMessageImg }}"
       show-message-card="{{ showMessageCard }}"
       app-parameter="{{ appParameter }}"
-
+      bindagreeprivacyauthorization="onAgreePrivacyAuthorization"
+      bindgetRealTimePhoneNumber="onGetRealTimePhoneNumber"
       bind:click="onConfirm"
       bindgetuserinfo="onGetUserInfo"
       bindcontact="onContact"
@@ -69,45 +72,55 @@
     </van-goods-action-button>
   </van-goods-action>
 
-  <view wx:else class="van-hairline--top van-dialog__footer">
-    <van-button
-      wx:if="{{ showCancelButton }}"
-      size="large"
-      loading="{{ loading.cancel }}"
-      class="van-dialog__button van-hairline--right"
-      custom-class="van-dialog__cancel"
-      custom-style="color: {{ cancelButtonColor }}"
-      bind:click="onCancel"
-    >
-      {{ cancelButtonText }}
-    </van-button>
-    <van-button
-      wx:if="{{ showConfirmButton }}"
-      size="large"
-      class="van-dialog__button"
-      loading="{{ loading.confirm }}"
-      custom-class="van-dialog__confirm"
-      custom-style="color: {{ confirmButtonColor }}"
+  <view wx:elif="{{ showCancelButton || showConfirmButton }}" class="van-hairline--top van-dialog__footer">
+    <block wx:if="{{ showCancelButton }}">
+      <slot wx:if="{{ useCancelButtonSlot }}" name="cancel-button" />
 
-      open-type="{{ confirmButtonOpenType }}"
-      lang="{{ lang }}"
-      business-id="{{ businessId }}"
-      session-from="{{ sessionFrom }}"
-      send-message-title="{{ sendMessageTitle }}"
-      send-message-path="{{ sendMessagePath }}"
-      send-message-img="{{ sendMessageImg }}"
-      show-message-card="{{ showMessageCard }}"
-      app-parameter="{{ appParameter }}"
+      <van-button
+        wx:else
+        size="large"
+        loading="{{ loading.cancel }}"
+        class="van-dialog__button van-hairline--right"
+        custom-class="van-dialog__cancel cancle-button-class"
+        custom-style="color: {{ cancelButtonColor }}"
+        bind:click="onCancel"
+      >
+        {{ cancelButtonText }}
+      </van-button>
+    </block>
 
-      bind:click="onConfirm"
-      bindgetuserinfo="onGetUserInfo"
-      bindcontact="onContact"
-      bindgetphonenumber="onGetPhoneNumber"
-      binderror="onError"
-      bindlaunchapp="onLaunchApp"
-      bindopensetting="onOpenSetting"
-    >
-      {{ confirmButtonText }}
-    </van-button>
+    <block wx:if="{{ showConfirmButton }}">
+      <slot wx:if="{{ useConfirmButtonSlot }}" name="confirm-button" />
+
+      <van-button
+        wx:else
+        size="large"
+        class="van-dialog__button"
+        loading="{{ loading.confirm }}"
+        custom-class="van-dialog__confirm confirm-button-class"
+        custom-style="color: {{ confirmButtonColor }}"
+        button-id="{{ confirmButtonId }}"
+        open-type="{{ confirmButtonOpenType }}"
+        lang="{{ lang }}"
+        business-id="{{ businessId }}"
+        session-from="{{ sessionFrom }}"
+        send-message-title="{{ sendMessageTitle }}"
+        send-message-path="{{ sendMessagePath }}"
+        send-message-img="{{ sendMessageImg }}"
+        show-message-card="{{ showMessageCard }}"
+        app-parameter="{{ appParameter }}"
+        bindagreeprivacyauthorization="onAgreePrivacyAuthorization"
+        bindgetRealTimePhoneNumber="onGetRealTimePhoneNumber"
+        bind:click="onConfirm"
+        bindgetuserinfo="onGetUserInfo"
+        bindcontact="onContact"
+        bindgetphonenumber="onGetPhoneNumber"
+        binderror="onError"
+        bindlaunchapp="onLaunchApp"
+        bindopensetting="onOpenSetting"
+      >
+        {{ confirmButtonText }}
+      </van-button>
+    </block>
   </view>
 </van-popup>
