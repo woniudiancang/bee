@@ -26,7 +26,7 @@
 
 /* ==================== 用户信息卡片 ==================== */
 .user-card {
-  margin: -40rpx 32rpx 0;
+  margin: 32rpx 32rpx 0;
   padding: 32rpx;
   background: linear-gradient(135deg, #ffffff 0%, #fff9f6 100%);
   border-radius: 28rpx;

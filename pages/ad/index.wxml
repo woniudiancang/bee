@@ -22,7 +22,7 @@
   </view>
 </view>
 
-<view class="" wx:if="{{addressList == null && addressEdit == false}}">
+<view class="empty-box" wx:if="{{addressList == null && addressEdit == false}}">
 	<view class="content-1">{{ $t.ad_index.empty }}</view>
 	<view class="content-2">{{ $t.ad_index.pleaseAdd }}</view>
 	<van-button color="#e64340" custom-class="button" bindtap="addAddress">{{ $t.ad_index.add }}</van-button>

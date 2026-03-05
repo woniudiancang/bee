@@ -47,7 +47,7 @@ swiper-item image {
 
 /* ======================== 商品信息卡片 ======================== */
 .goods-info-card {
-  margin: -40rpx 24rpx 24rpx;
+  margin: 24rpx 24rpx 24rpx;
   background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF7 100%);
   border-radius: 32rpx;
   padding: 40rpx 32rpx;

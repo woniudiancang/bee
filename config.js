@@ -1,6 +1,6 @@
 module.exports = {
-  version: "26.2.25",
-  note: '收货地址api升级，SDK升级到最新版',
+  version: "26.3.5",
+  note: '首页、商品详情页，样式遮盖效果改为不遮盖',
   subDomain: "beeorder", // 根据教程 https://www.it120.cc/help/qr6l4m.html 查看并设置你自己的 subDomain
   merchantId: 27, // 商户ID，可在后台工厂设置-->商户信息查看
   customerServiceType: 'QW' // 客服类型，QW为企业微信，需要在后台系统参数配置企业ID和客服URL，否则为小程序的默认客服

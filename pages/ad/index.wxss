@@ -271,3 +271,6 @@ page {
   font-size: 45rpx;
   color: #7D6A5E !important;
 }
+.empty-box {
+  text-align: center;
+}
