@@ -28,6 +28,10 @@ Page({
     peisongType: '', // 配送方式 kd,zq 分别表示快递/到店自取【默认值到onshow修改，这里修改无效】
     submitLoding: false,
     remark: '',
+    
+    // 会员卡相关
+    cardMyList: [], // 我的会员卡列表
+    curCard: null, // 当前选择使用的会员卡
 
     currentDate: new Date().getHours() + ':' + (new Date().getMinutes() % 10 === 0 ? new Date().getMinutes() : Math.ceil(new Date().getMinutes() / 10) * 10),
     minHour: new Date().getHours(),
@@ -112,6 +116,7 @@ Page({
       goodsList: goodsList
     })
     this.initShippingAddress()
+    this.loadCardList()
   },
 
   onLoad(e) {
@@ -320,6 +325,9 @@ Page({
     }
     if (that.data.curCoupon) {
       postData.couponId = that.data.curCoupon.id;
+    }
+    if (that.data.curCard) {
+      postData.cardId = that.data.curCard.id;
     }
     if (!e) {
       postData.calculate = "true";
@@ -570,6 +578,28 @@ Page({
     this.setData({
       curCoupon: this.data.coupons[selIndex],
       curCouponShowText: this.data.coupons[selIndex].nameExt
+    })
+    this.createOrder()
+  },
+  // 加载会员卡列表
+  async loadCardList() {
+    const token = wx.getStorageSync('token')
+    const res = await WXAPI.cardMyList(token)
+    if (res.code == 0 && res.data && res.data.length > 0) {
+      // 过滤出可用的会员卡（已激活且有余额/次数）
+      const availableCards = res.data.filter(card => {
+        return card.isActive && card.amount > 0
+      })
+      this.setData({
+        cardMyList: availableCards
+      })
+    }
+  },
+  // 选择会员卡
+  selectCard: function (e) {
+    const card = e.currentTarget.dataset.card
+    this.setData({
+      curCard: card
     })
     this.createOrder()
   },

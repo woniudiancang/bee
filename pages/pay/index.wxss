@@ -422,6 +422,134 @@ page {
   white-space: nowrap;
 }
 
+/* ========== 会员卡选择卡片 ========== */
+.card-select-card {
+  margin: 0 24rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(139, 90, 60, 0.08);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.card-title-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2C2C2C;
+  margin-left: 12rpx;
+}
+
+.card-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.card-item {
+  background: #FAFAFA;
+  border-radius: 20rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card-item.active {
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5EB 100%);
+  border-color: #D4A574;
+  box-shadow: 0 4rpx 16rpx rgba(212, 165, 116, 0.2);
+}
+
+.card-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 20rpx;
+}
+
+.card-item-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.card-item-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.card-item-icon.no-card {
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+}
+
+.card-item-icon.times-card-icon {
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+  box-shadow: 0 4rpx 12rpx rgba(67, 160, 71, 0.3);
+}
+
+.card-item-icon.balance-card-icon {
+  background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
+  box-shadow: 0 4rpx 12rpx rgba(251, 140, 0, 0.3);
+}
+
+.card-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-item-name {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.card-type-tag {
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+}
+
+.card-type-tag.times-tag {
+  background: rgba(67, 160, 71, 0.15);
+  color: #2E7D32;
+}
+
+.card-type-tag.balance-tag {
+  background: rgba(251, 140, 0, 0.15);
+  color: #E65100;
+}
+
+.card-item-desc {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+.card-expire {
+  color: #999;
+  margin-left: 8rpx;
+}
+
+.card-item-radio {
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
 /* ========== 保温袋卡片 ========== */
 .bag-card {
   margin: 0 24rpx 20rpx;

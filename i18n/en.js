@@ -280,6 +280,7 @@ module.exports = {
   pay: {
     title: '确认订单',
     choose: 'Choose coupons',
+    chooseCard: 'Choose Card',
     inputphoneNO: 'Input phone NO.',
     select: 'select self pickup/delivery time',
     address: 'The current address is beyond the delivery range',

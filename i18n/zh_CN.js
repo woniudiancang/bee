@@ -280,6 +280,7 @@ module.exports = {
   pay: {
     title: '确认订单',
     choose: '请选择使用优惠券',
+    chooseCard: '选择会员卡',
     inputphoneNO: '请输入手机号码',
     select: '请选择自取/配送时间',
     address: '当前地址超出配送范围',

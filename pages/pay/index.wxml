@@ -158,6 +158,55 @@
   </picker>
 </view>
 
+<!-- 会员卡卡片 -->
+<view class="card-select-card" wx:if="{{cardMyList && cardMyList.length > 0}}">
+  <view class="card-header">
+    <van-icon name="balance-o" size="36rpx" color="#D4A574" />
+    <text class="card-title-text">会员卡</text>
+  </view>
+  
+  <view class="card-list-wrapper">
+    <!-- 不使用会员卡选项 -->
+    <view class="card-item {{!curCard ? 'active' : ''}}" bindtap="selectCard" data-card="{{null}}">
+      <view class="card-item-content">
+        <view class="card-item-left">
+          <view class="card-item-icon no-card">
+            <van-icon name="close" size="32rpx" color="#999" />
+          </view>
+          <view class="card-item-info">
+            <view class="card-item-name">不使用会员卡</view>
+            <view class="card-item-desc">使用其他支付方式</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 会员卡列表 -->
+    <view class="card-item {{curCard && curCard.id == item.id ? 'active' : ''}}" wx:for="{{cardMyList}}" wx:key="id" bindtap="selectCard" data-card="{{item}}">
+      <view class="card-item-content">
+        <view class="card-item-left">
+          <view class="card-item-icon {{item.cardInfo.type == 0 ? 'times-card-icon' : 'balance-card-icon'}}">
+            <van-icon name="{{item.cardInfo.type == 0 ? 'coupon-o' : 'balance-list-o'}}" size="32rpx" color="#fff" />
+          </view>
+          <view class="card-item-info">
+            <view class="card-item-name">
+              {{item.cardInfo.name}}
+              <view class="card-type-tag {{item.cardInfo.type == 0 ? 'times-tag' : 'balance-tag'}}">
+                {{item.cardInfo.type == 0 ? '次卡' : '储值卡'}}
+              </view>
+            </view>
+            <view class="card-item-desc">
+              <text wx:if="{{item.cardInfo.type == 0}}">剩余 {{item.amount}} 次</text>
+              <text wx:if="{{item.cardInfo.type == 1}}">余额 ¥{{item.amount}}</text>
+              <text class="card-expire"> | 至 {{item.dateEnd}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
 <!-- 保温袋选择卡片 -->
 <view class="bag-card" wx:if="{{ peisongType == 'zq' && packaging_fee }}">
   <view class="card-title">{{ $t.pay.Insulationbag }}</view>
