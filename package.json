@@ -18,7 +18,7 @@
   "homepage": "https://github.com/woniudiancang/bee#readme",
   "dependencies": {
     "@vant/weapp": "^1.11.7",
-    "apifm-wxapi": "^26.2.12",
+    "apifm-wxapi": "^26.6.28",
     "wxbarcode": "^1.0.2"
   },
   "devDependencies": {
