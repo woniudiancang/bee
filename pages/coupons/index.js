@@ -95,6 +95,24 @@ Page({
       }
     })
   },
+  // 订阅消息公共方法：若配置了 coupon_subscribe_ids 则弹出订阅框，complete 后执行 callback；否则直接执行 callback
+  _requestSubscribe(callback) {
+    const subscribe_ids = wx.getStorageSync('coupon_subscribe_ids')
+    if (subscribe_ids) {
+      wx.requestSubscribeMessage({
+        tmplIds: subscribe_ids.split(','),
+        success(res) {},
+        fail(e) {
+          console.error(e)
+        },
+        complete: () => {
+          callback()
+        },
+      })
+    } else {
+      callback()
+    }
+  },
   getCounpon2(){
     if (!this.data.couponPwd) {
       wx.showToast({
@@ -114,7 +132,6 @@ Page({
     this.getCounpon(e)
   },
   getCounpon: function (e) {
-    const that = this
     if (e.currentTarget.dataset.pwd) {
       this.setData({
         pwdCounponId: e.currentTarget.dataset.id,
@@ -129,6 +146,12 @@ Page({
     this.setData({
       showPwdPop: false
     })
+    this._requestSubscribe(() => {
+      this._doGetCounpon(e)
+    })
+  },
+  _doGetCounpon: function (e) {
+    const that = this
     WXAPI.fetchCoupons({
       id: e.currentTarget.dataset.id,
       token: wx.getStorageSync('token'),
@@ -236,7 +259,12 @@ Page({
       }
     })
   },
-  async touse(e) {
+  touse(e) {
+    this._requestSubscribe(() => {
+      this._doTouse(e)
+    })
+  },
+  async _doTouse(e) {
     const item = e.currentTarget.dataset.item
     const res = await WXAPI.couponDetail(item.pid)
     if (res.code != 0) {
@@ -296,7 +324,7 @@ Page({
       showPwdPop: false
     })
   },
-  async exchangeCoupons() {
+  exchangeCoupons() {
     if (!this.data.number) {
       wx.showToast({
         title: this.data.$t.coupons.enternum,
@@ -311,6 +339,11 @@ Page({
       })
       return
     }
+    this._requestSubscribe(() => {
+      this._doExchangeCoupons()
+    })
+  },
+  async _doExchangeCoupons() {
     this.setData({
       exchangeCouponsLoading: true
     })

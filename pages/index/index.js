@@ -284,7 +284,7 @@ Page({
     } else {
       wx.removeStorageSync('shopIds')
     }
-    this.data.page = 1
+    this.setData({ page: 1 })
     this.getGoodsList()
   },
   async getGoodsList() {
@@ -416,9 +416,11 @@ Page({
   },
   _onReachBottom() {
     if (!this.data.isContinuousMode) {
-      // 原有的单分类模式
-      this.data.page++
-      this.getGoodsList()
+      // 原有的单分类模式：必须用 setData 更新 page，直接赋值 this.data.page 不会生效
+      const nextPage = this.data.page + 1
+      this.setData({ page: nextPage }, () => {
+        this.getGoodsList()
+      })
       return
     }
 

@@ -374,13 +374,13 @@ module.exports = {
     return request('/pay/wx/requestMerchantTransfer', true, 'get', data);
   },
   wxpayFOMO: function wxpayFOMO(data) {
-    return request('/pay/fomo/wxapp', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/wxapp', false, 'post', data);
   },
   payNow: function payNow(data) {
-    return request('/pay/fomo/payNow', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/payNow', false, 'post', data);
   },
   fomoCheckout: function fomoCheckout(data) {
-    return request('/pay/fomo/checkout', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/checkout', false, 'post', data);
   },
   wxpayFWS: function wxpayFWS(data) {
     return request('/pay/wxfws/wxapp', true, 'post', data);
@@ -401,13 +401,13 @@ module.exports = {
     return request('/pay/wepayez/wxapp', true, 'post', data);
   },
   wxpayxpert: function wxpayxpert(data) {
-    return request('/pay/payxpert/wxapp', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/payxpert/wxapp', false, 'post', data);
   },
   wxpayIPaynow: function wxpayIPaynow(data) {
     return request('/pay/ipaynow/wxapp', true, 'post', data);
   },
   ccvvPayWxapp: function ccvvPayWxapp(data) {
-    return request('/pay/ccvv/wxapp', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/ccvv/wxapp', false, 'post', data);
   },
   wxpayAirwallex: function wxpayAirwallex(data) {
     return request('/pay/airwallex/wxapp', true, 'post', data);
@@ -443,7 +443,7 @@ module.exports = {
     return request('/pay/kasipay/h5', true, 'post', data);
   },
   hmpayJsapi: function hmpayJsapi(data) {
-    return request('/pay/sandpay/hmpay/jsapi', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/sandpay/hmpay/jsapi', false, 'post', data);
   },
   login_wx: function login_wx(code) {
     return request('/user/wxapp/login', true, 'post', {
@@ -485,12 +485,12 @@ module.exports = {
     return request('/user/wxapp/getMobile', true, 'get', { code: code });
   },
   login_username: function login_username(data) {
-    return request('/user/username/login', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/username/login', false, 'post', data);
   },
   bindUsername: function bindUsername(token, username) {
     var pwd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/user/username/bindUsername', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/username/bindUsername', false, 'post', {
       token: token, username: username, pwd: pwd
     });
   },
@@ -546,7 +546,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/authorize', false, 'post', data);
   },
   register_username: function register_username(data) {
-    return request('/user/username/register', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/username/register', false, 'post', data);
   },
   register_mobile: function register_mobile(data) {
     return request('/user/m/register', true, 'post', data);
@@ -743,18 +743,18 @@ module.exports = {
     return request('/goods/seckill/grab', true, 'post', { token: token, goodsId: goodsId, seconds: seconds });
   },
   coupons: function coupons(data) {
-    return request('/discounts/coupons', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/discounts/coupons', false, 'get', data);
   },
   couponDetail: function couponDetail(id) {
-    return request('/discounts/detail', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/discounts/detail', false, 'get', {
       id: id
     });
   },
   couponStatistics: function couponStatistics(token) {
-    return request('/discounts/statistics', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/discounts/statistics', false, 'get', { token: token });
   },
   myCoupons: function myCoupons(data) {
-    return request('/discounts/my', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/discounts/my', false, 'get', data);
   },
   mergeCouponsRules: function mergeCouponsRules() {
     return request(COMMON_BASE_URL + subDomain + '/discounts/merge/list', false, 'get');
@@ -763,10 +763,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/discounts/merge', false, 'post', data);
   },
   fetchCoupons: function fetchCoupons(data) {
-    return request('/discounts/fetch', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/discounts/fetch', false, 'post', data);
   },
   sendCoupons: function sendCoupons(data) {
-    return request('/discounts/send', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/discounts/send', false, 'post', data);
   },
   exchangeCoupons: function exchangeCoupons(token, number, pwd) {
     var extJsonStr = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
@@ -776,16 +776,16 @@ module.exports = {
     });
   },
   couponsShareOpen: function couponsShareOpen(token, id) {
-    return request('/discounts/share/open', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/discounts/share/open', false, 'post', { token: token, id: id });
   },
   couponsShareClose: function couponsShareClose(token, id) {
-    return request('/discounts/share/close', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/discounts/share/close', false, 'post', { token: token, id: id });
   },
   couponsShareFetch: function couponsShareFetch(token, id, shareToken) {
-    return request('/discounts/share/fetch', true, 'post', { token: token, id: id, shareToken: shareToken });
+    return request(COMMON_BASE_URL + subDomain + '/discounts/share/fetch', false, 'post', { token: token, id: id, shareToken: shareToken });
   },
   couponsHX: function couponsHX(data) {
-    return request('/discounts/hx', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/discounts/hx', false, 'post', data);
   },
   noticeList: function noticeList(data) {
     return request('/notice/list', true, 'post', data);
@@ -960,7 +960,7 @@ module.exports = {
     });
   },
   userDetailSpreadUser: function userDetailSpreadUser(token, uid) {
-    return request('/user/detail/spreadUser', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/user/detail/spreadUser', false, 'get', {
       token: token, uid: uid
     });
   },
@@ -1362,6 +1362,33 @@ module.exports = {
       });
     });
   },
+  uploadFileV3: function uploadFileV3(data) {
+    var uploadUrl = 'https://oss.apifm.com/upload2';
+    if (data.apiUrl) {
+      uploadUrl = data.apiUrl;
+    }
+    delete data.apiUrl;
+    var tempFilePath = data.tempFilePath;
+    delete data.tempFilePath;
+    data.subDomain = subDomain;
+    return new Promise(function (resolve, reject) {
+      wx.uploadFile({
+        url: uploadUrl,
+        filePath: tempFilePath,
+        name: 'upfile',
+        formData: data,
+        success: function success(res) {
+          resolve(JSON.parse(res.data));
+        },
+        fail: function fail(error) {
+          reject(error);
+        },
+        complete: function complete(aaa) {
+          // 加载完成
+        }
+      });
+    });
+  },
   uploadFileFromUrl: function uploadFileFromUrl() {
     var remoteFileUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var ext = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
@@ -1528,13 +1555,13 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/deposit/back/apply', false, 'post', { token: token, id: id });
   },
   shopAreaCities: function shopAreaCities() {
-    return request('/shopArea/cities', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/shopArea/cities', false, 'get');
   },
   shopAreaList: function shopAreaList(data) {
-    return request('/shopArea/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shopArea/list', false, 'post', data);
   },
   shopAreaDetail: function shopAreaDetail(id) {
-    return request('/shopArea/detail', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/shopArea/detail', false, 'get', { id: id });
   },
   fetchShopsCities: function fetchShopsCities() {
     return request('/shop/subshop/cities', true, 'get');
@@ -1612,7 +1639,7 @@ module.exports = {
     return request('/user/modify/password', true, 'post', { token: token, pwdOld: pwdOld, pwdNew: pwdNew });
   },
   modifyUserPasswordByUserName: function modifyUserPasswordByUserName(data) {
-    return request('/user/username/modifyPassword', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/username/modifyPassword', false, 'post', data);
   },
   anonymousUserInfo: function anonymousUserInfo(id) {
     return request('/user/anonymous/info', true, 'get', { id: id });
@@ -1631,7 +1658,7 @@ module.exports = {
   queryBarcode: function queryBarcode() {
     var barcode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    return request('/barcode/info', true, 'get', { barcode: barcode });
+    return request(COMMON_BASE_URL + subDomain + '/barcode/info', false, 'get', { barcode: barcode });
   },
   luckyInfo: function luckyInfo(id) {
     return request(COMMON_BASE_URL + subDomain + '/luckyInfo/info/v2', false, 'get', { id: id });
@@ -1798,13 +1825,13 @@ module.exports = {
     return request('/queuing/my', true, 'get', { token: token, typeId: typeId, status: status });
   },
   idcardCheck: function idcardCheck(token, name, idCardNo) {
-    return request('/user/idcard', true, 'post', { token: token, name: name, idCardNo: idCardNo });
+    return request(COMMON_BASE_URL + subDomain + '/user/idcard', false, 'post', { token: token, name: name, idCardNo: idCardNo });
   },
   idcardCheckManualReview: function idcardCheckManualReview(data) {
-    return request('/user/idcard/manualReview', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/idcard/manualReview', false, 'post', data);
   },
   idcardCheckManualReviewInfo: function idcardCheckManualReviewInfo(token) {
-    return request('/user/idcard/manualReview/info', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/user/idcard/manualReview/info', false, 'get', { token: token });
   },
   userTagList: function userTagList(data) {
     return request(COMMON_BASE_URL + subDomain + '/userTag/list', false, 'post', data);
@@ -2375,10 +2402,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/goods/visitLog/clear', false, 'post', { token: token });
   },
   channelDataPush: function channelDataPush(key, content) {
-    return request('/channelData/push', true, 'post', { key: key, content: content });
+    return request(COMMON_BASE_URL + subDomain + '/channelData/push', false, 'post', { key: key, content: content });
   },
   channelDataPull: function channelDataPull(key) {
-    return request('/channelData/pull', true, 'get', { key: key });
+    return request(COMMON_BASE_URL + subDomain + '/channelData/pull', false, 'get', { key: key });
   },
   bindPartner: function bindPartner(token, partnerId) {
     return request(COMMON_BASE_URL + subDomain + '/user/bindPartner', false, 'post', { token: token, uid: partnerId });
@@ -2629,66 +2656,66 @@ module.exports = {
   },
   // 回收
   recycleOrders: function recycleOrders(data) {
-    return request('/recycleOrder/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/list', false, 'post', data);
   },
   recycleOrderApply: function recycleOrderApply(data) {
-    return request('/recycleOrder/apply', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/apply', false, 'post', data);
   },
   recycleOrderDetail: function recycleOrderDetail(token, id) {
-    return request('/recycleOrder/detail', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/detail', false, 'get', { token: token, id: id });
   },
   recycleOrderFahuo: function recycleOrderFahuo(data) {
-    return request('/recycleOrder/fahuo', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/fahuo', false, 'post', data);
   },
   recycleOrderClose: function recycleOrderClose(token, id) {
-    return request('/recycleOrder/close', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/close', false, 'post', { token: token, id: id });
   },
   recycleOrderDelete: function recycleOrderDelete(token, id) {
-    return request('/recycleOrder/del', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/recycleOrder/del', false, 'post', { token: token, id: id });
   },
   // 会员卡
   cardList: function cardList(data) {
-    return request('/card/list', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/list', false, 'get', data);
   },
   cardInfo: function cardInfo(id) {
-    return request('/card/info', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/card/info', false, 'get', { id: id });
   },
   cardBuy: function cardBuy(token, id) {
-    return request('/card/buy', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/card/buy', false, 'post', { token: token, id: id });
   },
   cardMyList: function cardMyList(token) {
-    return request('/card/my', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/card/my', false, 'get', { token: token });
   },
   cardMyLogs: function cardMyLogs(data) {
-    return request('/card/logs', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/logs', false, 'post', data);
   },
   cardExchangeFromPwd: function cardExchangeFromPwd(data) {
-    return request('/card/exchange', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/exchange', false, 'post', data);
   },
   cardShareOpen: function cardShareOpen(data) {
-    return request('/card/share/open', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/share/open', false, 'post', data);
   },
   cardShareClose: function cardShareClose(data) {
-    return request('/card/share/close', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/share/close', false, 'post', data);
   },
   cardShareFetch: function cardShareFetch(data) {
-    return request('/card/share/fetch', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/card/share/fetch', false, 'post', data);
   },
   // 收藏卡片
   collectCardHis: function collectCardHis(data) {
-    return request('/collectCard/del', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/collectCard/del', false, 'post', data);
   },
   collectCardInfo: function collectCardInfo(number) {
-    return request('/collectCard/cardInfo', true, 'get', { number: number });
+    return request(COMMON_BASE_URL + subDomain + '/collectCard/cardInfo', false, 'get', { number: number });
   },
   collectCardHisInfo: function collectCardHisInfo(token, id) {
-    return request('/collectCard/hisInfo', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/collectCard/hisInfo', false, 'get', { token: token, id: id });
   },
   collectCardBind: function collectCardBind(data) {
-    return request('/collectCard/bind', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/collectCard/bind', false, 'post', data);
   },
   collectCardUnBind: function collectCardUnBind(token, id, smsCode) {
-    return request('/collectCard/bind', true, 'post', { token: token, id: id, smsCode: smsCode });
+    return request(COMMON_BASE_URL + subDomain + '/collectCard/unbind', false, 'post', { token: token, id: id, smsCode: smsCode });
   },
   // 其他
   bengenSaleTongjiList: function bengenSaleTongjiList(data) {
@@ -2758,29 +2785,29 @@ module.exports = {
   },
   // 橱窗
   chuchuanSettingInfo: function chuchuanSettingInfo(uid) {
-    return request('/chuchuan/info', true, 'get', { uid: uid });
+    return request(COMMON_BASE_URL + subDomain + '/chuchuan/info', false, 'get', { uid: uid });
   },
   chuchuanSettingModify: function chuchuanSettingModify(data) {
-    return request('/chuchuan/modify', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/chuchuan/modify', false, 'post', data);
   },
   chuchuanGoodsList: function chuchuanGoodsList(data) {
-    return request('/chuchuanGoods/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/chuchuanGoods/list', false, 'post', data);
   },
   chuchuanGoodsAdd: function chuchuanGoodsAdd(data) {
-    return request('/chuchuanGoods/add', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/chuchuanGoods/add', false, 'post', data);
   },
   chuchuanGoodsRemove: function chuchuanGoodsRemove(token, goodsId) {
-    return request('/chuchuanGoods/remove', true, 'post', { token: token, goodsId: goodsId });
+    return request(COMMON_BASE_URL + subDomain + '/chuchuanGoods/remove', false, 'post', { token: token, goodsId: goodsId });
   },
   chuchuanGoodsCheck: function chuchuanGoodsCheck(token, goodsId) {
-    return request('/chuchuanGoods/check', true, 'get', { token: token, goodsId: goodsId });
+    return request(COMMON_BASE_URL + subDomain + '/chuchuanGoods/check', false, 'get', { token: token, goodsId: goodsId });
   },
   // 寄存
   jicunGoodsList: function jicunGoodsList(data) {
-    return request('/jicunGoods/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/jicunGoods/list', false, 'post', data);
   },
   jicunGoodsDetail: function jicunGoodsDetail(data) {
-    return request('/jicunGoods/detail', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/jicunGoods/detail', false, 'get', data);
   },
   // stripe
   stripeAddCard: function stripeAddCard(data) {
@@ -2892,10 +2919,10 @@ module.exports = {
     return request('/tempData/get', true, 'get', { key: key });
   },
   tempDataSetV2: function tempDataSetV2(key, content) {
-    return request(COMMON_BASE_URL + merchantId + '/tempData/set', true, 'post', { key: key, content: content });
+    return request(COMMON_BASE_URL + merchantId + '/tempData/set', false, 'post', { key: key, content: content });
   },
   tempDataGetV2: function tempDataGetV2(key) {
-    return request(COMMON_BASE_URL + merchantId + '/tempData/get', true, 'get', { key: key });
+    return request(COMMON_BASE_URL + merchantId + '/tempData/get', false, 'get', { key: key });
   },
   commonDatetime: function commonDatetime() {
     return request('/common/datetime', true, 'get');
@@ -3087,25 +3114,25 @@ module.exports = {
     return request('/shop/goods/yudingStatistics', true, 'get', { day: day });
   },
   contactList: function contactList() {
-    return request('/contact/list', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/contact/list', false, 'get');
   },
   distributedLock: function distributedLock(key, seconds) {
-    return request('/distributedLock/lock', true, 'get', { key: key, seconds: seconds });
+    return request(COMMON_BASE_URL + subDomain + '/distributedLock/lock', false, 'get', { key: key, seconds: seconds });
   },
   distributedLockRelease: function distributedLockRelease(key) {
-    return request('/distributedLock/lock', true, 'get', { key: key });
+    return request(COMMON_BASE_URL + subDomain + '/distributedLock/lock', false, 'get', { key: key });
   },
   communitySetting: function communitySetting() {
-    return request('/community/setting', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/community/setting', false, 'get');
   },
   communityLeaderApply: function communityLeaderApply(data) {
-    return request('/communityLeader/apply', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/communityLeader/apply', false, 'post', data);
   },
   communityLeaderApplyInfo: function communityLeaderApplyInfo(token) {
-    return request('/communityLeader/apply/info', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/communityLeader/apply/info', false, 'get', { token: token });
   },
   communityLeaderBuy: function communityLeaderBuy(token) {
-    return request('/communityLeader/buy', true, 'post', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/communityLeader/buy', false, 'post', { token: token });
   },
   communityOrderFahuo: function communityOrderFahuo(data) {
     return request('/communityOrder/fahuo', true, 'post', data);
@@ -3153,10 +3180,10 @@ module.exports = {
     return request('/order/startOrderPeriod', true, 'post', data);
   },
   shansongCourierInfo: function shansongCourierInfo(data) {
-    return request('/order/shansongCourierInfo', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/order/shansongCourierInfo', false, 'get', data);
   },
   shansongOrderInfo: function shansongOrderInfo(data) {
-    return request('/order/shansongOrderInfo', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/order/shansongOrderInfo', false, 'get', data);
   },
   userAttendantOrderStatistics: function userAttendantOrderStatistics(data) {
     return request('/order/statisticsJishi', true, 'get', data);
@@ -3636,6 +3663,27 @@ module.exports = {
   },
   dabGetPrice: function dabGetPrice(data) {
     return request(COMMON_BASE_URL + subDomain + '/dab/getPrice', false, 'get', data);
+  },
+  yaduoBasicLogin: function yaduoBasicLogin(data) {
+    return request(COMMON_BASE_URL + subDomain + '/yaduo/basicLogin', false, 'get', data);
+  },
+  yaduoUnbind: function yaduoUnbind(data) {
+    return request(COMMON_BASE_URL + subDomain + '/yaduo/unbind', false, 'post', data);
+  },
+  photoList: function photoList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/photo/list', false, 'post', data);
+  },
+  photoBuyLogs: function photoBuyLogs(data) {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs', false, 'post', data);
+  },
+  photoBuyLogsLogs: function photoBuyLogsLogs(data) {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs/logs', false, 'get', data);
+  },
+  photoBuy: function photoBuy(data) {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buy', false, 'post', data);
+  },
+  photoPay: function photoPay(data) {
+    return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data);
   }
 };
 
