@@ -1,4 +1,5 @@
 const WXAPI = require('apifm-wxapi')
+const AUTH = require('../../utils/auth')
 Page({
   data: {
   },
@@ -17,6 +18,11 @@ Page({
     this.cardShareFetch(false)
   },
   async cardShareFetch(calculate) {
+    const isLogined = await AUTH.checkHasLogined()
+    if (!isLogined) {
+      AUTH.login(this)
+      return
+    }
     wx.showLoading({
       title: '',
     })
