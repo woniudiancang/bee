@@ -217,21 +217,21 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/config/values', false, 'get', { keys: keys });
   },
   scoreRules: function scoreRules(data) {
-    return request('/score/send/rule', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/score/send/rule', false, 'post', data);
   },
   scoreSignRules: function scoreSignRules() {
-    return request('/score/sign/rules', true, 'get', {});
+    return request(COMMON_BASE_URL + subDomain + '/score/sign/rules', false, 'get', {});
   },
   scoreSign: function scoreSign(token) {
-    return request('/score/sign', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/score/sign', false, 'post', {
       token: token
     });
   },
   scoreSignLogs: function scoreSignLogs(data) {
-    return request('/score/sign/logs', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/score/sign/logs', false, 'post', data);
   },
   scoreTodaySignedInfo: function scoreTodaySignedInfo(token) {
-    return request('/score/today-signed', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/score/today-signed', false, 'get', {
       token: token
     });
   },
@@ -279,7 +279,7 @@ module.exports = {
     return request('/score/myStatistics', true, 'get', data);
   },
   expireScorestatistics: function expireScorestatistics(data) {
-    return request('/score/expireScorestatistics', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/score/expireScorestatistics', false, 'post', data);
   },
   scoreTaskList: function scoreTaskList(token) {
     return request(COMMON_BASE_URL + subDomain + '/score/taskList', false, 'get', { token: token });
@@ -288,16 +288,16 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/score/taskSuccess', false, 'post', { token: token, type: type });
   },
   kanjiaSet: function kanjiaSet(goodsId) {
-    return request('/shop/goods/kanjia/set/v2', true, 'get', { goodsId: goodsId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/set/v2', false, 'get', { goodsId: goodsId });
   },
   kanjiaJoin: function kanjiaJoin(token, kjid) {
-    return request('/shop/goods/kanjia/join', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/join', false, 'post', {
       kjid: kjid,
       token: token
     });
   },
   kanjiaDetail: function kanjiaDetail(kjid, joiner) {
-    return request('/shop/goods/kanjia/info', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/info', false, 'get', {
       kjid: kjid,
       joiner: joiner
     });
@@ -305,7 +305,7 @@ module.exports = {
   kanjiaHelp: function kanjiaHelp(token, kjid, joiner) {
     var remark = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-    return request('/shop/goods/kanjia/help', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/help', false, 'post', {
       kjid: kjid,
       joinerUser: joiner,
       token: token,
@@ -313,19 +313,19 @@ module.exports = {
     });
   },
   kanjiaClear: function kanjiaClear(token, kjid) {
-    return request('/shop/goods/kanjia/clear', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/clear', false, 'post', {
       kjid: kjid,
       token: token
     });
   },
   kanjiaMyJoinInfo: function kanjiaMyJoinInfo(token, kjid) {
-    return request('/shop/goods/kanjia/my', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/my', false, 'get', {
       kjid: kjid,
       token: token
     });
   },
   kanjiaHelpDetail: function kanjiaHelpDetail(token, kjid, joiner) {
-    return request('/shop/goods/kanjia/myHelp', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/myHelp', false, 'get', {
       kjid: kjid,
       joinerUser: joiner,
       token: token
@@ -398,7 +398,7 @@ module.exports = {
     return request('/pay/lcsw/wxapp', true, 'post', data);
   },
   wxpayWepayez: function wxpayWepayez(data) {
-    return request('/pay/wepayez/wxapp', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/pay/wepayez/wxapp', false, 'post', data);
   },
   wxpayxpert: function wxpayxpert(data) {
     return request(COMMON_BASE_URL + subDomain + '/pay/payxpert/wxapp', false, 'post', data);
@@ -446,13 +446,13 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/pay/sandpay/hmpay/jsapi', false, 'post', data);
   },
   login_wx: function login_wx(code) {
-    return request('/user/wxapp/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login', false, 'post', {
       code: code,
       type: 2
     });
   },
   loginWxV2: function loginWxV2(code, appid) {
-    return request('/user/wxapp/login/v2', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/v2', false, 'post', {
       code: code,
       appid: appid
     });
@@ -469,20 +469,20 @@ module.exports = {
     });
   },
   loginWxaMobile: function loginWxaMobile(code, encryptedData, iv) {
-    return request('/user/wxapp/login/mobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/mobile', false, 'post', {
       code: code,
       encryptedData: encryptedData,
       iv: iv
     });
   },
   loginWxaMobileV2: function loginWxaMobileV2(data) {
-    return request('/user/wxapp/login/mobile', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/mobile', false, 'post', data);
   },
   loginWxaMobileV3: function loginWxaMobileV3(data) {
-    return request('/user/wxapp/login/mobile/v2', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/mobile/v2', false, 'post', data);
   },
   fetchWxaMobile: function fetchWxaMobile(code) {
-    return request('/user/wxapp/getMobile', true, 'get', { code: code });
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/getMobile', false, 'get', { code: code });
   },
   login_username: function login_username(data) {
     return request(COMMON_BASE_URL + subDomain + '/user/username/login', false, 'post', data);
@@ -498,18 +498,18 @@ module.exports = {
     var deviceId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
     var deviceName = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-    return request('/user/m/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/login', false, 'post', {
       mobile: mobile, pwd: pwd, deviceId: deviceId, deviceName: deviceName
     });
   },
   loginMobileV2: function loginMobileV2(data) {
-    return request('/user/m/login', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/m/login', false, 'post', data);
   },
   loginMobileSmsCode: function loginMobileSmsCode(data) {
-    return request('/user/m/loginMobile', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/m/loginMobile', false, 'post', data);
   },
   resetPwdUseMobileCode: function resetPwdUseMobileCode(mobile, pwd, code) {
-    return request('/user/m/reset-pwd', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/reset-pwd', false, 'post', {
       mobile: mobile, pwd: pwd, code: code
     });
   },
@@ -521,8 +521,11 @@ module.exports = {
   wxmpAuth: function wxmpAuth(data) {
     return request('/user/wxmp/auth', true, 'post', data);
   },
+  wxmpLogin: function wxmpLogin(data) {
+    return request('/user/wxmp/login', true, 'post', data);
+  },
   register_complex: function register_complex(data) {
-    return request('/user/wxapp/register/complex', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/register/complex', false, 'post', data);
   },
   register_tt: function register_tt(data) {
     return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/register', false, 'post', data);
@@ -537,10 +540,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/q/qrcode', false, 'post', { content: content });
   },
   register_simple: function register_simple(data) {
-    return request('/user/wxapp/register/simple', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/register/simple', false, 'post', data);
   },
   authorize: function authorize(data) {
-    return request('/user/wxapp/authorize', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/authorize', false, 'post', data);
   },
   ttAuthorize: function ttAuthorize(data) {
     return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/authorize', false, 'post', data);
@@ -549,7 +552,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/username/register', false, 'post', data);
   },
   register_mobile: function register_mobile(data) {
-    return request('/user/m/register', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/m/register', false, 'post', data);
   },
   bannerTypes: function bannerTypes() {
     return request(COMMON_BASE_URL + subDomain + '/banner/types', false, 'get');
@@ -604,36 +607,36 @@ module.exports = {
   goodsLimitations: function goodsLimitations(goodsId) {
     var priceId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/shop/goods/limitation', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/limitation', false, 'get', {
       goodsId: goodsId, priceId: priceId
     });
   },
   goodsLimitationsV2: function goodsLimitationsV2(goodsId) {
     var propertyChildIds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/shop/goods/limitation', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/limitation', false, 'get', {
       goodsId: goodsId, propertyChildIds: propertyChildIds
     });
   },
   goodsAddition: function goodsAddition(goodsId) {
-    return request('/shop/goods/goodsAddition', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/goodsAddition', false, 'get', {
       goodsId: goodsId
     });
   },
   goodsShopStores: function goodsShopStores(goodsId) {
-    return request('/shop/goods/goodsShopStores', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/goodsShopStores', false, 'get', {
       goodsId: goodsId
     });
   },
   goodsVideoEpisodesList: function goodsVideoEpisodesList(goodsId) {
     var token = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/goodsVideoEpisodes/list', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/list', false, 'get', {
       goodsId: goodsId, token: token
     });
   },
   goodsVideoEpisodesBuy: function goodsVideoEpisodesBuy(goodsId, number, token) {
-    return request('/goodsVideoEpisodes/buy', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/buy', false, 'post', {
       goodsId: goodsId, number: number, token: token
     });
   },
@@ -641,7 +644,7 @@ module.exports = {
     return request('/shop/goods/statistics/days', true, 'post', data);
   },
   goodsUseless: function goodsUseless(data) {
-    return request('/shop/goods/useful', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/useful', false, 'post', data);
   },
   pushNewGoods: function pushNewGoods(data) {
     return request('/shop/goods/putOrUpdate', true, 'post', data);
@@ -668,10 +671,10 @@ module.exports = {
     });
   },
   goodsPriceFreight: function goodsPriceFreight(data) {
-    return request('/shop/goods/price/freight', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/price/freight', false, 'get', data);
   },
   goodsPriceMultilevels: function goodsPriceMultilevels(data) {
-    return request('/shop/goods/priceMultilevels', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/priceMultilevels', false, 'get', data);
   },
   goodsRebate: function goodsRebate(token, goodsId) {
     return request(COMMON_BASE_URL + subDomain + '/shop/goods/rebate/v2', false, 'get', {
@@ -788,17 +791,17 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/discounts/hx', false, 'post', data);
   },
   noticeList: function noticeList(data) {
-    return request('/notice/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/notice/list', false, 'post', data);
   },
   noticeLastOne: function noticeLastOne() {
     var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    return request('/notice/last-one', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/notice/last-one', false, 'get', {
       type: type
     });
   },
   noticeDetail: function noticeDetail(id) {
-    return request('/notice/detail', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/notice/detail', false, 'get', {
       id: id
     });
   },
@@ -915,21 +918,21 @@ module.exports = {
   bindMobileWxa: function bindMobileWxa(token, encryptedData, iv) {
     var pwd = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-    return request('/user/wxapp/bindMobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindMobile', false, 'post', {
       token: token, encryptedData: encryptedData, iv: iv, pwd: pwd
     });
   },
   bindMobileWxapp: function bindMobileWxapp(token, code, encryptedData, iv) {
     var pwd = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
 
-    return request('/user/wxapp/bindMobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindMobile', false, 'post', {
       token: token, code: code, encryptedData: encryptedData, iv: iv, pwd: pwd
     });
   },
   bindMobileWxappV2: function bindMobileWxappV2(token, code) {
     var pwd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/user/wxapp/bindMobile/v2', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindMobile/v2', false, 'post', {
       token: token, code: code, pwd: pwd
     });
   },
@@ -943,7 +946,7 @@ module.exports = {
   bindMobileSms: function bindMobileSms(token, mobile, code) {
     var pwd = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-    return request('/user/m/bind-mobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/bind-mobile', false, 'post', {
       token: token, mobile: mobile, code: code, pwd: pwd
     });
   },
@@ -1069,7 +1072,7 @@ module.exports = {
     return request('/order/set', true, 'get');
   },
   orderRefunds: function orderRefunds(token, orderId) {
-    return request('/order/refund', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/order/refund', false, 'get', {
       token: token,
       orderId: orderId
     });
@@ -1186,56 +1189,56 @@ module.exports = {
     return request('/user/payLogs', true, 'post', data);
   },
   rechargeSendRules: function rechargeSendRules() {
-    return request('/user/recharge/send/rule', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/user/recharge/send/rule', false, 'get');
   },
   payBillDiscounts: function payBillDiscounts() {
-    return request('/payBill/discounts', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/payBill/discounts', false, 'get');
   },
   payBill: function payBill(token, money) {
     var pwd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/payBill/pay', true, 'post', { token: token, money: money, pwd: pwd });
+    return request(COMMON_BASE_URL + subDomain + '/payBill/pay', false, 'post', { token: token, money: money, pwd: pwd });
   },
   payBillV2: function payBillV2(data) {
-    return request('/payBill/pay', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/payBill/pay', false, 'post', data);
   },
   vipLevel: function vipLevel() {
     return request('/config/vipLevel', true, 'get');
   },
   fxApply: function fxApply(token, name, mobile) {
-    return request('/saleDistribution/apply', true, 'post', { token: token, name: name, mobile: mobile });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/apply', false, 'post', { token: token, name: name, mobile: mobile });
   },
   fxApplyV2: function fxApplyV2(data) {
-    return request('/saleDistribution/apply/v2', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/apply/v2', false, 'post', data);
   },
   fxSetting: function fxSetting() {
-    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/setting', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/setting', false, 'get');
   },
   fxBuy: function fxBuy(token) {
-    return request('/saleDistribution/buy', true, 'post', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/buy', false, 'post', { token: token });
   },
   fxApplyProgress: function fxApplyProgress(token) {
-    return request('/saleDistribution/apply/progress', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/apply/progress', false, 'get', { token: token });
   },
   fxApplyProgressV2: function fxApplyProgressV2(token) {
-    return request('/saleDistribution/apply/progress/v2', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/apply/progress/v2', false, 'get', { token: token });
   },
   fxMembers: function fxMembers(data) {
-    return request('/saleDistribution/members', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/members', false, 'post', data);
   },
   fxCommisionLog: function fxCommisionLog(data) {
-    return request('/saleDistribution/commision/log', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/commision/log', false, 'post', data);
   },
   fxCommisionFreezeAmount: function fxCommisionFreezeAmount(token) {
-    return request('/saleDistribution/commission/freeze', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/commission/freeze', false, 'get', { token: token });
   },
   fxSaleroomRankTotal: function fxSaleroomRankTotal(page, pageSize) {
-    return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/sale-room-rank/total', false, 'get', {
       page: page, pageSize: pageSize
     });
   },
   fxSaleroomRankTotalTeam: function fxSaleroomRankTotalTeam(page, pageSize) {
-    return request('/saleDistribution/sale-room-rank/team/total', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/sale-room-rank/team/total', false, 'get', {
       page: page, pageSize: pageSize
     });
   },
@@ -1251,22 +1254,22 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/saleDistribution/upgrade', false, 'post', { token: token });
   },
   fxMembersStatistics: function fxMembersStatistics(token) {
-    return request('/saleDistribution/members/statistics', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/members/statistics', false, 'get', { token: token });
   },
   fxMyCommisionStatistics: function fxMyCommisionStatistics(token, days) {
     return request(COMMON_BASE_URL + subDomain + '/saleDistribution/my/commision', false, 'get', { token: token, days: days });
   },
   fxGoods: function fxGoods(data) {
-    return request('/saleDistribution/goods', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/goods', false, 'post', data);
   },
   fxTeamReport: function fxTeamReport(data) {
-    return request('/saleDistribution/team/report', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/team/report', false, 'post', data);
   },
   fxCities: function fxCities(token) {
-    return request('/saleDistribution/city/list', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/city/list', false, 'get', { token: token });
   },
   fxCityReport: function fxCityReport(data) {
-    return request('/saleDistribution/city/report', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/city/report', false, 'post', data);
   },
   goodsSellNumberStatistics: function goodsSellNumberStatistics(page, pageSize) {
     var goodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -1415,12 +1418,12 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/dfs/gallery', false, 'post', data);
   },
   refundApply: function refundApply(data) {
-    return request('/order/refundApply/apply', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/order/refundApply/apply', false, 'post', data);
   },
   refundApplyDetail: function refundApplyDetail(token, orderId) {
     var orderGoodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/order/refundApply/info', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/order/refundApply/info', false, 'get', {
       token: token,
       orderId: orderId,
       orderGoodsId: orderGoodsId
@@ -1429,14 +1432,14 @@ module.exports = {
   refundApplyCancel: function refundApplyCancel(token, orderId) {
     var orderGoodsId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/order/refundApply/cancel', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/order/refundApply/cancel', false, 'post', {
       token: token,
       orderId: orderId,
       orderGoodsId: orderGoodsId
     });
   },
   refundApplySetBackLogistics: function refundApplySetBackLogistics(data) {
-    return request('/order/refundApply/setBackLogistics', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/order/refundApply/setBackLogistics', false, 'post', data);
   },
   cmsCategories: function cmsCategories() {
     return request(COMMON_BASE_URL + subDomain + '/cms/category/list', false, 'get', {});
@@ -1564,22 +1567,22 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/shopArea/detail', false, 'get', { id: id });
   },
   fetchShopsCities: function fetchShopsCities() {
-    return request('/shop/subshop/cities', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/cities', false, 'get');
   },
   fetchShops: function fetchShops(data) {
-    return request('/shop/subshop/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/list', false, 'post', data);
   },
   fetchShopsV2: function fetchShopsV2(data) {
-    return request('/shop/subshop/list/v2', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/list/v2', false, 'post', data);
   },
   fetchMyShops: function fetchMyShops(token) {
-    return request('/shop/subshop/my', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/my', false, 'get', { token: token });
   },
   shopSubdetail: function shopSubdetail(id) {
-    return request('/shop/subshop/detail/v2', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/detail/v2', false, 'get', { id: id });
   },
   shopSubApply: function shopSubApply(data) {
-    return request('/shop/subshop/apply', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/apply', false, 'post', data);
   },
   pickPoints: function pickPoints(data) {
     return request(COMMON_BASE_URL + subDomain + '/shop/subshop/pickPoints', false, 'post', data);
@@ -1588,19 +1591,25 @@ module.exports = {
     return request('/shop/subshop/listReputation', true, 'post', data);
   },
   shopPicList: function shopPicList(data) {
-    return request('/shop/subshop/shopPics', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/shopPics', false, 'post', data);
+  },
+  shopPicAdd: function shopPicAdd(data) {
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/addShopPic', false, 'post', data);
+  },
+  shopPicDelete: function shopPicDelete(data) {
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/delShopPic', false, 'post', data);
   },
   shopFavPut: function shopFavPut(token, shopId) {
-    return request('/shop/fav/add', true, 'post', { token: token, shopId: shopId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/fav/add', false, 'post', { token: token, shopId: shopId });
   },
   shopFavCheck: function shopFavCheck(token, shopId) {
-    return request('/shop/fav/check', true, 'get', { token: token, shopId: shopId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/fav/check', false, 'get', { token: token, shopId: shopId });
   },
   shopFavList: function shopFavList(data) {
-    return request('/shop/fav/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/fav/list', false, 'post', data);
   },
   shopFavDelete: function shopFavDelete(token, shopId) {
-    return request('/shop/fav/delete', true, 'post', { token: token, shopId: shopId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/fav/delete', false, 'post', { token: token, shopId: shopId });
   },
   userAttendantFavPut: function userAttendantFavPut(token, attendantId) {
     return request('/userAttendantFav/add', true, 'post', { token: token, attendantId: attendantId });
@@ -1811,18 +1820,18 @@ module.exports = {
   queuingTypes: function queuingTypes() {
     var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    return request('/queuing/types', true, 'get', { status: status });
+    return request(COMMON_BASE_URL + subDomain + '/queuing/types', false, 'get', { status: status });
   },
   queuingGet: function queuingGet(token, typeId) {
     var mobile = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/queuing/get', true, 'post', { token: token, typeId: typeId, mobile: mobile });
+    return request(COMMON_BASE_URL + subDomain + '/queuing/get', false, 'post', { token: token, typeId: typeId, mobile: mobile });
   },
   queuingMy: function queuingMy(token) {
     var typeId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/queuing/my', true, 'get', { token: token, typeId: typeId, status: status });
+    return request(COMMON_BASE_URL + subDomain + '/queuing/my', false, 'get', { token: token, typeId: typeId, status: status });
   },
   idcardCheck: function idcardCheck(token, name, idCardNo) {
     return request(COMMON_BASE_URL + subDomain + '/user/idcard', false, 'post', { token: token, name: name, idCardNo: idCardNo });
@@ -1837,13 +1846,13 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/userTag/list', false, 'post', data);
   },
   userTagCertificateQuery: function userTagCertificateQuery(token) {
-    return request('/userTag/certificate/query', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/userTag/certificate/query', false, 'get', { token: token });
   },
   userTagCertificate: function userTagCertificate(data) {
-    return request('/userTag/certificate', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/userTag/certificate', false, 'post', data);
   },
   bindSeller: function bindSeller(data) {
-    return request('/user/bindSeller', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/bindSeller', false, 'post', data);
   },
   loginout: function loginout(token) {
     return request(COMMON_BASE_URL + subDomain + '/user/loginout', false, 'get', { token: token });
@@ -1881,31 +1890,31 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/level/buyLogs', false, 'post', data);
   },
   messageList: function messageList(data) {
-    return request('/user/message/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/message/list', false, 'post', data);
   },
   messageRead: function messageRead(token, id) {
-    return request('/user/message/read', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/user/message/read', false, 'post', { token: token, id: id });
   },
   messageDelete: function messageDelete(token, id) {
-    return request('/user/message/del', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/user/message/del', false, 'post', { token: token, id: id });
   },
   bindOpenid: function bindOpenid(token, code) {
     // SDK文档到这里
-    return request('/user/wxapp/bindOpenid', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid', false, 'post', {
       token: token, code: code,
       type: 2
     });
   },
   bindOpenidV2: function bindOpenidV2(token, code, appid) {
-    return request('/user/wxapp/bindOpenid/v2', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid/v2', false, 'post', {
       token: token, code: code, appid: appid
     });
   },
   bindOpenidV11: function bindOpenidV11(data) {
-    return request('/user/wxapp/bindOpenid', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid', false, 'post', data);
   },
   encryptedData: function encryptedData(code, _encryptedData, iv) {
-    return request('/user/wxapp/decode/encryptedData', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/decode/encryptedData', false, 'post', {
       code: code, encryptedData: _encryptedData, iv: iv
     });
   },
@@ -2133,47 +2142,50 @@ module.exports = {
     });
   },
   peisonFeeList: function peisonFeeList() {
-    return request('/fee/peisong/list', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/fee/peisong/list', false, 'get');
   },
   peisongMembers: function peisongMembers(data) {
-    return request('/peisong/member/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/list', false, 'post', data);
   },
   peisongMemberInfo: function peisongMemberInfo(token) {
-    return request('/peisong/member/info', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/info', false, 'get', {
       token: token
     });
   },
   peisongMemberChangeWorkStatus: function peisongMemberChangeWorkStatus(token) {
-    return request('/peisong/member/change-work-status', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/change-work-status', false, 'post', {
       token: token
     });
   },
+  peisongMemberStatistics: function peisongMemberStatistics(data) {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/statistics', false, 'post', data);
+  },
   peisongOrdersGrabbing: function peisongOrdersGrabbing(token) {
-    return request('/peisong/order/grabbing', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/grabbing', false, 'get', { token: token });
   },
   peisongOrders: function peisongOrders(data) {
-    return request('/peisong/order/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/list', false, 'post', data);
   },
   peisongOrderGrab: function peisongOrderGrab(data) {
-    return request('/peisong/order/grab', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/grab', false, 'post', data);
   },
   peisongOrderDetail: function peisongOrderDetail(token, id) {
-    return request('/peisong/order/detail', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/detail', false, 'get', { token: token, id: id });
   },
   peisongOrderEstimatedCompletionTime: function peisongOrderEstimatedCompletionTime(data) {
-    return request('/peisong/order/estimatedCompletionTime', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/estimatedCompletionTime', false, 'post', data);
   },
   peisongStartService: function peisongStartService(data) {
-    return request('/peisong/order/start-service', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/start-service', false, 'post', data);
   },
   peisongEndService: function peisongEndService(data) {
-    return request('/peisong/order/end-service', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/end-service', false, 'post', data);
   },
   peisongEndServiceRemark: function peisongEndServiceRemark(token, id, remarkEnd) {
-    return request('/peisong/order/end-service/remarkEnd', true, 'post', { token: token, id: id, remarkEnd: remarkEnd });
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/end-service/remarkEnd', false, 'post', { token: token, id: id, remarkEnd: remarkEnd });
   },
   peisongOrderAllocation: function peisongOrderAllocation(token, id, uid) {
-    return request('/peisong/order/allocation', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/order/allocation', false, 'post', {
       token: token, id: id, uid: uid
     });
   },
@@ -2305,17 +2317,17 @@ module.exports = {
     var brandId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
     var categoryId = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
 
-    return request('/shop/goods/times/schedule', true, 'post', { goodsId: goodsId, propertyChildIds: propertyChildIds, brandId: brandId, categoryId: categoryId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/schedule', false, 'post', { goodsId: goodsId, propertyChildIds: propertyChildIds, brandId: brandId, categoryId: categoryId });
   },
   goodsTimesDays: function goodsTimesDays(goodsId) {
     var propertyChildIds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/shop/goods/times/days', true, 'post', { goodsId: goodsId, propertyChildIds: propertyChildIds });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/days', false, 'post', { goodsId: goodsId, propertyChildIds: propertyChildIds });
   },
   goodsTimesDayItems: function goodsTimesDayItems(day, goodsId) {
     var propertyChildIds = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    return request('/shop/goods/times/items', true, 'post', { day: day, goodsId: goodsId, propertyChildIds: propertyChildIds });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/items', false, 'post', { day: day, goodsId: goodsId, propertyChildIds: propertyChildIds });
   },
   goodsBrandList: function goodsBrandList(data) {
     return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/list', false, 'post', data);
@@ -2369,13 +2381,13 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/site/adPosition/batch', false, 'get', { keys: keys });
   },
   momentsCategory: function momentsCategory() {
-    return request('/momentsCategory/list', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/momentsCategory/list', false, 'get');
   },
   momentsList: function momentsList(data) {
-    return request('/moments/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/moments/list', false, 'post', data);
   },
   momentsdetail: function momentsdetail(id) {
-    return request('/moments/detail', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/moments/detail', false, 'get', { id: id });
   },
   goodsVisitLog: function goodsVisitLog(data) {
     return request('/goods/visitLog', true, 'post', data);
@@ -2438,25 +2450,25 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/partner/withdrawalLog/refuse', false, 'post', data);
   },
   myLiveRooms: function myLiveRooms(data) {
-    return request('/liveRooms/my', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/my', false, 'post', data);
   },
   liveRooms: function liveRooms(data) {
-    return request('/liveRooms/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/list', false, 'post', data);
   },
   myLiveRoomsInfo: function myLiveRoomsInfo(token, id) {
-    return request('/liveRooms/my/info', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/my/info', false, 'get', { token: token, id: id });
   },
   liveRoomsInfo: function liveRoomsInfo(token, id) {
-    return request('/liveRooms/info', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/info', false, 'get', { token: token, id: id });
   },
   liveRoomGoodsMainly: function liveRoomGoodsMainly(data) {
-    return request('/liveRooms/goods/mainly', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/goods/mainly', false, 'post', data);
   },
   stopLiveRoom: function stopLiveRoom(token, id) {
-    return request('/liveRooms/my/stop', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/my/stop', false, 'post', { token: token, id: id });
   },
   likeLiveRoom: function likeLiveRoom(token, id) {
-    return request('/liveRooms/like', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/liveRooms/like', false, 'post', { token: token, id: id });
   },
   liveRoomOnlineUsers: function liveRoomOnlineUsers(token, roomId) {
     return request('/websocket/rest/liveRoom/onlines', false, 'get', { token: token, roomId: roomId });
@@ -2468,7 +2480,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + ('/mock/' + groupName + '/' + apiName), false, method);
   },
   tourJourneyList: function tourJourneyList(type, refId) {
-    return request('/tourJourney/list', true, 'get', { type: type, refId: refId });
+    return request(COMMON_BASE_URL + subDomain + '/tourJourney/list', false, 'get', { type: type, refId: refId });
   },
   userBankSelectBanks: function userBankSelectBanks() {
     return request(COMMON_BASE_URL + subDomain + '/userBank/banks', false, 'get');
@@ -2604,55 +2616,55 @@ module.exports = {
   },
   // cps
   cpsJdGoodsCategory: function cpsJdGoodsCategory(parentId, grade) {
-    return request('/cpsJdGoods/category', true, 'get', { parentId: parentId, grade: grade });
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/category', false, 'get', { parentId: parentId, grade: grade });
   },
   cpsJdGoodsSearch: function cpsJdGoodsSearch(data) {
-    return request('/cpsJdGoods/search', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/search', false, 'post', data);
   },
   cpsJdGoodsDetail: function cpsJdGoodsDetail(data) {
-    return request('/cpsJdGoods/detail', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/detail', false, 'get', data);
   },
   cpsJdGoodsSetExt: function cpsJdGoodsSetExt(data) {
-    return request('/cpsJdGoods/ext/set', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/ext/set', false, 'post', data);
   },
   cpsJdGoodsQueryExt: function cpsJdGoodsQueryExt(skuId) {
-    return request('/cpsJdGoods/ext/query', true, 'get', { skuId: skuId });
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/ext/query', false, 'get', { skuId: skuId });
   },
   cpsJdGoodsShotUrl: function cpsJdGoodsShotUrl(token, skuId) {
-    return request('/cpsJdGoods/shotUrl', true, 'get', { token: token, skuId: skuId });
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/shotUrl', false, 'get', { token: token, skuId: skuId });
   },
   cpsJdGoodsShotUrlSite: function cpsJdGoodsShotUrlSite(token, materialUrl, couponUrl) {
-    return request('/cpsJdGoods/shotUrl/site', true, 'post', { token: token, materialUrl: materialUrl, couponUrl: couponUrl });
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/shotUrl/site', false, 'post', { token: token, materialUrl: materialUrl, couponUrl: couponUrl });
   },
   cpsJdOrders: function cpsJdOrders(data) {
-    return request('/cpsJdOrder/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdOrder/list', false, 'post', data);
   },
   cpsJdOrderDetail: function cpsJdOrderDetail(token, id) {
-    return request('/cpsJdOrder/detail', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdOrder/detail', false, 'get', { token: token, id: id });
   },
   cpsPddBeian: function cpsPddBeian(token) {
-    return request('/cpsPddGoods/beian', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/cpsPddGoods/beian', false, 'get', { token: token });
   },
   cpsPddGoodsDetail: function cpsPddGoodsDetail(data) {
-    return request('/cpsPddGoods/detail', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsPddGoods/detail', false, 'get', data);
   },
   cpsPddGoodsShotUrl: function cpsPddGoodsShotUrl(token, goodsSign) {
-    return request('/cpsPddGoods/shotUrl', true, 'get', { token: token, goodsSign: goodsSign });
+    return request(COMMON_BASE_URL + subDomain + '/cpsPddGoods/shotUrl', false, 'get', { token: token, goodsSign: goodsSign });
   },
   cpsPddOrders: function cpsPddOrders(data) {
-    return request('/cpsPddOrder/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsPddOrder/list', false, 'post', data);
   },
   cpsPddOrderDetail: function cpsPddOrderDetail(token, id) {
-    return request('/cpsPddOrder/detail', true, 'get', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/cpsPddOrder/detail', false, 'get', { token: token, id: id });
   },
   cpsTaobaoGoodsDetail: function cpsTaobaoGoodsDetail(data) {
-    return request('/cpsTaobaoGoods/detail', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/cpsTaobaoGoods/detail', false, 'get', data);
   },
   cpsTaobaoGoodsShotUrl: function cpsTaobaoGoodsShotUrl(token, content) {
-    return request('/cpsTaobaoGoods/shotUrl', true, 'post', { token: token, content: content });
+    return request(COMMON_BASE_URL + subDomain + '/cpsTaobaoGoods/shotUrl', false, 'post', { token: token, content: content });
   },
   cpsTaobaoGoodsKouling: function cpsTaobaoGoodsKouling(token, content) {
-    return request('/cpsTaobaoGoods/kouling', true, 'post', { token: token, content: content });
+    return request(COMMON_BASE_URL + subDomain + '/cpsTaobaoGoods/kouling', false, 'post', { token: token, content: content });
   },
   // 回收
   recycleOrders: function recycleOrders(data) {
@@ -2837,40 +2849,40 @@ module.exports = {
   },
   // 朋友圈
   momentsPublish: function momentsPublish(data) {
-    return request('/user/moments/publish', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/publish', false, 'post', data);
   },
   userMomentsList: function userMomentsList(data) {
-    return request('/user/moments/list', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/list', false, 'post', data);
   },
   momentsDetail: function momentsDetail(token, momentsId) {
-    return request('/user/moments/detail', true, 'get', { token: token, momentsId: momentsId });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/detail', false, 'get', { token: token, momentsId: momentsId });
   },
   momentsDelete: function momentsDelete(token, momentsId) {
-    return request('/user/moments/del', true, 'post', { token: token, momentsId: momentsId });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/del', false, 'post', { token: token, momentsId: momentsId });
   },
   momentsDeleteComment: function momentsDeleteComment(token, commentId) {
-    return request('/user/moments/delCommon', true, 'post', { token: token, commentId: commentId });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/delCommon', false, 'post', { token: token, commentId: commentId });
   },
   momentsLike: function momentsLike(token, momentsId) {
-    return request('/user/moments/like', true, 'post', { token: token, momentsId: momentsId });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/like', false, 'post', { token: token, momentsId: momentsId });
   },
   momentsComment: function momentsComment(token, momentsId) {
     var uid = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
     var content = arguments[3];
 
-    return request('/user/moments/comment', true, 'post', { token: token, momentsId: momentsId, uid: uid, content: content });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/comment', false, 'post', { token: token, momentsId: momentsId, uid: uid, content: content });
   },
   momentsCommentLogs: function momentsCommentLogs(data) {
-    return request('/user/moments/logs', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/logs', false, 'post', data);
   },
   momentsLogsRead: function momentsLogsRead(token, logsIds) {
-    return request('/user/moments/logRead', true, 'post', { token: token, logsIds: logsIds });
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/logRead', false, 'post', { token: token, logsIds: logsIds });
   },
   bottleMsgPublish: function bottleMsgPublish(data) {
-    return request('/bottleMsg/publish', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/bottleMsg/publish', false, 'post', data);
   },
   bottleMsgSalvage: function bottleMsgSalvage(token) {
-    return request('/bottleMsg/salvage', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/bottleMsg/salvage', false, 'get', { token: token });
   },
   userInvoiceInfo: function userInvoiceInfo(token) {
     return request(COMMON_BASE_URL + subDomain + '/userInvoice/info', false, 'get', { token: token });
@@ -2882,10 +2894,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/userInvoice/bind', false, 'post', data);
   },
   goodsLendsList: function goodsLendsList(data) {
-    return request('/goodsLends/list', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/goodsLends/list', false, 'post', data);
   },
   goodsLendsLogs: function goodsLendsLogs(data) {
-    return request('/goodsLends/logs', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/goodsLends/logs', false, 'post', data);
   },
   // 支付宝小程序
   aliappUserRegister: function aliappUserRegister(data) {
@@ -2925,19 +2937,19 @@ module.exports = {
     return request(COMMON_BASE_URL + merchantId + '/tempData/get', false, 'get', { key: key });
   },
   commonDatetime: function commonDatetime() {
-    return request('/common/datetime', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/common/datetime', false, 'get');
   },
   commonDays: function commonDays() {
     var startDay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var days = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/common/days', false, 'get', { startDay: startDay, days: days });
+    return request(COMMON_BASE_URL + subDomain + '/common/days', false, 'get', { startDay: startDay, days: days });
   },
   commonDiffMillis: function commonDiffMillis() {
     var d1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var d2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return request('/common/diffMillis', false, 'get', { d1: d1, d2: d2 });
+    return request(COMMON_BASE_URL + subDomain + '/common/diffMillis', false, 'get', { d1: d1, d2: d2 });
   },
   // 企业应用 组织/成员/网盘
   organizePrices: function organizePrices() {
@@ -3102,13 +3114,13 @@ module.exports = {
     return request('/order/rejectOrder', true, 'post', { token: token, orderId: orderId });
   },
   userAttendantOrderSuccess: function userAttendantOrderSuccess(token, orderId) {
-    return request('/order/success', true, 'post', { token: token, orderId: orderId });
+    return request(COMMON_BASE_URL + subDomain + '/order/success', false, 'post', { token: token, orderId: orderId });
   },
   shopCategory: function shopCategory() {
-    return request('/shopCategory/all', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/shopCategory/all', false, 'get');
   },
   shopCategoryDetail: function shopCategoryDetail(id) {
-    return request('/shopCategory/info', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/shopCategory/info', false, 'get', { id: id });
   },
   yudingStatistics: function yudingStatistics(day) {
     return request('/shop/goods/yudingStatistics', true, 'get', { day: day });
@@ -3135,37 +3147,37 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/communityLeader/buy', false, 'post', { token: token });
   },
   communityOrderFahuo: function communityOrderFahuo(data) {
-    return request('/communityOrder/fahuo', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/communityOrder/fahuo', false, 'post', data);
   },
   wxmpOpenid: function wxmpOpenid(code) {
     return request('/user/wxmp/openid', true, 'get', { code: code });
   },
   listingSet: function listingSet() {
-    return request('/listingSet/info', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/listingSet/info', false, 'get');
   },
   listingMyListing: function listingMyListing(token) {
-    return request('/listingInfo/myListing', true, 'get', { token: token });
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/myListing', false, 'get', { token: token });
   },
   listingSave: function listingSave(data) {
-    return request('/listingInfo/save', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/save', false, 'post', data);
   },
   listingDetail: function listingDetail(id) {
-    return request('/listingInfo/detail', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/detail', false, 'get', { id: id });
   },
   listingCancel: function listingCancel(token, id) {
-    return request('/listingInfo/cancel', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/cancel', false, 'post', { token: token, id: id });
   },
   listingSuccess: function listingSuccess(token, id) {
-    return request('/listingInfo/success', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/success', false, 'post', { token: token, id: id });
   },
   listingDelete: function listingDelete(token, id) {
-    return request('/listingInfo/delete', true, 'post', { token: token, id: id });
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/delete', false, 'post', { token: token, id: id });
   },
   listingAddGoods: function listingAddGoods(data) {
-    return request('/listingInfo/addGoods', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/addGoods', false, 'post', data);
   },
   listingRemoveGoods: function listingRemoveGoods(data) {
-    return request('/listingInfo/removeGoods', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/listingInfo/removeGoods', false, 'post', data);
   },
   listingJoinList: function listingJoinList(data) {
     return request('/listingInfo/joinList', true, 'post', data);
@@ -3195,19 +3207,19 @@ module.exports = {
     return request('/order/keloop/courierTag', true, 'get', data);
   },
   workingHoursMySubmitLogs: function workingHoursMySubmitLogs(data) {
-    return request('/workingHours/mySubmitLogs', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/workingHours/mySubmitLogs', false, 'post', data);
   },
   workingHoursSubmit: function workingHoursSubmit(data) {
-    return request('/workingHours/submit', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/workingHours/submit', false, 'post', data);
   },
   workingHoursBossReport: function workingHoursBossReport(data) {
-    return request('/workingHours/bossReport', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/workingHours/bossReport', false, 'post', data);
   },
   workingHoursMyProject: function workingHoursMyProject(data) {
-    return request('/workingHours/myProject', true, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/workingHours/myProject', false, 'post', data);
   },
   workingHoursProjectInfo: function workingHoursProjectInfo(code) {
-    return request('/workingHours/project', true, 'get', { code: code });
+    return request(COMMON_BASE_URL + subDomain + '/workingHours/project', false, 'get', { code: code });
   },
   bestpayProCreateOrder: function bestpayProCreateOrder(data) {
     return request('/pay/bestpay/proCreateOrder', true, 'post', data);
@@ -3434,16 +3446,22 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/coachInfo/my', false, 'get', data);
   },
   coachStudentList: function coachStudentList(data) {
-    return request(COMMON_BASE_URL + subDomain + '/coachStudent/list', false, 'post', data);
+    return request(COMMON_BASE_URL + subDomain + '/coachStudent/list/v2', false, 'post', data);
+  },
+  coachStudentPublicList: function coachStudentPublicList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/coachStudent/publicList', false, 'post', data);
   },
   coachStudentMyCoachs: function coachStudentMyCoachs(data) {
     return request(COMMON_BASE_URL + subDomain + '/coachStudent/myCoachs', false, 'post', data);
   },
   coachStudentDetail: function coachStudentDetail(data) {
-    return request(COMMON_BASE_URL + subDomain + '/coachStudent/detail', false, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/coachStudent/detail/v2', false, 'get', data);
   },
   trainingList: function trainingList(data) {
     return request(COMMON_BASE_URL + subDomain + '/training/list', false, 'post', data);
+  },
+  trainingPublicList: function trainingPublicList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/training/publicList', false, 'post', data);
   },
   trainingSet: function trainingSet(data) {
     return request(COMMON_BASE_URL + subDomain + '/training/set', false, 'post', data);
@@ -3496,6 +3514,9 @@ module.exports = {
   vodBaseAuthAndAddress: function vodBaseAuthAndAddress(data) {
     return request(COMMON_BASE_URL + subDomain + '/vodBase/authAndAddress', false, 'post', data);
   },
+  tournamentGroups: function tournamentGroups(data) {
+    return request(COMMON_BASE_URL + subDomain + '/tournament/groups', false, 'get', data);
+  },
   tournamentList: function tournamentList(data) {
     return request(COMMON_BASE_URL + subDomain + '/tournament/list', false, 'post', data);
   },
@@ -3537,6 +3558,9 @@ module.exports = {
   },
   teacherStudentList: function teacherStudentList(data) {
     return request(COMMON_BASE_URL + subDomain + '/teacherStudent/list', false, 'post', data);
+  },
+  teacherStudentListV2: function teacherStudentListV2(data) {
+    return request(COMMON_BASE_URL + subDomain + '/teacherStudent/v2/list', false, 'post', data);
   },
   teacherStudentSignLogsList: function teacherStudentSignLogsList(data) {
     return request(COMMON_BASE_URL + subDomain + '/teacherStudent/myStudentSignLogs', false, 'post', data);
@@ -3684,6 +3708,33 @@ module.exports = {
   },
   photoPay: function photoPay(data) {
     return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data);
+  },
+  tournamentScoreList: function tournamentScoreList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/tournamentScore/list', false, 'post', data);
+  },
+  tournamentScoreLogList: function tournamentScoreLogList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/tournamentScore/logs', false, 'post', data);
+  },
+  centerUserAddressList: function centerUserAddressList(data) {
+    return request(COMMON_BASE_URL + subDomain + '/centerUserAddress/list', false, 'post', data);
+  },
+  tgBotAuthorize: function tgBotAuthorize(data) {
+    return request(COMMON_BASE_URL + subDomain + '/tg/bot/authorize', false, 'post', data);
+  },
+  tgBotPayStar: function tgBotPayStar(data) {
+    return request(COMMON_BASE_URL + subDomain + '/tg/bot/pay/star', false, 'post', data);
+  },
+  gameUserEnergyNeonBlockRush: function gameUserEnergyNeonBlockRush(data) {
+    return request(COMMON_BASE_URL + subDomain + '/gameUserEnergy/neonBlockRush', false, 'get', data);
+  },
+  neonBlockRushStart: function neonBlockRushStart(data) {
+    return request(COMMON_BASE_URL + subDomain + '/neonBlockRush/start', false, 'post', data);
+  },
+  neonBlockRushFinish: function neonBlockRushFinish(data) {
+    return request(COMMON_BASE_URL + subDomain + '/neonBlockRush/finish', false, 'post', data);
+  },
+  neonBlockRushWeeklyLeaderboard: function neonBlockRushWeeklyLeaderboard(data) {
+    return request(COMMON_BASE_URL + subDomain + '/neonBlockRush/weeklyLeaderboard', false, 'post', data);
   }
 };
 

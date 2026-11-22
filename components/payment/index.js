@@ -68,7 +68,7 @@ Component({
       if (!token) {
         token = wx.getStorageSync('token')
       }
-      const postData = {
+      let postData = {
         token,
         money: this.data.money,
         remark: this.data.remark,
