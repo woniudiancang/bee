@@ -561,18 +561,18 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/banner/list', false, 'get', data);
   },
   goodsCategory: function goodsCategory() {
-    return request('/shop/goods/category/all', true, 'get');
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/category/all', false, 'get');
   },
   goodsCategoryV2: function goodsCategoryV2() {
     var shopId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    return request('/shop/goods/category/all', true, 'get', { shopId: shopId });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/category/all', false, 'get', { shopId: shopId });
   },
   goodsCategoryDetail: function goodsCategoryDetail(id) {
-    return request('/shop/goods/category/info', true, 'get', { id: id });
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/category/info', false, 'get', { id: id });
   },
   goodsCategoryDetailV2: function goodsCategoryDetailV2(data) {
-    return request('/shop/goods/category/info', true, 'get', data);
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/category/info', false, 'get', data);
   },
   goods: function goods(data) {
     if (!data) {

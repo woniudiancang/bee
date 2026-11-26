@@ -1,5 +1,5 @@
 module.exports = {
-  version: "26.11.22",
+  version: "26.11.26",
   note: 'SDK升级到最新版',
   subDomain: "beeorder", // 根据教程 https://www.it120.cc/help/qr6l4m.html 查看并设置你自己的 subDomain
   merchantId: 27, // 商户ID，可在后台工厂设置-->商户信息查看
